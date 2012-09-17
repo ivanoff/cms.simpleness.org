@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+
+use strict;
+
+my $output = '';
+
+my $rules =
+
+{
+    #index page
+    '' => sub {
+#	$main::template->process( 'ship/index.tpl', { %{$main::tt}, }, \$output );
+#	return $output;
+    },
+
+};

@@ -1,0 +1,44 @@
+#!/usr/bin/perl
+
+use strict;
+use lib '..';
+use CONFIG;
+use TRANSLATE;
+
+my $q = $main::q;
+my $t = $main::t;
+my $tt = $main::tt;
+my $db = $main::db;
+my $template = Template->new($CONFIG_TEMPLATE);
+my $output = '';
+my $r;
+
+return "permission denied" unless ( $tt->{access}{can_edit_content} );
+
+my $rules =
+
+{
+
+    '/admin/news/add' => sub {
+	if($q->param('name')) {
+	    my $news_key = $db->sql( "SELECT MAX(news_key) k FROM base_news WHERE lang=?", $t->{'language'}, );
+	    $news_key->[0]{k} = 0 unless @$news_key;
+	    $db->sql( "INSERT INTO base_news ( news_date, lang, news_name, news_body, news_key ) VALUES ( ?, ?, ?, ?, ? )", 
+					$q->param('date'), $t->{'language'}, $q->param('name'), $q->param('body'), $news_key->[0]{k}+1 );
+	}
+	$template->process('admin/news_add.tpl', { %$tt }, \$output );
+	return $output;
+    },
+
+    '/admin/news/edit/(\d+)' => sub {
+	if($q->param('name')) {
+	    $db->sql( "UPDATE base_news SET news_name=?, news_body=?, news_date=? WHERE news_id=?", 
+			$q->param('name'), $q->param('body'), $q->param('date'), $1 );
+	    redirect 'news';
+	}
+	my $n = $db->sql( "SELECT * FROM base_news WHERE news_id=?", $1 );
+	$template->process('admin/news_add.tpl', { %$tt, news_id=>$1, n=>$n }, \$output );
+	return $output;
+    },
+
+};

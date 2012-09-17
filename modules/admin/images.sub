@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+
+use strict;
+use CONFIG;
+
+my $output = '';
+my $SESSION = $main::SESSION;
+
+return "permission denied" unless ( $main::tt->{access}{can_manage_gallery} );
+
+my $rules =
+
+{
+
+    '/admin/images/browse' => sub {
+	$main::header = "clear";
+	my $path = $CONFIG_IMAGES->{PATH};
+	$main::template->process('admin/images/browse.tpl', 
+	    { %$main::tt, fl=>[<$path/*.*>], num=>$main::q->url_param('CKEditorFuncNum'), path=>$path, }, 
+	    \$output );
+	return $output;
+    },
+
+    '/admin/images/upload' => sub {
+	my $upfile = $main::q->param('upload');
+	binmode($upfile);
+	open F, '>', $CONFIG_IMAGES->{PATH}.'/'.${$main::q->Vars}{upload};
+	while ( <$upfile> ) {
+	    print F $_;
+	}
+	close F;
+	$main::header = "Content-type: text/html";
+	$main::template->process('admin/images/upload.tpl', 
+	    { %$main::tt, num=>$main::q->url_param('CKEditorFuncNum'), path=>$CONFIG_IMAGES->{PATH}, }, 
+	    \$output );
+	return $output;
+    },
+
+};

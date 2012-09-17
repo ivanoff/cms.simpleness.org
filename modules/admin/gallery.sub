@@ -1,0 +1,88 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+use CONFIG;
+
+my $output = '';
+my $q = $main::q;
+my $db = $main::db;
+my $SESSION = $main::SESSION;
+
+return "permission denied" unless ( $main::tt->{access}{can_manage_gallery} );
+
+my $rules =
+
+{
+
+    '/admin/gallery' => sub {
+	if($q->param('new_gallery')) {
+	    my $key = $db->sql ( "SELECT MAX(gal_key)+1 gal_key FROM base_gallery" );
+	    $db->sql ( "INSERT INTO base_gallery (gal_name, gal_description,lang,gal_key) VALUES (?,?,?,?)", 
+			$q->param('new_gallery'), $q->param('new_gallery_description'), $main::t->{'language'}, $key->[0]{gal_key});
+	    my $id = $db->sql ( "SELECT MAX(gal_id) gal_id FROM base_gallery" );
+	    `mkdir $CONFIG_IMAGES->{PATH}/$id->[0]{gal_id}`;
+	    foreach my $size ( @{$CONFIG_IMAGES->{SIZE}} ) {
+		`mkdir $CONFIG_IMAGES->{PATH}/$id->[0]{gal_id}/$size`;
+	    }
+	    redirect2('admin/gallery/'.$id->[0]{gal_id});
+	} else {
+	    my %gallery = map { $_->{gal_id} => $_ } @{$db->sql ( "SELECT * FROM base_gallery" )};
+	    $main::template->process('admin/gallery.tpl', { %$main::tt, gallery=>\%gallery, }, \$output );
+	    return $output;
+	}
+    },
+
+    '/admin/gallery/(\d+)' => sub {
+	my $gal_id = $1;
+	if($q->param('gallery_name_new')) {
+	    $db->sql ( "UPDATE base_gallery SET gal_name=?, gal_description WHERE gal_id=?", 
+			$q->param('gallery_name_new'), $q->param('gallery_description_new'), $gal_id);
+	}
+	my %gallery = map { $_->{gal_id} => $_ } @{$db->sql ( "SELECT * FROM base_gallery" )};
+	$main::tt = { %{$main::tt}, image=>1, };
+	my $size = $CONFIG_IMAGES->{SIZE}[0];
+	my $path = $CONFIG_IMAGES->{PATH};
+	$main::template->process('admin/gallery.tpl', { %$main::tt, images=>[<$path/$gal_id/$size/*.*>], gal_id => $gal_id, gallery=>\%gallery, }, \$output );
+	return $output;
+    },
+
+    '/admin/gallery/delete/.*/(\d+)/(.*)' => sub {
+	if ( $2 !~ /\.\.\// ) {
+	    my $image = $CONFIG_IMAGES->{PATH}.'/'.$1.'/'.$2;
+	    foreach my $size ( (@{$CONFIG_IMAGES->{SIZE}}, '') ) {
+		my $_ = $image;
+		s/$CONFIG_IMAGES->{SIZE}[0]/$size/;
+		unlink;
+	    }
+	}
+	back;
+    },
+
+    '/admin/gallery/delete/(\d+)' => sub {
+	`rm -rf $CONFIG_IMAGES->{PATH}/$1`;
+	my $key = $db->sql ( "SELECT gal_key FROM base_gallery WHERE gal_id=?", $1 );
+	$db->sql ( "DELETE FROM base_gallery WHERE gal_key=?", $key->[0]{gal_key} );
+	my $id = $db->sql ( "SELECT MAX(gal_id) gal_id FROM base_gallery" );
+	redirect2('admin/gallery/'.$id->[0]{gal_id});
+    },
+
+    '/admin/gallery/upload/(\d+)' => sub {
+	my $gal_id = $1;
+	my $upfile = $main::q->param('Filedata');
+	binmode($upfile);
+	my $filename = $CONFIG_IMAGES->{PATH}.'/'.$gal_id.'/'.${$main::q->Vars}{Filedata};
+	open F, '>', $filename;
+	while ( <$upfile> ) {
+	    print F $_;
+	}
+	close F;
+	foreach my $size ( @{$CONFIG_IMAGES->{SIZE}} ) {
+	    resize ( $filename, $CONFIG_IMAGES->{PATH}.'/'.$gal_id.'/'.$size.'/'.${$main::q->Vars}{Filedata}, split( 'x', $size ) );
+	}
+#	unlink $filename;
+	$main::header = "Content-type: text/html";
+	return '1';
+    },
+
+};

@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+use strict;
+use lib '..';
+use CONFIG;
+
+{
+
+    '/admin/robot/(.*)' => sub {
+	$_ = shift;
+	/^take it$/ && `cd /home/ship/www/modules/cron && ./actualize_take_base.pl`;
+	return 'done';
+    },
+
+};

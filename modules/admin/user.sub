@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+
+use strict;
+use lib '..';
+use CONFIG;
+
+return "permission denied" unless ( $main::tt->{access}{can_view_users} );
+
+{
+
+'nothing' => 'to say. left from ship',
+
+};

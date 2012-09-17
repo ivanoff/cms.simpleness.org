@@ -1,0 +1,24 @@
+#!/usr/bin/perl
+
+use strict;
+use CONFIG;
+
+my $q = $main::q;
+my $t = $main::t;
+my $tt = $main::tt;
+my $db = $main::db;
+my $template = Template->new($CONFIG_TEMPLATE);
+my $output = '';
+my $r;
+
+my $rules =
+
+{
+    '/news' => sub {
+	$r = $db->sql( "SELECT * FROM base_news WHERE lang=? ORDER BY news_date DESC", $t->{'language'} );
+	$template->process('news/index.tpl', { %$tt, news => $r, }, \$output );
+	$main::tt = { %{$main::tt}, title => $t->t('News'), };
+	return $output;
+    },
+
+};

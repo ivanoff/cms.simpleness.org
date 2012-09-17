@@ -1,0 +1,53 @@
+#!/usr/bin/perl
+
+use strict;
+
+my $q = $main::q;
+my $t = $main::t;
+my $tt = $main::tt;
+my $db = $main::db;
+my $CONFIG = $main::CONFIG;
+my $CONFIG_TEMPLATE = $main::CONFIG_TEMPLATE;
+my $template = Template->new($CONFIG_TEMPLATE);
+my $output = '';
+my $r;
+
+my $rules =
+
+{
+    '&begin' => sub {
+	my $uri = shift;
+	$uri = '' unless $uri;
+
+## get last 2 news (for left column etc)
+	$main::tt = { %{$main::tt},
+	    news	=> $db->sql("SELECT * FROM base_news WHERE lang=? ORDER BY news_date DESC LIMIT 2", $t->{'language'}),
+	};
+
+## get galleries info
+	my %gallery = map { $_->{gal_id} => $_ } @{$db->sql ( "SELECT * FROM base_gallery" )};
+	$main::tt = { %{$main::tt}, gallery	=> \%gallery, };
+
+## get all content with '_' sign in the name's first letter (ex: info for header and footter)
+	my %sources = map { $_->{content_page} => $_ } @{$db->sql("select * from base_content WHERE content_page REGEXP '_.*' AND lang=?", $t->{'language'})};
+	$main::tt = { %{$main::tt}, sources => \%sources, };
+
+## get content with $uri name
+	$uri =~ s%/$%%;
+	$r = $db->sql("select * from base_content WHERE content_page=? AND lang=?", $uri, $t->{'language'});
+
+	if ($r->[0]) {
+	    $main::tt = { %{$main::tt}, 
+		'title' => $r->[0]{content_title},
+		'uri'	=> $uri,
+	    };
+	    if( $r->[0]{content_body} ) {
+		$main::tt = { %{$main::tt}, 
+		    'content' => $r->[0]{content_body},
+		};
+	    };
+	}
+
+    },
+
+};

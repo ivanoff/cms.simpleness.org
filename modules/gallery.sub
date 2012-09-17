@@ -1,0 +1,30 @@
+#!/usr/bin/perl
+
+use strict;
+use CONFIG;
+
+my $output = '';
+my $db = $main::db;
+
+my %gallery = map { $_->{gal_id} => $_ } @{$db->sql ( "SELECT * FROM base_gallery" )};
+
+my $rules =
+
+{
+
+    '/gallery' => sub {
+	$main::template->process('gallery/index.tpl', { %$main::tt, gallery=>\%gallery, }, \$output );
+	return $output;
+    },
+
+    '/gallery/(\d+)' => sub {
+	my $gal_id = $1;
+	$main::tt = { %{$main::tt}, image=>1, };
+	my $size = $CONFIG_IMAGES->{SIZE}[0];
+	my $path = $CONFIG_IMAGES->{PATH};
+	$main::template->process('gallery/gallery.tpl', { %$main::tt, images=>[<$path/$gal_id/$size/*.*>], gallery=>\%gallery, gal_id=>$gal_id}, \$output );
+	return $output;
+    },
+
+
+};

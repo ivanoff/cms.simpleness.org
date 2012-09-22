@@ -34,8 +34,6 @@ if($q->param('_SESSION_ID')) {
     }
 }
 
-to_log( $SESSION->param('_SESSION_ID') );
-
 ## Check for cached page and load it if found
 $_ = md5_hex (($ENV{'SERVER_NAME'}||'').($ENV{'REQUEST_URI'}||''));
 my $cache_dir = $CONFIG->{cache_dir}.'/cache_'.substr($_, 0, 1);

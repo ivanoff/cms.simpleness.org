@@ -1,0 +1,132 @@
+############################################
+## default index file
+
+    DirectoryIndex main.pl
+
+<IfModule mod_security.c>
+###########################################
+# disable POST processing to not break multiple image upload
+
+    SecFilterEngine Off
+    SecFilterScanPOST Off
+</IfModule>
+
+<IfModule mod_deflate.c>
+
+############################################
+## enable apache served files compression
+## http://developer.yahoo.com/performance/rules.html#gzip
+
+    # Insert filter on all content
+    ###SetOutputFilter DEFLATE
+    # Insert filter on selected content types only
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+
+    # Netscape 4.x has some problems...
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+
+    # Netscape 4.06-4.08 have some more problems
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+
+    # MSIE masquerades as Netscape, but it is fine
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+    # Don't compress images
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+
+    # Make sure proxies don't deliver the wrong content
+    #Header append Vary User-Agent env=!dont-vary
+
+</IfModule>
+
+<IfModule mod_ssl.c>
+
+############################################
+## make HTTPS env vars available for CGI mode
+
+    SSLOptions StdEnvVars
+
+</IfModule>
+
+<IfModule mod_rewrite.c>
+
+############################################
+## enable rewrites
+
+    Options +FollowSymLinks
+    RewriteEngine on
+
+############################################
+## you can put here your site root folder
+## path relative to web root
+
+    #RewriteBase /site_root/
+
+############################################
+## workaround for HTTP authorization
+## in CGI environment
+
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+############################################
+## always send 404 on missing files in these folders
+
+    RewriteCond %{REQUEST_URI} !^/(css|editor|images|js|template|modules)/
+
+    Options -Indexes
+#    RewriteRule ^/(files)(.*)$ main.pl [R=302,NC,L] 
+
+############################################
+## never rewrite for existing files, directories and links
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+
+############################################
+## rewrite everything else to main.pl
+
+    RewriteRule .* main.pl [L]
+
+</IfModule>
+
+
+############################################
+## Prevent character encoding issues from server overrides
+## If you still have problems, use the second line instead
+
+    AddDefaultCharset Off
+    #AddDefaultCharset UTF-8
+
+<IfModule mod_expires.c>
+
+############################################
+## Add default Expires header
+## http://developer.yahoo.com/performance/rules.html#expires
+
+# Cache static content for 10 days
+ExpiresActive On
+ExpiresDefault "access plus 4 hours"
+ExpiresByType image/gif A864000
+ExpiresByType image/png A864000
+ExpiresByType image/jpg A864000
+ExpiresByType image/jpeg A864000
+ExpiresByType text/css A864000
+ExpiresByType text/javascript A864000
+ExpiresByType application/javascript A864000
+ExpiresByType application/x-javascript A864000
+
+</IfModule>
+
+############################################
+## By default allow all access
+
+    Order allow,deny
+    Allow from all
+
+############################################
+## If running in cluster environment, uncomment this
+## http://developer.yahoo.com/performance/rules.html#etags
+
+    #FileETag none
+

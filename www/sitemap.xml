@@ -11,6 +11,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -31,17 +36,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://admin.clear/gallery/16</loc>
+    <loc>http://admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://admin.clear/gallery/17</loc>
+    <loc>http://admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://admin.clear/gallery/18</loc>
+    <loc>http://admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -71,6 +76,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://ar.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://ar.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -91,17 +101,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://ar.admin.clear/gallery/16</loc>
+    <loc>http://ar.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://ar.admin.clear/gallery/17</loc>
+    <loc>http://ar.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://ar.admin.clear/gallery/18</loc>
+    <loc>http://ar.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -131,6 +141,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://bg.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://bg.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -151,17 +166,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://bg.admin.clear/gallery/16</loc>
+    <loc>http://bg.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://bg.admin.clear/gallery/17</loc>
+    <loc>http://bg.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://bg.admin.clear/gallery/18</loc>
+    <loc>http://bg.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -191,6 +206,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://ch.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://ch.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -211,17 +231,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://ch.admin.clear/gallery/16</loc>
+    <loc>http://ch.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://ch.admin.clear/gallery/17</loc>
+    <loc>http://ch.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://ch.admin.clear/gallery/18</loc>
+    <loc>http://ch.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -251,6 +271,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://da.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://da.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -271,17 +296,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://da.admin.clear/gallery/16</loc>
+    <loc>http://da.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://da.admin.clear/gallery/17</loc>
+    <loc>http://da.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://da.admin.clear/gallery/18</loc>
+    <loc>http://da.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -311,6 +336,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://de.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://de.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -331,17 +361,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://de.admin.clear/gallery/16</loc>
+    <loc>http://de.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://de.admin.clear/gallery/17</loc>
+    <loc>http://de.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://de.admin.clear/gallery/18</loc>
+    <loc>http://de.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -361,72 +391,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://en.admin.clear</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1</priority>
-</url>
-<url>
-    <loc>http://en.admin.clear/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://en.admin.clear/bio</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://en.admin.clear/contacts</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://en.admin.clear/download</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://en.admin.clear/gallery</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://en.admin.clear/gallery/16</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>http://en.admin.clear/gallery/17</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>http://en.admin.clear/gallery/18</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>http://en.admin.clear/news</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://en.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://en.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://es.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
 </url>
 <url>
     <loc>http://es.admin.clear/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
+    <loc>http://es.admin.clear/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -451,17 +426,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://es.admin.clear/gallery/16</loc>
+    <loc>http://es.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://es.admin.clear/gallery/17</loc>
+    <loc>http://es.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://es.admin.clear/gallery/18</loc>
+    <loc>http://es.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -491,6 +466,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://et.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://et.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -511,17 +491,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://et.admin.clear/gallery/16</loc>
+    <loc>http://et.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://et.admin.clear/gallery/17</loc>
+    <loc>http://et.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://et.admin.clear/gallery/18</loc>
+    <loc>http://et.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -551,6 +531,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://fa.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://fa.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -571,17 +556,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://fa.admin.clear/gallery/16</loc>
+    <loc>http://fa.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://fa.admin.clear/gallery/17</loc>
+    <loc>http://fa.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://fa.admin.clear/gallery/18</loc>
+    <loc>http://fa.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -611,6 +596,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://fr.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://fr.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -631,17 +621,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://fr.admin.clear/gallery/16</loc>
+    <loc>http://fr.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://fr.admin.clear/gallery/17</loc>
+    <loc>http://fr.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://fr.admin.clear/gallery/18</loc>
+    <loc>http://fr.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -671,6 +661,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://gr.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://gr.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -691,17 +686,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://gr.admin.clear/gallery/16</loc>
+    <loc>http://gr.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://gr.admin.clear/gallery/17</loc>
+    <loc>http://gr.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://gr.admin.clear/gallery/18</loc>
+    <loc>http://gr.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -731,6 +726,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://il.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://il.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -751,17 +751,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://il.admin.clear/gallery/16</loc>
+    <loc>http://il.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://il.admin.clear/gallery/17</loc>
+    <loc>http://il.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://il.admin.clear/gallery/18</loc>
+    <loc>http://il.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -791,6 +791,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://it.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://it.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -811,17 +816,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://it.admin.clear/gallery/16</loc>
+    <loc>http://it.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://it.admin.clear/gallery/17</loc>
+    <loc>http://it.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://it.admin.clear/gallery/18</loc>
+    <loc>http://it.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -851,6 +856,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://jp.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://jp.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -871,17 +881,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://jp.admin.clear/gallery/16</loc>
+    <loc>http://jp.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://jp.admin.clear/gallery/17</loc>
+    <loc>http://jp.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://jp.admin.clear/gallery/18</loc>
+    <loc>http://jp.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -911,6 +921,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://ko.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://ko.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -931,17 +946,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://ko.admin.clear/gallery/16</loc>
+    <loc>http://ko.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://ko.admin.clear/gallery/17</loc>
+    <loc>http://ko.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://ko.admin.clear/gallery/18</loc>
+    <loc>http://ko.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -971,6 +986,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://lt.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://lt.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -991,17 +1011,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://lt.admin.clear/gallery/16</loc>
+    <loc>http://lt.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://lt.admin.clear/gallery/17</loc>
+    <loc>http://lt.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://lt.admin.clear/gallery/18</loc>
+    <loc>http://lt.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -1031,6 +1051,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://lv.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://lv.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1051,17 +1076,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://lv.admin.clear/gallery/16</loc>
+    <loc>http://lv.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://lv.admin.clear/gallery/17</loc>
+    <loc>http://lv.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://lv.admin.clear/gallery/18</loc>
+    <loc>http://lv.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -1091,6 +1116,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://nl.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://nl.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1111,17 +1141,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://nl.admin.clear/gallery/16</loc>
+    <loc>http://nl.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://nl.admin.clear/gallery/17</loc>
+    <loc>http://nl.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://nl.admin.clear/gallery/18</loc>
+    <loc>http://nl.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -1151,6 +1181,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://pl.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://pl.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1171,17 +1206,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://pl.admin.clear/gallery/16</loc>
+    <loc>http://pl.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://pl.admin.clear/gallery/17</loc>
+    <loc>http://pl.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://pl.admin.clear/gallery/18</loc>
+    <loc>http://pl.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -1211,6 +1246,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://pt.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://pt.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1231,17 +1271,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://pt.admin.clear/gallery/16</loc>
+    <loc>http://pt.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://pt.admin.clear/gallery/17</loc>
+    <loc>http://pt.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://pt.admin.clear/gallery/18</loc>
+    <loc>http://pt.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -1271,6 +1311,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://ro.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://ro.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1291,17 +1336,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://ro.admin.clear/gallery/16</loc>
+    <loc>http://ro.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://ro.admin.clear/gallery/17</loc>
+    <loc>http://ro.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://ro.admin.clear/gallery/18</loc>
+    <loc>http://ro.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -1321,12 +1366,82 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://ru.admin.clear</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+</url>
+<url>
+    <loc>http://ru.admin.clear/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
+    <loc>http://ru.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
+    <loc>http://ru.admin.clear/bio</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
+    <loc>http://ru.admin.clear/contacts</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
+    <loc>http://ru.admin.clear/download</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
+    <loc>http://ru.admin.clear/gallery</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
+    <loc>http://ru.admin.clear/gallery/1</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>http://ru.admin.clear/gallery/2</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>http://ru.admin.clear/gallery/3</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>http://ru.admin.clear/news</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
+    <loc>http://ru.admin.clear/search</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
+    <loc>http://ru.admin.clear/test</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://tr.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
 </url>
 <url>
     <loc>http://tr.admin.clear/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
+    <loc>http://tr.admin.clear/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -1351,17 +1466,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://tr.admin.clear/gallery/16</loc>
+    <loc>http://tr.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://tr.admin.clear/gallery/17</loc>
+    <loc>http://tr.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://tr.admin.clear/gallery/18</loc>
+    <loc>http://tr.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -1391,6 +1506,11 @@
     <priority>0.6</priority>
 </url>
 <url>
+    <loc>http://ua.admin.clear/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
     <loc>http://ua.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1411,17 +1531,17 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://ua.admin.clear/gallery/16</loc>
+    <loc>http://ua.admin.clear/gallery/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://ua.admin.clear/gallery/17</loc>
+    <loc>http://ua.admin.clear/gallery/2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>http://ua.admin.clear/gallery/18</loc>
+    <loc>http://ua.admin.clear/gallery/3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>

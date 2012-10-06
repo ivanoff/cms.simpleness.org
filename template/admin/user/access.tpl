@@ -13,6 +13,8 @@
 	'can_settings' => 'can edit settings',
 	'can_import_base' => 'can import base',
 	'can_manage_gallery' => 'can manage gallery',
+	'add_news' => 'can add and edit news',
+	'print_page' => 'can print page',
     }
 %]
 

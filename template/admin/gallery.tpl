@@ -2,20 +2,20 @@
 
 <table>
 
-[% IF gal_id %]
+[% IF gal_key %]
 
 <tr><td>
 
 <h2>
 <span id="gal_name">
-    [% gallery.${gal_id}.gal_name %]
+    [% gallery.${gal_key}.gal_name %]
 </span>
 </h2>
-    [% gallery.${gal_id}.gal_description %]
+    [% gallery.${gal_key}.gal_description %]
 <span id="gal_edit">
 <form method="post">
-    <input name="gallery_name_new" value="[% gallery.${gal_id}.gal_name %]"><br>
-    <textarea name="gallery_description_new">[% gallery.${gal_id}.gal_description %]</textarea><br>
+    <input name="gallery_name_new" value="[% gallery.${gal_key}.gal_name %]"><br>
+    <textarea name="gallery_description_new">[% gallery.${gal_key}.gal_description %]</textarea><br>
     <input type="submit" value="[%t('Save')%]">
     <input type="button" id="to_cancel" value="[%t('Cancel')%]">
 </form>
@@ -39,7 +39,7 @@
 	$('#to_delete').toggle();
     });
     $('#to_delete').click(function () {
-	if ( confirm ('[% t('Are you sure to delete this gallery?') %]') ) { location.replace('/admin/gallery/delete/[% gal_id %]') }; 
+	if ( confirm ('[% t('Are you sure to delete this gallery?') %]') ) { location.replace('/admin/gallery/delete/[% gal_key %]') }; 
     });
 </script>
 
@@ -53,7 +53,7 @@
 		window.onload = function() {
 			var settings = {
 				flash_url : "/editor/swfupload/swfupload.swf",
-				upload_url: "/admin/gallery/upload/[% gal_id %]",
+				upload_url: "/admin/gallery/upload/[% gal_key %]",
 				post_params: {"_SESSION_ID" : "[% session('_SESSION_ID') %]"},
 				file_size_limit : "1073741824",
 				file_types : "*.*",
@@ -113,7 +113,6 @@
 <br />
 
     <div class="gallery">
-      <h2>[% gallery.${gal_id}.gal_name %]</h2>
       <ul>
 [% FOREACH img IN images %]
         <li><a rel="gallery_group" href="/[% img.replace('174x174','640x480') %]" title="Image [% n = n + 1 %][% n %]"><img src="/[% img %]" alt="" /></a> 
@@ -136,7 +135,7 @@
 <tr><td>
 <b>[% t('Please, select gallery') %]</b><br />
 [% FOREACH g IN gallery.keys %]
-&nbsp; <a href="/admin/gallery/[% gallery.${g}.gal_id %]">[% gallery.${g}.gal_id %] - [% gallery.${g}.gal_name %]</a><br />
+&nbsp; <a href="/admin/gallery/[% gallery.${g}.gal_key %]">[% gallery.${g}.gal_key %] - [% gallery.${g}.gal_name %]</a><br />
 [% END %]
 <br />
 <form action="/admin/gallery" method="post">

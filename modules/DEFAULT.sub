@@ -25,7 +25,7 @@ my $rules =
 	};
 
 ## get galleries info
-	my %gallery = map { $_->{gal_id} => $_ } @{$db->sql ( "SELECT * FROM base_gallery" )};
+	my %gallery = map { $_->{gal_id} => $_ } @{$db->sql ( "SELECT * FROM base_gallery WHERE lang=?", $t->{'language'} )};
 	$main::tt = { %{$main::tt}, gallery	=> \%gallery, };
 
 ## get all content with '_' sign in the name's first letter (ex: info for header and footter)

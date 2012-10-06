@@ -179,7 +179,7 @@ sub email {
 
     $email->header_set( 'Content-type' => 'text/plain; charset="utf-8"' );
 
-if( defined %{$_->{Image}} ) {
+if( keys %{$_->{Image}} ) {
 
     my @parts = (
       Email::MIME->create(

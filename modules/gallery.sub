@@ -6,7 +6,7 @@ use CONFIG;
 my $output = '';
 my $db = $main::db;
 
-my %gallery = map { $_->{gal_id} => $_ } @{$db->sql ( "SELECT * FROM base_gallery" )};
+my %gallery = map { $_->{gal_key} => $_ } @{$db->sql ( "SELECT * FROM base_gallery WHERE lang=?", $main::t->{'language'} )};
 
 my $rules =
 
@@ -18,11 +18,12 @@ my $rules =
     },
 
     '/gallery/(\d+)' => sub {
-	my $gal_id = $1;
+	my $gal_key = $1;
 	$main::tt = { %{$main::tt}, image=>1, };
 	my $size = $CONFIG_IMAGES->{SIZE}[0];
 	my $path = $CONFIG_IMAGES->{PATH};
-	$main::template->process('gallery/gallery.tpl', { %$main::tt, images=>[<$path/$gal_id/$size/*.*>], gallery=>\%gallery, gal_id=>$gal_id}, \$output );
+	$main::template->process('gallery/gallery.tpl', { %$main::tt, images=>[<$path/$gal_key/$size/*.*>], 
+				gallery=>\%gallery, gal_key=>$gal_key}, \$output );
 	return $output;
     },
 

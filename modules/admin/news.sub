@@ -4,16 +4,28 @@ use strict;
 use lib '..';
 use CONFIG;
 use TRANSLATE;
+use MAIN;
 
 my $q = $main::q;
 my $t = $main::t;
 my $tt = $main::tt;
 my $db = $main::db;
-my $template = Template->new($CONFIG_TEMPLATE);
+my $template = $main::template;
 my $output = '';
 my $r;
 
 return "permission denied" unless ( $tt->{access}{can_edit_content} );
+
+sub renew_news {
+    foreach my $to ( @{$CONFIG->{languages}} ) {
+	next if $to eq $CONFIG->{default_language};
+#	next if grep {$_ eq $to} keys %{$CONFIG->{languages_dont_translate}};
+	$t->lang_checking ( { table=>'base_news', id=>'news_key', id_main=>'news_id', 
+		    lang_from=>$CONFIG->{default_language}, lang_to=>$to, dnd=>['news_date', ] } );
+    }
+    $t->email_to_lang_owners('/news') if $t->{'language'} eq $CONFIG->{default_language};
+    return 1;
+}
 
 my $rules =
 
@@ -25,20 +37,38 @@ my $rules =
 	    $news_key->[0]{k} = 0 unless @$news_key;
 	    $db->sql( "INSERT INTO base_news ( news_date, lang, news_name, news_body, news_key ) VALUES ( ?, ?, ?, ?, ? )", 
 					$q->param('date'), $t->{'language'}, $q->param('name'), $q->param('body'), $news_key->[0]{k}+1 );
+	    renew_news();
+	    return redirect2('news');
 	}
 	$template->process('admin/news_add.tpl', { %$tt }, \$output );
 	return $output;
     },
 
     '/admin/news/edit/(\d+)' => sub {
-	if($q->param('name')) {
-	    $db->sql( "UPDATE base_news SET news_name=?, news_body=?, news_date=? WHERE news_id=?", 
-			$q->param('name'), $q->param('body'), $q->param('date'), $1 );
-	    redirect 'news';
-	}
+	my $news_id = $1;
 	my $n = $db->sql( "SELECT * FROM base_news WHERE news_id=?", $1 );
-	$template->process('admin/news_add.tpl', { %$tt, news_id=>$1, n=>$n }, \$output );
+	if($q->param('name')) {
+	    if ( $t->{'language'} eq $CONFIG->{default_language} ) {
+		my $x = '?,' x (keys %{$CONFIG->{languages_dont_translate}});
+		$x =~ s/.$//;
+		$x = "''" unless $x;
+		$db->sql( "DELETE FROM base_news WHERE news_key=? AND lang!=? AND lang NOT IN ($x)", 
+			$n->[0]{news_key}, $CONFIG->{default_language}, keys %{$CONFIG->{languages_dont_translate}});
+	    }
+	    $db->sql( "UPDATE base_news SET news_name=?, news_body=?, news_date=? WHERE news_id=?", 
+			$q->param('name'), $q->param('body'), $q->param('date'), $news_id );
+	    renew_news();
+	    return redirect2('news');
+	}
+	$template->process('admin/news_add.tpl', { %$tt, news_id=>$news_id, n=>$n }, \$output );
 	return $output;
+    },
+
+    '/admin/news/delete/(\d+)' => sub {
+	my $news_id = $1;
+	my $n = $db->sql( "SELECT * FROM base_news WHERE news_id=?", $1 );
+	$db->sql( "DELETE FROM base_news WHERE news_key=?", $n->[0]{news_key} );
+	redirect2('news');
     },
 
 };

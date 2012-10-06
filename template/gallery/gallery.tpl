@@ -1,9 +1,9 @@
 <h1>[% t('Gallery') %]</h1>
 <table><tr><td>
     <div class="gallery">
-      <h2>[% gallery.${gal_id}.gal_name %]</h2>
-	[% gallery.${gal_id}.gal_description %]
-	<br />
+      <h2>[% gallery.${gal_key}.gal_name %]</h2>
+	[% gallery.${gal_key}.gal_description %]
+	<br /><br />
       <ul>
 [% FOREACH img IN images %]
 	    <li>

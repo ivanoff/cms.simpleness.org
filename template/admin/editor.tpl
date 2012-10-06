@@ -23,11 +23,11 @@
 		</p>
 		<p>
 			header: <input name="pageheader" value="[% (source)? source : title %]" />
+			<input type="checkbox" name="no_lang_cache" value="1">don't use language cache
 		</p>
 		<p>
 			<input type="hidden" name="page" value="[% (source)? source : uri %]" />
 			<input type="hidden" name="lang" value="[% language %]" />
-			<input type="hidden" name="place" value="body" />
 			<input type="submit" value="Submit" />
 		</p>
 	    </form>

@@ -5,8 +5,11 @@
 <a href="/admin/gallery">[% t('Gallery manager') %]</a><br />
 [% END %]
 
-[% IF access.can_edit_content %]
+[% IF access.add_news %]
 <a href="/admin/news/add">[% t('add news') %]</a><br />
+[% END %]
+
+[% IF access.can_edit_content %]
 <a href="/admin/renew/sitemap">[% t('renew the sitemap') %]</a><br />
 <a href="/admin/lang_base">[% t('show dictionary') %]</a><br />
 <a href="/admin/lang_check">[% t('update language in database') %]</a><br />

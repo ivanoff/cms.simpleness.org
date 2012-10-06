@@ -45,7 +45,7 @@ h4 { font-size:16px; color:#b10301; line-height:18px; }
 
 
 /* Header */
-#header .bg-bottom { padding:30px 20px 26px 33px; height:100%; }
+#header .bg-bottom { padding:20px 20px 26px 33px; height:100%; }
 #header .bg-bottom-right { position:absolute; padding: 0px 10px 56px 743px; }
 
 /* Navigation */

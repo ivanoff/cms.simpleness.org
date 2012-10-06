@@ -1,1 +1,1 @@
-../CONFIG.pm
+../www/CONFIG.pm

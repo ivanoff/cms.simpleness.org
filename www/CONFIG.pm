@@ -21,7 +21,7 @@ our $CONFIG = {
 	log_sql		=> '../log/clear.sql',
 
 	cache		=> 0,
-	cache_time	=> 2592000,
+	cache_time	=> 259200,
 	cache_dir	=> '../tmp',
 
         db_type 	=> 'mysql',
@@ -41,7 +41,7 @@ our $CONFIG = {
 			     nl=>'de Nederlandse taal', bg=>'Български език', ro=>'limba română', da=>'dansk', 
 			     ko=>'한국어', pt=>'língua portuguesa', },
 	languages_dont_translate => {
-#				ru=>'2@ivanoff.org.ua',
+				ru=>'2@ivanoff.org.ua',
 			    },
 	phrases_dont_translate => [
 				'Simpleness CMS', 'cms.simpleness.org', 'simpleness.org',

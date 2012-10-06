@@ -62,7 +62,7 @@
 			<li class="dir"><a href="/gallery" [% 'class="active"' IF uri.match('^/gallery/?') %]><span>[% t('Gallery') %]</span></a>
 			    <ul>
 [% FOREACH g IN gallery.keys %]
-				<li><a href="/gallery/[% gallery.${g}.gal_id %]" [% 'class="active"' IF uri == '/gallery/' _ gallery.${g}.gal_id %]>[% gallery.${g}.gal_name %]</a></li>
+				<li><a href="/gallery/[% gallery.${g}.gal_key %]" [% 'class="active"' IF uri == '/gallery/' _ gallery.${g}.gal_id %]>[% gallery.${g}.gal_name %]</a></li>
 [% END %]
 			    </ul>
 			</li>
@@ -81,7 +81,9 @@
 		<div class="bg-top">
 			<div class="bg-bottom">
 
+[% IF access.print_page %]
 <a href="#" id="print_button" onclick="print();return false;"><img src="/images/btn_print.gif" border="0" align="RIGHT"></a>
+[% END %]
 
 [% source='' %]
 [% IF access.can_edit_content %]
@@ -89,8 +91,22 @@
     [% body %]
 [% ELSE %]
     [% content %]
+    
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style " id="no_print">
+<br />
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_google_plusone"></a>
+<a class="addthis_button_linkedin_counter"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-506ffb3468d2f3c5"></script>
+<!-- AddThis Button END -->
+
     [% body %]
 [% END %]
+
 
 				
 			</div>

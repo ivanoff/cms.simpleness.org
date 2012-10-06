@@ -106,14 +106,41 @@ my $rules =
 	my $lang = $q->param('lang');
 	my $page = $q->param('page');
 	my $pageheader = $q->param('pageheader');
-	my $place = $q->param('place');
-#	$db->sql( "DELETE FROM base_content WHERE content_page=? AND lang!='en' AND lang!=?", $page, $main::CONFIG->{default_language} );
-	$db->sql( "DELETE FROM base_content WHERE content_page=? AND lang=? AND content_place=?", $page, $lang, $place );
-	if ( $body ) {
-	    $db->sql("INSERT INTO base_content (content_date_from, content_page, lang, content_body, content_place, content_title) 
-		    VALUES (NOW(), ?, ?, ?, ?, ?)", $page, $lang, $body, $place, $pageheader);
+	$t->{'no_lang_cache'} = ($q->param('no_lang_cache') eq '1')? 1 : 0;
+
+	## if current language isn't default one, then update only one page
+	if ( $lang ne $CONFIG->{default_language} ) {
+	    $db->sql( "DELETE FROM base_content WHERE content_page=? AND lang=?", $page, $lang );
+	    if ( $body ) {
+		$db->sql("INSERT INTO base_content (content_date_from, content_page, lang, content_body, content_title) 
+			VALUES (NOW(), ?, ?, ?, ?)", $page, $lang, $body, $pageheader);
+	    }
+	    back();
+	    die;
 	}
-	print "location: ".$ENV{HTTP_REFERER}."\n\n";
+
+	## deleting all pages except languages_don't_translate
+	my $x = '?,' x (keys %{$CONFIG->{languages_dont_translate}});
+	$x =~ s/.$//;
+	$x = "''" unless $x;
+	$db->sql( "DELETE FROM base_content WHERE content_page=? AND lang NOT IN ($x)", 
+		    $page, keys %{$CONFIG->{languages_dont_translate}} );
+	if ( $body ) {
+	    $db->sql("INSERT INTO base_content (content_date_from, content_page, lang, content_body, content_title) 
+		    VALUES (NOW(), ?, ?, ?, ?)", $page, $lang, $body, $pageheader);
+	}
+
+	$t->email_to_lang_owners($page);
+
+	foreach my $to ( @{$CONFIG->{languages}} ) {
+	    next if $to eq $CONFIG->{default_language};
+	    next if grep {$_ eq $to} keys %{$CONFIG->{languages_dont_translate}};
+	    $t->lang_checking ( { table=>'base_content', id=>'content_page', id_main=>'content_id', 
+		lang_from=>$CONFIG->{default_language}, lang_to=>$to, 
+		dnd=>['user_id', 'content_date_from', 'content_place', ] } );
+	}
+	
+	back();
     },
 
 };

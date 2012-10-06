@@ -11,6 +11,17 @@ my $SESSION = $main::SESSION;
 
 return "permission denied" unless ( $main::tt->{access}{can_manage_gallery} );
 
+sub renew_gallery {
+    foreach my $to ( @{$CONFIG->{languages}} ) {
+	next if $to eq $CONFIG->{default_language};
+#	next if grep {$_ eq $to} keys %{$CONFIG->{languages_dont_translate}};
+	$main::t->lang_checking ( { table=>'base_gallery', id=>'gal_key', id_main=>'gal_id', 
+		    lang_from=>$CONFIG->{default_language}, lang_to=>$to, dnd=>[ ] } );
+    }
+    $main::t->email_to_lang_owners('/gallery') if $main::t->{'language'} eq $CONFIG->{default_language};
+    return 1;
+}
+
 my $rules =
 
 {
@@ -20,30 +31,34 @@ my $rules =
 	    my $key = $db->sql ( "SELECT MAX(gal_key)+1 gal_key FROM base_gallery" );
 	    $db->sql ( "INSERT INTO base_gallery (gal_name, gal_description,lang,gal_key) VALUES (?,?,?,?)", 
 			$q->param('new_gallery'), $q->param('new_gallery_description'), $main::t->{'language'}, $key->[0]{gal_key});
-	    my $id = $db->sql ( "SELECT MAX(gal_id) gal_id FROM base_gallery" );
-	    `mkdir $CONFIG_IMAGES->{PATH}/$id->[0]{gal_id}`;
+	    `mkdir $CONFIG_IMAGES->{PATH}/$key->[0]{gal_key}`;
 	    foreach my $size ( @{$CONFIG_IMAGES->{SIZE}} ) {
-		`mkdir $CONFIG_IMAGES->{PATH}/$id->[0]{gal_id}/$size`;
+		`mkdir $CONFIG_IMAGES->{PATH}/$key->[0]{gal_key}/$size`;
 	    }
-	    redirect2('admin/gallery/'.$id->[0]{gal_id});
+	    renew_gallery();
+	    redirect2('admin/gallery/'.$key->[0]{gal_key});
 	} else {
-	    my %gallery = map { $_->{gal_id} => $_ } @{$db->sql ( "SELECT * FROM base_gallery" )};
+	    my %gallery = map { $_->{gal_key} => $_ } @{$db->sql ( "SELECT * FROM base_gallery WHERE lang=?", $main::t->{'language'} )};
 	    $main::template->process('admin/gallery.tpl', { %$main::tt, gallery=>\%gallery, }, \$output );
 	    return $output;
 	}
     },
 
     '/admin/gallery/(\d+)' => sub {
-	my $gal_id = $1;
+	my $gal_key = $1;
 	if($q->param('gallery_name_new')) {
-	    $db->sql ( "UPDATE base_gallery SET gal_name=?, gal_description WHERE gal_id=?", 
-			$q->param('gallery_name_new'), $q->param('gallery_description_new'), $gal_id);
+	    if ( $main::t->{'language'} eq $CONFIG->{default_language} ) {
+		$db->sql( "DELETE FROM base_gallery WHERE gal_key=? AND lang!=?", $gal_key, $main::t->{'language'});
+	    }
+	    $db->sql ( "UPDATE base_gallery SET gal_name=?, gal_description=? WHERE gal_key=? AND lang=?", 
+			$q->param('gallery_name_new'), $q->param('gallery_description_new'), $gal_key, $main::t->{'language'});
+	    renew_gallery();
 	}
-	my %gallery = map { $_->{gal_id} => $_ } @{$db->sql ( "SELECT * FROM base_gallery" )};
+	my %gallery = map { $_->{gal_key} => $_ } @{$db->sql ( "SELECT * FROM base_gallery WHERE lang=?", $main::t->{'language'} )};
 	$main::tt = { %{$main::tt}, image=>1, };
 	my $size = $CONFIG_IMAGES->{SIZE}[0];
 	my $path = $CONFIG_IMAGES->{PATH};
-	$main::template->process('admin/gallery.tpl', { %$main::tt, images=>[<$path/$gal_id/$size/*.*>], gal_id => $gal_id, gallery=>\%gallery, }, \$output );
+	$main::template->process('admin/gallery.tpl', { %$main::tt, images=>[<$path/$gal_key/$size/*.*>], gal_key => $gal_key, gallery=>\%gallery, }, \$output );
 	return $output;
     },
 
@@ -53,7 +68,7 @@ my $rules =
 	    foreach my $size ( (@{$CONFIG_IMAGES->{SIZE}}, '') ) {
 		my $_ = $image;
 		s/$CONFIG_IMAGES->{SIZE}[0]/$size/;
-		unlink;
+		unlink if -f $_;
 	    }
 	}
 	back;
@@ -61,24 +76,23 @@ my $rules =
 
     '/admin/gallery/delete/(\d+)' => sub {
 	`rm -rf $CONFIG_IMAGES->{PATH}/$1`;
-	my $key = $db->sql ( "SELECT gal_key FROM base_gallery WHERE gal_id=?", $1 );
-	$db->sql ( "DELETE FROM base_gallery WHERE gal_key=?", $key->[0]{gal_key} );
-	my $id = $db->sql ( "SELECT MAX(gal_id) gal_id FROM base_gallery" );
-	redirect2('admin/gallery/'.$id->[0]{gal_id});
+	$db->sql ( "DELETE FROM base_gallery WHERE gal_key=?", $1 );
+	my $id = $db->sql ( "SELECT MAX(gal_key) gal_key FROM base_gallery" );
+	redirect2('admin/gallery/'.$id->[0]{gal_key});
     },
 
     '/admin/gallery/upload/(\d+)' => sub {
-	my $gal_id = $1;
+	my $gal_key = $1;
 	my $upfile = $main::q->param('Filedata');
 	binmode($upfile);
-	my $filename = $CONFIG_IMAGES->{PATH}.'/'.$gal_id.'/'.${$main::q->Vars}{Filedata};
+	my $filename = $CONFIG_IMAGES->{PATH}.'/'.$gal_key.'/'.${$main::q->Vars}{Filedata};
 	open F, '>', $filename;
 	while ( <$upfile> ) {
 	    print F $_;
 	}
 	close F;
 	foreach my $size ( @{$CONFIG_IMAGES->{SIZE}} ) {
-	    resize ( $filename, $CONFIG_IMAGES->{PATH}.'/'.$gal_id.'/'.$size.'/'.${$main::q->Vars}{Filedata}, split( 'x', $size ) );
+	    resize ( $filename, $CONFIG_IMAGES->{PATH}.'/'.$gal_key.'/'.$size.'/'.${$main::q->Vars}{Filedata}, split( 'x', $size ) );
 	}
 #	unlink $filename;
 	$main::header = "Content-type: text/html";

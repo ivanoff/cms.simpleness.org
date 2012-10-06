@@ -21,6 +21,15 @@ my $rules =
 	return $output;
     },
 
+    '/admin/images/delete/(.*)' => sub {
+	my $_ = shift;
+	return 0 if /\.\./;
+	return 0 unless -f;
+	return 0 unless /^$CONFIG_IMAGES->{PATH}/;
+	unlink $_;
+	back;
+    },
+
     '/admin/images/upload' => sub {
 	my $upfile = $main::q->param('upload');
 	binmode($upfile);

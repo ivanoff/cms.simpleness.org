@@ -21,4 +21,11 @@ my $rules =
 	return $output;
     },
 
+    '/news/(\d+)' => sub {
+	$r = $db->sql( "SELECT * FROM base_news WHERE lang=? AND news_key=?", $t->{'language'}, $1 );
+	$template->process('news/one.tpl', { %$tt, news => $r, news_key => $1 }, \$output );
+	$main::tt = { %{$main::tt}, title => $t->t('News'), };
+	return $output;
+    },
+
 };

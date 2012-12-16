@@ -14,6 +14,7 @@
 	'can_import_base' => 'can import base',
 	'can_manage_gallery' => 'can manage gallery',
 	'add_news' => 'can add and edit news',
+	'edit_menu' => 'edit main menu',
 	'print_page' => 'can print page',
     }
 %]

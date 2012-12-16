@@ -3,6 +3,7 @@
 use strict;
 use MAIN;
 use CONFIG;
+use File::Path qw(make_path remove_tree);
 
 my $output = '';
 my $q = $main::q;
@@ -31,9 +32,9 @@ my $rules =
 	    my $key = $db->sql ( "SELECT MAX(gal_key)+1 gal_key FROM base_gallery" );
 	    $db->sql ( "INSERT INTO base_gallery (gal_name, gal_description,lang,gal_key) VALUES (?,?,?,?)", 
 			$q->param('new_gallery'), $q->param('new_gallery_description'), $main::t->{'language'}, $key->[0]{gal_key});
-	    `mkdir $CONFIG_IMAGES->{PATH}/$key->[0]{gal_key}`;
+	    make_path("$CONFIG_IMAGES->{PATH}/$key->[0]{gal_key}");
 	    foreach my $size ( @{$CONFIG_IMAGES->{SIZE}} ) {
-		`mkdir $CONFIG_IMAGES->{PATH}/$key->[0]{gal_key}/$size`;
+		make_path("$CONFIG_IMAGES->{PATH}/$key->[0]{gal_key}/$size");
 	    }
 	    renew_gallery();
 	    redirect2('admin/gallery/'.$key->[0]{gal_key});
@@ -75,7 +76,7 @@ my $rules =
     },
 
     '/admin/gallery/delete/(\d+)' => sub {
-	`rm -rf $CONFIG_IMAGES->{PATH}/$1`;
+	remove_tree("$CONFIG_IMAGES->{PATH}/$1");
 	$db->sql ( "DELETE FROM base_gallery WHERE gal_key=?", $1 );
 	my $id = $db->sql ( "SELECT MAX(gal_key) gal_key FROM base_gallery" );
 	redirect2('admin/gallery/'.$id->[0]{gal_key});
@@ -97,6 +98,24 @@ my $rules =
 #	unlink $filename;
 	$main::header = "Content-type: text/html";
 	return '1';
+    },
+
+    '/admin/gallery/(\d+)/update' => sub {
+	my $gal_key = $1;
+	$_ = $q->param('body');
+	if ( $main::t->{'language'} eq $CONFIG->{default_language} ) {
+	    $db->sql( "DELETE FROM base_gallery WHERE gal_key=? AND lang!=?", $gal_key, $main::t->{'language'});
+	}
+	if($q->param('page') eq "header") {
+	    s/\<.*?\>//g;
+	    $db->sql ( "UPDATE base_gallery SET gal_name=? WHERE gal_key=? AND lang=?", 
+			$_ , $gal_key, $main::t->{'language'});
+	}
+	if($q->param('page') eq "body") {
+	    $db->sql ( "UPDATE base_gallery SET gal_description=? WHERE gal_key=? AND lang=?", 
+			$_, $gal_key, $main::t->{'language'});
+	}
+	renew_gallery();
     },
 
 };

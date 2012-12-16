@@ -10,6 +10,13 @@
 	<link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
 	<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="only screen and (max-device-width: 640px)" />
 	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript">
+	    $(document).ready(function(){
+		$('#languages').change(function(){
+		    location = $(this).val();
+		})
+	    });
+	</script>
 [% IF image %]
 	<link href="/css/lightbox.css" rel="stylesheet" type="text/css" media="screen" />
 	<script type="text/javascript" src="/js/lightbox.js"></script>
@@ -18,28 +25,32 @@
 	</script>
 [% END %]
 [% IF access.can_edit_content %]
-	<script type="text/javascript" src="/editor/ckeditor.js"></script>
-[% END %]
 	<script type="text/javascript">
-	    $(document).ready(function(){
-		$('#languages').change(function(){
-		    location = $(this).val();
-		})
-	    });
+	    var session = "[% session('_SESSION_ID') %]";
+	    var lang = "[% language %]";
+	    var title = "[% title %]"; 
+	    var page = "content:[% uri %]"; 
 	</script>
+	<script src="/js/nicEdit.js" type="text/javascript"></script>
+	<script src="/js/nicEditRun.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="/css/dropBox.css" type="text/css" media="all" />
+[% END %]
 </head>
 <body>
+[% IF access.can_edit_content %]
+<div id="myNicPanel" style="position: fixed; z-index: 900; width:100%;"></div>
+<div style="height: 25px;"></div>
+[% END %]
 <!-- Shell -->
 <div id="shell">
 	<!-- Header -->
 	<div id="header" class="big-box">
 		<div class="bg-bottom">
-[% source='_header' %]
-[% IF access.can_edit_content %]
-    [% INCLUDE admin/editor.tpl %]
-[% ELSE %]
-    [% sources.item(source).content_body %]
-[% END %]
+
+<div id="content:_header" class="editable">
+[% sources.item('_header').content_body %]
+</div>
+
 			<div class="bg-bottom-right">
 <select name="languages" id="languages">
     [% FOREACH l IN languages.sort %]
@@ -85,13 +96,11 @@
 <a href="#" id="print_button" onclick="print();return false;"><img src="/images/btn_print.gif" border="0" align="RIGHT"></a>
 [% END %]
 
-[% source='' %]
-[% IF access.can_edit_content %]
-    [% INCLUDE admin/editor.tpl %]
-    [% body %]
-[% ELSE %]
-    [% content %]
-    
+<div id="content:[% uri %]" class="editable">
+[% (access.can_edit_content)? content_edit : content %]
+</div>
+[% body %]
+
 <!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style " id="no_print">
 <br />
@@ -104,8 +113,7 @@
 <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-506ffb3468d2f3c5"></script>
 <!-- AddThis Button END -->
 
-    [% body %]
-[% END %]
+</div>
 
 
 				
@@ -116,15 +124,23 @@
 	
 	<!-- Footer -->
 	<div id="footer">
-[% source='_bottom' %]
-[% IF access.can_edit_content %]
-    [% INCLUDE admin/editor.tpl %]
-[% ELSE %]
-    [% sources.item(source).content_body %]
-[% END %]
-		<p>
-			Created by <a href="http://ivanoff.org.ua" target="_blank">ivanoff</a>
-		</p>
+
+<div id="content:_bottom" class="editable">
+[% sources.item('_bottom').content_body %]
+</div>
+
+	<p>
+	Created by <a href="http://ivanoff.org.ua" target="_blank">ivanoff</a>
+
+	<a href="/login"><img src="/images/btn_key.png" id="admin_key" border="0"></a>
+	<script type="text/javascript">
+	    $("#admin_key").css({ opacity: 0.1 })
+		.mouseover( function(){ $(this).stop().animate({opacity:'1.0'},300); })
+		.mouseout ( function(){ $(this).stop().animate({opacity:'0.1'},300); });
+	</script>
+
+	</p>
+
 	</div>
 	<!-- /Footer -->
 </div>

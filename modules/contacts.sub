@@ -52,8 +52,6 @@ my $rules =
     	    }
 	    redirect('contacts/success');
 	}
-	$template->process('contacts/index.tpl', { %$tt }, \$output );
-	return $output;
     },
 
     '/contacts/success' => sub {

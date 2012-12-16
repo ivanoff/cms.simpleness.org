@@ -9,7 +9,12 @@
 <a href="/admin/news/add">[% t('add news') %]</a><br />
 [% END %]
 
+[% IF access.edit_menu %]
+<a href="/admin/menu">[% t('edit menu') %]</a><br />
+[% END %]
+
 [% IF access.can_edit_content %]
+<a href="/admin/content">[% t('show content pages') %]</a><br />
 <a href="/admin/renew/sitemap">[% t('renew the sitemap') %]</a><br />
 <a href="/admin/lang_base">[% t('show dictionary') %]</a><br />
 <a href="/admin/lang_check">[% t('update language in database') %]</a><br />

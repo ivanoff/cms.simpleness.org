@@ -14,6 +14,7 @@ use CGI::Session;
 use Time::HiRes qw(gettimeofday tv_interval);
 use Digest::MD5 qw( md5_hex );
 use File::stat;
+use File::Path qw(make_path);
 
 use CONFIG;
 use DATABASE;
@@ -91,6 +92,9 @@ eval {
     ## get result from subsections with $ENV{'REDIRECT_URL'} link
     $body = module($ENV{'REDIRECT_URL'});
 };
+
+module( '&end', "/DEFAULT.sub", $ENV{'REDIRECT_URL'} );
+
 if ( $CONFIG->{show_errors} ) {
     $body = $@ if $@;
     $body = $template->error() if $template->error();
@@ -137,7 +141,7 @@ if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
     if ( $cache && !defined $SESSION->param('slogin') && !$q->https ) {
 	$_ = md5_hex (($ENV{'SERVER_NAME'}||'').($ENV{'REQUEST_URI'}||''));
 	my $cache_dir = '../tmp/cache_'.substr($_, 0, 1);
-	`mkdir $cache_dir` unless -e $cache_dir;
+	make_path($cache_dir) unless -e $cache_dir;
 	open F, '>', "$cache_dir/cache_$_";
 	print F $page;
 	close F;

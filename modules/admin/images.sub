@@ -31,16 +31,16 @@ my $rules =
     },
 
     '/admin/images/upload' => sub {
-	my $upfile = $main::q->param('upload');
+	my $upfile = $main::q->param('image');
 	binmode($upfile);
-	open F, '>', $CONFIG_IMAGES->{PATH}.'/'.${$main::q->Vars}{upload};
+	open F, '>', $CONFIG_IMAGES->{PATH}.'/'.${$main::q->Vars}{image};
 	while ( <$upfile> ) {
 	    print F $_;
 	}
 	close F;
-	$main::header = "Content-type: text/html";
+	$main::header = "Content-type: application/json; charset=utf-8";
 	$main::template->process('admin/images/upload.tpl', 
-	    { %$main::tt, num=>$main::q->url_param('CKEditorFuncNum'), path=>$CONFIG_IMAGES->{PATH}, }, 
+	    { %$main::tt, path=>$CONFIG_IMAGES->{PATH}, }, 
 	    \$output );
 	return $output;
     },

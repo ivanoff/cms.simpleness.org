@@ -115,14 +115,16 @@ sub resize {
     my ($w,$h) = $img->Get('width','height');
     my $new_height = $height;
     my $new_width = int($w * ($height / $h));
-    if( $new_width < $width ) {
+    if( ( $new_width < $width && $width < 200 ) || ( $new_width > $width && $width > 200 ) ) {
 	$new_width = $width;
 	$new_height = int($h * ($width / $w));
     }
     $img->Resize(width=>$new_width, height=>$new_height);
     if( $width<200 ) {
 	$img->Crop( x=>(($new_width>$width)?int(($new_width-$width)/2):0), 
-	    y=>(($new_height>$height)?int(($new_height-$height)/2):0), 
+#	    y=>(($new_height>$height)?int(($new_height-$height)/2):0), 
+# vertical photo crop to top
+	    y=>0, 
 	    width=>$width, height=>$height);
     }
     $img->Sharpen();

@@ -145,8 +145,6 @@ h4 { font-size:16px; color:#b10301; line-height:18px; }
 .box { float:left; width:262px; margin:0 62px 28px 0; }
 .last { margin-right:0 !important; }
 
-#content { width:613px; margin-right:35px; }
-
 /* Footer */
 #footer { padding:10px 0;}
 #footer p { color:#8c8772; font-size:12px; text-align:right; }

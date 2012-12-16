@@ -19,7 +19,7 @@
 	<div id="editor[% source %]_div">
 	    <form action="/admin/content_modify" method="post">
 		<p>
-			<textarea class="ckeditor__" cols="80" id="editor[% (source)? source : 1 %]" name="body" rows="10">[% (source)? sources.item(source).content_body : content %]</textarea>
+			<textarea class="ckeditor__" cols="80" id="editor[% (source)? source : 1 %]" name="body" rows="10">[% (source)? sources.item(source).content_body : content_edit %]</textarea>
 		</p>
 		<p>
 			header: <input name="pageheader" value="[% (source)? source : title %]" />

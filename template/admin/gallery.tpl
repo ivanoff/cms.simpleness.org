@@ -6,53 +6,27 @@
 
 <tr><td>
 
-<h2>
-<span id="gal_name">
-    [% gallery.${gal_key}.gal_name %]
-</span>
-</h2>
+<h2><div id="gallery/[% gal_key %]:header" class="editable">[% gallery.${gal_key}.gal_name %]</div></h2>
+<div id="gallery/[% gal_key %]:body" class="editable">
     [% gallery.${gal_key}.gal_description %]
-<span id="gal_edit">
-<form method="post">
-    <input name="gallery_name_new" value="[% gallery.${gal_key}.gal_name %]"><br>
-    <textarea name="gallery_description_new">[% gallery.${gal_key}.gal_description %]</textarea><br>
-    <input type="submit" value="[%t('Save')%]">
-    <input type="button" id="to_cancel" value="[%t('Cancel')%]">
-</form>
-</span>
-&nbsp;
-<a href="#" id="to_edit">[% t('edit') %]</a>
+</div>
 <a href="#" id="to_delete">[% t('delete') %]</a>
-
 <script type="text/javascript">
-    $('#gal_edit').hide();
-    $('#to_edit').click(function () {
-	$('#gal_edit').toggle();
-	$('#gal_name').toggle();
-	$('#to_edit').toggle();
-	$('#to_delete').toggle();
-    });
-    $('#to_cancel').click(function () {
-	$('#gal_edit').toggle();
-	$('#gal_name').toggle();
-	$('#to_edit').toggle();
-	$('#to_delete').toggle();
-    });
     $('#to_delete').click(function () {
 	if ( confirm ('[% t('Are you sure to delete this gallery?') %]') ) { location.replace('/admin/gallery/delete/[% gal_key %]') }; 
     });
 </script>
 
-<script type="text/javascript" src="/editor/swfupload/js/swfupload.js"></script>
-<script type="text/javascript" src="/editor/swfupload/js/swfupload.queue.js"></script>
-<script type="text/javascript" src="/editor/swfupload/js/fileprogress.js"></script>
-<script type="text/javascript" src="/editor/swfupload/js/handlers.js"></script>
+<script type="text/javascript" src="/js/swfupload/js/swfupload.js"></script>
+<script type="text/javascript" src="/js/swfupload/js/swfupload.queue.js"></script>
+<script type="text/javascript" src="/js/swfupload/js/fileprogress.js"></script>
+<script type="text/javascript" src="/js/swfupload/js/handlers.js"></script>
 <script type="text/javascript">
 		var swfu;
 
 		window.onload = function() {
 			var settings = {
-				flash_url : "/editor/swfupload/swfupload.swf",
+				flash_url : "/js/swfupload/swfupload.swf",
 				upload_url: "/admin/gallery/upload/[% gal_key %]",
 				post_params: {"_SESSION_ID" : "[% session('_SESSION_ID') %]"},
 				file_size_limit : "1073741824",
@@ -140,7 +114,8 @@
 <br />
 <form action="/admin/gallery" method="post">
     <b>[% t('New gallery') %]:</b><br /> <input name="new_gallery" required><br />
-    [% t('Description') %]:<br /> <textarea name="new_gallery_description"></textarea><br />
+    [% t('Description') %]:<br /> <textarea id="gallery_description_new" name="new_gallery_description"></textarea><br />
+
     <input type="submit" value="[% t('Add new gallery') %]" />
 </form>
 

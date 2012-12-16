@@ -84,6 +84,7 @@ sub translate_simple {
     my ( $text, $from, $to ) = @_;
     return $text if ($from eq $to);
     return $text if $text =~ /^[\s\d]*$/;
+    return $text if $text =~ /^\s*\{[\w\/]+\}\s*$/;
     $text =~ s/&#39;/'/gsm;
     $text =~ s/&quot;/\"/gsm;
     $to =~ s/ua/uk/;

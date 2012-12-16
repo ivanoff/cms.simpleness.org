@@ -44,6 +44,7 @@
 	'Direct Contact'	=> ' ',
 	'Documents'	=> ' ',
 	'Download'	=> ' ',
+	'Drop new images here'	=> ' ',
 	'duplicate'	=> ' ',
 	'Eastern & Central Europe'	=> ' ',
 	'Eastern Africa'	=> ' ',

@@ -19,6 +19,7 @@
 	</script>
 [% IF image %]
 	<link href="/css/lightbox.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="/css/gallery.css" rel="stylesheet" type="text/css" media="screen" />
 	<script type="text/javascript" src="/js/lightbox.js"></script>
 	<script type="text/javascript">
 	    $(function() { $('.gallery a').lightBox(); });
@@ -53,8 +54,8 @@
 
 			<div class="bg-bottom-right">
 <select name="languages" id="languages">
-    [% FOREACH l IN languages.sort %]
-        <option [% 'selected' IF ( language == l || (!language && l =='ru') ) %] value="//[% IF l!=default_language %][% l _ '.' %][% END %][% config.site %][% uri %]" style="background: url(/images/flags/[% l %].gif) no-repeat; padding-left: 20px;">[% languages_t.${l} %]</option>
+    [% FOREACH l IN config.languages.sort %]
+        <option [% 'selected' IF ( language == l || (!language && l =='ru') ) %] value="//[% IF l!=config.default_language %][% l _ '.' %][% END %][% config.site %][% uri %]" style="background: url(/images/flags/[% l %].gif) no-repeat; padding-left: 20px;">[% config.languages_t.${l} %]</option>
     [% END %]
 </select>
 			</div>
@@ -78,7 +79,7 @@
 			    </ul>
 			</li>
 			<li><a href="/contacts" [% 'class="active"' IF uri == '/contacts' %]><span>[% t('Contact Us') %]</span></a></li>
-[% IF login %]
+[% IF session('slogin') %]
 			<li><a href="/admin" [% 'class="active"' IF uri == '/admin' %]><span>[% t('Admin page') %]</span></a></li>
 [% END %]
 			

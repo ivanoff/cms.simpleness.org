@@ -46,7 +46,7 @@
 	});
 
 	myNicEditor.addEvent('blur', function() {
-	    if( current_text != this.selectedInstance.getContent() ) {
+	    if( this.selectedInstance && current_text != this.selectedInstance.getContent() ) {
 		save_text(this.selectedInstance.elm.id, this.selectedInstance.getContent());
 	    }
 	});

@@ -15,13 +15,64 @@
       <ul id="gallerys" class="gallerys">
 [% FOREACH img IN images %]
 	    <li>
-		<a href="/[% img.replace('174x174','640x480') %]" title="Image [% n = n + 1 %][% n %]. [% t('Gallery') %]">
-		<img src="/[% img %]" alt="">
-		</a>
+    [% PROCESS gallery/image.tpl img=img %]
 	    </li>
 [% END %]
       </ul>
       <br class="clear" />
+
+[% IF access.can_manage_gallery %]
+<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<!-- <script src="/js/jquery-ui.js"></script> -->
+
+<script>
+    $(function() {
+	$( "#gallerys" ).sortable(
+	    { opacity: 0.8, revert: true, 
+		start: function(event, ui) { $('.gallery a').unbind(); }, 
+		stop:  function(event, ui) { $('.gallery a').lightBox(); }, 
+		update: function(event, ui) { 
+		    var result = [];
+		    $('#gallerys').each(function(){
+			$(this).find('li').each(function(){
+			    result.push ( $(this).find('a img').attr('id') );
+			});
+		    });
+//		    alert (result.join());
+		    var fd = new FormData();
+		    fd.append("_SESSION_ID", session);
+		    var xhr = new XMLHttpRequest();
+    		    xhr.open('POST', '/admin/gallery/sort/'+result.join(), true);
+		    xhr.send(fd);
+		} 
+	    });
+	$( "#gallerys" ).disableSelection();
+    });
+</script>
+
+<script type="text/javascript">
+    $('.delete').click(function () {
+//	if ( confirm ('[% t('Are you sure to delete this image?') %]') ) 
+	{
+	    var fd = new FormData();
+	    fd.append("_SESSION_ID", session);
+	    var xhr = new XMLHttpRequest();
+    	    xhr.open('POST', '/admin/gallery/delete/'+$(this).attr('name'), true);
+	    xhr.send(fd);
+	    $(this).parent().animate({opacity:0}, 700, function(){ $(this).css({display:"none"}); });
+	}
+	return false;
+    });
+    $('.move-right').click(function () {
+	$(this).parent().insertAfter( $(this).parent().next() );
+//	p1 = $(this).parent().html();
+//	p2 = $(this).parent().next().html();
+//	$(this).parent().next().html( p1 );
+//	$(this).parent().html( p2 );
+	return false;
+    });
+</script>
+[% END %]
 
     </div>
 </td></tr></table>

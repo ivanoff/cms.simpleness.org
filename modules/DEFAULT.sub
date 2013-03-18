@@ -16,53 +16,58 @@ my $rules =
 
 {
     '&begin' => sub {
-	my $uri = shift;
-	$uri = '' unless $uri;
+        my $uri = shift;
+        $uri = '' unless $uri;
+
+# don't cache if https or while logged in
+        if ( defined $main::SESSION->param('slogin') || $main::q->https ) {
+            $main::CONFIG->{cache} = 0;
+        }
 
 ## get last 4 news (for left column etc)
-	$main::tt = { %{$main::tt},
-	    news	=> $db->sql("SELECT * FROM base_news WHERE lang=? ORDER BY news_date DESC LIMIT 4", $t->{'language'}),
-	};
+        $main::tt = { %{$main::tt},
+            news        => $db->sql("SELECT * FROM base_news WHERE lang=? ORDER BY news_date DESC LIMIT 4", $t->{'language'}),
+        };
 
 ## get galleries info
-	my %gallery = map { $_->{gal_id} => $_ } @{$db->sql ( "SELECT * FROM base_gallery WHERE lang=?", $t->{'language'} )};
-	$main::tt = { %{$main::tt}, gallery	=> \%gallery, };
+        my %gallery = map { $_->{gal_id} => $_ } @{$db->sql ( "SELECT * FROM base_gallery WHERE lang=?", $t->{'language'} )};
+        $main::tt = { %{$main::tt}, gallery        => \%gallery, };
 
 ## get all content with '_' sign in the name's first letter (ex: info for header and footter)
-	my %sources = map { $_->{content_page} => $_ } @{$db->sql("select * from base_content WHERE content_page REGEXP '_.*' AND lang=?", $t->{'language'})};
-	$main::tt = { %{$main::tt}, sources => \%sources, };
+        my %sources = map { $_->{content_page} => $_ } @{$db->sql("select * from base_content WHERE content_page REGEXP '_.*' AND lang=?", $t->{'language'})};
+        $main::tt = { %{$main::tt}, sources => \%sources, };
 
 ## get content with $uri name
-	$uri =~ s%/$%%;
-	$r = $db->sql("select * from base_content WHERE content_page=? AND lang=?", $uri, $t->{'language'});
+        $uri =~ s%/$%%;
+        $r = $db->sql("select * from base_content WHERE content_page=? AND lang=?", $uri, $t->{'language'});
 
-	if ($r->[0]) {
-	    $main::tt = { %{$main::tt}, 
-		'title' => $r->[0]{content_title},
-		'uri'	=> $uri,
-	    };
-	    if( $r->[0]{content_body} ) {
-		$main::tt = { %{$main::tt}, 
-		    'content' => $r->[0]{content_body},
-		};
-	    };
-	}
+        if ($r->[0]) {
+            $main::tt = { %{$main::tt}, 
+                'title' => $r->[0]{content_title},
+                'uri'        => $uri,
+            };
+            if( $r->[0]{content_body} ) {
+                $main::tt = { %{$main::tt}, 
+                    'content' => $r->[0]{content_body},
+                };
+            };
+        }
 
     },
 
     '&end' => sub {
-	my $content_edit = ${$main::tt}{'content'};
-	while ( $content_edit =~ /{([\w\/]+)}/g ) {
-	    my $c = $1;
-	    if( -e $CONFIG_TEMPLATE->{INCLUDE_PATH}.'/'.$c.'.tpl' ) {
-		$template->process($c.'.tpl', { %$tt }, \$output );
-		${$main::tt}{'content'} =~ s/{\Q$c\E}/$output/g if $output;
-	    }
-	    ${$main::tt}{'content'} =~ s/{\Q$c\E}/$main::tt{$c}/g if $main::tt{$c};
-	}
-	$main::tt = { %{$main::tt}, 
-	    'content_edit' => $content_edit,
-	};
+        my $content_edit = ${$main::tt}{'content'};
+        while ( $content_edit =~ /{([\w\/]+)}/g ) {
+            my $c = $1;
+            if( -e $CONFIG_TEMPLATE->{INCLUDE_PATH}.'/'.$c.'.tpl' ) {
+                $template->process($c.'.tpl', { %$tt }, \$output );
+                ${$main::tt}{'content'} =~ s/{\Q$c\E}/$output/g if $output;
+            }
+            ${$main::tt}{'content'} =~ s/{\Q$c\E}/$main::tt{$c}/g if $main::tt{$c};
+        }
+        $main::tt = { %{$main::tt}, 
+            'content_edit' => $content_edit,
+        };
     },
 
 };

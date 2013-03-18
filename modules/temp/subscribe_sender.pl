@@ -21,18 +21,18 @@ foreach ( @$r ) {
     my $email = $db->sql( "SELECT * FROM customers WHERE cust_id=?", $_->{user_id} );
 
     my $s = email ( { 
-	From    => $CONFIG->{email},
-    	To    => $email->[0]{cust_email},
-	Subject => $_->{subs_subj},
-	Message => $_->{subs_body},
+        From    => $CONFIG->{email},
+            To    => $email->[0]{cust_email},
+        Subject => $_->{subs_subj},
+        Message => $_->{subs_body},
     } ); 
 
     if ( $s eq '1' ) {
-#	print "good\n";
-	$db->sql( "UPDATE base_subscribe_current SET subs_result='sent' WHERE id=?", $_->{id} );
+#        print "good\n";
+        $db->sql( "UPDATE base_subscribe_current SET subs_result='sent' WHERE id=?", $_->{id} );
     } else {
-#	print "$s\n";
-	$db->sql( "UPDATE base_subscribe_current SET subs_result='error', subs_error=? WHERE id=?", $s, $_->{id} );
+#        print "$s\n";
+        $db->sql( "UPDATE base_subscribe_current SET subs_result='error', subs_error=? WHERE id=?", $s, $_->{id} );
     }
 
 }

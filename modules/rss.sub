@@ -1,26 +1,18 @@
 #!/usr/bin/perl
 
 use strict;
-use CONFIG;
 
-my $q = $main::q;
-my $t = $main::t;
-my $tt = $main::tt;
-my $db = $main::db;
-my $template = Template->new($CONFIG_TEMPLATE);
 my $output = '';
-my $r;
 
-my $rules =
+$main::CONFIG->{cache} = 1;   # cache this module
+$main::CONFIG->{cache_time} = 1;    # set cache time to 1 sec
 
 {
-    cache_time => 1,
     
-    '/rss/ru/buy.xml' => sub {
-	$main::header = "Content-type: text/xml";
-#	$r = $db->sql( "SELECT * FROM base_news WHERE lang=? ORDER BY news_date DESC", $t->{'language'} );
-	$template->process('xml/rss.tpl', { %$tt, }, \$output );
-	return $output;
+    '/rss' => sub {
+        $main::header = "Content-type: text/xml";
+        $main::template->process('xml/rss.tpl', { %$main::tt, }, \$output );
+        return $output;
     },
 
 };

@@ -35,8 +35,10 @@ $.each( event.dataTransfer.files , function(i, file) {
         xhr.onreadystatechange = stateChange;
 	xhr.send(fd);
 
-	$(".gallery ul").append('<li><a href="/images/gallery/'+gallery_key+'/640x480/'+file.name+'" title="New Image"><img src="/images/gallery/'+gallery_key+'/174x174/'+file.name+'"></a></li>');
-	$(function() { $('.gallery a').lightBox(); });
+	if (xhr.status==200) {
+	    $(".gallery ul").append(xhr.responseXML.getElementsByTagName("result")[0].firstChild.nodeValue);
+	    $(function() { $('.gallery a').lightBox(); });
+	}
 
 });
 

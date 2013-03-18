@@ -46,18 +46,18 @@ is( $t->_replace_by_hash('hi! .+ how are you?', {'hi'=>'привет', 'how are 
 ## translate simple
 isa_ok( $t, 'TRANSLATE', '_translate_simple' );
 is( $t->_translate_simple( "Hello World", 'en', 'ru' ), 
-		    "Привет мир", '_translate( "Hello World", "en", "ru" )' );
+                    "Привет мир", '_translate( "Hello World", "en", "ru" )' );
 is( $t->_translate_simple( "Hello! How are you? Please note that these instructions are not valid for WordPress.com users.", 'en', 'ru' ),
-		    "Здравствуйте! Как поживаешь? Пожалуйста, обратите внимание, что эти указания не являются действительными для пользователей WordPress.com.",
-		     '_translate "Hello! How are you..." ,"en", "ru"');
+                    "Здравствуйте! Как поживаешь? Пожалуйста, обратите внимание, что эти указания не являются действительными для пользователей WordPress.com.",
+                     '_translate "Hello! How are you..." ,"en", "ru"');
 
 is( $t->_translate_simple( "Привет мир", 'ru', 'en' ), 
-		    "Hello world", '_translate( "Привет мир", "ru", "en" )' );
+                    "Hello world", '_translate( "Привет мир", "ru", "en" )' );
 
 is( $t->_translate_simple( "Hello World", 'en', 'en' ), 
-		    "Hello World", '_translate( "Hello World", "en", "en" )' );
+                    "Hello World", '_translate( "Hello World", "en", "en" )' );
 is( $t->_translate_simple( "123", 'en', 'ru' ), 
-		    "123", '_translate( "123", "en", "ru" )' );
+                    "123", '_translate( "123", "en", "ru" )' );
 
 ## words between tags
 isa_ok( $t, 'TRANSLATE', '_words_between_tags' );
@@ -88,8 +88,8 @@ is( $t->_translate('hi! <i>how <b>are</b> you</i>?', 'en', 'ru'), 'привет!
 is( $t->_translate('<h1>привет! <b>как</b> дела?</h1>', 'ru', 'en'), '<h1>Hello! <b>as</b> are you?</h1>', '_translate html ru->en' );
 
 is( $t->_translate('Perl 5.6 and earlier used a quicksort algorithm to implement sort. That algorithm was not stable, so could go quadratic. (A stable sort preserves the input order of elements that compare equal. Although quicksort\'s run time is O(NlogN) when averaged over all arrays of length N, the time can be O(N**2), quadratic behavior, for some inputs.) In 5.7, the quicksort implementation was replaced with a stable mergesort algorithm whose worst-case behavior is O(NlogN). But benchmarks indicated that for some inputs, on some platforms, the original quicksort was faster. 5.8 has a sort pragma for limited control of the sort. Its rather blunt control of the underlying algorithm may not persist into future Perls, but the ability to characterize the input or output in implementation independent ways quite probably will. See the sort pragma.', 'en', 'ru'), 
-	'Perl 5.6 и более ранние версии использовали алгоритм быстрой сортировки для реализации подобного. Этот алгоритм не был стабильным, поэтому может пойти квадратичной. (Сортировке сохраняется порядок ввода элементов, которые считаются равными. Несмотря на время выполнения быстрой сортировки составляет O (NlogN), когда усредненная по всем массивов длины N, время может быть O (N ** 2), квадратичного поведения, для некоторых входов .) в 5,7, реализация быстрой сортировки был заменен на устойчивый алгоритм сортировки слиянием которых наихудшее поведение O (NlogN). Но тесты показали, что для некоторых входов, на некоторых платформах, оригинальные быстрой сортировки был быстрее. 5,8 есть своего рода директива для ограниченного контроля рода. Его довольно тупым контролем основной алгоритм не может сохраниться и в будущем Перлз, но способность характеризуют вход или выход в реализации независимыми способами, вполне вероятно, будет. См. рода Прагма.', 
-	'_translate large en->ru' );
+        'Perl 5.6 и более ранние версии использовали алгоритм быстрой сортировки для реализации подобного. Этот алгоритм не был стабильным, поэтому может пойти квадратичной. (Сортировке сохраняется порядок ввода элементов, которые считаются равными. Несмотря на время выполнения быстрой сортировки составляет O (NlogN), когда усредненная по всем массивов длины N, время может быть O (N ** 2), квадратичного поведения, для некоторых входов .) в 5,7, реализация быстрой сортировки был заменен на устойчивый алгоритм сортировки слиянием которых наихудшее поведение O (NlogN). Но тесты показали, что для некоторых входов, на некоторых платформах, оригинальные быстрой сортировки был быстрее. 5,8 есть своего рода директива для ограниченного контроля рода. Его довольно тупым контролем основной алгоритм не может сохраниться и в будущем Перлз, но способность характеризуют вход или выход в реализации независимыми способами, вполне вероятно, будет. См. рода Прагма.', 
+        '_translate large en->ru' );
 
 ## translate cache
 $t->{'cache'} = 1;
@@ -98,8 +98,8 @@ is( $t->_translate('привет! как дела?', 'ru', 'en'), 'Hello! how ar
 is( $t->_translate('hi! <i>how <b>are</b> you</i>?', 'en', 'ru'), 'привет! <i>как <b>есть</b> Вы</i>?', '_translate cache html en->ru' );
 is( $t->_translate('<h1>привет! <b>как</b> дела?</h1>', 'ru', 'en', 1), '<h1>Hello! <b>as</b> are you?</h1>', '_translate cache html ru->en' );
 is( $t->_translate('Perl 5.6 and earlier used a quicksort algorithm to implement sort. That algorithm was not stable, so could go quadratic. (A stable sort preserves the input order of elements that compare equal. Although quicksort\'s run time is O(NlogN) when averaged over all arrays of length N, the time can be O(N**2), quadratic behavior, for some inputs.) In 5.7, the quicksort implementation was replaced with a stable mergesort algorithm whose worst-case behavior is O(NlogN). But benchmarks indicated that for some inputs, on some platforms, the original quicksort was faster. 5.8 has a sort pragma for limited control of the sort. Its rather blunt control of the underlying algorithm may not persist into future Perls, but the ability to characterize the input or output in implementation independent ways quite probably will. See the sort pragma.', 'en', 'ru', 1), 
-	'Perl 5.6 и более ранние версии использовали алгоритм быстрой сортировки для реализации подобного. Этот алгоритм не был стабильным, поэтому может пойти квадратичной. (Сортировке сохраняется порядок ввода элементов, которые считаются равными. Несмотря на время выполнения быстрой сортировки составляет O (NlogN), когда усредненная по всем массивов длины N, время может быть O (N ** 2), квадратичного поведения, для некоторых входов .) в 5,7, реализация быстрой сортировки был заменен на устойчивый алгоритм сортировки слиянием которых наихудшее поведение O (NlogN). Но тесты показали, что для некоторых входов, на некоторых платформах, оригинальные быстрой сортировки был быстрее. 5,8 есть своего рода директива для ограниченного контроля рода. Его довольно тупым контролем основной алгоритм не может сохраниться и в будущем Перлз, но способность характеризуют вход или выход в реализации независимыми способами, вполне вероятно, будет. См. рода Прагма.', 
-	'_translate cache large en->ru' );
+        'Perl 5.6 и более ранние версии использовали алгоритм быстрой сортировки для реализации подобного. Этот алгоритм не был стабильным, поэтому может пойти квадратичной. (Сортировке сохраняется порядок ввода элементов, которые считаются равными. Несмотря на время выполнения быстрой сортировки составляет O (NlogN), когда усредненная по всем массивов длины N, время может быть O (N ** 2), квадратичного поведения, для некоторых входов .) в 5,7, реализация быстрой сортировки был заменен на устойчивый алгоритм сортировки слиянием которых наихудшее поведение O (NlogN). Но тесты показали, что для некоторых входов, на некоторых платформах, оригинальные быстрой сортировки был быстрее. 5,8 есть своего рода директива для ограниченного контроля рода. Его довольно тупым контролем основной алгоритм не может сохраниться и в будущем Перлз, но способность характеризуют вход или выход в реализации независимыми способами, вполне вероятно, будет. См. рода Прагма.', 
+        '_translate cache large en->ru' );
 
 my $cache_file = $main::CONFIG->{languages_cache_path}.'/en-ru.pl';
 ok ( -f $cache_file, 'cache language file en-ru' );

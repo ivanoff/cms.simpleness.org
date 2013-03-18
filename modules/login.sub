@@ -21,13 +21,13 @@ my $rules =
     '/login' => sub {
 
 #pass = md5(pass+md5(login)+md5(login+pass))
-	if( $q->param('login') ) {
-	    $r = $db->sql("SELECT * FROM base_users WHERE user_login=? and user_password=MD5(CONCAT(?,MD5(?),MD5(?)))", $q->param('login'), $q->param('password'), $q->param('login'), $q->param('password').$q->param('login'));
-	    if ( $r->[0] ) {
-		$main::SESSION->param('slogin', md5_hex($q->param('login')));
-		$main::SESSION->param('sid', $r->[0]{user_id});
-		my $g = $db->sql( "SELECT * FROM base_users_groups WHERE group_id=?", $r->[0]{group_id} );
-		$main::SESSION->param('sgroup', $g->[0]{group_name});
+        if( $q->param('login') ) {
+            $r = $db->sql("SELECT * FROM base_users WHERE user_login=? and user_password=MD5(CONCAT(?,MD5(?),MD5(?)))", $q->param('login'), $q->param('password'), $q->param('login'), $q->param('password').$q->param('login'));
+            if ( $r->[0] ) {
+                $main::SESSION->param('slogin', md5_hex($q->param('login')));
+                $main::SESSION->param('sid', $r->[0]{user_id});
+                my $g = $db->sql( "SELECT * FROM base_users_groups WHERE group_id=?", $r->[0]{group_id} );
+                $main::SESSION->param('sgroup', $g->[0]{group_name});
                 my %params_default = ( 'show_relevant_best'=>'yes', 'show_relevant'=>'no', 'show_unrelevant'=>'no', 'mail_show_buy_sell'=>'yes' );
                 $r = $db->sql( "SELECT * FROM base_users_settings WHERE user_id=?", $r->[0]{user_id} );
                 foreach (@$r) {
@@ -37,123 +37,123 @@ my $rules =
                 foreach ( keys %params_default ) {
                     $main::SESSION->param($_, $params_default{$_});
                 }
-		redirect('login/success');
-	    }
-	}
-	$template->process('login/index.tpl', { %$tt }, \$output );
-	return $output;
+                redirect('login/success');
+            }
+        }
+        $template->process('login/index.tpl', { %$tt }, \$output );
+        return $output;
     },
 
     '/login/success' => sub {
-	$main::cache = 0;
-	$r = $db->sql("SELECT * FROM base_users WHERE user_login=?", $main::SESSION->param('slogin'));
-	$template->process('login/success.tpl', { name => $r->[0]{user_name}, %$tt }, \$output );
-	return $output;
+        $main::cache = 0;
+        $r = $db->sql("SELECT * FROM base_users WHERE user_login=?", $main::SESSION->param('slogin'));
+        $template->process('login/success.tpl', { name => $r->[0]{user_name}, %$tt }, \$output );
+        return $output;
     },
 
     '/login/exit' => sub {
-#	$main::SESSION->param('slogin', '');
-#	$main::SESSION->param('sgroup', '');
-#	$main::SESSION->param('sid', '');
+#        $main::SESSION->param('slogin', '');
+#        $main::SESSION->param('sgroup', '');
+#        $main::SESSION->param('sid', '');
         $main::SESSION->delete();
         $main::SESSION->flush();
-	redirect2 ('');
+        redirect2 ('');
     },
 
 
     '/login/recover' => sub {
-	if( $q->param('login') ) {
-	    $r = $db->sql("SELECT * FROM base_users WHERE user_login=?", $q->param('login'));
-	    if ( $r->[0] ) {
-		$db->sql("DELETE FROM base_users_recover WHERE user_id=?", $r->[0]{user_id});
-		my $recover = md5_hex( $q->param('login').time.$r->[0]{user_id}.rand().$r->[0]{user_password} );
-		$db->sql("INSERT INTO base_users_recover (user_id, recover) VALUES (?,?)", $r->[0]{user_id}, $recover);
-		my $message;
-		$template->process('messages/recover.tpl', { %$tt, name=>$r->[0]{user_name}, url=>'/login/recover/'.$recover, }, \$message );
-		email ( { 
-		    From  => 'info@ship.org.ua',
-		    To    => $q->param('login'),
-		    Subject => "Recovery password",
-    		    Message => $message,
-    		} );
-	    }
-	    $template->process('login/recover/sent.tpl', { %$tt, }, \$output );
-	} else {
-	    $template->process('login/recover/index.tpl', { %$tt, }, \$output );
-	}
-	return $output;
+        if( $q->param('login') ) {
+            $r = $db->sql("SELECT * FROM base_users WHERE user_login=?", $q->param('login'));
+            if ( $r->[0] ) {
+                $db->sql("DELETE FROM base_users_recover WHERE user_id=?", $r->[0]{user_id});
+                my $recover = md5_hex( $q->param('login').time.$r->[0]{user_id}.rand().$r->[0]{user_password} );
+                $db->sql("INSERT INTO base_users_recover (user_id, recover) VALUES (?,?)", $r->[0]{user_id}, $recover);
+                my $message;
+                $template->process('messages/recover.tpl', { %$tt, name=>$r->[0]{user_name}, url=>'/login/recover/'.$recover, }, \$message );
+                email ( { 
+                    From  => 'info@ship.org.ua',
+                    To    => $q->param('login'),
+                    Subject => "Recovery password",
+                        Message => $message,
+                    } );
+            }
+            $template->process('login/recover/sent.tpl', { %$tt, }, \$output );
+        } else {
+            $template->process('login/recover/index.tpl', { %$tt, }, \$output );
+        }
+        return $output;
     },
 
     '/login/recover/([0-9a-f]{32})' => sub {
-	if( $q->param('password') ) {
-	    my $recover = shift;
-	    $r = $db->sql("SELECT * FROM base_users_recover WHERE recover=?", $recover);
-	    if ( $r->[0] ) {
-		my $r2 = $db->sql("SELECT * FROM base_users WHERE user_id=?", $r->[0]{user_id});
-		$db->sql("UPDATE base_users SET user_password=MD5(CONCAT(?,MD5(?),MD5(?))) WHERE user_login=?", $q->param('password'), $r2->[0]{user_login}, $q->param('password').$r2->[0]{user_login}, $r2->[0]{user_login} );
-		$db->sql("DELETE FROM base_users_recover WHERE recover=?", $recover);
-#		caught_update( "UPDATE base_users SET user_password='".$md5->[0]{md5}."' WHERE user_id=".$r->[0]{user_id}.";" );
+        if( $q->param('password') ) {
+            my $recover = shift;
+            $r = $db->sql("SELECT * FROM base_users_recover WHERE recover=?", $recover);
+            if ( $r->[0] ) {
+                my $r2 = $db->sql("SELECT * FROM base_users WHERE user_id=?", $r->[0]{user_id});
+                $db->sql("UPDATE base_users SET user_password=MD5(CONCAT(?,MD5(?),MD5(?))) WHERE user_login=?", $q->param('password'), $r2->[0]{user_login}, $q->param('password').$r2->[0]{user_login}, $r2->[0]{user_login} );
+                $db->sql("DELETE FROM base_users_recover WHERE recover=?", $recover);
+#                caught_update( "UPDATE base_users SET user_password='".$md5->[0]{md5}."' WHERE user_id=".$r->[0]{user_id}.";" );
 =c
-		my $message;
-		$r = $db->sql("SELECT * FROM base_users WHERE user_id=?", $r->[0]{user_id});
-		$template->process('messages/recover_done.tpl', { %$tt, name=>$r->[0]{user_name}, }, \$message );
-		email ( { 
-		    To    => $q->param('login'),
-		    Subject => "Recovery password done",
-    		    Message => $message,
-    		} );
+                my $message;
+                $r = $db->sql("SELECT * FROM base_users WHERE user_id=?", $r->[0]{user_id});
+                $template->process('messages/recover_done.tpl', { %$tt, name=>$r->[0]{user_name}, }, \$message );
+                email ( { 
+                    To    => $q->param('login'),
+                    Subject => "Recovery password done",
+                        Message => $message,
+                    } );
 =cut
-	    }
-	    $template->process('login/recover/done.tpl', { %$tt, }, \$output );
-	} else {
-	    $template->process('login/recover/password.tpl', { %$tt, }, \$output );
-	}
-	return $output;
+            }
+            $template->process('login/recover/done.tpl', { %$tt, }, \$output );
+        } else {
+            $template->process('login/recover/password.tpl', { %$tt, }, \$output );
+        }
+        return $output;
     },
 
     '/login/change' => sub {
-	if( $q->param('password') ) {
-	    $r = $db->sql("SELECT * FROM base_users WHERE user_login=? AND user_password=MD5(CONCAT(?,MD5(?),MD5(?)))", $q->param('login'), $q->param('password_old'), $q->param('login'), $q->param('password_old').$q->param('login'));
-	    if ( $r->[0] ) {
-		$db->sql("UPDATE base_users SET user_password=MD5(CONCAT(?,MD5(?),MD5(?))) WHERE user_login=?", $q->param('password'), $r->[0]{user_login}, $q->param('password').$r->[0]{user_login}, $r->[0]{user_login} );
-		$template->process('login/change/done.tpl', { %$tt, }, \$output );
-		return $output;
-	    }
-	}
-	$template->process('login/change/index.tpl', { %$tt, }, \$output );
-	return $output;
+        if( $q->param('password') ) {
+            $r = $db->sql("SELECT * FROM base_users WHERE user_login=? AND user_password=MD5(CONCAT(?,MD5(?),MD5(?)))", $q->param('login'), $q->param('password_old'), $q->param('login'), $q->param('password_old').$q->param('login'));
+            if ( $r->[0] ) {
+                $db->sql("UPDATE base_users SET user_password=MD5(CONCAT(?,MD5(?),MD5(?))) WHERE user_login=?", $q->param('password'), $r->[0]{user_login}, $q->param('password').$r->[0]{user_login}, $r->[0]{user_login} );
+                $template->process('login/change/done.tpl', { %$tt, }, \$output );
+                return $output;
+            }
+        }
+        $template->process('login/change/index.tpl', { %$tt, }, \$output );
+        return $output;
     },
 
     '/login/register' => sub {
 return ""; ##don't register
-	if( $q->param('login') =~ /[A-Z0-9\.\_\%\+\-]+@[A-Z0-9\.\-]+\.[A-Z]{2,4}/i ) {
-	    $r = $db->sql("SELECT * FROM base_users WHERE user_login=?", $q->param('login'));
-	    if ( $r->[0] ) {
-		redirect ('login/register/already');
-	    } else {
-		$db->sql("INSERT INTO base_users (user_id, user_login, user_password, user_email, user_name, user_lang, group_id) VALUES (NULL,?,MD5(CONCAT(?,MD5(?),MD5(?))),?,?,?,6)", 
-		    $q->param('login'),$q->param('password'), $q->param('login'), $q->param('password').$q->param('login'),'',$q->param('name'),$t->{'language'}||'ru');
-		my $message;
-		$template->process('messages/contacts.tpl', { %$tt, name=>$q->param('name'), email=>$q->param('login'), text=>'registration: '.md5_hex($q->param('password')) }, \$message );
-		email ( { 
-    		    Message => $message,
-    		} );
-#		redirect ('login/register/success');
-	    }
-	    module('/login');
-	}
-	$template->process('login/register/index.tpl', { %$tt }, \$output );
-	return $output;
+        if( $q->param('login') =~ /[A-Z0-9\.\_\%\+\-]+@[A-Z0-9\.\-]+\.[A-Z]{2,4}/i ) {
+            $r = $db->sql("SELECT * FROM base_users WHERE user_login=?", $q->param('login'));
+            if ( $r->[0] ) {
+                redirect ('login/register/already');
+            } else {
+                $db->sql("INSERT INTO base_users (user_id, user_login, user_password, user_email, user_name, user_lang, group_id) VALUES (NULL,?,MD5(CONCAT(?,MD5(?),MD5(?))),?,?,?,6)", 
+                    $q->param('login'),$q->param('password'), $q->param('login'), $q->param('password').$q->param('login'),'',$q->param('name'),$t->{'language'}||'ru');
+                my $message;
+                $template->process('messages/contacts.tpl', { %$tt, name=>$q->param('name'), email=>$q->param('login'), text=>'registration: '.md5_hex($q->param('password')) }, \$message );
+                email ( { 
+                        Message => $message,
+                    } );
+#                redirect ('login/register/success');
+            }
+            module('/login');
+        }
+        $template->process('login/register/index.tpl', { %$tt }, \$output );
+        return $output;
     },
 
     '/login/register/success' => sub {
-	$template->process('login/register/success.tpl', { %$tt }, \$output );
-	return $output;
+        $template->process('login/register/success.tpl', { %$tt }, \$output );
+        return $output;
     },
 
     '/login/register/already' => sub {
-	$template->process('login/register/already.tpl', { %$tt }, \$output );
-	return $output;
+        $template->process('login/register/already.tpl', { %$tt }, \$output );
+        return $output;
     },
 
 };

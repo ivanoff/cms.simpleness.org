@@ -2,7 +2,7 @@
 
 <script type="text/javascript">
     function fill_all( ) {
-	[% FOREACH l IN languages.sort %]
+	[% FOREACH l IN config.languages.sort %]
 	    document.getElementById('subj_[%l%]').value=document.getElementById('subj_default').value;
 	    document.getElementById('body_[%l%]').value=document.getElementById('body_default').value;
 	[% END %]
@@ -21,7 +21,7 @@ subj: <input type="text" name="subj_default" id="subj_default" value=""/><br />
 <br />
 <input type="button" value="fill all languages" onclick="fill_all()"> <input type="submit" value="save and generate emails">
 
-[% FOREACH l IN languages.sort %]
+[% FOREACH l IN config.languages.sort %]
 
 <hr />
 

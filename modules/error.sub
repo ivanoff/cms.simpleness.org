@@ -13,12 +13,12 @@ my $rules =
 
 {
     '/error/(\w*)' => sub {
-	open F, '>>', $CONFIG->{log_error};
-	print F &{$tt->{current_date}}.' '.&{$tt->{current_time}}.' ('.$ENV{REMOTE_ADDR}.') '.$1;
-	print F "\n";
-	close F;
-	$template->process('error/index.tpl', { %$tt }, \$output );
-	return $output;
+        open F, '>>', $CONFIG->{log_error};
+        print F &{$tt->{current_date}}.' '.&{$tt->{current_time}}.' ('.$ENV{REMOTE_ADDR}.') '.$1;
+        print F "\n";
+        close F;
+        $template->process('error/index.tpl', { %$tt }, \$output );
+        return $output;
     },
 
 };

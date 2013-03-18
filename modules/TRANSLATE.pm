@@ -22,12 +22,12 @@ sub new {
     $self->{'language_file'} = $lang_file;
 
     if (-f $lang_file) {
-	my $ref = eval { local $SIG{__DIE__}; do $lang_file };
-	if (ref($ref) eq 'HASH') {
-	    $self->{'words'} = $ref;
+        my $ref = eval { local $SIG{__DIE__}; do $lang_file };
+        if (ref($ref) eq 'HASH') {
+            $self->{'words'} = $ref;
         } else {
-    	    use File::Copy;
-    	    copy($lang_file, $lang_file.'.tmp') unless(-f $lang_file.'.tmp');
+                use File::Copy;
+                copy($lang_file, $lang_file.'.tmp') unless(-f $lang_file.'.tmp');
         }
     }
 
@@ -44,7 +44,7 @@ sub t {
     if( $new_word ) {
         $word = $new_word if ( $new_word ne ' ' );
     } else {
-#	$word = $self->new_word($word);
+#        $word = $self->new_word($word);
     }
 
     return $word;
@@ -67,12 +67,12 @@ sub save_lang {
     print FILE "{\n";
     print FILE "\t''\t=> ' ',\n" unless $ref->{''};
     foreach my $key (sort {uc($a) cmp uc($b)} keys %{$ref}) {
-	my $key_c = $key;
-	$key_c =~ s/\'/\\\'/g;
-	$ref->{$key} =~ s/\'/\\\'/g;
-	utf8::decode( $ref->{$key} );
-	utf8::decode( $key_c );
-	print FILE "\t'$key_c'\t=> '".$ref->{$key}."',\n";
+        my $key_c = $key;
+        $key_c =~ s/\'/\\\'/g;
+        $ref->{$key} =~ s/\'/\\\'/g;
+        utf8::decode( $ref->{$key} );
+        utf8::decode( $key_c );
+        print FILE "\t'$key_c'\t=> '".$ref->{$key}."',\n";
     }
     print FILE "};";
     close FILE;
@@ -94,7 +94,7 @@ sub translate_simple {
     $to =~ s/il/iw/;
     my $mech = WWW::Mechanize->new();
     eval {
-	$mech->get( "http://translate.google.com/?tl=$to&fl=$from&q=$text" );
+        $mech->get( "http://translate.google.com/?tl=$to&fl=$from&q=$text" );
     };
     return $text if $@;
     my $_ = encode 'utf8', $mech->content;
@@ -116,7 +116,7 @@ sub words_between_tags {
 sub replace_by_hash {
     my ( $self, $text, $hash ) = @_;
     foreach ( sort {length($b) cmp length($a)} keys %$hash ) {
-	$text =~ s/\Q$_\E/$hash->{$_}/g;
+        $text =~ s/\Q$_\E/$hash->{$_}/g;
     }
     return $text;
 }
@@ -129,18 +129,18 @@ sub translate_hash {
     my ( $cache_file, $ref );
     if ( $self->{'cache'} ) {
     ## restore cache lang
-	$cache_file = $main::CONFIG->{languages_cache_path}.'/'.$from.'-'.$to.'.pl';
-	$ref = eval { local $SIG{__DIE__}; do $cache_file } if -f $cache_file;
+        $cache_file = $main::CONFIG->{languages_cache_path}.'/'.$from.'-'.$to.'.pl';
+        $ref = eval { local $SIG{__DIE__}; do $cache_file } if -f $cache_file;
     }
     foreach (keys %$words) {
-	next if defined $words->{$_} && $words->{$_} ne '1';
-	$words->{$_} = ( $self->{'cache'} && !$self->{'no_lang_cache'} && $ref && $ref->{$_} )? $ref->{$_}
-		        : $self->translate_simple( $_, $from, $to );
-	$ref->{$_} = $words->{$_} if $self->{'cache'};
+        next if defined $words->{$_} && $words->{$_} ne '1';
+        $words->{$_} = ( $self->{'cache'} && !$self->{'no_lang_cache'} && $ref && $ref->{$_} )? $ref->{$_}
+                        : $self->translate_simple( $_, $from, $to );
+        $ref->{$_} = $words->{$_} if $self->{'cache'};
     }
     if ( $self->{'cache'} ) {
     ## save cache lang
-	$self->save_lang( $cache_file, $ref );
+        $self->save_lang( $cache_file, $ref );
     }
     return $words;
 }
@@ -151,7 +151,7 @@ sub translate {
     my $self = shift;
     my ( $text, $from, $to ) = @_;
     if ( ref($text) eq 'HASH' ) {
-	return $self->translate_hash( $text, $from, $to );
+        return $self->translate_hash( $text, $from, $to );
     }
     my $hash = $self->words_between_tags( $text );
     $hash = $self->translate_hash( $hash, $from, $to );
@@ -161,27 +161,27 @@ sub translate {
 sub dictionary_translate {
     my %words;
     foreach my $lang ( @{$main::CONFIG->{languages}} ) {
-	my $ref = eval { local $SIG{__DIE__}; do $main::CONFIG->{config_path}.'/lang/'.$lang.'.pl' };
-	$words{$_} = 1 foreach keys %$ref;
+        my $ref = eval { local $SIG{__DIE__}; do $main::CONFIG->{config_path}.'/lang/'.$lang.'.pl' };
+        $words{$_} = 1 foreach keys %$ref;
     }
     $words{$_} = 1 foreach ( @{$main::CONFIG->{phrases_dont_translate}} );
 
     foreach my $lang ( @{$main::CONFIG->{languages}} ) {
-	my $translate;
-	my $t = TRANSLATE->new($lang);
-	foreach ( keys %words ) {
-	    next if /^\ *$/;
-#	    $translate->{$_}=1 if !$t->{words}{$_} || $t->{words}{$_} ~= /^\ *$/;
-	    $translate->{$_}=1 if !$t->{words}{$_};
-	}
-	if ($lang eq 'en') {
-	    $t->{'words'}{$_}=' ' foreach keys %$translate;
-	    $t->save_lang;
-	    next;
-	}
-	$translate = $t->translate($translate, 'en', $lang);
-	$t->{'words'}{$_}=$translate->{$_} foreach keys %$translate;
-	$t->save_lang;
+        my $translate;
+        my $t = TRANSLATE->new($lang);
+        foreach ( keys %words ) {
+            next if /^\ *$/;
+#            $translate->{$_}=1 if !$t->{words}{$_} || $t->{words}{$_} ~= /^\ *$/;
+            $translate->{$_}=1 if !$t->{words}{$_};
+        }
+        if ($lang eq 'en') {
+            $t->{'words'}{$_}=' ' foreach keys %$translate;
+            $t->save_lang;
+            next;
+        }
+        $translate = $t->translate($translate, 'en', $lang);
+        $t->{'words'}{$_}=$translate->{$_} foreach keys %$translate;
+        $t->save_lang;
     }
 }
 
@@ -195,8 +195,8 @@ sub lang_checking {
 
     my $db = $main::db;
     my $r = $db->sql("SELECT * FROM $params->{table} WHERE lang=? AND $params->{id} NOT IN 
-		(SELECT $params->{id} FROM $params->{table} WHERE lang=?)", 
-		$params->{lang_from}, $params->{lang_to});
+                (SELECT $params->{id} FROM $params->{table} WHERE lang=?)", 
+                $params->{lang_from}, $params->{lang_to});
     return "$params->{table} - nothing to do" unless @$r;
     
     my @keys = grep { $_ ne $params->{id_main} } keys %{$r->[0]};
@@ -206,36 +206,36 @@ sub lang_checking {
     ## get text to translate in to refhash $source with translated text
     my $source;
     foreach my $row (@$r) {
-	foreach my $key (@keys) {
-	    next if $key eq 'lang';
-	    next if ( grep { $_ eq $key } @{$params->{dnd}} );
-	    next if $source->{$row->{$key}};
-	    $source->{$row->{$key}} = $self->translate($row->{$key}, $params->{lang_from}, $params->{lang_to} );
-	    ##replace don't translate phrases
-	    foreach my $phrase ( @{$main::CONFIG->{phrases_dont_translate}} ) {
-		my $_ = $t->t( $phrase );
-		next unless $_;
-		$_ = $phrase if /^\ *$/;
-		$source->{$row->{$key}} =~ s/\Q$_\E/$phrase/g;
-	    }
-	}
+        foreach my $key (@keys) {
+            next if $key eq 'lang';
+            next if ( grep { $_ eq $key } @{$params->{dnd}} );
+            next if $source->{$row->{$key}};
+            $source->{$row->{$key}} = $self->translate($row->{$key}, $params->{lang_from}, $params->{lang_to} );
+            ##replace don't translate phrases
+            foreach my $phrase ( @{$main::CONFIG->{phrases_dont_translate}} ) {
+                my $_ = $t->t( $phrase );
+                next unless $_;
+                $_ = $phrase if /^\ *$/;
+                $source->{$row->{$key}} =~ s/\Q$_\E/$phrase/g;
+            }
+        }
     }
 
     foreach my $row (@$r) {
-	my @new;
-	foreach my $key (@keys) {
-	    if ( $key eq 'lang' ) {
-		push @new, $params->{lang_to};
-		next;
-	    } elsif ( ( grep { $_ eq $key } @{$params->{dnd}} ) ) {
-		push @new, $row->{$key};
-	    } else {
-		push @new, $source->{$row->{$key}};
-	    }
-	}
-	my $q = '?,'x(@keys+0);
-	$q =~ s/.$//;
-	$db->sql( "INSERT INTO $params->{table} (".(join ( ',', @keys )).") VALUES ($q)", @new );
+        my @new;
+        foreach my $key (@keys) {
+            if ( $key eq 'lang' ) {
+                push @new, $params->{lang_to};
+                next;
+            } elsif ( ( grep { $_ eq $key } @{$params->{dnd}} ) ) {
+                push @new, $row->{$key};
+            } else {
+                push @new, $source->{$row->{$key}};
+            }
+        }
+        my $q = '?,'x(@keys+0);
+        $q =~ s/.$//;
+        $db->sql( "INSERT INTO $params->{table} (".(join ( ',', @keys )).") VALUES ($q)", @new );
     }
 
     return $params->{table} . " : " . $params->{lang_to} . " : " . (0+@$r) . "<br />";
@@ -248,17 +248,17 @@ return 0;
     my ($self, $url) = @_;
     my $lang_owner;
     foreach (keys %{$main::CONFIG->{languages_dont_translate}}) {
-	push @{$lang_owner->{$main::CONFIG->{languages_dont_translate}{$_}}}, $_;
+        push @{$lang_owner->{$main::CONFIG->{languages_dont_translate}{$_}}}, $_;
     }
     foreach (keys %{$lang_owner}){
-	my $message;
-	$main::template->process('messages/lang_owner_was_modyfied.tpl', 
-		{ %{$main::tt}, lang=>$lang_owner->{$_}, url=>$url, }, \$message );
-	email ( { 
-	    To    => $_,
-	    Subject => "Page was modyfied",
-    	    Message => $message,
-    	} );
+        my $message;
+        $main::template->process('messages/lang_owner_was_modyfied.tpl', 
+                { %{$main::tt}, lang=>$lang_owner->{$_}, url=>$url, }, \$message );
+        email ( { 
+            To    => $_,
+            Subject => "Page was modyfied",
+                Message => $message,
+            } );
     }
 return 1;
 }

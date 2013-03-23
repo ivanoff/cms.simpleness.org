@@ -9,7 +9,9 @@ use DBD::Log;
 sub new {
     my ($class) = @_;
     my $self = {};
-    my $dsn = 'DBI:'.$main::CONFIG->{'db_type'}.':dbname='.$main::CONFIG->{'db_database'};
+    my $dsn = 'DBI:'.$main::CONFIG->{'db_type'}
+                .':dbname='.$main::CONFIG->{'db_dbname'}
+                .';host='.$main::CONFIG->{'db_host'};
     my $dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, {PrintError => 1});
     $self->{'connect'} = \$dbh;
     $self->{'prefix'} = $main::CONFIG->{'db_table_prefix'};

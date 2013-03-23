@@ -10,6 +10,7 @@ use Net::SMTP_auth;
 use Digest::MD5 qw( md5_hex );
 use File::Path qw(make_path);
 use File::stat;
+use POSIX qw(strftime);
 
 our $VERSION = '0.02';
 our @ISA     = qw( Exporter );
@@ -20,14 +21,14 @@ our @EXPORT  = qw(
                    to_log
                    thumbnail_images resize
                    email
-                   cache_save cache_load
+                   cache_save cache_delete cache_load
                 );
 use strict;
 use CONFIG;
 
 ## get all access rules
 sub access {
-    $_ = eval { local $SIG{__DIE__}; do $CONFIG->{config_path}.'/access.pl' };
+    $_ = eval { local $SIG{__DIE__}; do $CONFIG->{config_files_path}.'/access.pl' };
     $_->{$main::SESSION->param('sgroup')};
 }
 
@@ -63,8 +64,8 @@ sub module {
     }
     if (-f $module) {
         my $ref = eval { local $SIG{__DIE__}; do $module; };
-        return $@ if $@;
-        return `cd $CONFIG->{modules_path} && perl -c ../$module 2>&1` unless $ref;
+        return to_log( $@ ) if $@;
+        return to_log( `cd $CONFIG->{modules_path} && perl -c $module 2>&1` ) unless $ref;
         return $ref unless ref($ref);
         if (ref($ref) eq 'HASH') { %main = (%main, %$ref); };
     }
@@ -79,7 +80,12 @@ sub module {
 sub to_log {
     my ( $filename, @data ) = ( ref($_[0]) ne 'HASH' )? ( $CONFIG->{log_error}, @_ ):( $_[0]->{filename}, @{$_[0]->{data}} );
     open F, '>>', $filename;
-    print F $_."\n" foreach @data;
+    foreach ( @data ) {
+        print F $ENV{REMOTE_ADDR};
+        print F (strftime " [%F %T] - ", localtime);
+        s/\r|\n//g;
+        print F $_."\n";
+    }
     close F;
 }
 
@@ -230,30 +236,49 @@ my $rv = $bulk->send($email);
 
 }
 
+sub cache_md5_filename {
+    md5_hex (($ENV{'SERVER_NAME'}||'').($ENV{'REQUEST_URI'}||''));
+}
+
+sub cache_dir {
+    $CONFIG->{cache_dir}.'/'.substr(&cache_md5_filename, 0, 1).'/'.substr(&cache_md5_filename, 0, 2);
+}
+
+sub cache_filename {
+    &cache_dir . "/" . &cache_md5_filename;
+}
+
 sub cache_save {
     return 0 if !$CONFIG->{cache};
-    my $page = shift;
-    my $md5_name = md5_hex (($ENV{'SERVER_NAME'}||'').($ENV{'REQUEST_URI'}||''));
-    my $cache_dir = $CONFIG->{cache_dir}.'/cache_'.substr($md5_name, 0, 1);
-    make_path($cache_dir) unless -e $cache_dir;
-    open F, '>', "$cache_dir/cache_$md5_name";
-    print F $page;
+    my $content = shift;
+    make_path( &cache_dir ) unless -e &cache_dir;
+    open F, '>', &cache_filename;
+    print F $content;
     close F;
-    utime time+$CONFIG->{cache_time}, time+$CONFIG->{cache_time}, "$cache_dir/cache_$md5_name";
+    utime time+$CONFIG->{cache_time}, time+$CONFIG->{cache_time}, &cache_filename;
+    return 1;
+}
+
+sub cache_delete {
+    $ENV{'REQUEST_URI'} = shift if @_;
+    unlink &cache_filename if -e &cache_filename;
     return 1;
 }
 
 sub cache_load {
-    my $md5_name = md5_hex (($ENV{'SERVER_NAME'}||'').($ENV{'REQUEST_URI'}||''));
-    my $cache_dir = $CONFIG->{cache_dir}.'/cache_'.substr($md5_name, 0, 1);
+    my %s = ( defined $main::index_session )? %{$main::index_session} : ();
 
-    return 0 if $ENV{'REQUEST_METHOD'} eq 'POST';
-    return 0 if defined $main::SESSION->param('slogin');
-    return 0 unless -e "$cache_dir/cache_$md5_name";
-    return 0 if stat("$cache_dir/cache_$md5_name")->mtime < time;
+    return 0 if !$CONFIG->{cache}
+             || $ENV{'REQUEST_METHOD'} eq 'POST'
+             || ! defined $s{_SESSION_ID}
+             || defined $s{slogin}
+             || ( defined $main::SESSION && defined $main::SESSION->param('slogin') )
+             || ! -e &cache_filename
+             || stat(&cache_filename)->mtime < time
+            ;
 
     my $result;
-    open F, "$cache_dir/cache_$md5_name";
+    open F, &cache_filename;
     $result .= $_ foreach <F>;
     close F;
     return $result;

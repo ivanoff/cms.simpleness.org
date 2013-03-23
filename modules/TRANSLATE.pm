@@ -18,7 +18,7 @@ sub new {
     $self->{'cache'} = $main::CONFIG->{languages_cache};
     $self->{'no_lang_cache'} = 0;
 
-    my $lang_file = $main::CONFIG->{config_path}.'/lang/'.$lang.'.pl';
+    my $lang_file = $main::CONFIG->{config_files_path}.'/lang/'.$lang.'.pl';
     $self->{'language_file'} = $lang_file;
 
     if (-f $lang_file) {
@@ -161,7 +161,7 @@ sub translate {
 sub dictionary_translate {
     my %words;
     foreach my $lang ( @{$main::CONFIG->{languages}} ) {
-        my $ref = eval { local $SIG{__DIE__}; do $main::CONFIG->{config_path}.'/lang/'.$lang.'.pl' };
+        my $ref = eval { local $SIG{__DIE__}; do $main::CONFIG->{config_files_path}.'/lang/'.$lang.'.pl' };
         $words{$_} = 1 foreach keys %$ref;
     }
     $words{$_} = 1 foreach ( @{$main::CONFIG->{phrases_dont_translate}} );

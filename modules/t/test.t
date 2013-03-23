@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use lib 'modules';
+use lib '..';
 
 use Test::More tests => 51;
 

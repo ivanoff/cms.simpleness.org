@@ -1,7 +1,7 @@
 ############################################
 ## default index file
 
-    DirectoryIndex main.pl
+    DirectoryIndex index.pl
 
 <IfModule mod_security.c>
 ###########################################
@@ -74,7 +74,7 @@
     RewriteCond %{REQUEST_URI} !^/(css|editor|images|js|template|modules)/
 
     Options -Indexes
-#    RewriteRule ^/(files)(.*)$ main.pl [R=302,NC,L] 
+#    RewriteRule ^/(files)(.*)$ index.pl [R=302,NC,L] 
 
 ############################################
 ## never rewrite for existing files, directories and links
@@ -84,9 +84,9 @@
     RewriteCond %{REQUEST_FILENAME} !-l
 
 ############################################
-## rewrite everything else to main.pl
+## rewrite everything else to index.pl
 
-    RewriteRule .* main.pl [L]
+    RewriteRule .* index.pl [L]
 
 </IfModule>
 

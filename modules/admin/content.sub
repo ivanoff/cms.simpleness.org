@@ -44,6 +44,9 @@ my $rules =
         $page =~ s/^content://;
         $t->{'no_lang_cache'} = ($q->param('no_lang_cache') eq '1')? 1 : 0;
 
+        cache_delete( $page );
+        if ( $page =~ /^_/ ) {};
+
         ## if current language isn't default one, then update only one page
         if ( $lang ne $CONFIG->{default_language} ) {
             if ( $body ) {

@@ -20,21 +20,17 @@ our ( $db, $q, $t, $tt, $template, $SESSION, $header, );
 my $time_interval = [gettimeofday()];
 
 $q = new CGI;
-$SESSION = new CGI::Session("driver:File", undef, {Directory=>$CONFIG->{cache_dir}});
+$SESSION = new CGI::Session("driver:File", undef, {Directory=>$CONFIG->{session_dir}});
 if($q->param('_SESSION_ID')) {
-    $SESSION = CGI::Session->load( "driver:File", $q->param('_SESSION_ID'), {Directory=>$CONFIG->{cache_dir}} );
+    $SESSION = CGI::Session->load( "driver:File", $q->param('_SESSION_ID'), {Directory=>$CONFIG->{session_dir}} );
     if ( $SESSION->is_expired ) {
         $SESSION->delete();
         $SESSION->flush();
     }
 }
-
-## Check for cached page and load it if found
-if ( my $body = cache_load ) {
-    print "Content-Type: text/html; charset=utf-8\n\n";
-    print $body;
-    print "\n<!-- ".(tv_interval($time_interval)*1000)."ms cache $_ -->";
-    exit 0;
+if ( $SESSION->param('ip') && $SESSION->param('ip') ne $ENV{REMOTE_ADDR} ) {
+    $SESSION->delete();
+    $SESSION->flush();
 }
 
 ## Get current language
@@ -77,9 +73,14 @@ eval {
 
 module( '&end', "/DEFAULT.sub", $ENV{'REDIRECT_URL'} );
 
-if ( $CONFIG->{show_errors} ) {
-    $body = $@ if $@;
-    $body = $template->error() if $template->error();
+if ( $@ ) {
+    to_log( $@ );
+    $body = $@ if $CONFIG->{show_errors};
+}
+
+if ( $template->error() ) {
+    to_log( $template->error() );
+    $body = $template->error() if $CONFIG->{show_errors};
 }
 
 if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
@@ -95,7 +96,7 @@ if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
 } else {
     my $cookie = $q->cookie(-name=>'CGISESSID',
                             -value=>$SESSION->id(),
-                            -expires=>'+1h',
+                            -expires=>$CONFIG->{session_expires},
                             -path=>'/',
                             -domain=>$CONFIG->{site},
                             );
@@ -117,11 +118,13 @@ if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
 
     my $page;
     $template->process('index.tpl', { body=>$body, %$tt, }, \$page);
-    $page = $template->error() if $CONFIG->{show_errors} && $template->error();
+    if ( $template->error() ) {
+        to_log( $template->error() );
+        $page = $template->error() if $CONFIG->{show_errors};
+    }
 
     print $page;
-    print "\n<!-- ".(tv_interval($time_interval)*1000)."ms -->";
-
+    print "\n<!-- ".(tv_interval($time_interval)*1000)." ms -->";
     cache_save ( $page );
 
 }

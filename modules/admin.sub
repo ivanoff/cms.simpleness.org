@@ -26,7 +26,7 @@ my $rules =
 
     '/admin/lang_base' => sub {
         die unless ( $tt->{access}{can_edit_content} );
-        my $lang_file = $main::CONFIG->{config_path}.'/lang/en.pl';
+        my $lang_file = $main::CONFIG->{config_files_path}.'/lang/en.pl';
         my $ref = eval { local $SIG{__DIE__}; do $lang_file };
         $output .= $_.' => '.$t->t($_).'<br>' foreach sort keys %$ref;
         return $output;
@@ -37,7 +37,7 @@ my $rules =
         my $res;
         my %words;
         foreach my $lang ( @{$main::CONFIG->{languages}} ) {
-            my $ref = eval { local $SIG{__DIE__}; do $main::CONFIG->{config_path}.'/lang/'.$lang.'.pl' };
+            my $ref = eval { local $SIG{__DIE__}; do $main::CONFIG->{config_files_path}.'/lang/'.$lang.'.pl' };
             $words{$_} = 1 foreach keys %$ref;
         }
         foreach my $lang ( @{$main::CONFIG->{languages}} ) {

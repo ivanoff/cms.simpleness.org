@@ -19,11 +19,6 @@ my $rules =
         my $uri = shift;
         $uri = '' unless $uri;
 
-# don't cache if https or while logged in
-        if ( defined $main::SESSION->param('slogin') || $main::q->https ) {
-            $main::CONFIG->{cache} = 0;
-        }
-
 ## get last 4 news (for left column etc)
         $main::tt = { %{$main::tt},
             news        => $db->sql("SELECT * FROM base_news WHERE lang=? ORDER BY news_date DESC LIMIT 4", $t->{'language'}),

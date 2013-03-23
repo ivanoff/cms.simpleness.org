@@ -24,6 +24,7 @@ my $rules =
         if( $q->param('login') ) {
             $r = $db->sql("SELECT * FROM base_users WHERE user_login=? and user_password=MD5(CONCAT(?,MD5(?),MD5(?)))", $q->param('login'), $q->param('password'), $q->param('login'), $q->param('password').$q->param('login'));
             if ( $r->[0] ) {
+                $main::SESSION->param('ip', $ENV{REMOTE_ADDR});
                 $main::SESSION->param('slogin', md5_hex($q->param('login')));
                 $main::SESSION->param('sid', $r->[0]{user_id});
                 my $g = $db->sql( "SELECT * FROM base_users_groups WHERE group_id=?", $r->[0]{group_id} );

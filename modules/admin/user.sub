@@ -8,6 +8,6 @@ return "permission denied" unless ( $main::tt->{access}{can_view_users} );
 
 {
 
-'nothing' => 'to say. left from ship',
+'/user' => sub {'list of users'},
 
 };

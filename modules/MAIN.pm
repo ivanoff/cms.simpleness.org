@@ -2,29 +2,43 @@
 
 package MAIN;
 
+use strict;
+use warnings;
+
 use Email::Send;
-use Email::Send::Gmail;
 use Email::MIME::Creator;
 use IO::All;
-use Net::SMTP_auth;
 use Digest::MD5 qw( md5_hex );
-use File::Path qw(make_path);
-use File::stat;
-use POSIX qw(strftime);
+use File::Path qw( make_path remove_tree );
+use POSIX qw( strftime );
+use Time::HiRes qw( gettimeofday tv_interval );
 
-our $VERSION = '0.02';
+use CONFIG;
+use MAIN::Cache;
+use MAIN::Laconic;
+
+our $VERSION = '0.1';
 our @ISA     = qw( Exporter );
 our @EXPORT  = qw(
-                   access 
-                   redirect redirect2 back
-                   module
-                   to_log
-                   thumbnail_images resize
-                   email
-                   cache_save cache_delete cache_load
-                );
-use strict;
-use CONFIG;
+                $CONFIG $CONFIG_TEMPLATE $CONFIG_IMAGES
+                redirect redirect2 back
+                access 
+                module
+                to_log
+                thumbnail_images resize
+                email
+                make_path remove_tree
+                ban forbid
+            );
+our @EXPORT_OK  = qw(
+                gettimeofday tv_interval
+                md5_hex
+            );
+our %EXPORT_TAGS = (
+                all   => [ @EXPORT, @EXPORT_OK ],
+                time  => [ qw( gettimeofday tv_interval ) ],
+                file  => [ qw( make_path remove_tree ) ],
+            );
 
 ## get all access rules
 sub access {
@@ -36,14 +50,14 @@ sub access {
  get result from subsections $module with $link section and @arg arguments
  if there is no modules, system gets module, regards to path of link
  for example:
-    $body = module( '&begin', "/DEFAULT.sub", 'abc', 123 );
-        system will get module DEFAULT.sub in modules path, 
+    $body = module( '&begin', "/DEFAULT.hash", 'abc', 123 );
+        system will get module DEFAULT.hash in modules path, 
         then execute &begin subsection with ('abc', 123) parameters
     $body = module('/admin/news/edit/123');
-        System will try to find /admin/news/edit/123.sub link, then /admin/news/edit.sub, 
-        then /admin/news.sub and stop search, 'cause found last one.
+        System will try to find /admin/news/edit/123.hash link, then /admin/news/edit.hash, 
+        then /admin/news.hash and stop search, 'cause found last one.
         After that, system will find '/admin/news/edit/(\d+)' section in
-        /admin/news.sub module by regexp with $link.
+        /admin/news.hash module by regexp with $link.
         Then, system execute this section with '123' argument.
 =cut
 sub module {
@@ -54,13 +68,13 @@ sub module {
     } else {
         push @modules, $1 while ( $link =~ m%/([\w\d]+[\w\d\.]*)%g );
         while ( @modules ) {
-            $module = $CONFIG->{modules_path}."/".(join '/', @modules).".sub";
+            $module = $CONFIG->{modules_path}."/".(join '/', @modules).".".$CONFIG->{modules_extension};
             last if -f $module;
             undef $module;
             pop @modules;
         }
-        $module = $CONFIG->{modules_path}."/DEFAULT.sub" unless $module;
-        $module = $CONFIG->{modules_path}."/.sub" unless $link;
+        $module = $CONFIG->{modules_path}."/DEFAULT.hash" unless $module;
+        $module = $CONFIG->{modules_path}."/.hash" unless $link;
     }
     if (-f $module) {
         my $ref = eval { local $SIG{__DIE__}; do $module; };
@@ -228,60 +242,12 @@ if( keys %{$_->{Image}} ) {
     );
 }
 
-my $bulk = Email::Send->new;
-for ( qw[Sendmail SMTP Qmail] ) {
-    $bulk->mailer($_) and last if $bulk->mailer_available($_);
-}
-my $rv = $bulk->send($email);
+    my $bulk = Email::Send->new;
+    for ( qw[Sendmail SMTP Qmail] ) {
+        $bulk->mailer($_) and last if $bulk->mailer_available($_);
+    }
+    my $rv = $bulk->send($email);
 
-}
-
-sub cache_md5_filename {
-    md5_hex (($ENV{'SERVER_NAME'}||'').($ENV{'REQUEST_URI'}||''));
-}
-
-sub cache_dir {
-    $CONFIG->{cache_dir}.'/'.substr(&cache_md5_filename, 0, 1).'/'.substr(&cache_md5_filename, 0, 2);
-}
-
-sub cache_filename {
-    &cache_dir . "/" . &cache_md5_filename;
-}
-
-sub cache_save {
-    return 0 if !$CONFIG->{cache};
-    my $content = shift;
-    make_path( &cache_dir ) unless -e &cache_dir;
-    open F, '>', &cache_filename;
-    print F $content;
-    close F;
-    utime time+$CONFIG->{cache_time}, time+$CONFIG->{cache_time}, &cache_filename;
-    return 1;
-}
-
-sub cache_delete {
-    $ENV{'REQUEST_URI'} = shift if @_;
-    unlink &cache_filename if -e &cache_filename;
-    return 1;
-}
-
-sub cache_load {
-    my %s = ( defined $main::index_session )? %{$main::index_session} : ();
-
-    return 0 if !$CONFIG->{cache}
-             || $ENV{'REQUEST_METHOD'} eq 'POST'
-             || ! defined $s{_SESSION_ID}
-             || defined $s{slogin}
-             || ( defined $main::SESSION && defined $main::SESSION->param('slogin') )
-             || ! -e &cache_filename
-             || stat(&cache_filename)->mtime < time
-            ;
-
-    my $result;
-    open F, &cache_filename;
-    $result .= $_ foreach <F>;
-    close F;
-    return $result;
 }
 
 =head1 MAIN

@@ -1,0 +1,36 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+use MAIN::Update;
+
+return "can't find update file $CONFIG->{update_rules_file}" unless -f $CONFIG->{update_rules_file};
+my $up = eval { local $SIG{__DIE__}; do $CONFIG->{update_rules_file} };
+return "error in ../$CONFIG->{update_rules_file}" if ref $up ne 'HASH';
+
+forbid 'view_update' or
+
+{
+
+    '/admin/update' => sub {
+
+        my $files;
+        foreach ( keys %{$up->{files}} ) {
+            $files->{$_}=file_to_md5('../'.$_);
+        }
+        
+        process ('admin/update/index.tpl', { old => $up->{files}, new => $files });
+    },
+
+    '/admin/update/diff/(.*)' => sub {
+        my $file = $1;
+        return "file isn't in the list of updates" unless $up->{files}{$file};
+        my $remote = get_remote_content( $file );
+        return "Remote page not found" unless $remote;
+        open F, '<', '../'.$file;
+        my $current = join '', <F>;
+        close F;
+        process ('admin/update/diff.tpl', { diff => compare ( $remote, $current ) });
+    },
+
+};

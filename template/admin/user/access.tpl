@@ -1,21 +1,22 @@
 <h2>Access</h2>
 <form method="post" enctype="multipart/form-data">
 
-[% IF access.can_edit_user_access %]
+[% IF access.edit_user_access %]
 
 [%
     access_names = { 
-	'can_edit_user_access' => 'can edit this access',
-	'can_edit_content' => 'can edit content', 
-	'can_email_page' => 'can send emails from the site', 
-	'can_add_subscribe' => 'can add new subscribe', 
-	'can_view_addthis' => 'view addthis area',
-	'can_settings' => 'can edit settings',
-	'can_import_base' => 'can import base',
-	'can_manage_gallery' => 'can manage gallery',
+	'edit_user_access' => 'can edit this access',
+	'edit_content' => 'can edit content', 
+	'email_page' => 'can send emails from the site', 
+	'add_subscribe' => 'can add new subscribe', 
+	'view_addthis' => 'view addthis area',
+	'settings' => 'can edit settings',
+	'import_base' => 'can import base',
+	'manage_gallery' => 'can manage gallery',
 	'add_news' => 'can add and edit news',
 	'edit_menu' => 'edit main menu',
 	'print_page' => 'can print page',
+	'view_update' => 'can view updates',
     }
 %]
 

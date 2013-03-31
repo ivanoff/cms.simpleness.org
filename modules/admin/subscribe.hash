@@ -1,0 +1,70 @@
+#!/usr/bin/perl
+
+use strict;
+use lib '..';
+use CONFIG;
+use MAIN;
+use TRANSLATE;
+
+my $q = $main::q;
+my $t = $main::t;
+my $tt = { 
+    %{$main::tt}, 
+    current_date => sub{ my @d = localtime(time); $d[5]+=1900; $d[4]++; 
+            map {$_='0'.$_ if $_<10;} @d; return "$d[5]-$d[4]-$d[3]"; },
+    current_time => sub{ my @d = localtime(time); 
+            map {$_='0'.$_ if $_<10;} @d; return "$d[2]:$d[1]:$d[0]"; },
+    };
+my $db = $main::db;
+my $template = Template->new($CONFIG_TEMPLATE);
+my $output = '';
+my $r;
+
+ban 'add_subscribe' or
+
+my $rules =
+
+{
+
+    '/admin/subscribe/add' => sub {
+        
+        if($q->param('generate')) {
+            $r = $db->sql( "SELECT MAX(subs_key) subs_key FROM base_subscribe_current" );
+            my $subs_key = ($r->[0]{subs_key})? $r->[0]{subs_key}+1 : 1;
+            foreach my $lang ( 'default', @{$CONFIG->{languages}} ) {
+                next unless $q->param('subj_'.$lang);
+                $db->sql( "INSERT INTO base_subscribe (subs_key, lang, subs_date, subs_subj, subs_body) VALUES (?,?,?,?,?)", 
+                            $subs_key, $lang, $q->param('date'), $q->param('subj_'.$lang), $q->param('body_'.$lang) );
+            }
+            my %cust = map { $_->{cust_id}=>$_ } @{ $db->sql( "SELECT * FROM ships s LEFT JOIN customers c ON (s.cust_id=c.cust_id)" ) };
+            $r = $db->sql( "SELECT * FROM base_users WHERE user_password=MD5('0') ORDER BY user_id ASC" );
+#            $r = $db->sql( "SELECT * FROM base_users WHERE user_id=356 AND user_password=MD5('0') ORDER BY user_id ASC" );
+            foreach ( @$r ) {
+                next if $_->{user_name} eq '__';
+                $_->{user_lang} = 'default' unless $_->{user_lang};
+                $_->{user_lang} = 'ru' if $_->{user_name} =~ /[аоиеуя]/;
+                $_->{user_lang} = 'en' if $_->{user_name} !~ /[аоиеуя]/ && $_->{user_lang} == 'ru';
+                next unless $q->param('subj_'.$_->{user_lang});
+                my $subj = $q->param('subj_'.$_->{user_lang});
+                my $body = $q->param('body_'.$_->{user_lang});
+                $subj =~ s/\[name\]/$_->{user_name}/g;
+                $body =~ s/\[name\]/$_->{user_name}/g;
+                $body =~ s/\[login\]/$cust{$_->{user_id}}->{cust_email}/g;
+                my $password = md5_hex($_->{user_login}.$_->{user_password});
+                $password =~ s/^.{26}//;
+                $password =~ s/666/667/;
+                $body =~ s/\[password\]/$password/g;
+                $db->sql( "UPDATE base_users SET user_password=MD5(?) WHERE user_id=?", $password, $_->{user_id} );
+#                $db->sql( "UPDATE base_users SET user_password=MD5('0') WHERE user_id=?", $_->{user_id} );
+                $db->sql( "INSERT INTO base_subscribe_current (subs_key, subs_date, user_id, subs_subj, subs_body, subs_result) VALUES (?,?,?,?,?,'wait')",
+                            $subs_key, $q->param('date'), $_->{user_id}, $subj, $body );
+            }
+            back();
+        }
+
+        my %subscribers = map { $_->{user_lang} => $_->{c} } @{ $db->sql( "SELECT user_lang, count(*) c FROM base_users GROUP BY user_lang" ) };
+        $template->process('admin/subscribe/add.tpl', { %$tt, subscribers=>\%subscribers, }, \$output );
+        return $output;
+    },
+
+};

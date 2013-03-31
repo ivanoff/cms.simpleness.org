@@ -25,7 +25,7 @@
 	    $(function() { $('.gallery a').lightBox(); });
 	</script>
 [% END %]
-[% IF access.can_edit_content %]
+[% IF access.edit_content %]
 	<script type="text/javascript">
 	    var session = "[% session('_SESSION_ID') %]";
 	    var lang = "[% language %]";
@@ -38,7 +38,7 @@
 [% END %]
 </head>
 <body>
-[% IF access.can_edit_content %]
+[% IF access.edit_content %]
 <div id="myNicPanel" style="position: fixed; z-index: 900; width:100%;"></div>
 <div style="height: 25px;"></div>
 [% END %]
@@ -98,10 +98,11 @@
 [% END %]
 
 <div id="content:[% uri %]" class="editable">
-[% (access.can_edit_content)? content_edit : content %]
+[% (access.edit_content)? content_edit : content %]
 </div>
 [% body %]
 
+[% IF access.view_addthis %]
 <!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style " id="no_print">
 <br />
@@ -113,6 +114,7 @@
 </div>
 <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-506ffb3468d2f3c5"></script>
 <!-- AddThis Button END -->
+[% END %]
 
 </div>
 

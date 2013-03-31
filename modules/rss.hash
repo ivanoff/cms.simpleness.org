@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+
+use strict;
+
+{
+    '/rss' => sub {
+        header 'xml';
+        $main::template->process( 'xml/rss.tpl' );
+    },
+};

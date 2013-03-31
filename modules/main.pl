@@ -6,16 +6,30 @@ use lib '../modules';
 
 use DBI;
 use Template;
+
 use CGI;
 use CGI::Session;
-use Time::HiRes qw(gettimeofday tv_interval);
 
 use CONFIG;
 use DATABASE;
 use TRANSLATE;
-use MAIN;
+use MAIN qw( :all );
 
 our ( $db, $q, $t, $tt, $template, $SESSION, $header, );
+
+{
+    # create SubTemplate package for override 'process' method
+    # to add default variables and return output if no outstream variable
+    package SubTemplate;
+    our @ISA = qw( Template );
+    sub process {
+        my ($self, $template, $vars, $outstream, @opts) = @_;
+        my $output;
+        $vars = ($vars)? { %$tt, %$vars } : $tt;
+        my $r = $self->SUPER::process($template, $vars, ($outstream)?$outstream:\$output, @opts);
+        return ($outstream)? $r : $output;
+    }
+};
 
 my $time_interval = [gettimeofday()];
 
@@ -33,6 +47,8 @@ if ( $SESSION->param('ip') && $SESSION->param('ip') ne $ENV{REMOTE_ADDR} ) {
     $SESSION->flush();
 }
 
+#-250
+
 ## Get current language
 $ENV{'SERVER_NAME'} =~ /^(?:www\.)?(?:(\w\w)\.)?/;
 my $lang = $1 || $CONFIG->{default_language};
@@ -43,7 +59,9 @@ unless ( grep {$_ eq $lang} @{$CONFIG->{languages}} ) {
 
 $t = TRANSLATE->new($lang);
 $db = DATABASE->new;
-$template = Template->new($CONFIG_TEMPLATE);
+#-50
+$template = SubTemplate->new($CONFIG_TEMPLATE);
+#-50
 
 ## Default variables for Template Toolkit
 $tt = {
@@ -63,15 +81,16 @@ $tt = {
 };
 
 ## exec &begin link in DEFAULT subsection with REDIRECT_URL parameter
-module( '&begin', "/DEFAULT.sub", $ENV{'REDIRECT_URL'} );
-
+module( '&begin', "/DEFAULT.hash", $ENV{'REDIRECT_URL'} );
+#-0
 my $body;
 eval {
     ## get result from subsections with $ENV{'REDIRECT_URL'} link
     $body = module($ENV{'REDIRECT_URL'});
 };
+#-100
 
-module( '&end', "/DEFAULT.sub", $ENV{'REDIRECT_URL'} );
+module( '&end', "/DEFAULT.hash", $ENV{'REDIRECT_URL'} );
 
 if ( $@ ) {
     to_log( $@ );
@@ -116,8 +135,8 @@ if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
             )),
         );
 
-    my $page;
-    $template->process('index.tpl', { body=>$body, %$tt, }, \$page);
+    my $page=$template->process('index.tpl', { body=>$body, }, );
+#-100
     if ( $template->error() ) {
         to_log( $template->error() );
         $page = $template->error() if $CONFIG->{show_errors};
@@ -125,6 +144,7 @@ if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
 
     print $page;
     print "\n<!-- ".(tv_interval($time_interval)*1000)." ms -->";
+
     cache_save ( $page );
 
 }

@@ -1,0 +1,46 @@
+#!/usr/bin/perl
+
+use strict;
+use CONFIG;
+
+my $output = '';
+my $SESSION = $main::SESSION;
+
+ban 'manage_gallery' or
+
+{
+
+    '/admin/images/browse' => sub {
+        $main::header = "clear";
+        my $path = $CONFIG_IMAGES->{PATH};
+        $main::template->process('admin/images/browse.tpl', 
+            { %$main::tt, fl=>[<$path/*.*>], num=>$main::q->url_param('CKEditorFuncNum'), path=>$path, }, 
+            \$output );
+        return $output;
+    },
+
+    '/admin/images/delete/(.*)' => sub {
+        my $_ = shift;
+        return 0 if /\.\./;
+        return 0 unless -f;
+        return 0 unless /^$CONFIG_IMAGES->{PATH}/;
+        unlink $_;
+        back;
+    },
+
+    '/admin/images/upload' => sub {
+        my $upfile = $main::q->param('image');
+        binmode($upfile);
+        open F, '>', $CONFIG_IMAGES->{PATH}.'/'.${$main::q->Vars}{image};
+        while ( <$upfile> ) {
+            print F $_;
+        }
+        close F;
+        $main::header = "Content-type: application/json; charset=utf-8";
+        $main::template->process('admin/images/upload.tpl', 
+            { %$main::tt, path=>$CONFIG_IMAGES->{PATH}, }, 
+            \$output );
+        return $output;
+    },
+
+};

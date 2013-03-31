@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+
+cache(1);       # cache turn on
+
+{
+    '/error/(\w*)' => sub {
+        to_log( $1 );
+        $main::template->process( 'error/index.tpl' );
+    },
+};

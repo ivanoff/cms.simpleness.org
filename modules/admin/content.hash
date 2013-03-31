@@ -1,0 +1,112 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+use CONFIG;
+
+my $output = '';
+my $q = $main::q;
+my $t = $main::t;
+my $db = $main::db;
+my $SESSION = $main::SESSION;
+
+return $_ if $_ = ban 'manage_gallery';
+
+sub translate_content {
+        foreach my $to ( @{$CONFIG->{languages}} ) {
+            next if $to eq $CONFIG->{default_language};
+            next if grep {$_ eq $to} keys %{$CONFIG->{languages_dont_translate}};
+            $t->lang_checking ( { table=>'base_content', id=>'content_page', id_main=>'content_id', 
+                lang_from=>$CONFIG->{default_language}, lang_to=>$to, 
+                dnd=>['user_id', 'content_date_from', 'content_place', ] } );
+        }
+}
+
+my $rules =
+
+{
+
+    '/admin/content' => sub {
+        my @content = @{$db->sql ( "SELECT * FROM base_content ORDER BY lang, content_page" )};
+        $main::template->process('admin/content.tpl', { %$main::tt, content=>\@content, }, \$output );
+        return $output;
+    },
+
+    '/admin/content/(\d+)' => sub {
+        $main::header = 'clear';
+        return ($db->sql ( "SELECT content_body FROM base_content WHERE content_id=?", $1 ))[0][0]{content_body};
+    },
+
+    '/admin/content/update' => sub {
+        my $body = $q->param('body');
+        my $lang = $q->param('lang');
+        my $page = $q->param('page');
+        $page =~ s/^content://;
+        $t->{'no_lang_cache'} = ($q->param('no_lang_cache') eq '1')? 1 : 0;
+
+        cache_delete( $page );
+        if ( $page =~ /^_/ ) {};
+
+        ## if current language isn't default one, then update only one page
+        if ( $lang ne $CONFIG->{default_language} ) {
+            if ( $body ) {
+                $db->sql("UPDATE base_content SET content_body=? WHERE content_page=? AND lang=?", $body, $page, $lang );
+            } else {
+                $db->sql( "DELETE FROM base_content WHERE content_page=? AND lang=?", $page, $lang );
+            }
+            back();
+            die;
+        }
+
+        ## deleting all pages except languages_don't_translate
+        my $x = '?,' x (keys %{$CONFIG->{languages_dont_translate}});
+        $x =~ s/.$//;
+        $x = "''" unless $x;
+        if ( $body ) {
+            $db->sql("UPDATE base_content SET content_body=? WHERE content_page=? AND lang=?", $body, $page, $lang );
+        } else {
+            $db->sql( "DELETE FROM base_content WHERE content_page=? AND ( lang NOT IN ($x) OR lang=? )", 
+                    $page, keys %{$CONFIG->{languages_dont_translate}}, $lang );
+        }
+
+        $t->email_to_lang_owners($page);
+
+        translate_content();
+        
+        back();
+    },
+
+    '/admin/content/update/headers' => sub {
+        my $pageheader = $q->param('pageheader');
+        unless (defined $pageheader) {
+            back();
+            die;
+        };
+        my $lang = $q->param('lang');
+        my $page = $q->param('page');
+        $page =~ s/^content//;
+        $t->{'no_lang_cache'} = ($q->param('no_lang_cache') eq '1')? 1 : 0;
+
+        $db->sql("UPDATE base_content SET content_title=? WHERE content_page=? AND lang=?", 
+                $pageheader, $page, $lang );
+
+        ## if current language isn't default one, then update only one page
+        unless ( $lang ne $CONFIG->{default_language} ) {
+
+            ## deleting all pages except languages_don't_translate
+            my $x = '?,' x (keys %{$CONFIG->{languages_dont_translate}});
+            $x =~ s/.$//;
+            $x = "''" unless $x;
+            $db->sql( "DELETE FROM base_content WHERE content_page=? AND lang NOT IN ($x) AND lang!=?", 
+                    $page, keys %{$CONFIG->{languages_dont_translate}}, $lang );
+
+            $t->email_to_lang_owners($page);
+            translate_content();
+
+        }
+        
+        back();
+    },
+
+
+};

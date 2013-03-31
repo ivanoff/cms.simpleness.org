@@ -6,7 +6,7 @@
 	    [% gallery.${gal_key}.gal_description %]
 	</div>
 	<br />
-[% IF access.can_manage_gallery %]
+[% IF access.manage_gallery %]
 	<script type="text/javascript">
 	    var gallery_key = "[% gal_key %]"; 
 	</script>
@@ -21,7 +21,7 @@
       </ul>
       <br class="clear" />
 
-[% IF access.can_manage_gallery %]
+[% IF access.manage_gallery %]
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 <!-- <script src="/js/jquery-ui.js"></script> -->
 
@@ -77,7 +77,7 @@
     </div>
 </td></tr></table>
 
-[% IF access.can_manage_gallery %]
+[% IF access.manage_gallery %]
 	<div class="dropZone">[% t('Drop new images here') %]</div>
 	<script src="/js/dropBox.js" type="text/javascript"></script>
 [% END %]

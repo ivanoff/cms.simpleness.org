@@ -1,0 +1,57 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+
+ban 'edit_menu' or
+
+{
+
+    '/admin/menu' => sub {
+        my %menu = map { $_->{menu_key} => $_ } 
+                @{ sql( "SELECT * FROM base_menu m 
+                    LEFT JOIN base_menu_url u ON (m.menu_key=u.menu_key)
+                    WHERE m.lang=? ORDER BY u.menu_order DESC", lang ) };
+        process( 'admin/menu.tpl', { menu=>\%menu, } );
+    },
+
+    '/admin/menu/add/(.+)' => sub {
+        my $name = my $url = shift;
+        $url =~ s/[\s\/\'\"]/_/g;
+        $url = '/'.$url;
+
+        my $r = sql( "SELECT menu_key FROM base_menu_url WHERE menu_url=?", $url );
+        unless ( $r->[0] ){
+            $r = sql "SELECT MAX(menu_order)+1 max_order FROM base_menu_url";
+            sql( "INSERT INTO base_menu_url (menu_url, menu_order, menu_parent) 
+                                    VALUES (?,?,0)", $url, $r->[0]{max_order} );
+            $r = sql( "SELECT menu_key FROM base_menu_url WHERE menu_url=?", $url );
+        }
+        sql( "INSERT INTO base_menu (menu_name, lang, menu_key) 
+                VALUES (?,?,?)", $url, lang, $r->[0]{menu_key} );
+
+        header( 'xml' );
+        process( 'xml/index.tpl', { records=>{ id=>$r->[0]{menu_key}, name=>$name, url=>$url, } } );
+    },
+
+    '/admin/menu/delete/(\d+)' => sub {
+        sql "DELETE FROM base_menu_url WHERE menu_key=?", $1;
+        header( 'xml' );
+        process( 'xml/index.tpl', { records=>{ id=>$1 } } );
+    },
+
+    '/admin/menu/sort/([\w:;]+)' => sub {
+        my @menu = split ";", $1;
+        my %menu_check = map { $1 => $2 if /(.*):(.*)/; } @menu;
+
+        my $offset;
+        foreach ( @menu ) {
+            my ($child, $parent) = (/(\d*):(.*)/)? ($1, $2) : 0;
+            next unless $child;
+            $parent = 0 unless $menu_check{$parent};
+            sql( "UPDATE base_menu_url SET menu_parent=?, menu_order=?
+                    WHERE menu_key=?", $parent, (++$offset), $child );
+        }
+    },
+
+};

@@ -6,7 +6,6 @@ use strict;
 
 use utf8;
 use Encode;
-
 use WWW::Mechanize;
 
 sub new {

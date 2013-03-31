@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+
+my $db = $main::db;
+
+my %gallery = map { $_->{gal_key} => $_ } 
+                @{$db->sql ( "SELECT * FROM base_gallery WHERE lang=?", $main::t->{'language'} )};
+
+params { gallery=>\%gallery, image=>1 };
+
+{
+
+    '/gallery' => sub {
+        $main::template->process( 'gallery/index.tpl' );
+    },
+
+    '/gallery/(\d+)' => sub {
+        my $gal_key = $1;
+        my @images = @{$db->sql ( "SELECT * FROM base_gallery_images 
+                            WHERE gal_key=? ORDER BY img_order DESC", $gal_key )};
+        $main::template->process( 'gallery/gallery.tpl', { images=>\@images, gal_key=>$gal_key, 
+                                    size=>$CONFIG_IMAGES->{SIZE}[0]}, );
+    },
+
+};

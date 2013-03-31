@@ -31,11 +31,9 @@ sub sql {
 
 #    if ( 1 ) {
     if ( $dbh->errstr ) {
-        open F, '>>/tmp/ship.org.ua.log';
-        print F "$sql\n"; 
-        print F join "\n", @_ , "\n"; 
-        print F $dbh->errstr."\n"; 
-        close F;
+        to_log ( $dbh->errstr ); 
+        to_log ( "SQL: $sql" ); 
+        to_log ( "PARAMETERS: ". (join ", ", @_) ); 
     }
     my @result;
 
@@ -54,8 +52,8 @@ sub sql {
 
 ## for logging updates
 sub sql_log {
-#    to_log ( @_ );
-#    to_log ( {filename=>'/tmp/ship.org.ua.sql', data=>[ @_ ], } );
+    to_log ( @_ );
+    to_log ( {filename=>$main::CONFIG->{'log_sql'}, data=>[ @_ ], } );
 
     my $self = shift;
     my $sql = shift;

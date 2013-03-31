@@ -10,6 +10,7 @@ our ( @ISA, @EXPORT );
 
 our $CONFIG = { 
 
+        modules_extension  => 'hash',
         modules_path       => '../modules',
         config_files_path  => '../modules/admin/config',
 
@@ -61,6 +62,15 @@ our $CONFIG = {
         show_errors        => 0,
         log_error          => '../log/error.log',
         log_sql            => '../log/clear.sql',
+
+# Automatically updates section
+# frequency parameter regexp string 'YYYY-MM-DD;HH:MM:SS;DOW;DOY'
+
+        update_automatically    => 1,
+        update_log_file         => '../log/upgate.log',
+        update_rules_file       => '../modules/admin/config/update.pl',
+        update_rules_timeout    => 60*60*24,
+        update_frequency_regexp => qr/;6;/,  #every friday
 
 };
 

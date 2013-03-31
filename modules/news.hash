@@ -1,0 +1,22 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+
+my $t = $main::t;
+my $template = $main::template;
+
+title $t->t('News');
+
+{
+    '/news' => sub {
+        my $r = $main::db->sql( "SELECT * FROM base_news WHERE lang=? 
+                                        ORDER BY news_date DESC", $t->{'language'} );
+        $template->process('news/index.tpl', { news => $r, });
+    },
+
+    '/news/(\d+)' => sub {
+        my $r = $main::db->sql( "SELECT * FROM base_news WHERE lang=? AND news_key=?", $t->{'language'}, $1 );
+        $template->process('news/one.tpl', { news => $r, news_key => $1 } );
+    },
+};

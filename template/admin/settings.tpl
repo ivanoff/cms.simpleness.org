@@ -4,7 +4,7 @@
 
 <form method="post" name="sett" id="sett">
 
-[% IF access.can_edit_users %]
+[% IF access.edit_users %]
 [% t('Show only') %]: 
 <select name="country">
 	<option [% UNLESS session('country') %]selected="selected"[% END %] value='all'>[% t('All') %]</option>
@@ -15,13 +15,13 @@
 <br />
 [% END %]
 
-[% IF access.can_subscribe %]
+[% IF access.subscribe %]
     [% t('Get suitable offers by email') %]: 
     <input type="checkbox" name="subscribe" [% IF session('subscribe') %]checked="checked"[% END %] value="1">
     <br />
 [% END %]
 
-[% IF access.can_relation %]
+[% IF access.relation %]
 
 [% t('Show the best from relevant') %]: 
 <input type="radio" [% IF session('show_relevant_best') == 'yes' %]checked="checked"[% END %] name="show_relevant_best" value="yes">[% t('Yes') %]
@@ -40,10 +40,10 @@
 
 [% END %]
 
-[% IF access.can_show_interests %]
+[% IF access.show_interests %]
 [% END %]
 
-[% IF access.can_email_page %]
+[% IF access.email_page %]
 <b>[% t('Mail') %]</b><br />
 On page: 
 <input type="radio" [% IF session('mail_on_page') == '20' %]checked="checked"[% END %] name="mail_on_page" value="">20

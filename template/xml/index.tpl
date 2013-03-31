@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<data>
 [% FOREACH key IN records.keys %]
 <[% key %]>[% records.${key}
     .replace('&','&amp;')
@@ -8,3 +9,4 @@
     .replace('"','&quot;')
     %]</[% key %]>
 [% END %]
+</data>

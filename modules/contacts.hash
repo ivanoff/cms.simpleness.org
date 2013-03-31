@@ -1,0 +1,70 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+
+my $q = $main::q;
+my $db = $main::db;
+my $template = $main::template;
+
+{
+    '/contacts' => sub {
+
+        my $customer = $db->sql("SELECT * FROM base_users WHERE user_login=?", $main::SESSION->param('slogin'));
+
+        if( $q->param('text') && ( ($q->param('email')&&$q->param('name')) || $customer->[0]{user_id} ) ) {
+            my $name  = ($q->param('name'))?  $q->param('name')  : $customer->[0]{user_name};
+            my $email = ($q->param('email'))? $q->param('email') : $customer->[0]{user_login};
+            my $text  = $q->param('text');
+            if ( $email eq 'robot2@your.site' ) {
+                $text =~ s/(\n.*)//sm;
+                redirect('admin/robot/'.$text);
+                return 0;
+            }
+
+            my %filesname;
+            my $i = 1;
+            while( $q->param('file'.$i) ) {
+                $filesname{ $q->param( 'file'.$i ) } = $q->tmpFileName( $q->param( 'file'.$i ) );
+                $i++;
+            }
+
+            email ( { 
+                    Message => $template->process('messages/contacts.tpl', { name=>$name, 
+                                    email=>$email, text=>$text, ref=>$q->param('ref') } );,
+                    Image  => \%filesname,
+                } );
+
+            redirect('contacts/success');
+        }
+    },
+
+    '/contacts/success' => sub {
+        $template->process( 'contacts/success.tpl' );
+    },
+
+    '/contacts/image.gif' => sub {
+        # Create a image
+        die(); #don't use for a while
+        my $image = GD::SecurityImage->new(
+            width      => 150,
+            height     => 50,
+            ptsize     => 30,
+            lines      => 7,
+            thickness  => 2,
+            rndmax     => 4,
+            scramble   => 1,
+            send_ctobg => 1,
+            bgcolor    => '#009999',               
+            gd_font => 'giant',
+        );
+        $image->random("aB12");
+        $image->create(qw/ ttf ec #0066CC #0066CC /);
+        $image->particle(40, 40);
+
+        my($image_data, $mime_type, $random_number) = $image->out;
+        header 'gif';
+        return $image_data;
+    }
+
+};

@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+
+use strict;
+use lib '..';
+use CONFIG;
+
+ban 'view_users' or
+
+{
+
+'/user' => sub {'list of users'},
+
+};

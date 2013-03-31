@@ -5,15 +5,15 @@
 ## Check database connection
 ## Import and update database
 ## Update config file
-die; #surprise!!! Don't tested yet
 
 use strict;
 use warnings;
-use lib '../modules';
+use lib 'modules';
 use CONFIG;
 
 my @modules = qw( 
     WWW::Mechanize
+    WWW::Mechanize::GZip
     DBI
     Template
     CGI
@@ -28,6 +28,7 @@ my @modules = qw(
     File::Path
     POSIX
     Encode
+    Text::Diff
   );
 
     sub param {
@@ -54,7 +55,7 @@ my @modules = qw(
     my @install = grep { $check_modules->{$_} } keys %$check_modules;
     if(@install) {
         print "Modules need to be install:\n". (join "\n", @install) ."\n";
-        if( param( "Do you want to install missed modules?", 'y' ) =~ /y(es)/i ) {
+        if( param( "Do you want to install missed modules?", 'y' ) eq 'y' ) {
 	    `perl -MCPAN -e 'force install $_'` foreach ( @install );
         } else {
 	    die("Please, install missed modules manually and start $0 again\n");
@@ -64,7 +65,7 @@ my @modules = qw(
 
 ### get parameters ###
 
-    print "Please, enter parameters below:\n";
+    print "Please, enter parameters below: ";
     $CONFIG->{site}  = param( "site url",    $CONFIG->{site} );
     $CONFIG->{email} = param( "your e-mail", $CONFIG->{email} );
     my $pass  = param( "password for admin area" );
@@ -74,11 +75,11 @@ my @modules = qw(
     my ( $dsn, $dbh );
 
     sub db_connect {
-	$dsn = 'DBI:'.$main::CONFIG->{'db_type'}
-        	.':dbname='.$main::CONFIG->{'db_dbname'}
-        	.';host='.$main::CONFIG->{'db_host'};
-	$dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, {PrintError => 1});
-	return $dbh->error();
+	$dsn = 'DBI:'.$CONFIG->{'db_type'}
+        	.':dbname='.$CONFIG->{'db_dbname'}
+        	.';host='.$CONFIG->{'db_host'};
+	$dbh = DBI->connect($dsn, $CONFIG->{'db_user'}, $CONFIG->{'db_password'}, {PrintError => 1});
+	return $DBI::errstr;
     }
 
     my $answer;
@@ -111,16 +112,19 @@ my @modules = qw(
 
     
 ### Import and update database ###
-    open F, '<', '../install/simpleness.sql';
-    my $sql = join '', <F>;
+    open F, '<', 'install.sql';
+    $dbh->do( $_ ) for split /;\n/, join( '', <SQL> );
     close F;
-    my $sth = $dbh->prepare( $sql );
-    my $rv = $sth->execute();
 
-    $sth = $dbh->prepare( "UPDATE base_users SET user_password=MD5(CONCAT(?,MD5(?),MD5(?))) WHERE user_login='admin'" );
-    $rv = $sth->execute( $pass, 'admin', $pass.'admin', 'admin' );
+#    my $sth = $dbh->prepare( $sql );
+#    my $rv = $sth->execute();
+
+    my $sth = $dbh->prepare( "UPDATE base_users SET user_password=MD5(CONCAT(?,MD5(?),MD5(?))) WHERE user_login=?" );
+    my $rv = $sth->execute( $pass, 'admin', $pass.'admin', 'admin' );
 
 
 ### Remove this file
-    unlink $0 if( param( "Do you want to remove this unnecessary $0 file?", 'y' ) =~ /y(es)/i );
+    if( param( "Do you want to remove this unnecessary $0 file?", 'y' ) eq 'y' ) {
+        unlink foreach qw( $0 install.sql log/.gitignore tmp/.gitignore );
+    }
 

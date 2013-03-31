@@ -1,3 +1,5 @@
+    var myNicEditor;
+
     var save_text = function ( where, what ) {
 //	if ( what == "click to edit" ) return 0;
 	if( where.indexOf(":") ) {
@@ -23,7 +25,7 @@
     });
     bkLib.onDomLoaded(function() {
 	var current_text = '';
-        var myNicEditor = new nicEditor({
+        myNicEditor = new nicEditor({
 		fullPanel : true, 
 		onSave : function(content, id, instance) {
 		    save_text( id, content );

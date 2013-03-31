@@ -10,12 +10,12 @@ our ( @ISA, @EXPORT );
 
 our $CONFIG = { 
 
+        site               => 'admin.clear',
+        email              => '2@ivanoff.org.ua',
+
         modules_extension  => 'hash',
         modules_path       => '../modules',
         config_files_path  => '../modules/admin/config',
-
-        site               => 'admin.clear',
-        email              => '2@ivanoff.org.ua',
 
 # DB section
 
@@ -90,6 +90,7 @@ our $CONFIG_TEMPLATE = {
         EVAL_PERL         => 1,              # evaluate Perl code blocks
 #        INTERPOLATE       => 1,             # expand "$var" in plain text
 #        DEBUG             => 1,
+        RECURSION         => 1,
 };
 
 1;

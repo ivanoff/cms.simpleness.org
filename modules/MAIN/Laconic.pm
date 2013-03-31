@@ -26,9 +26,14 @@ sub title {
 }
 
 sub header {
-    $_ = shift;
-    /xml/ && do {$main::header = "Content-type: text/xml"};
-    /gif/ && do {$main::header = "Content-type: image/gif"};
+    my ( $_, $params ) = @_;
+    /xml/ && do {$main::header = "Content-type: text/xml;"};
+    /gif/ && do {$main::header = "Content-type: image/gif;"};
+    if ( ref $params eq 'HASH' ) {
+        if ( $params->{no_cache} ) {
+            $main::header .= "Cache-Control: no-cache, must-revalidate\nExpires: Sat, 26 Jul 1997 05:00:00 GMT";
+        }
+    }
 }
 
 sub ban {

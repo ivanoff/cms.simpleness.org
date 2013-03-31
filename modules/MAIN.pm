@@ -29,6 +29,8 @@ our @EXPORT  = qw(
                 email
                 make_path remove_tree
                 ban forbid
+                sql
+                lang
             );
 our @EXPORT_OK  = qw(
                 gettimeofday tv_interval

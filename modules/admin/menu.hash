@@ -8,15 +8,14 @@ ban 'edit_menu' or
 {
 
     '/admin/menu' => sub {
-        my %menu = map { $_->{menu_key} => $_ } 
-                @{ sql( "SELECT * FROM base_menu m 
+        my @menu = @{ sql( "SELECT * FROM base_menu m 
                     LEFT JOIN base_menu_url u ON (m.menu_key=u.menu_key)
-                    WHERE m.lang=? ORDER BY u.menu_order DESC", lang ) };
-        process( 'admin/menu.tpl', { menu=>\%menu, } );
+                    WHERE m.lang=? ORDER BY u.menu_order ASC", lang ) };
+        process( 'admin/menu/index.tpl', { menu=>\@menu, } );
     },
 
     '/admin/menu/add/(.+)' => sub {
-        my $name = my $url = shift;
+        my ($name, $url) = ( $_[0], $_[0] );
         $url =~ s/[\s\/\'\"]/_/g;
         $url = '/'.$url;
 
@@ -28,9 +27,9 @@ ban 'edit_menu' or
             $r = sql( "SELECT menu_key FROM base_menu_url WHERE menu_url=?", $url );
         }
         sql( "INSERT INTO base_menu (menu_name, lang, menu_key) 
-                VALUES (?,?,?)", $url, lang, $r->[0]{menu_key} );
+                VALUES (?,?,?)", $name, lang, $r->[0]{menu_key} );
 
-        header( 'xml' );
+        header( 'xml', { no_cache => 1, } );
         process( 'xml/index.tpl', { records=>{ id=>$r->[0]{menu_key}, name=>$name, url=>$url, } } );
     },
 
@@ -53,5 +52,17 @@ ban 'edit_menu' or
                     WHERE menu_key=?", $parent, (++$offset), $child );
         }
     },
+
+    '/admin/menu/edit/(\d+)/update' => sub {
+        my $id = $1;
+        my $body = $main::q->param('body');
+        my ($url, $name) = ( $body=~/href=["'](.*)['"].*>(.*)</ )? ($1, $2) : ( );
+        return 0 unless $url;
+        sql "UPDATE base_menu SET menu_name=? WHERE lang=? AND menu_key=?", $name, $main::q->param('lang'), $id;
+        sql "UPDATE base_menu_url SET menu_url=? WHERE menu_key=?", $url, $id;
+        header( 'xml' );
+        process( 'xml/index.tpl', { records=>{ id=>$id } } );
+    },
+
 
 };

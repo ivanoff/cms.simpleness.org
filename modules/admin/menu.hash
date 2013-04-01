@@ -3,7 +3,7 @@
 use strict;
 use MAIN;
 
-ban 'edit_menu' or
+you_cannot 'edit_menu' or
 
 {
 
@@ -19,13 +19,10 @@ ban 'edit_menu' or
         $url =~ s/[\s\/\'\"]/_/g;
         $url = '/'.$url;
 
-        my $r = sql( "SELECT menu_key FROM base_menu_url WHERE menu_url=?", $url );
-        unless ( $r->[0] ){
-            $r = sql "SELECT MAX(menu_order)+1 max_order FROM base_menu_url";
-            sql( "INSERT INTO base_menu_url (menu_url, menu_order, menu_parent) 
+        my $r = sql "SELECT MAX(menu_order)+1 max_order FROM base_menu_url";
+        sql( "INSERT INTO base_menu_url (menu_url, menu_order, menu_parent) 
                                     VALUES (?,?,0)", $url, $r->[0]{max_order} );
-            $r = sql( "SELECT menu_key FROM base_menu_url WHERE menu_url=?", $url );
-        }
+        $r = sql( "SELECT menu_key FROM base_menu_url WHERE menu_url=?", $url );
         sql( "INSERT INTO base_menu (menu_name, lang, menu_key) 
                 VALUES (?,?,?)", $name, lang, $r->[0]{menu_key} );
 
@@ -35,7 +32,7 @@ ban 'edit_menu' or
 
     '/admin/menu/delete/(\d+)' => sub {
         sql "DELETE FROM base_menu_url WHERE menu_key=?", $1;
-        header( 'xml' );
+        header( 'xml', { no_cache => 1, } );
         process( 'xml/index.tpl', { records=>{ id=>$1 } } );
     },
 
@@ -55,12 +52,11 @@ ban 'edit_menu' or
 
     '/admin/menu/edit/(\d+)/update' => sub {
         my $id = $1;
-        my $body = $main::q->param('body');
-        my ($url, $name) = ( $body=~/href=["'](.*)['"].*>(.*)</ )? ($1, $2) : ( );
+        my ($url, $name) = ( param('body') =~ /href=["'](.*?)['"].*?>(.*)</ )? ($1, $2) : ( );
         return 0 unless $url;
-        sql "UPDATE base_menu SET menu_name=? WHERE lang=? AND menu_key=?", $name, $main::q->param('lang'), $id;
+        sql "UPDATE base_menu SET menu_name=? WHERE lang=? AND menu_key=?", $name, lang, $id;
         sql "UPDATE base_menu_url SET menu_url=? WHERE menu_key=?", $url, $id;
-        header( 'xml' );
+        header( 'xml', { no_cache => 1, } );
         process( 'xml/index.tpl', { records=>{ id=>$id } } );
     },
 

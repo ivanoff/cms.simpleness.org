@@ -1,10 +1,9 @@
 #!/usr/bin/perl
 
 use strict;
-use lib '..';
-use CONFIG;
+use MAIN;
 
-ban 'view_users' or
+you_cannot 'view_users' or
 
 {
 

@@ -7,13 +7,13 @@ use lib '..';
 
 use Test::More tests => 51;
 
-require_ok( 'CONFIG' );
-use CONFIG;
+require_ok( 'MAIN' );
+use MAIN;
 require_ok( 'TRANSLATE' );
 
-is ( $CONFIG->{default_language}, 'ru', "Default language is ru" );
+is ( lang('default'), 'ru', "Default language is ru" );
 
-my $t = new TRANSLATE( $CONFIG->{default_language} );
+my $t = new TRANSLATE( lang('default') );
 
 isa_ok( $t, 'TRANSLATE' );
 

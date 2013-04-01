@@ -1,10 +1,11 @@
 #!/usr/bin/perl
 
 use strict;
+use MAIN;
 
 {
     '/rss' => sub {
         header 'xml';
-        $main::template->process( 'xml/rss.tpl' );
+        process( 'xml/rss.tpl' );
     },
 };

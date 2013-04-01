@@ -13,7 +13,7 @@ use CGI::Session;
 use CONFIG;
 use DATABASE;
 use TRANSLATE;
-use MAIN qw( :all );
+use MAIN;
 
 our ( $db, $q, $t, $tt, $template, $SESSION, $header, );
 
@@ -51,7 +51,7 @@ if ( $SESSION->param('ip') && $SESSION->param('ip') ne $ENV{REMOTE_ADDR} ) {
 
 ## Get current language
 $ENV{'SERVER_NAME'} =~ /^(?:www\.)?(?:(\w\w)\.)?/;
-my $lang = $1 || $CONFIG->{default_language};
+my $lang = $1 || lang('default');
 unless ( grep {$_ eq $lang} @{$CONFIG->{languages}} ) {
     print "Status: 404 Not Found\n\n";
     exit 0;
@@ -75,9 +75,6 @@ $tt = {
     language     => $t->{'language'},
     direct_rtl   => sub{ $t->{'language'} =~ /(il|fa|ar)/ },
     access       => access( $ENV{'REDIRECT_URL'}, $SESSION->param('slogin') ),
-    current_date => sub{ my @d = localtime(time); $d[5]+=1900; $d[4]++; map {$_='0'.$_ if $_<10;} @d; return "$d[5]-$d[4]-$d[3]"; },
-    current_time => sub{ my @d = localtime(time); map {$_='0'.$_ if $_<10;} @d; return "$d[2]:$d[1]:$d[0]"; },
-    month        => sub{ $_ = shift; my @m = qw( January February March April May June July August September October November December ); return $m[$_-1]; },
 };
 
 ## exec &begin link in DEFAULT subsection with REDIRECT_URL parameter
@@ -94,20 +91,16 @@ module( '&end', "/DEFAULT.hash", $ENV{'REDIRECT_URL'} );
 
 if ( $@ ) {
     to_log( $@ );
-    $body = $@ if $CONFIG->{show_errors};
+    $body = ( $CONFIG->{show_errors} )? $@ : 'err.#01';
 }
 
 if ( $template->error() ) {
     to_log( $template->error() );
-    $body = $template->error() if $CONFIG->{show_errors};
+    $body = ( $CONFIG->{show_errors} )? $template->error() : 'err.#02';
 }
 
 if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
     print "Status: 404 Not Found\n\n";
-} elsif ( $header && $header eq 'clear' ) {
-    ## get clear template
-    print $q->header(-charset=>"utf-8");
-    $template->process('clear.tpl', { body=>$body, %$tt, });
 } elsif ( $header ) {
     ## if there is any information in header - show it
     print $header."\n\n";

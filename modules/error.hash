@@ -8,6 +8,6 @@ cache(1);       # cache turn on
 {
     '/error/(\w*)' => sub {
         to_log( $1 );
-        $main::template->process( 'error/index.tpl' );
+        process( 'error/index.tpl' );
     },
 };

@@ -19,33 +19,33 @@ use MAIN::Laconic;
 
 our $VERSION = '0.1';
 our @ISA     = qw( Exporter );
-our @EXPORT  = qw(
+
+our @EXPORT_OK  = qw(
                 $CONFIG $CONFIG_TEMPLATE $CONFIG_IMAGES
                 redirect redirect2 back
                 access 
                 module
                 to_log
-                thumbnail_images resize
+                resize
                 email
-                make_path remove_tree
-                ban forbid
-                sql
-                lang
-            );
-our @EXPORT_OK  = qw(
-                gettimeofday tv_interval
                 md5_hex
             );
+
 our %EXPORT_TAGS = (
-                all   => [ @EXPORT, @EXPORT_OK ],
-                time  => [ qw( gettimeofday tv_interval ) ],
-                file  => [ qw( make_path remove_tree ) ],
+                all     => [ @EXPORT_OK ],
+                laconic => [ qw( defaults title header ban you_cannot you_can_not process sql
+                                t lang is_default_lang cache param session images) ],
+                cache   => [ qw( cache_save cache_delete cache_load )],
+                time    => [ qw( gettimeofday tv_interval ) ],
+                file    => [ qw( make_path remove_tree ) ],
             );
+
+our @EXPORT = map { @$_ } values %EXPORT_TAGS;
 
 ## get all access rules
 sub access {
     $_ = eval { local $SIG{__DIE__}; do $CONFIG->{config_files_path}.'/access.pl' };
-    $_->{$main::SESSION->param('sgroup')};
+    $_->{&session('sgroup')};
 }
 
 =head1 module
@@ -80,8 +80,15 @@ sub module {
     }
     if (-f $module) {
         my $ref = eval { local $SIG{__DIE__}; do $module; };
-        return to_log( $@ ) if $@;
-        return to_log( `cd $CONFIG->{modules_path} && perl -c $module 2>&1` ) unless $ref;
+        if ( $@ ) {
+            to_log( $@ );
+            return ($CONFIG->{show_errors})? $@ : 'err.#03';
+        }
+        unless( $ref ) {
+            my $error = `cd $CONFIG->{modules_path} && perl -c $module 2>&1`;
+            to_log( $error );
+            return ($CONFIG->{show_errors})? $error : 'err.#04';
+        }
         return $ref unless ref($ref);
         if (ref($ref) eq 'HASH') { %main = (%main, %$ref); };
     }
@@ -111,7 +118,7 @@ sub redirect {
     my $url = shift || $main::q->server_name;
     my $lang = shift || '';
     my $rtype = shift || "302 Found\nCache-Control: no-cache, must-revalidate\nExpires: Sat, 26 Jul 1997 05:00:00 GMT";
-    $url = $lang.'.'.$url if $lang && $lang ne $CONFIG->{default_language};
+    $url = $lang.'.'.$url if $lang && $lang ne lang('default');
     $main::header = "HTTP/1.1 $rtype";
     my $protocol = ($main::q->https)? 'https' : 'http';
     my $port = ($main::q->virtual_port != 80)? ':'.$main::q->virtual_port : '';
@@ -160,34 +167,6 @@ sub resize {
     $img->AutoGamma();
 =cut
     $img->Write($to);
-}
-
-sub thumbnail_images {
-    my @id = @_;
-    my $CONFIG_IMAGES = $main::CONFIG_IMAGES;
-    my $tmp = $CONFIG_IMAGES->{PATH}.'tmp.jpg';
-    unless (@id) {
-        my $r = $main::db->sql ( "SELECT ship_id FROM documents WHERE doc_type='jpg' group by ship_id" );
-        return 0 unless( @$r );
-        @id = map { $_->{ship_id} } @$r;
-    }
-    foreach (@id) {
-        my $r = $main::db->sql ( "SELECT * FROM documents WHERE doc_type='jpg' AND ship_id=?", $_ );
-        foreach my $img (@$r) {
-            open F, '>', $tmp;
-            binmode F;
-            print F $img->{doc_content};
-            close F;
-            foreach my $size ( @{$CONFIG_IMAGES->{SIZE}} ) {
-                my $path = $CONFIG_IMAGES->{PATH}.$size.'/';
-                mkdir $path unless -d $path;
-                resize ( $tmp, $path.$img->{ship_id}.'-'.$img->{doc_id}.'.jpg', split( 'x', $size ) );
-            }
-            unlink $tmp;
-        }
-    }
-
-    return 1;
 }
 
 sub email {

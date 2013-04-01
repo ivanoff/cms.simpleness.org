@@ -26,7 +26,7 @@ sub cache_filename {
 
 sub cache_save {
     return 0 if !$main::CONFIG->{cache};
-    return 0 if ( $main::SESSION && $main::SESSION->param('slogin') );
+    return 0 if ( session('slogin') );
     my $content = shift;
     make_path( &cache_dir ) unless -e &cache_dir;
     open F, '>', &cache_filename;

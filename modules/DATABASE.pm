@@ -50,57 +50,6 @@ sub sql {
 }
 
 
-## for logging updates
-sub sql_log {
-    to_log ( @_ );
-    to_log ( {filename=>$main::CONFIG->{'log_sql'}, data=>[ @_ ], } );
-
-    my $self = shift;
-    my $sql = shift;
-    my $dbh = ${$self->{'connect'}};
-
-    my $scalar = '';
-    open( my $fh, "+>:scalar", \$scalar );
-    $dbh = DBD::Log->new(
-                        dbi     => $dbh,
-                        logFH   => $fh,
-                        logThis => [ 'all', ],
-                    );
-
-    my $sth = $dbh->prepare($sql);
-    my $rv = $sth->execute(@_);
-
-    close $fh;
-    if ($scalar) {
-        $scalar =~ s/^(\d+)[\s]*(.*)/$2; #$1/;
-        $scalar =~ s/=,/='',/g;
-        $scalar =~ s/,,/,'',/g;
-        $scalar =~ s/,\s*\)/,'')/g;
-        $scalar =~ s/\(\s*,/('',/g;
-        $scalar =~ s/=\s*WHERE/='' WHERE/g;
-        $scalar =~ s/CONCAT_WS\( ',',  \)/CONCAT_WS\( ',', '' \)/g;
-        open LOG_SQL, ">>", $main::CONFIG->{'log_sql'};
-        print LOG_SQL $scalar;
-        close LOG_SQL;
-    }
-
-#    return $self->sql($sql, @_);
-
-    my @result;
-    if($sth->{NUM_OF_FIELDS}) {    
-        while(my ($r) = $sth->fetchrow_hashref()) {
-            last unless defined($r);
-            push @result, $r;
-        }
-    }
-
-    $sth->finish();
-
-    return \@result;
-
-}
-
-
 sub DESTROY {
     my $self = shift;
     my $dbh = ${$self->{'connect'}};

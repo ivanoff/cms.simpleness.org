@@ -2,7 +2,6 @@
 
 use strict;
 use warnings;
-use lib '../modules';
 
 use DBI;
 use Template;

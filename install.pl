@@ -19,12 +19,11 @@ my @modules = qw(
     CGI::Session
     Time::HiRes
     Email::Send
-    Email::Send::Gmail
     Email::MIME::Creator
     IO::All
-    Net::SMTP_auth
     Digest::MD5
     File::Path
+    File::Copy
     POSIX
     Encode
     Text::Diff

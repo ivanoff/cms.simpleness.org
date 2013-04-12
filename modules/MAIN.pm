@@ -45,7 +45,10 @@ our @EXPORT = map { @$_ } values %EXPORT_TAGS;
 ## get all access rules
 sub access {
     $_ = eval { local $SIG{__DIE__}; do $CONFIG->{config_files_path}.'/access.pl' };
-    $_->{&session('sgroup')};
+    if ( &session('sgroup') ) {
+        return $_->{&session('sgroup')} || {};
+    }
+    return {};
 }
 
 =head1 module

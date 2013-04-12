@@ -4,7 +4,6 @@ package DATABASE;
 
 use strict;
 use DBI;
-use DBD::Log;
 
 sub new {
     my ($class) = @_;

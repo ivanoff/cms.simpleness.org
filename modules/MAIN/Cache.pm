@@ -5,6 +5,7 @@ package MAIN::Cache;
 use strict;
 use warnings;
 
+use MAIN::Laconic;
 use File::Path qw( make_path );
 use Digest::MD5 qw( md5_hex );
 

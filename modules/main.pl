@@ -25,12 +25,15 @@ our ( $db, $q, $t, $tt, $template, $SESSION, $header, );
         my ($self, $template, $vars, $outstream, @opts) = @_;
         my $output;
         $vars = ($vars)? { %$tt, %$vars } : $tt;
-        my $r = $self->SUPER::process($template, $vars, ($outstream)?$outstream:\$output, @opts);
+        $_ = $ENV{'SERVER_NAME'}.'/'.$template;
+        $template = $_ if -e $main::CONFIG_TEMPLATE->{INCLUDE_PATH}.'/'.$_;
+        my $r = $self->SUPER::process( $template , $vars, ($outstream)?$outstream:\$output, @opts);
         return ($outstream)? $r : $output;
     }
 };
 
 my $time_interval = [gettimeofday()];
+$ENV{'SERVER_NAME'} =~ s/^www\././;
 
 $q = new CGI;
 $SESSION = new CGI::Session("driver:File", undef, {Directory=>$CONFIG->{session_dir}});
@@ -49,8 +52,7 @@ if ( $SESSION->param('ip') && $SESSION->param('ip') ne $ENV{REMOTE_ADDR} ) {
 #-250
 
 ## Get current language
-$ENV{'SERVER_NAME'} =~ /^(?:www\.)?(?:(\w\w)\.)?/;
-my $lang = $1 || lang('default');
+my $lang = ($ENV{'SERVER_NAME'} =~ /^([a-z]{2})\./i)? $1 : lang('default');
 unless ( grep {$_ eq $lang} @{$CONFIG->{languages}} ) {
     print "Status: 404 Not Found\n\n";
     exit 0;
@@ -77,7 +79,7 @@ $tt = {
 };
 
 ## exec &begin link in DEFAULT subsection with REDIRECT_URL parameter
-module( '&begin', "/DEFAULT.hash", $ENV{'REDIRECT_URL'} );
+module( '&begin', "/DEFAULT.hash", [ $ENV{'REDIRECT_URL'} ] );
 #-0
 my $body;
 eval {
@@ -86,17 +88,10 @@ eval {
 };
 #-100
 
-module( '&end', "/DEFAULT.hash", $ENV{'REDIRECT_URL'} );
+module( '&end', "/DEFAULT.hash", [ $ENV{'REDIRECT_URL'} ] );
 
-if ( $@ ) {
-    to_log( $@ );
-    $body = ( $CONFIG->{show_errors} )? $@ : 'err.#01';
-}
-
-if ( $template->error() ) {
-    to_log( $template->error() );
-    $body = ( $CONFIG->{show_errors} )? $template->error() : 'err.#02';
-}
+$body = error( 1, $@ ) if $@;
+$body = error( 2, $template->error() ) if $template->error();
 
 if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
     print "Status: 404 Not Found\n\n";
@@ -140,3 +135,5 @@ if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
     cache_save ( $page );
 
 }
+
+1;

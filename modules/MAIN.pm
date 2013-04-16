@@ -29,6 +29,7 @@ our @EXPORT_OK  = qw(
                 resize
                 email
                 md5_hex
+                error
             );
 
 our %EXPORT_TAGS = (
@@ -45,10 +46,29 @@ our @EXPORT = map { @$_ } values %EXPORT_TAGS;
 ## get all access rules
 sub access {
     $_ = eval { local $SIG{__DIE__}; do $CONFIG->{config_files_path}.'/access.pl' };
-    if ( &session('sgroup') ) {
-        return $_->{&session('sgroup')} || {};
-    }
+    return $_->{&session('sgroup')} if &session('sgroup') && $_->{&session('sgroup')};
     return {};
+}
+
+sub find_hash {
+    my ( $link, $module ) = @_;
+    my @additional = ( $ENV{'SERVER_NAME'}, '' );
+    foreach my $additional_path ( @additional ) {
+        my $path = $CONFIG->{modules_path}.'/'.$additional_path.'/';
+        return $path.$module if $module && -f $path.$module;
+        my @modules;
+        push @modules, $1 while ( $link =~ m%/([\w\d]+[\w\d\.]*)%g );
+        while ( @modules ) {
+            my $file = $path."/".(join '/', @modules).".".$CONFIG->{modules_extension};
+            return $file if -f $file;
+            pop @modules;
+        }
+    }
+    foreach my $additional_path ( @additional ) {
+        my $default = $CONFIG->{modules_path}.'/'.$additional_path.'/DEFAULT.hash';
+        return $default if -f $default;
+    }
+    return 0;
 }
 
 =head1 module
@@ -66,38 +86,21 @@ sub access {
         Then, system execute this section with '123' argument.
 =cut
 sub module {
-    my ( $link, $module, @arg ) = @_;
-    my ( %main, @modules );
-    if ( $module ) {
-        $module = $CONFIG->{modules_path}.'/'.$module;
-    } else {
-        push @modules, $1 while ( $link =~ m%/([\w\d]+[\w\d\.]*)%g );
-        while ( @modules ) {
-            $module = $CONFIG->{modules_path}."/".(join '/', @modules).".".$CONFIG->{modules_extension};
-            last if -f $module;
-            undef $module;
-            pop @modules;
-        }
-        $module = $CONFIG->{modules_path}."/DEFAULT.hash" unless $module;
-        $module = $CONFIG->{modules_path}."/.hash" unless $link;
-    }
+    my ( $link, $module, $arg ) = @_;
+    $module = ($link)? find_hash( $link, $module ) : $CONFIG->{modules_path}."/.hash";
+    my %main;
     if (-f $module) {
         my $ref = eval { local $SIG{__DIE__}; do $module; };
-        if ( $@ ) {
-            to_log( $@ );
-            return ($CONFIG->{show_errors})? $@ : 'err.#03';
-        }
-        unless( $ref ) {
-            my $error = `cd $CONFIG->{modules_path} && perl -c $module 2>&1`;
-            to_log( $error );
-            return ($CONFIG->{show_errors})? $error : 'err.#04';
-        }
+
+        return error( 3, $@ ) if $@;
+        return error( 4, `cd $CONFIG->{modules_path} && perl -c $module 2>&1` ) unless $ref;
+
         return $ref unless ref($ref);
         if (ref($ref) eq 'HASH') { %main = (%main, %$ref); };
     }
     foreach (sort {length $b <=> length $a} keys %main) {
         if (my @arr = $link =~ /^$_$/) {
-            return $main{$_}( @arg, @arr );
+            return $main{$_}( @$arg, @arr );
         }
     }
     return '';
@@ -114,6 +117,13 @@ sub to_log {
     }
     close F;
 }
+
+sub error {
+    my ( $error_no, $error_text ) = @_;
+    to_log( $error_text );
+    return ( $main::CONFIG->{show_errors} )? $error_text : 'err.#'.$error_no;
+}
+
 
 ## 302 redirect
 sub redirect {

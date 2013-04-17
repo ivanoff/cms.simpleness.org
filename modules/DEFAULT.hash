@@ -19,6 +19,12 @@ use MAIN;
         my %sources = map { $_->{content_page} => $_ } @{sql("select * from base_content WHERE content_page REGEXP '_.*' AND lang=?", lang)};
         defaults { sources => \%sources, };
 
+## get main menu
+        my @menu = @{ sql( "SELECT * FROM base_menu m 
+                    LEFT JOIN base_menu_url u ON (m.menu_key=u.menu_key)
+                    WHERE m.lang=? ORDER BY u.menu_order ASC", lang ) };
+        defaults { menu=>\@menu, };
+
 ## get content with $uri name
         $uri =~ s%/$%%;
         my $r = sql("select * from base_content WHERE content_page=? AND lang=?", $uri, lang);

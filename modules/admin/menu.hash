@@ -3,6 +3,16 @@
 use strict;
 use MAIN;
 
+sub renew_menu {
+    foreach my $to ( @{$CONFIG->{languages}} ) {
+        next if is_default_lang($to);
+        $main::t->lang_checking ( { table=>'base_menu', id=>'menu_key', id_main=>'menu_id', 
+                    lang_from=>lang('default'), lang_to=>$to, dnd=>[ ] } );
+    }
+    $main::t->email_to_lang_owners('/admin/menu') if is_default_lang;
+    return 1;
+}
+
 you_cannot 'edit_menu' or
 
 {
@@ -26,11 +36,18 @@ you_cannot 'edit_menu' or
         sql( "INSERT INTO base_menu (menu_name, lang, menu_key) 
                 VALUES (?,?,?)", $name, lang, $r->[0]{menu_key} );
 
+        renew_menu();
+
         header( 'xml', { no_cache => 1, } );
         process( 'xml/index.tpl', { records=>{ id=>$r->[0]{menu_key}, name=>$name, url=>$url, } } );
     },
 
     '/admin/menu/delete/(\d+)' => sub {
+#        my @sub_menu = @{ sql( "SELECT menu_key FROM base_menu_url WHERE menu_parent!=0" ) };
+#        my @a = ( $1 );
+#        while ( @a = grep  ) {
+#            push @to_remove, @a;
+#        }
         sql "DELETE FROM base_menu_url WHERE menu_key=?", $1;
         header( 'xml', { no_cache => 1, } );
         process( 'xml/index.tpl', { records=>{ id=>$1 } } );
@@ -56,6 +73,9 @@ you_cannot 'edit_menu' or
         return 0 unless $url;
         sql "UPDATE base_menu SET menu_name=? WHERE lang=? AND menu_key=?", $name, lang, $id;
         sql "UPDATE base_menu_url SET menu_url=? WHERE menu_key=?", $url, $id;
+
+        renew_menu();
+
         header( 'xml', { no_cache => 1, } );
         process( 'xml/index.tpl', { records=>{ id=>$id } } );
     },

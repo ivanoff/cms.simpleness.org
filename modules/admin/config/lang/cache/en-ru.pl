@@ -1,5 +1,9 @@
 {
 	''	=> ' ',
+	'Contact Us'	=> 'Связаться с Нами',
+	'Download'	=> 'Скачать',
+	'Gallery'	=> 'Галерея',
+	'Home'	=> 'Дома',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'является составной страна Королевства Нидерландов, расположенные в основном в Северо-Западной Европе и некоторых островов в Карибском море.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> 'является составной страна Королевства Нидерландов, расположенные в основном в Северо-Западной Европе и некоторых островов в Карибском море. является составной страна Королевства Нидерландов, расположенных<br>в основном в Северо-Западной Европе и некоторых островов в Карибском море.',
@@ -29,6 +33,9 @@ Alps. To the south, it consists of the untirety of the Italian
 Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
  Sea–and many other smaller islands.',
 	'Italy'	=> 'Италия',
+	'News'	=> 'Новости',
+	'Spain'	=> 'Испания',
 	'The Netherlands'	=> 'Нидерланды',
 	'The NetherlandsItaly'	=> 'NetherlandsItaly',
+	'To-do list'	=> 'Список дел',
 };

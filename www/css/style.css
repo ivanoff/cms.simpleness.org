@@ -60,17 +60,17 @@ h4 { font-size:16px; color:#b10301; line-height:18px; }
 #navigation ul li a,
 #navigation ul li a span { float:left; background-position:left top; }
 #navigation ul li a {  color:#847d62; text-decoration:none; padding-left:5px; }
-#navigation ul li a span { padding:0 16px 0 11px; background-position:right top;}
+#navigation ul li a span { padding:0 16px 0 11px; background-position:right top; white-space: nowrap;}
 
 
 #navigation ul li a.active,
 #navigation ul li a.active span,
 #navigation ul li a:hover,
-#navigation ul li a:hover span { color:#fff; background-image:url(/images/navigation-active.gif); }
+#navigation ul li a:hover span { color:#fff; background-image:url(/images/navigation-active.gif); white-space: nowrap; }
 
-#navigation ul li.has-dd a span { padding:0 26px 0 11px; background:url(/images/navigation-dd-arrow.gif) right top no-repeat; }
+#navigation ul li.has-dd a span { padding:0 26px 0 11px; background:url(/images/navigation-dd-arrow.gif) right top no-repeat; white-space: nowrap; }
 #navigation ul li.has-dd a.active span,
-#navigation ul li.has-dd a:hover span { background-image:url(/images/navigation-active-dropdown.gif);  }
+#navigation ul li.has-dd a:hover span { background-image:url(/images/navigation-active-dropdown.gif); white-space: nowrap; }
 
 #navigation .dd { position:absolute; top:42px; left:0; background:#ece9dd; border:1px solid #847d62; display:none; padding:4px; }
 

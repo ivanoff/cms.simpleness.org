@@ -67,18 +67,17 @@
 	<!-- Navigation -->
 	<div id="navigation">
 		<ul class="dropdown dropdown-horizontal">
-			<li><a href="/" [% 'class="active"' IF uri == '' %]><span>[% t('Home') %]</span></a></li>
-			<li><a href="/download" [% 'class="active"' IF uri == '/download' %]><span>[% t('Download') %]</span></a></li>
-			<li><a href="/to-do_list" [% 'class="active"' IF uri == '/to-do_list' %]><span>[% t('To-do list') %]</span></a></li>
-			<li><a href="/news" [% 'class="active"' IF uri == '/news' %]><span>[% t('News') %]</span></a></li>
-			<li class="dir"><a href="/gallery" [% 'class="active"' IF uri.match('^/gallery/?') %]><span>[% t('Gallery') %]</span></a>
-			    <ul>
-[% FOREACH g IN gallery.keys %]
-				<li><a href="/gallery/[% gallery.${g}.gal_key %]" [% 'class="active"' IF uri == '/gallery/' _ gallery.${g}.gal_id %]>[% gallery.${g}.gal_name %]</a></li>
+
+[% BLOCK main_menu %]
+    [% FOREACH m IN menu %]
+        [% NEXT IF m.menu_parent != level %]
+        <li><a href="[% m.menu_url %]" [% 'class="active"' IF uri == m.menu_url %]><span>[% m.menu_name %]</span></a>
+            <ul>[% INCLUDE main_menu level = m.menu_key %]</ul>
+        </li>
+    [% END %]
 [% END %]
-			    </ul>
-			</li>
-			<li><a href="/contacts" [% 'class="active"' IF uri == '/contacts' %]><span>[% t('Contact Us') %]</span></a></li>
+[% INCLUDE main_menu level = 0 %]
+
 [% IF session('slogin') %]
 			<li><a href="/admin" [% 'class="active"' IF uri == '/admin' %]><span>[% t('Admin page') %]</span></a></li>
 [% END %]

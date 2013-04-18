@@ -262,4 +262,31 @@ return 0;
 return 1;
 }
 
+
+sub renew_content {
+    my ( $self, $params ) = @_;
+=c
+            if ( is_default_lang ) {
+                my $x = '?,' x (keys %{$CONFIG->{languages_dont_translate}});
+                $x =~ s/.$//;
+                $x = "''" unless $x;
+                sql( "DELETE FROM base_news WHERE news_key=? AND lang!=? AND lang NOT IN ($x)", 
+                        $n->[0]{news_key}, lang('default'), keys %{$CONFIG->{languages_dont_translate}});
+            }
+=cut
+    $_ = ( ref $params eq 'HASH' )? $params->{name} : $params;
+    $params = {} if ref $params ne 'HASH';
+
+    /^menu$/ && do {
+        $params = { table=>'base_menu', id=>'menu_key', id_main=>'menu_id', dnd=>[ ], %$params };
+    };
+
+    foreach my $to ( @{$CONFIG->{languages}} ) {
+        next if is_default_lang($to);
+        $self->lang_checking ( { lang_from=>lang('default'), lang_to=>$to, %$params } );
+    }
+#    $main::t->email_to_lang_owners('/admin/menu') if is_default_lang;
+    return 1;
+}
+
 1;

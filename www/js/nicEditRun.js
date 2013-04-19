@@ -2,6 +2,7 @@
 
     var save_text = function ( where, what ) {
 //	if ( what == "click to edit" ) return 0;
+        if ( what == "<br>" ) what='';
 	if( where.indexOf(":") ) {
 	    var a = where.split(":");
 	    module = a[0];
@@ -39,7 +40,8 @@
 
         myNicEditor.setPanel('myNicPanel');
 	$(".editable").each(function(){ 
-	    if ( $(this).text().replace(/(\n|\r|\s)+$/, '') == "" ) $(this).html("<font color='#AAA'><small>click to edit</small></font>");
+//	    if ( $(this).text().replace(/(\n|\r|\s)+$/, '') == "" ) $(this).html("<font color='#AAA'><small>click to edit</small></font>");
+	    if ( $(this).text().replace(/(\n|\r|\s)+$/, '') == "" ) $(this).html("<br>");
 	    myNicEditor.addInstance(this.id); 
 	});
 

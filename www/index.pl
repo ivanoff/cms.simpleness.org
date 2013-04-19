@@ -5,15 +5,15 @@ use warnings;
 
 use lib '../modules';
 use CONFIG;
+use Time::HiRes qw( gettimeofday tv_interval );
 use MAIN::Cache qw( cache_load );
 use MAIN::Update qw( update need_to_update );
-use Time::HiRes qw( gettimeofday tv_interval );
 
 my $time_interval = [ gettimeofday() ];
 
 # get session parameters
 our $index_session;
-if ( $ENV{HTTP_COOKIE} =~ /CGISESSID=([0-9a-f]{32})/ ) {
+if ( $ENV{HTTP_COOKIE} && $ENV{HTTP_COOKIE} =~ /CGISESSID=([0-9a-f]{32})/ ) {
     $index_session = eval { local $SIG{__DIE__}; do $CONFIG->{session_dir}."/cgisess_$1"; };
 }
 

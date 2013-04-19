@@ -7,12 +7,14 @@
 	'Contact Us'	=> 'Επικοινωνήστε μαζί μας',
 	'Description is prepared.'	=> 'Περιγραφή είναι έτοιμος.',
 	'Download'	=> 'Λήψη',
+	'Download3'	=> 'Download3',
 	'e-mail:'	=> 'e-mail:',
 	'Feedback'	=> 'Ανατροφοδότηση',
 	'Find out more'	=> 'Μάθετε περισσότερα',
 	'First of all, Simpleness...'	=> 'Πρώτα απ &#39;όλα, απλότητα ...',
 	'Gallery'	=> 'Γκάλερι',
 	'Home'	=> 'Σπίτι',
+	'Home page'	=> 'Αρχική σελίδα',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'αποτελεί συστατικό χώρα του Βασιλείου των Κάτω Χωρών, που βρίσκεται κυρίως στη Βόρεια-Δυτική Ευρώπη και με ορισμένα νησιά της Καραϊβικής.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> 'αποτελεί συστατικό χώρα του Βασιλείου των Κάτω Χωρών, που βρίσκεται κυρίως στη Βόρεια-Δυτική Ευρώπη και με ορισμένα νησιά της Καραϊβικής. αποτελεί συστατικό χώρα του Βασιλείου των Κάτω Χωρών, το οποίο βρίσκεται<br>κυρίως στη Βόρεια και Δυτική Ευρώπη με κάποια νησιά της Καραϊβικής.',

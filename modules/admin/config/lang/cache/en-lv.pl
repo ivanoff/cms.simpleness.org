@@ -13,6 +13,7 @@
 	'First of all, Simpleness...'	=> 'Pirmkārt, simpleness ...',
 	'Gallery'	=> 'Galerija',
 	'Home'	=> 'Mājas',
+	'Home page'	=> 'Mājas lapa',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'ir sastāvdaļa valsts no Nīderlandes Karalistes, kas galvenokārt atrodas ziemeļu-rietumu Eiropā un ar dažām Karību salās.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> 'ir sastāvdaļa valsts no Nīderlandes Karalistes, kas galvenokārt atrodas ziemeļu-rietumu Eiropā un ar dažām Karību salās. ir sastāvdaļa valsts no Nīderlandes Karalistes, kas atrodas<br>galvenokārt ziemeļrietumu Eiropā un ar dažām Karību salās.',

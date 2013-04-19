@@ -3,17 +3,6 @@
 use strict;
 use MAIN;
 
-sub renew_news {
-    foreach my $to ( @{$CONFIG->{languages}} ) {
-        next if is_default_lang($to);
-#        next if grep {$_ eq $to} keys %{$CONFIG->{languages_dont_translate}};
-        $main::t->lang_checking ( { table=>'base_news', id=>'news_key', id_main=>'news_id', 
-                    lang_from=>lang('default'), lang_to=>$to, dnd=>['news_date', ] } );
-    }
-    $main::t->email_to_lang_owners('/news') if is_default_lang;
-    return 1;
-}
-
 you_cannot 'edit_content' or
 
 {
@@ -24,7 +13,9 @@ you_cannot 'edit_content' or
             $news_key->[0]{k} = 0 unless @$news_key;
             sql( "INSERT INTO base_news ( news_date, lang, news_name, news_body, news_key ) VALUES ( ?, ?, ?, ?, ? )", 
                                         param('date'), lang, param('name'), param('body'), $news_key->[0]{k}+1 );
-            renew_news();
+
+            $main::t->renew_content('news');
+
             return redirect2('news');
         }
         process( 'admin/news_add.tpl' );
@@ -34,16 +25,11 @@ you_cannot 'edit_content' or
         my $news_id = $1;
         my $n = sql( "SELECT * FROM base_news WHERE news_id=?", $1 );
         if(param('name')) {
-            if ( is_default_lang ) {
-                my $x = '?,' x (keys %{$CONFIG->{languages_dont_translate}});
-                $x =~ s/.$//;
-                $x = "''" unless $x;
-                sql( "DELETE FROM base_news WHERE news_key=? AND lang!=? AND lang NOT IN ($x)", 
-                        $n->[0]{news_key}, lang('default'), keys %{$CONFIG->{languages_dont_translate}});
-            }
             sql( "UPDATE base_news SET news_name=?, news_body=?, news_date=? WHERE news_id=?", 
                         param('name'), param('body'), param('date'), $news_id );
-            renew_news();
+
+            $main::t->renew_content('news',$n->[0]{news_key});
+
             return redirect2('news');
         }
         process('admin/news_add.tpl', { news_id=>$news_id, n=>$n } );

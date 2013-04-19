@@ -13,6 +13,7 @@
 	'First of all, Simpleness...'	=> 'بادئ ذي بدء، البساطة ...',
 	'Gallery'	=> 'رواق',
 	'Home'	=> 'منزل',
+	'Home page'	=> 'الصفحة الرئيسية',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'بلد المكونة للمملكة هولندا، وتقع أساسا في شمال غرب أوروبا ومع بعض الجزر في منطقة البحر الكاريبي.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> 'بلد المكونة للمملكة هولندا، وتقع أساسا في شمال غرب أوروبا ومع بعض الجزر في منطقة البحر الكاريبي. بلد المكونة للمملكة هولندا، وتقع<br>أساسا في شمال غرب أوروبا ومع بعض الجزر في منطقة البحر الكاريبي.',

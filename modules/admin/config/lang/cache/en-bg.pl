@@ -13,6 +13,7 @@
 	'First of all, Simpleness...'	=> 'На първо място, простота ...',
 	'Gallery'	=> 'Галерия',
 	'Home'	=> 'Дом',
+	'Home page'	=> 'Начална страница',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'е съставна страна на Кралство Холандия, разположени предимно в Северозападна Европа и с някои острови в Карибско море.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> 'е съставна страна на Кралство Холандия, разположени предимно в Северозападна Европа и с някои острови в Карибско море. е съставна страна на Кралство Нидерландия, разположен<br>главно в Северозападна Европа и с някои острови в Карибско море.',

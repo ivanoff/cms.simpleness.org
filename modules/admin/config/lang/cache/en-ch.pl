@@ -7,12 +7,14 @@
 	'Contact Us'	=> '联系我们',
 	'Description is prepared.'	=> '说明准备。',
 	'Download'	=> '下载',
+	'Download3'	=> 'Download3',
 	'e-mail:'	=> '电子邮件：',
 	'Feedback'	=> '反馈',
 	'Find out more'	=> '了解更多',
 	'First of all, Simpleness...'	=> '首先，简单...',
 	'Gallery'	=> '画廊',
 	'Home'	=> '家',
+	'Home page'	=> '主页',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> '是国家主要集中在西北欧和加勒比地区的一些岛屿，位于荷兰王国的一个组成部分。',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> '是国家主要集中在西北欧和加勒比地区的一些岛屿，位于荷兰王国的一个组成部分。国家是一个组成部分，位于荷兰王国<br>主要集中在西北欧和加勒比地区的一些岛屿。',

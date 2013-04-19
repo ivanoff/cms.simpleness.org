@@ -13,6 +13,7 @@
 	'First of all, Simpleness...'	=> '우선, Simpleness ...',
 	'Gallery'	=> '갱도',
 	'Home'	=> '홈',
+	'Home page'	=> '홈 페이지',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> '주로 북서 유럽과 카리브해의 일부 섬과있는 네덜란드의 왕국의 구성 국가입니다.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> '주로 북서 유럽과 카리브해의 일부 섬과있는 네덜란드의 왕국의 구성 국가입니다. 있는 네덜란드의 왕국의 구성 국가입니다<br>주로 북서 유럽과 카리브해의 일부 섬을 갖추고 있습니다.',

@@ -7,12 +7,14 @@
 	'Contact Us'	=> 'お問い合わせ',
 	'Description is prepared.'	=> '説明が用意されています。',
 	'Download'	=> 'ダウンロード',
+	'Download3'	=> 'Download3',
 	'e-mail:'	=> '電子メール：',
 	'Feedback'	=> 'フィードバック',
 	'Find out more'	=> '詳細をご覧ください',
 	'First of all, Simpleness...'	=> 'まず第一に、シンプルさ...',
 	'Gallery'	=> 'ギャラリー',
 	'Home'	=> 'ホーム',
+	'Home page'	=> 'ホームページ',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> '主に北&#183;西ヨーロッパとカリブ海のいくつかの島を持つ位置、オランダ王国の構成国である。',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> '主に北&#183;西ヨーロッパとカリブ海のいくつかの島を持つ位置、オランダ王国の構成国である。オランダ王国の構成国が位置し、<br>主に北&#183;西ヨーロッパやカリブ海のいくつかの島を持つ。',

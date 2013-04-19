@@ -13,6 +13,7 @@
 	'First of all, Simpleness...'	=> 'Esiteks Simpleness ...',
 	'Gallery'	=> 'Galerii',
 	'Home'	=> 'Kodu',
+	'Home page'	=> 'Kodulehekülg',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'on komponendi riik Madalmaade Kuningriigi, asuvad peamiselt Loode-Euroopa ja mõned saart Kariibi meri.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> 'on komponendi riik Madalmaade Kuningriigi, asuvad peamiselt Loode-Euroopa ja mõned saart Kariibi meri. on komponendi riik Madalmaade Kuningriigi, asub<br>peamiselt Loode-Euroopa ja mõned saart Kariibi meri.',

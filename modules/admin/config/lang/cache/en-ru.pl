@@ -2,8 +2,10 @@
 	''	=> ' ',
 	'Contact Us'	=> 'Связаться с Нами',
 	'Download'	=> 'Скачать',
+	'Download3'	=> 'Download3',
 	'Gallery'	=> 'Галерея',
 	'Home'	=> 'Дома',
+	'Home page'	=> 'Главная страница',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'является составной страна Королевства Нидерландов, расположенные в основном в Северо-Западной Европе и некоторых островов в Карибском море.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> 'является составной страна Королевства Нидерландов, расположенные в основном в Северо-Западной Европе и некоторых островов в Карибском море. является составной страна Королевства Нидерландов, расположенных<br>в основном в Северо-Западной Европе и некоторых островов в Карибском море.',

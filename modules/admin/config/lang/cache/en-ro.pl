@@ -13,6 +13,7 @@
 	'First of all, Simpleness...'	=> 'Mai întâi de toate, simplitate ...',
 	'Gallery'	=> 'Galerie',
 	'Home'	=> 'Acasă',
+	'Home page'	=> 'Pagina de start',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'este o &#539;ară constitutiv al Regatului &#538;ărilor de Jos, situat în principal în nord-vestul Europei &#537;i cu unele insule din Caraibe.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> 'este o &#539;ară constitutiv al Regatului &#538;ărilor de Jos, situat în principal în nord-vestul Europei &#537;i cu unele insule din Caraibe. este o &#539;ară constitutiv al Regatului &#538;ărilor de Jos, situată<br>în principal în nord-vestul Europei &#537;i cu unele insule din Caraibe.',

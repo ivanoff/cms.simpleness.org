@@ -70,7 +70,7 @@ sub lang {
 }
 
 sub is_default_lang {
-    my $lang = (@_)? shift : lang;
+    my $lang = shift || lang;
     return $lang eq lang('default');
 }
 
@@ -82,7 +82,7 @@ sub cache {
 
 sub param {
     return $main::q->Vars unless @_;
-    return $main::q->param( @_ );
+    return map { $main::q->param( $_ ) } @_;
 }
 
 sub session {

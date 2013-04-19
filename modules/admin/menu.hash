@@ -61,10 +61,11 @@ you_cannot 'edit_menu' or
         my $id = $1;
         my ($url, $name) = ( param('body') =~ /href=["'](.*?)['"].*?>(.*)</ )? ($1, $2) : ( );
         return 0 unless $url;
+
         sql "UPDATE base_menu SET menu_name=? WHERE lang=? AND menu_key=?", $name, lang, $id;
         sql "UPDATE base_menu_url SET menu_url=? WHERE menu_key=?", $url, $id;
 
-        $main::t->renew_content('menu');
+        $main::t->renew_content( 'menu', $id );
 
         header( 'xml', { no_cache => 1, } );
         process( 'xml/index.tpl', { records=>{ id=>$id } } );

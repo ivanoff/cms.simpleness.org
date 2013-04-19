@@ -13,6 +13,7 @@
 	'First of all, Simpleness...'	=> 'اول از همه، سادگ&#1740; ...',
 	'Gallery'	=> 'گالر&#1740;',
 	'Home'	=> 'خانه',
+	'Home page'	=> 'صفحه اصل&#1740;',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'تشک&#1740;ل &#1740;ک کشور پادشاه&#1740; هلند، عمدتا در شمال غرب اروپا و برخ&#1740; از جزا&#1740;ر کارائ&#1740;ب واقع شده است.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> 'تشک&#1740;ل &#1740;ک کشور پادشاه&#1740; هلند، عمدتا در شمال غرب اروپا و برخ&#1740; از جزا&#1740;ر کارائ&#1740;ب واقع شده است. تشک&#1740;ل &#1740;ک کشور پادشاه&#1740; هلند، واقع<br>عمدتا در شمال غرب اروپا و برخ&#1740; از جزا&#1740;ر کارائ&#1740;ب.',

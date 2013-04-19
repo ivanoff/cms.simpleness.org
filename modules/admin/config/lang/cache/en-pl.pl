@@ -13,6 +13,7 @@
 	'First of all, Simpleness...'	=> 'Przede wszystkim, Simpleness ...',
 	'Gallery'	=> 'Galeria',
 	'Home'	=> 'Dom',
+	'Home page'	=> 'Strona główna',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'jest składnikiem kraj Królestwa Holandii, znajduje się głównie w północno-zachodniej Europy oraz z niektórych wysp na Karaibach.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> 'jest składnikiem kraj Królestwa Holandii, znajduje się głównie w północno-zachodniej Europy oraz z niektórych wysp na Karaibach. jest składnikiem kraj Królestwa Niderlandów, z siedzibą<br>głównie w północno-zachodniej Europy oraz z niektórych wysp na Karaibach.',

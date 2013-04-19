@@ -7,12 +7,14 @@
 	'Contact Us'	=> 'Зв&#39;язатися з Нами',
 	'Description is prepared.'	=> 'Опис готується.',
 	'Download'	=> 'Завантажити',
+	'Download3'	=> 'Download3',
 	'e-mail:'	=> 'адресу електронної пошти:',
 	'Feedback'	=> 'Зворотний зв&#39;язок',
 	'Find out more'	=> 'Дізнайтеся більше',
 	'First of all, Simpleness...'	=> 'В першу чергу, простота ...',
 	'Gallery'	=> 'Галерея',
 	'Home'	=> 'Будинки',
+	'Home page'	=> 'Головна сторінка',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'є складовою країна Королівства Нідерландів, розташовані в основному в Північно-Західній Європі та деяких островів у Карибському морі.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> 'є складовою країна Королівства Нідерландів, розташовані в основному в Північно-Західній Європі та деяких островів у Карибському морі. є складовою країна Королівства Нідерландів, розташованих<br>в основному в Північно-Західній Європі та деяких островів у Карибському морі.',

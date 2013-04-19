@@ -7,12 +7,14 @@
 	'Contact Us'	=> 'Contattaci',
 	'Description is prepared.'	=> 'La descrizione è preparato.',
 	'Download'	=> 'Caricare',
+	'Download3'	=> 'Download3',
 	'e-mail:'	=> 'e-mail:',
 	'Feedback'	=> 'Feedback',
 	'Find out more'	=> 'Per saperne di più',
 	'First of all, Simpleness...'	=> 'Prima di tutto, Semplicità ...',
 	'Gallery'	=> 'Galleria',
 	'Home'	=> 'Domestico',
+	'Home page'	=> 'Home page',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'è un paese costituente del Regno dei Paesi Bassi, che si trova principalmente in Europa nord-occidentale e con alcune isole dei Caraibi.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> 'è un paese costituente del Regno dei Paesi Bassi, che si trova principalmente in Europa nord-occidentale e con alcune isole dei Caraibi. è un paese costituente del Regno dei Paesi Bassi, che si trova<br>principalmente nel Nord-occidentale e con alcune isole dei Caraibi.',

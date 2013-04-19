@@ -13,6 +13,7 @@
 	'First of all, Simpleness...'	=> 'קודם כל, simpleness ...',
 	'Gallery'	=> 'גלריה',
 	'Home'	=> 'בית',
+	'Home page'	=> 'דף הבית',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'היא מדינה מכוננת של ממלכת הולנד, הממוקם בעיקר בצפון מערב אירופה ועם כמה איים בים הקריבי.',
 	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
 mainly in North-West Europe and with some islands in the Caribbean.'	=> 'היא מדינה מכוננת של ממלכת הולנד, הממוקם בעיקר בצפון מערב אירופה ועם כמה איים בים הקריבי. היא מדינה מכוננת של ממלכת הולנד, הממוקמת<br>בעיקר בצפון מערב אירופה ועם כמה איים בים הקריבי.',

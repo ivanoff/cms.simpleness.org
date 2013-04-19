@@ -4,6 +4,7 @@ package TRANSLATE;
 
 use strict;
 
+use MAIN::Laconic;
 use utf8;
 use Encode;
 use WWW::Mechanize;
@@ -15,7 +16,6 @@ sub new {
     $lang='en' unless $lang;
     $self->{'language'} = $lang;
     $self->{'cache'} = $main::CONFIG->{languages_cache};
-    $self->{'no_lang_cache'} = 0;
 
     my $lang_file = $main::CONFIG->{config_files_path}.'/lang/'.$lang.'.pl';
     $self->{'language_file'} = $lang_file;
@@ -133,7 +133,7 @@ sub translate_hash {
     }
     foreach (keys %$words) {
         next if defined $words->{$_} && $words->{$_} ne '1';
-        $words->{$_} = ( $self->{'cache'} && !$self->{'no_lang_cache'} && $ref && $ref->{$_} )? $ref->{$_}
+        $words->{$_} = ( $self->{'cache'} && $ref && $ref->{$_} )? $ref->{$_}
                         : $self->translate_simple( $_, $from, $to );
         $ref->{$_} = $words->{$_} if $self->{'cache'};
     }
@@ -187,6 +187,7 @@ sub dictionary_translate {
 sub lang_checking {
     my ($self, $params) = @_;
     return 0 unless $params->{table} && $params->{id} && $params->{id_main};
+    $params->{dnd} ||= [];
     push @{$params->{dnd}}, $params->{id};
 
     $params->{lang_from} = $main::CONFIG->{default_language} unless $params->{lang_from};
@@ -264,28 +265,45 @@ return 1;
 
 
 sub renew_content {
-    my ( $self, $params ) = @_;
-=c
-            if ( is_default_lang ) {
-                my $x = '?,' x (keys %{$CONFIG->{languages_dont_translate}});
-                $x =~ s/.$//;
-                $x = "''" unless $x;
-                sql( "DELETE FROM base_news WHERE news_key=? AND lang!=? AND lang NOT IN ($x)", 
-                        $n->[0]{news_key}, lang('default'), keys %{$CONFIG->{languages_dont_translate}});
-            }
-=cut
-    $_ = ( ref $params eq 'HASH' )? $params->{name} : $params;
-    $params = {} if ref $params ne 'HASH';
+    my ( $self, $name, $remove_id, $params ) = @_;
+    return 0 unless $name;
+    $params ||= {};
 
-    /^menu$/ && do {
-        $params = { table=>'base_menu', id=>'menu_key', id_main=>'menu_id', dnd=>[ ], %$params };
+    $_ = $name;
+    /^content$/ && do {
+        $params = { table=>'base_content', id=>'content_page', id_main=>'content_id', url=>'/',
+                    dnd=>['user_id', 'content_date_from', 'content_place', ], %$params };
     };
 
-    foreach my $to ( @{$CONFIG->{languages}} ) {
+    /^news$/ && do {
+        $params = { table=>'base_news', id=>'news_key', id_main=>'news_id', url=>'/news',
+                    dnd=>[ 'news_date', ], %$params };
+    };
+
+    /^gallery$/ && do {
+        $params = { table=>'base_gallery', id=>'gal_key', id_main=>'gal_id', url=>'/gallery', %$params };
+    };
+
+    /^menu$/ && do {
+        $params = { table=>'base_menu', id=>'menu_key', id_main=>'menu_id', url=>'/menu', %$params };
+    };
+
+    if ( $remove_id ) {
+        my @dnd_lang = ( keys %{$main::CONFIG->{languages_dont_translate}}, &lang('default'), &lang );
+        my $x = '?,' x ( @dnd_lang );
+        $x =~ s/.$//;
+        $x ||= "''";
+        sql( "DELETE FROM ".$params->{table}." WHERE ".$params->{id}."=? AND lang NOT IN ($x)", 
+                $remove_id, @dnd_lang );
+    }
+
+    foreach my $to ( @{$main::CONFIG->{languages}} ) {
         next if is_default_lang($to);
         $self->lang_checking ( { lang_from=>lang('default'), lang_to=>$to, %$params } );
     }
-#    $main::t->email_to_lang_owners('/admin/menu') if is_default_lang;
+
+    $self->email_to_lang_owners( $params->{url}.'/'.$remove_id ) if $remove_id;
+
     return 1;
 }
 

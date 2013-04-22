@@ -3,7 +3,7 @@
 <link href="/css/sort.css" rel="stylesheet">
 <link href="/css/icon.css" rel="stylesheet">
 
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script src="/js/jquery-ui.js"></script>
 <script src="/js/sort.js"></script>
 
 <script>
@@ -63,7 +63,7 @@
 
                 data += '<i class="icon-move"></i> ';
                 data += '<i class="icon-trash" onclick="delete_menu(this);return(false);"></i> ';
-                data += '<span id="menu/[% m.menu_key %]:body" class="editable"> ';
+                data += '<span id="/admin/menu/[% m.menu_key %]/update?body" class="editable"> ';
                 data += '<a href="' + $(xml).find("url").text() + '">';
                 data += $(xml).find("name").text() + '</a> ';
                 data += '</span> ';

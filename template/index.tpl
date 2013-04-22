@@ -10,13 +10,6 @@
 	<link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
 	<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="only screen and (max-device-width: 640px)" />
 	<script type="text/javascript" src="/js/jquery.js"></script>
-	<script type="text/javascript">
-	    $(document).ready(function(){
-		$('#languages').change(function(){
-		    location = $(this).val();
-		})
-	    });
-	</script>
 [% IF image %]
 	<link href="/css/lightbox.css" rel="stylesheet" type="text/css" media="screen" />
 	<link href="/css/gallery.css" rel="stylesheet" type="text/css" media="screen" />
@@ -48,7 +41,7 @@
 	    var session = "[% session('_SESSION_ID') %]";
 	    var lang = "[% language %]";
 	    var title = "[% title %]"; 
-	    var page = "content:[% uri %]"; 
+	    var page = "?[% uri %]"; 
 	    var uri = "[% uri %]"; 
 	</script>
 	<script src="/js/nicEdit.js" type="text/javascript"></script>
@@ -59,44 +52,21 @@
 [% END %]
 </head>
 <body>
-[% IF access.edit_content %]
-<div id="myNicPanel" style="position: fixed; z-index: 900; width:100%;"></div>
-<div style="height: 25px;"></div>
-<div id="myNicPanel_info" style="position: fixed; z-index: 900; width:100%; text-align:center; background-color: #CFB;"></div>
-<script type="text/javascript">
-    function show_info( t ) {
-        if ( t ) {
-            $('#myNicPanel_info').text( t );
-            $("#myNicPanel_info").show('blind', {}, 500);
-            setTimeout(function() {
-                $("#myNicPanel_info").hide('blind', {}, 500)
-            }, 5000);
-        } else {
-            $("#myNicPanel_info").hide();
-        }
-    };
-    $(document).ready(function(){
-        show_info('');
-    });
-</script>
-[% END %]
+[% PROCESS panel_edit.tpl %]
 <!-- Shell -->
 <div id="shell">
 	<!-- Header -->
 	<div id="header" class="big-box">
 		<div class="bg-bottom">
 
-<div id="content:_header" class="editable">
+<div id="?_header" class="editable">
 [% sources.item('_header').content_body %]
 </div>
 
-			<div class="bg-bottom-right">
-<select name="languages" id="languages">
-    [% FOREACH l IN config.languages.sort %]
-        <option [% 'selected' IF ( language == l || (!language && l =='ru') ) %] value="//[% IF l!=config.default_language %][% l _ '.' %][% END %][% config.site %][% uri %]" style="background: url(/images/flags/[% l %].gif) no-repeat; padding-left: 20px;">[% config.languages_t.${l} %]</option>
-    [% END %]
-</select>
-			</div>
+<div class="bg-bottom-right">
+[% PROCESS panel_lang.tpl %]
+</div>
+
 			<div class="cl">&nbsp;</div>
 		</div>
 	</div>
@@ -135,7 +105,7 @@
 [% END %]
 
 [% UNLESS templates_only %]
-<div id="content:[% uri %]" class="editable">
+<div id="?[% uri %]" class="editable">
 [% (access.edit_content)? content_edit : content %]
 </div>
 [% END %]
@@ -168,7 +138,7 @@
 	<!-- Footer -->
 	<div id="footer">
 
-<div id="content:_bottom" class="editable">
+<div id="?_bottom" class="editable">
 [% sources.item('_bottom').content_body %]
 </div>
 

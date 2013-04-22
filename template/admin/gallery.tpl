@@ -6,8 +6,8 @@
 
 <tr><td>
 
-<h2><div id="gallery/[% gal_key %]:header" class="editable">[% gallery.${gal_key}.gal_name %]</div></h2>
-<div id="gallery/[% gal_key %]:body" class="editable">
+<h2><div id="/admin/gallery/[% gal_key %]/update?header" class="editable">[% gallery.${gal_key}.gal_name %]</div></h2>
+<div id="/admin/gallery/[% gal_key %]/update?body" class="editable">
     [% gallery.${gal_key}.gal_description %]
 </div>
 <a href="#" id="to_delete">[% t('delete') %]</a>

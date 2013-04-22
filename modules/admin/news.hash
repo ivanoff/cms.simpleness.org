@@ -15,17 +15,17 @@ you_cannot 'edit_content' or
 {
 
     '/admin/news/add' => sub {
-        if(param('name')) {
+        process( 'admin/news/add.tpl' );
+    },
+
+    '/admin/news/add/update' => sub {
+        my ( $lang, $date, $header, $body ) = param( 'lang', 'date', 'header', 'body' );
+        if ( $lang && $date && $header && $body ) {
             my $news_key = sql( "SELECT MAX(news_key) k FROM base_news WHERE lang=?", lang );
             $news_key->[0]{k} = 0 unless @$news_key;
             sql( "INSERT INTO base_news ( news_date, lang, news_name, news_body, news_key ) VALUES ( ?, ?, ?, ?, ? )", 
-                                        param('date'), lang, param('name'), param('body'), $news_key->[0]{k}+1 );
-
-            $main::t->renew_content('news');
-
-            return redirect2('news');
+                                        $date, $lang, $header, $body, $news_key->[0]{k}+1 );
         }
-        process( 'admin/news/add.tpl' );
     },
 
     '/admin/news/edit/(\d+)' => sub {
@@ -65,10 +65,7 @@ you_cannot 'edit_content' or
     },
 
     '/admin/news/delete/(\d+)' => sub {
-        my $news_id = $1;
-        my $n = sql( "SELECT * FROM base_news WHERE news_id=?", $1 );
-        sql( "DELETE FROM base_news WHERE news_key=?", $n->[0]{news_key} );
-        redirect2('news');
+        sql( "DELETE FROM base_news WHERE news_key=?", $1 );
     },
 
 };

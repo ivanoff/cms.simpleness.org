@@ -1,3 +1,14 @@
+<link href="/css/icon.css" rel="stylesheet">
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.delete').click(function () {
+            save_text( '/admin/news/delete/'+$(this).attr('name'), {}, 'news was deleted'); 
+	    $(this).parent().animate({opacity:0}, 700, function(){ $(this).css({display:"none"}); });
+	    return false;
+        });
+    });
+</script>
+
 <h2>[% t('News') %]</h2>
 
 [% IF access.add_news %]
@@ -8,11 +19,10 @@
 
 <small><b>[% SET d = n.news_date.substr(0,10).split('-'); t(month(d.1)) _ ' ' _ d.2 _', ' _ d.0 %]</b></small>
 &nbsp;
-[% IF access.add_news %]
-<a href="/admin/news/edit/[% n.news_id %]"><img border="0" src="/images/btn_edit.gif"></a>
-<a href="/admin/news/delete/[% n.news_id %]"><img border="0" src="/images/btn_delete.gif"></a>
-[% END %]
     <div class="news index">
+[% IF access.add_news %]
+<i class='icon-trash delete' name="[% n.news_key %]" alt="[% t('delete') %]"></i>
+[% END %]
 	<a href="/news/[% n.news_key %]">[% n.news_name %]</a>
 	<br />
 	<p>[% n.news_body.remove('(?ims)((<br( /)?>\s*<br( /)?>)|(<p>\s*&nbsp;\s*</p>\s*){2}).*') %]</p>

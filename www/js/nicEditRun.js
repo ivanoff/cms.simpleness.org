@@ -1,31 +1,41 @@
     var myNicEditor, myNicEditor_plain;
     var content_current_page = new Object();
 
+    var is_silent = function ( what ) {
+        return ( $("div[id*='"+what+"'].silent").attr('id') );
+    }
+
     var save_text = function ( where, what, info ) {
 
-//alert ($("div[id*='"+where+"'] > .silent").text());
     	$(window).unbind("focusout");
-        if( content_current_page[where] == what ) return false;
-        content_current_page[where] = what;
 
-        if ( what == "<br>" ) what='';
-	if( where.indexOf(":") ) {
-	    var a = where.split(":");
-	    module = a[0];
-	    where  = a[1];
-	} else {
-	    module = 'content';
-	}
+        var what_hash = {};
+	if( where.indexOf("?") == -1 ) {
+            what_hash = what;
+        } else {
+            if ( is_silent(where) && !info ) return false;
+	    var a = where.split("?");
+            if( content_current_page[where] == a[1] ) return false;
+            content_current_page[where] = a[1];
+	    where = ( a[0]!='' )? a[0] : '/admin/content/update';
+	    what_hash = { 'page' : a[1], 'body' : what };
+        }
+
 	var fd = new FormData();
-	fd.append("page", where);
-	fd.append("body", what);
-	fd.append("lang", lang);
 	fd.append("_SESSION_ID", session);
+	fd.append("lang", lang);
+        $.each(what_hash, function(key, value) {
+            if ( is_silent( where+'?'+key ) && !info ) return false;
+            if ( value == "<br>" ) value='';
+            fd.append(key, value);
+        });
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "/admin/"+ module +"/update");
+	xhr.open("POST", where);
 	xhr.send(fd);
 
         show_info( (info)? info : "content saved" );
+        
+        return true;
 
     };
 

@@ -1,8 +1,10 @@
+<link href="/css/icon.css" rel="stylesheet">
+
 <h1>[% t('Gallery') %]</h1>
 <table><tr><td>
     <div class="gallery">
-        <h2><div id="gallery/[% gal_key %]:header" class="editable">[% gallery.${gal_key}.gal_name %]</div></h2>
-	<div id="gallery/[% gal_key %]:body" class="editable">
+        <h2><div id="/admin/gallery/[% gal_key %]/update?header" class="editable">[% gallery.${gal_key}.gal_name %]</div></h2>
+	<div id="/admin/gallery/[% gal_key %]/update?body" class="editable">
 	    [% gallery.${gal_key}.gal_description %]
 	</div>
 	<br />
@@ -37,11 +39,7 @@
 			});
 		    });
 //		    alert (result.join());
-		    var fd = new FormData();
-		    fd.append("_SESSION_ID", session);
-		    var xhr = new XMLHttpRequest();
-    		    xhr.open('POST', '/admin/gallery/sort/'+result.join(), true);
-		    xhr.send(fd);
+                    save_text( '/admin/gallery/sort/'+result.join(), {}, 'image position saved'); 
 		} 
 	    });
 	$( "#gallerys" ).disableSelection();
@@ -52,11 +50,7 @@
     $('.delete').click(function () {
 //	if ( confirm ('[% t('Are you sure to delete this image?') %]') ) 
 	{
-	    var fd = new FormData();
-	    fd.append("_SESSION_ID", session);
-	    var xhr = new XMLHttpRequest();
-    	    xhr.open('POST', '/admin/gallery/delete/'+$(this).attr('name'), true);
-	    xhr.send(fd);
+            save_text( '/admin/gallery/delete/'+$(this).attr('name'), {}, 'image was deleted'); 
 	    $(this).parent().animate({opacity:0}, 700, function(){ $(this).css({display:"none"}); });
 	}
 	return false;

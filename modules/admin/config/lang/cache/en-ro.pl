@@ -1,59 +1,51 @@
 {
 	''	=> ' ',
 	'&nbsp;'	=> '&nbsp;',
-	'0038-066-938-1344'	=> '0038-066-938-1344',
-	'2@ivanoff.org.ua'	=> '2@ivanoff.org.ua',
-	'contact me'	=> 'contactati-ma',
-	'Contact Us'	=> 'Contacta&#539;i-ne',
-	'Description is prepared.'	=> 'Descrierea este pregătit.',
-	'Download'	=> 'Descarca',
-	'e-mail:'	=> 'e-mail:',
-	'Feedback'	=> 'Feedback',
-	'Find out more'	=> 'Afla mai mult',
-	'First of all, Simpleness...'	=> 'Mai întâi de toate, simplitate ...',
+	'&nbsp;(c) 2010-2012,'	=> '&nbsp;(c) 2010-2012,',
+	'(c) 2010-2012,'	=> '(c) 2010-2012,',
+	'ab'	=> 'din',
+	'abc'	=> 'abc',
+	'abcddekknneeee ddh'	=> 'abcddekknneeee ddh',
+	'Attention!'	=> 'Aten&#539;ie!',
+	'c'	=> 'C',
+	'd'	=> 'd',
+	'dd'	=> 'dd',
+	'dddd'	=> 'dddd',
+	'ddddnjh'	=> 'ddddnjh',
+	'dddh'	=> 'DDH',
+	'ddekknneeee ddh'	=> 'ddekknneeee ddh',
+	'ddh'	=> 'DDH',
+	'ddhh'	=> 'ddhh',
+	'Download'	=> 'Descărca&#539;i',
+	'Download Simpleness CMS (v.0.3.0923, .tar.gz, 1,0 Mb)'	=> 'Descarcă Simplitatea CMS (v.0.3.0923,. Tar.gz, 1,0 Mb)',
+	'Download. Simpleness CMS'	=> 'Descărca&#539;i. Simplitate CMS',
+	'e'	=> 'e',
+	'ee'	=> 'ee',
+	'eee'	=> 'eee',
+	'eeee'	=> 'eeee',
+	'ekk'	=> 'OLS',
+	'ekkeeee'	=> 'ekkeeee',
+	'ekknn'	=> 'Văduvă',
+	'ekknne'	=> 'ekknne',
+	'ekknneeeenn'	=> 'ekknneeeenn',
 	'Gallery'	=> 'Galerie',
-	'Home'	=> 'Acasă',
 	'Home page'	=> 'Pagina de start',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'este o &#539;ară constitutiv al Regatului &#538;ărilor de Jos, situat în principal în nord-vestul Europei &#537;i cu unele insule din Caraibe.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'este o &#539;ară constitutiv al Regatului &#538;ărilor de Jos, situat în principal în nord-vestul Europei &#537;i cu unele insule din Caraibe. este o &#539;ară constitutiv al Regatului &#538;ărilor de Jos, situată<br>în principal în nord-vestul Europei &#537;i cu unele insule din Caraibe.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean. is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'este o &#539;ară constitutiv al Regatului &#538;ărilor de Jos, situat în principal în nord-vestul Europei &#537;i cu unele insule din Caraibe. este o &#539;ară constitutiv al Regatului &#538;ărilor de Jos, situată<br>în principal în nord-vestul Europei &#537;i cu unele insule din Caraibe.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the entirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'este o republică parlamentară unitară în Europa de Sud-Europa Centrală. Pentru a<br>nord, se învecinează cu Fran&#539;a, Elve&#539;ia, Austria, Slovenia &#537;i de-a lungul<br>Alpi. Pentru sud, este alcătuită din totalitatea italian<br>Peninsula, Sicilia, Sardinia-insulele mai mari două din Marea Mediterană<br> Sea-&#537;i multe alte insule mai mici.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
+	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'este un stat suveran &#537;i un membru al Uniunii Europene, situat în sud-vestul Europei in Peninsula Iberica.',
 	'Italy'	=> 'Italia',
-	'Last version - 0.3.0923 was released at September of 23. You can download this system from'	=> 'Ultima versiune - a fost lansat la 0.3.0923 septembrie 23. Pute&#539;i descărca acest sistem de',
+	'kkn'	=> 'KKN',
+	'kknne'	=> 'kknne',
+	'kknneeee ddh'	=> 'kknneeee ddh',
+	'ne'	=> 'numai',
+	'New repository on GitHub'	=> 'Nou depozit pe GitHub',
+	'New version 0.3.0923 is available'	=> 'Noua versiune 0.3.0923 este disponibil',
+	'New version 0.3.0923 is available. You can download it here:'	=> 'Noua versiune 0.3.0923 este disponibilă. Îl pute&#539;i descărca de aici:',
 	'News'	=> '&#536;tiri',
-	'phone:'	=> 'telefon:',
-	'Simpleness CMS - is an open-source Perl CMS system.'	=> 'Simplitate CMS - este un open-source Perl sistem de CMS.',
-	'Simpleness CMS - simple and free CMS system'	=> 'Simplitate CMS - simplu &#537;i gratuit CMS sistem de',
+	'nn'	=> 'nn',
+	'Simpleness CMS'	=> 'Simpleness CMS',
+	'Simpleness CMS on GitHub'	=> 'Simplitate CMS pe GitHub',
+	'Simpleness CMS system is under development. I adjust it at my leisure. All files are posted for review only. But it is working system - so, you can try it ;)'	=> 'Simplitate CMS sistem este in curs de dezvoltare. L-am adapta la timpul meu liber. Toate fi&#537;ierele sunt postate doar pentru reexaminare. Dar acesta este sistemul de lucru - astfel, pute&#539;i încerca ;)',
+	'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'	=> 'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+	'Simpleness&nbsp; CMS'	=> 'Simplitate',
 	'Spain'	=> 'Spania',
-	'The basic principle of the system - the simpler, the better.'	=> 'Principiul de bază al sistemului - mai simplu, cu atât mai bine.',
-	'The Netherlands'	=> '&#538;ările de Jos',
-	'The NetherlandsItaly'	=> 'NetherlandsItaly',
-	'this page'	=> 'aceasta pagina',
-	'To-do list'	=> 'Pentru a-do list',
-	'Waiting for your comments about idea and code. If you wish to participate in development - please'	=> 'Asteptam comentariile voastre despre idee &#537;i codul. Dacă dori&#539;i să participa&#539;i la dezvoltarea - vă rugăm să',
-	'{contacts/index}'	=> '{contacts/index}',
+	'The Netherlands'	=> 'Olanda',
 };

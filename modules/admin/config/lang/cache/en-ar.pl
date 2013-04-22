@@ -1,59 +1,54 @@
 {
 	''	=> ' ',
 	'&nbsp;'	=> '&nbsp;',
-	'0038-066-938-1344'	=> '0038-066-938-1344',
-	'2@ivanoff.org.ua'	=> '2@ivanoff.org.ua',
-	'contact me'	=> 'الاتصال بي',
-	'Contact Us'	=> 'الاتصال بنا',
-	'Description is prepared.'	=> 'إعداد الوصف.',
+	'&nbsp;(c) 2010-2012,'	=> '&nbsp;(c) 2010-2012,',
+	'(c) 2010-2012,'	=> '(c) 2010-2012,',
+	'ab'	=> 'من',
+	'abc'	=> 'abc',
+	'abcddekknneeee ddh'	=> 'abcddekknneeee ddh',
+	'Attention!'	=> 'اهتمام!',
+	'c'	=> 'ج',
+	'd'	=> 'د',
+	'dd'	=> 'dd',
+	'dddd'	=> 'DDDD',
+	'ddddnjh'	=> 'ddddnjh',
+	'dddh'	=> '[ده',
+	'ddh'	=> '[ده',
+	'ddhh'	=> 'ddhh',
 	'Download'	=> 'تحميل',
-	'e-mail:'	=> 'البريد الإلكتروني:',
-	'Feedback'	=> 'تعليقات',
-	'Find out more'	=> 'معرفة المزيد',
-	'First of all, Simpleness...'	=> 'بادئ ذي بدء، البساطة ...',
+	'Download Simpleness CMS (v.0.3.0923, .tar.gz, 1,0 Mb)'	=> 'تحميل البساطة CMS (v.0.3.0923،. TAR.GZ، 1،0 ميجا بايت)',
+	'Download. Simpleness CMS'	=> 'تحميل. البساطه CMS',
+	'e'	=> 'e',
+	'ee'	=> 'ه ه',
+	'eee'	=> 'EEE',
+	'eeee'	=> 'EEEE',
+	'ekk'	=> 'عملية شريان الحياة',
+	'ekkeeee'	=> 'ekkeeee',
+	'ekknn'	=> 'أرملة',
+	'ekknne'	=> 'ekknne',
+	'ekknneeeenn'	=> 'ekknneeeenn',
 	'Gallery'	=> 'رواق',
-	'Home'	=> 'منزل',
 	'Home page'	=> 'الصفحة الرئيسية',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'بلد المكونة للمملكة هولندا، وتقع أساسا في شمال غرب أوروبا ومع بعض الجزر في منطقة البحر الكاريبي.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'بلد المكونة للمملكة هولندا، وتقع أساسا في شمال غرب أوروبا ومع بعض الجزر في منطقة البحر الكاريبي. بلد المكونة للمملكة هولندا، وتقع<br>أساسا في شمال غرب أوروبا ومع بعض الجزر في منطقة البحر الكاريبي.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean. is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'بلد المكونة للمملكة هولندا، وتقع أساسا في شمال غرب أوروبا ومع بعض الجزر في منطقة البحر الكاريبي. بلد المكونة للمملكة هولندا، وتقع<br>أساسا في شمال غرب أوروبا ومع بعض الجزر في منطقة البحر الكاريبي.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the entirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'هي جمهورية برلمانية موحدة في جنوب ووسط أوروبا. إلى<br>الشمال، تصل إلى حدود فرنسا وسويسرا والنمسا، وسلوفينيا على طول<br>جبال الألب. إلى الجنوب، وتتكون من مجمل الإيطالي<br>شبه الجزيرة، صقلية، سردينيا، الجزر أكبر دولتين في منطقة البحر الأبيض المتوسط<br> البحر والعديد من الجزر الصغيرة الأخرى.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
+	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'هي دولة ذات سيادة وعضو في الاتحاد الأوروبي تقع في جنوب غرب أوروبا في شبه الجزيرة الايبيرية.',
 	'Italy'	=> 'إيطاليا',
-	'Last version - 0.3.0923 was released at September of 23. You can download this system from'	=> 'صدر في سبتمبر من 0.3.0923 23 - الإصدار الأخير. يمكنك تحميل هذا النظام من',
+	'kk'	=> 'KK',
+	'kkn'	=> 'KKN',
+	'kknne'	=> 'kknne',
+	'kknneeee ddh'	=> 'kknneeee ddh',
+	'ne'	=> 'فقط',
+	'New repository on GitHub'	=> 'مستودع جديد على جيثب',
+	'New version 0.3.0923 is available'	=> 'النسخة الجديدة 0.3.0923 متاح',
+	'New version 0.3.0923 is available. You can download it here:'	=> 'النسخة الجديدة 0.3.0923 هو متاح. يمكنك تحميله من هنا:',
+	'New version 0.3.0923 is&nbsp; available'	=> 'النسخة الجديدة 0.3.0923 هو',
+	'New version&nbsp; 0.3.0923 is available'	=> 'نسخة جديدة',
 	'News'	=> 'أخبار',
-	'phone:'	=> 'الهاتف:',
-	'Simpleness CMS - is an open-source Perl CMS system.'	=> 'البساطة CMS - هو المصدر المفتوح نظام CMS بيرل.',
-	'Simpleness CMS - simple and free CMS system'	=> 'البساطة CMS - بسيطة وخالية CMS النظام',
+	'nn'	=> 'NN',
+	'nne'	=> 'NNE',
+	'Simpleness CMS'	=> 'Simpleness CMS',
+	'Simpleness CMS on GitHub'	=> 'البساطه CMS على جيثب',
+	'Simpleness CMS system is under development. I adjust it at my leisure. All files are posted for review only. But it is working system - so, you can try it ;)'	=> 'البساطه CMS النظام هو قيد التطوير. أنا تعديله في أوقات الفراغ بلدي. تنشر جميع الملفات للمراجعة فقط. ولكنه نظام العمل - لذلك، يمكنك أن تجرب ذلك ؛)',
+	'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'	=> 'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+	'Simpleness&nbsp; CMS'	=> 'البساطه',
 	'Spain'	=> 'إسبانيا',
-	'The basic principle of the system - the simpler, the better.'	=> 'المبدأ الأساسي للنظام - أبسط، على نحو أفضل.',
 	'The Netherlands'	=> 'هولندا',
-	'The NetherlandsItaly'	=> 'وNetherlandsItaly',
-	'this page'	=> 'هذه الصفحة',
-	'To-do list'	=> 'قائمة المهام',
-	'Waiting for your comments about idea and code. If you wish to participate in development - please'	=> 'في انتظار تعليقاتكم حول فكرة ورمز. إذا كنت ترغب في المشاركة في التنمية - يرجى',
-	'{contacts/index}'	=> '{contacts/index}',
 };

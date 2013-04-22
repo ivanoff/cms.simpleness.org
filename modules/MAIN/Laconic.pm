@@ -82,6 +82,7 @@ sub cache {
 
 sub param {
     return $main::q->Vars unless @_;
+    return $main::q->param( $_[0] ) unless $_[1];
     return map { $main::q->param( $_ ) } @_;
 }
 

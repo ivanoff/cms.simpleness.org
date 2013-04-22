@@ -38,7 +38,6 @@ you_cannot 'manage_gallery' or
         my $size = images('SIZE')->[0];
         my $path = images('PATH');
         process('admin/gallery.tpl', { images=>[<$path/$gal_key/$size/*.*>], gallery=>\%gallery, } );
-        return $output;
     },
 
     '/admin/gallery/delete/i(\d+)' => sub {

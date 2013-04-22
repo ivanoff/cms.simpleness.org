@@ -1,60 +1,55 @@
 {
 	''	=> ' ',
 	'&nbsp;'	=> '&nbsp;',
-	'0038-066-938-1344'	=> '0038-066-938-1344',
-	'2@ivanoff.org.ua'	=> '2@ivanoff.org.ua',
-	'contact me'	=> 'Kontaktieren Sie mich',
-	'Contact Us'	=> 'Kontakt',
-	'Description is prepared.'	=> 'Die Beschreibung ist vorbereitet.',
+	'&nbsp;(c) 2010-2012,'	=> '&nbsp;(c) 2010-2012,',
+	'(c) 2010-2012,'	=> '(c) 2010-2012,',
+	'ab'	=> 'ab',
+	'abc'	=> 'abc',
+	'abcddekknneeee ddh'	=> 'abcddekknneeee ddh',
+	'Attention!'	=> 'Achtung!',
+	'c'	=> 'c',
+	'd'	=> 'd',
+	'dd'	=> 'dd',
+	'dddd'	=> 'dddd',
+	'ddddnjh'	=> 'ddddnjh',
+	'dddh'	=> 'DDH',
+	'ddekknneeee ddh'	=> 'ddekknneeee ddh',
+	'ddh'	=> 'ddh',
+	'ddhh'	=> 'DDHH',
 	'Download'	=> 'Herunterladen',
-	'Download3'	=> 'Download3',
-	'e-mail:'	=> 'e-mail:',
-	'Feedback'	=> 'Rückkopplung',
-	'Find out more'	=> 'Erfahren Sie mehr',
-	'First of all, Simpleness...'	=> 'Zunächst Simpleness ...',
+	'Download Simpleness CMS (v.0.3.0923, .tar.gz, 1,0 Mb)'	=> 'Laden Simpleness CMS (v.0.3.0923,. Tar.gz, 1,0 Mb)',
+	'Download. Simpleness CMS'	=> 'Herunterladen. Simpleness CMS',
+	'e'	=> 'e',
+	'ee'	=> 'ee',
+	'eee'	=> 'eee',
+	'eeee'	=> 'eeee',
+	'ekk'	=> 'OLS',
+	'ekkeeee'	=> 'ekkeeee',
+	'ekknn'	=> 'Witwe',
+	'ekknne'	=> 'ekknne',
+	'ekknneeeenn'	=> 'ekknneeeenn',
 	'Gallery'	=> 'Galerie',
-	'Home'	=> 'Zuhause',
 	'Home page'	=> 'Startseite',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'ist ein Bestandteil Land des Königreichs der Niederlande, vor allem in Nord-Westeuropa und einigen Inseln in der Karibik.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'ist ein Bestandteil Land des Königreichs der Niederlande, vor allem in Nord-Westeuropa und einigen Inseln in der Karibik. ist ein Bestandteil Land des Königreichs der Niederlande, befindet<br>vor allem in Nord-West Europa und mit einigen Inseln in der Karibik.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean. is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'ist ein Bestandteil Land des Königreichs der Niederlande, vor allem in Nord-Westeuropa und einigen Inseln in der Karibik. ist ein Bestandteil Land des Königreichs der Niederlande, befindet<br>vor allem in Nord-West Europa und mit einigen Inseln in der Karibik.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the entirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'ist eine einheitliche parlamentarische Republik in Süd-und Mitteleuropa. Um die<br>Norden grenzt es Frankreich, der Schweiz, Österreich und Slowenien entlang der<br>Alpen. Im Süden, es besteht aus der Gesamtheit der italienischen<br>Halbinsel, Sizilien, Sardinien-die beiden größten Inseln im Mittelmeer<br> Sea-und viele andere kleinere Inseln.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
+	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'ist ein souveräner Staat und Mitglied der Europäischen Union im Südwesten Europas auf der iberischen Halbinsel.',
 	'Italy'	=> 'Italien',
-	'Last version - 0.3.0923 was released at September of 23. You can download this system from'	=> 'Letzte Version - 0.3.0923 wurde im September von 23 freigegeben. Sie können dieses System von Download',
+	'kk'	=> 'kk',
+	'kkn'	=> 'kkn',
+	'kknne'	=> 'kknne',
+	'kknneeee ddh'	=> 'kknneeee ddh',
+	'ne'	=> 'lediglich',
+	'New repository on GitHub'	=> 'New Repository auf GitHub',
+	'New version 0.3.0923 is available'	=> 'Neue Version 0.3.0923 ist verfügbar',
+	'New version 0.3.0923 is available. You can download it here:'	=> 'Neue Version 0.3.0923 ist verfügbar. Sie können es hier herunterladen:',
+	'New version 0.3.0923 is&nbsp; available'	=> 'Neue Version 0.3.0923 ist',
+	'New version&nbsp; 0.3.0923 is available'	=> 'Neue Version',
 	'News'	=> 'Nachrichten',
-	'phone:'	=> 'Telefon:',
-	'Simpleness CMS - is an open-source Perl CMS system.'	=> 'Simpleness CMS - ist ein Open-Source-Perl CMS-System.',
-	'Simpleness CMS - simple and free CMS system'	=> 'Simpleness CMS - einfach und kostenlos CMS-System',
+	'nn'	=> 'nn',
+	'nne'	=> 'nne',
+	'Simpleness CMS'	=> 'Simpleness CMS',
+	'Simpleness CMS on GitHub'	=> 'Simpleness CMS auf GitHub',
+	'Simpleness CMS system is under development. I adjust it at my leisure. All files are posted for review only. But it is working system - so, you can try it ;)'	=> 'Simpleness CMS-System ist in der Entwicklung. Ich stelle es in meiner Freizeit. Alle Dateien werden für die Überprüfung nur geschrieben. Aber es funktioniert System - so können Sie es versuchen ;)',
+	'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'	=> 'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+	'Simpleness&nbsp; CMS'	=> 'Simpleness',
 	'Spain'	=> 'Spanien',
-	'The basic principle of the system - the simpler, the better.'	=> 'Das Grundprinzip des Systems - die einfachere, desto besser.',
 	'The Netherlands'	=> 'Niederlande',
-	'The NetherlandsItaly'	=> 'Die NetherlandsItaly',
-	'this page'	=> 'Diese Seite',
-	'To-do list'	=> 'To-do-Liste',
-	'Waiting for your comments about idea and code. If you wish to participate in development - please'	=> 'Warten auf Ihre Kommentare zu Idee und Code. Wenn Sie in der Entwicklung beteiligen möchten - bitte',
-	'{contacts/index}'	=> '{contacts/index}',
 };

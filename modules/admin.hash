@@ -4,6 +4,8 @@ use strict;
 use MAIN;
 use TRANSLATE;
 
+defaults { templates_only => 1, };
+
 {
     '/admin' => sub {
         process('admin/index.tpl');

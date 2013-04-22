@@ -1,59 +1,50 @@
 {
 	''	=> ' ',
 	'&nbsp;'	=> '&nbsp;',
-	'0038-066-938-1344'	=> '0038-066-938-1344',
-	'2@ivanoff.org.ua'	=> '2@ivanoff.org.ua',
-	'contact me'	=> '저에게 연락',
-	'Contact Us'	=> '문의',
-	'Description is prepared.'	=> '설명 준비가되어 있습니다.',
+	'&nbsp;(c) 2010-2012,'	=> '&nbsp;(c) 2010-2012,',
+	'(c) 2010-2012,'	=> '(c) 2010-2012,',
+	'ab'	=> '부터',
+	'abc'	=> 'abc',
+	'abcddekknneeee ddh'	=> 'abcddekknneeee ddh',
+	'Attention!'	=> '주의!',
+	'c'	=> 'C',
+	'd'	=> '디',
+	'dd'	=> 'dd',
+	'dddd'	=> 'DDDD',
+	'ddddnjh'	=> 'ddddnjh',
+	'dddh'	=> 'DDH',
+	'ddekknneeee ddh'	=> 'ddekknneeee ddh',
+	'ddh'	=> 'DDH',
+	'ddhh'	=> 'ddhh',
 	'Download'	=> '다운로드',
-	'e-mail:'	=> '이메일 :',
-	'Feedback'	=> '피드백',
-	'Find out more'	=> '자세한 내용을 알아보십시오',
-	'First of all, Simpleness...'	=> '우선, Simpleness ...',
-	'Gallery'	=> '갱도',
-	'Home'	=> '홈',
+	'Download Simpleness CMS (v.0.3.0923, .tar.gz, 1,0 Mb)'	=> '간결함 CMS (v.0.3.0923. tar.gz를, 1.0 메가 비트) 다운로드',
+	'Download. Simpleness CMS'	=> '다운로드 할 수 있습니다. 간결함 CMS',
+	'e'	=> 'e',
+	'ee'	=> 'EE',
+	'eee'	=> 'EEE',
+	'eeee'	=> 'EEEE',
+	'ekk'	=> 'OLS',
+	'ekkeeee'	=> 'ekkeeee',
+	'ekknn'	=> '과부',
+	'ekknne'	=> 'ekknne',
+	'ekknneeeenn'	=> 'ekknneeeenn',
+	'Gallery'	=> '갤러리',
 	'Home page'	=> '홈 페이지',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> '주로 북서 유럽과 카리브해의 일부 섬과있는 네덜란드의 왕국의 구성 국가입니다.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> '주로 북서 유럽과 카리브해의 일부 섬과있는 네덜란드의 왕국의 구성 국가입니다. 있는 네덜란드의 왕국의 구성 국가입니다<br>주로 북서 유럽과 카리브해의 일부 섬을 갖추고 있습니다.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean. is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> '주로 북서 유럽과 카리브해의 일부 섬과있는 네덜란드의 왕국의 구성 국가입니다. 있는 네덜란드의 왕국의 구성 국가입니다<br>주로 북서 유럽과 카리브해의 일부 섬을 갖추고 있습니다.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the entirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> '남 - 중부 유럽의 단일 의회 공화국입니다. 에<br>북쪽으로는 따라 프랑스,&#8203;&#8203; 스위스, 오스트리아 및 슬로베니아 테두리를<br>알프스. 남쪽에, 그것은 이탈리아의 전체 구성되어 있습니다<br>반도 지중해에서 시칠리아, 사르데냐 (Sardinia) - 두 큰 섬<br>&#160;바다 및 기타 여러 작은 섬.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
+	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> '주권 국가와 이베리아 반도에 남서 유럽에있는 유럽 연합 (EU)의 일원이다.',
 	'Italy'	=> '이탈리아',
-	'Last version - 0.3.0923 was released at September of 23. You can download this system from'	=> '마지막 버전 - 0.3.0923은 23 년 9 월에 릴리스되었습니다. 당신은에서이 시스템을 다운로드 할 수 있습니다',
+	'kkn'	=> 'KKN',
+	'kknne'	=> 'kknne',
+	'kknneeee ddh'	=> 'kknneeee ddh',
+	'ne'	=> '만',
+	'New repository on GitHub'	=> 'GitHub의에 새 저장소',
+	'New version 0.3.0923 is available'	=> '새로운 버전 0.3.0923를 사용할 수 있습니다',
+	'New version 0.3.0923 is available. You can download it here:'	=> '새로운 버전 0.3.0923를 사용할 수 있습니다. 당신은 여기에서 다운로드 할 수 있습니다 :',
 	'News'	=> '뉴스',
-	'phone:'	=> '전화 번호 :',
-	'Simpleness CMS - is an open-source Perl CMS system.'	=> 'Simpleness CMS는 - 오픈 소스 펄 CMS 시스템입니다.',
-	'Simpleness CMS - simple and free CMS system'	=> 'Simpleness CMS - 간단하고 무료로 CM&#8203;&#8203;S 시스템',
+	'nn'	=> 'NN',
+	'Simpleness CMS'	=> 'Simpleness CMS',
+	'Simpleness CMS on GitHub'	=> 'GitHub의에 간결함 CMS',
+	'Simpleness CMS system is under development. I adjust it at my leisure. All files are posted for review only. But it is working system - so, you can try it ;)'	=> '간결함 CMS 시스템을 개발 중에있다. 나는 나의 여가 시간을 조정합니다. 모든 파일은 검토를 위해 게시됩니다. 그러나 시스템을 작동하고 - 그래서 당신은 그것을 ;)을 시도 할 수 있습니다',
+	'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'	=> 'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
 	'Spain'	=> '스페인',
-	'The basic principle of the system - the simpler, the better.'	=> '시스템의 기본 원리 - 간단수록 좋습니다.',
 	'The Netherlands'	=> '네덜란드',
-	'The NetherlandsItaly'	=> 'NetherlandsItaly',
-	'this page'	=> '이 페이지',
-	'To-do list'	=> '할 일 목록',
-	'Waiting for your comments about idea and code. If you wish to participate in development - please'	=> '아이디어 및 코드에 대한 귀하의 의견을 기다리는 중입니다. 당신이 개발에 참여하고자하는 경우 - 제발',
-	'{contacts/index}'	=> '{contacts/index}',
 };

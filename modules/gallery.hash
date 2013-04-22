@@ -6,7 +6,7 @@ use MAIN;
 my %gallery = map { $_->{gal_key} => $_ }
                 @{sql( "SELECT * FROM base_gallery WHERE lang=?", lang )};
 
-defaults { gallery=>\%gallery, image=>1 };
+defaults { gallery=>\%gallery, image=>1, templates_only => 1, };
 
 {
 

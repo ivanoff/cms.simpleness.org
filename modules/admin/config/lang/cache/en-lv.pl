@@ -1,59 +1,54 @@
 {
 	''	=> ' ',
 	'&nbsp;'	=> '&nbsp;',
-	'0038-066-938-1344'	=> '0038-066-938-1344',
-	'2@ivanoff.org.ua'	=> '2@ivanoff.org.ua',
-	'contact me'	=> 'sazinieties ar mani',
-	'Contact Us'	=> 'Sazinieties ar mums',
-	'Description is prepared.'	=> 'Apraksts ir sagatavots.',
+	'&nbsp;(c) 2010-2012,'	=> '&nbsp;(c) 2010-2012,',
+	'(c) 2010-2012,'	=> '(c) 2010-2012,',
+	'ab'	=> 'no',
+	'abc'	=> 'abc',
+	'abcddekknneeee ddh'	=> 'abcddekknneeee ddh',
+	'Attention!'	=> 'Uzmanību!',
+	'c'	=> 'c',
+	'd'	=> 'd',
+	'dd'	=> 'dd',
+	'dddd'	=> 'dddd',
+	'ddddnjh'	=> 'ddddnjh',
+	'dddh'	=> 'DDH',
+	'ddekknneeee ddh'	=> 'ddekknneeee ddh',
+	'ddh'	=> 'DDH',
+	'ddhh'	=> 'ddhh',
 	'Download'	=> 'Lejupielādēt',
-	'e-mail:'	=> 'E-pasts:',
-	'Feedback'	=> 'Atsauksmes',
-	'Find out more'	=> 'Uzzini vairāk',
-	'First of all, Simpleness...'	=> 'Pirmkārt, simpleness ...',
+	'Download Simpleness CMS (v.0.3.0923, .tar.gz, 1,0 Mb)'	=> 'Lejupielādēt Simpleness CMS (v.0.3.0923. Tar, 1,0 Mb)',
+	'Download. Simpleness CMS'	=> 'Lejupielādēt. Simpleness CMS',
+	'e'	=> 'e',
+	'ee'	=> 'ee',
+	'eee'	=> 'eee',
+	'eeee'	=> 'eeee',
+	'ekk'	=> 'OLS',
+	'ekkeeee'	=> 'ekkeeee',
+	'ekknn'	=> 'Atraitne',
+	'ekknne'	=> 'ekknne',
+	'ekknneeeenn'	=> 'ekknneeeenn',
 	'Gallery'	=> 'Galerija',
-	'Home'	=> 'Mājas',
 	'Home page'	=> 'Mājas lapa',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'ir sastāvdaļa valsts no Nīderlandes Karalistes, kas galvenokārt atrodas ziemeļu-rietumu Eiropā un ar dažām Karību salās.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'ir sastāvdaļa valsts no Nīderlandes Karalistes, kas galvenokārt atrodas ziemeļu-rietumu Eiropā un ar dažām Karību salās. ir sastāvdaļa valsts no Nīderlandes Karalistes, kas atrodas<br>galvenokārt ziemeļrietumu Eiropā un ar dažām Karību salās.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean. is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'ir sastāvdaļa valsts no Nīderlandes Karalistes, kas galvenokārt atrodas ziemeļu-rietumu Eiropā un ar dažām Karību salās. ir sastāvdaļa valsts no Nīderlandes Karalistes, kas atrodas<br>galvenokārt ziemeļrietumu Eiropā un ar dažām Karību salās.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the entirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'ir vienots parlamentāra republika Dienvidaustrumu Centrāleiropā. Līdz<br>ziemeļiem, tā robežojas Francija, Šveice, Austrija un Slovēniju gar<br>Alpi. Uz dienvidiem, tas sastāv no kopumā no Itālijas<br>Pussala, Sicīlija, Sardīnija-divas lielākās salas Vidusjūrā<br> Jūras un daudzas citas mazās salas.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
+	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'ir suverēna valsts un Eiropas Savienības atrodas dienvidrietumu Eiropā par Ibērijas pussalā loceklis.',
 	'Italy'	=> 'Itālija',
-	'Last version - 0.3.0923 was released at September of 23. You can download this system from'	=> 'Pēdējā versija - 0.3.0923 tika izlaists septembra 23. Jūs varat lejupielādēt šo sistēmu no',
+	'kk'	=> 'kk',
+	'kkn'	=> 'KKN',
+	'kknne'	=> 'kknne',
+	'kknneeee ddh'	=> 'kknneeee ddh',
+	'ne'	=> 'tikai',
+	'New repository on GitHub'	=> 'Jauns krātuve par GitHub',
+	'New version 0.3.0923 is available'	=> 'Jaunā versija 0.3.0923 pieejams',
+	'New version 0.3.0923 is available. You can download it here:'	=> 'Jaunā versija 0.3.0923 ir pieejama. Jūs varat lejupielādēt to šeit:',
+	'New version&nbsp; 0.3.0923 is available'	=> 'Jaunā versija',
 	'News'	=> 'Jaunumi',
-	'phone:'	=> 'tālrunis:',
-	'Simpleness CMS - is an open-source Perl CMS system.'	=> 'Simpleness CMS - ir atvērtā koda Perl CMS sistēma.',
-	'Simpleness CMS - simple and free CMS system'	=> 'Simpleness CMS - vienkārša un bezmaksas CMS sistēma',
+	'nn'	=> 'nn',
+	'nne'	=> 'ZZA',
+	'Simpleness CMS'	=> 'Simpleness CMS',
+	'Simpleness CMS on GitHub'	=> 'Simpleness CMS par GitHub',
+	'Simpleness CMS system is under development. I adjust it at my leisure. All files are posted for review only. But it is working system - so, you can try it ;)'	=> 'Simpleness CMS sistēma ir izstrādes stadijā. Es pielāgotu to manu atpūtai. Visi faili ir ievietojis pārskatīšanai tikai. Bet tas strādā sistēma - tā, jūs varat mēģināt to ;)',
+	'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'	=> 'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+	'Simpleness&nbsp; CMS'	=> 'Simpleness',
 	'Spain'	=> 'Spānija',
-	'The basic principle of the system - the simpler, the better.'	=> 'Pamatprincips sistēmas - vienkāršāku, labāku.',
 	'The Netherlands'	=> 'Nīderlande',
-	'The NetherlandsItaly'	=> 'NetherlandsItaly',
-	'this page'	=> 'šo lapu',
-	'To-do list'	=> 'To-do sarakstu',
-	'Waiting for your comments about idea and code. If you wish to participate in development - please'	=> 'Gaida jūsu komentārus par ideju un kodu. Ja jūs vēlaties piedalīties attīstībā - lūdzu',
-	'{contacts/index}'	=> '{contacts/index}',
 };

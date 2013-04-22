@@ -62,6 +62,10 @@ you_cannot 'edit_menu' or
         my ($url, $name) = ( param('body') =~ /href=["'](.*?)['"].*?>(.*)</ )? ($1, $2) : ( );
         return 0 unless $url;
 
+        if ( is_default_lang ) {
+            sql( "DELETE FROM base_menu WHERE menu_key=? AND lang!=?", $id, lang);
+        }
+
         sql "UPDATE base_menu SET menu_name=? WHERE lang=? AND menu_key=?", $name, lang, $id;
         sql "UPDATE base_menu_url SET menu_url=? WHERE menu_key=?", $url, $id;
 

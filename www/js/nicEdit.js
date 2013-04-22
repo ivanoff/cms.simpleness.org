@@ -270,7 +270,7 @@ var nicEditorConfig = bkClass.extend({
 	},
 	saveHeadersURI : '/admin/content/update/headers',
 	iconsPath : '/images/icon_nicEditor.gif',
-	buttonList : ['save','bold','italic','underline','left','center','right','justify','ol','ul','fontSize','fontFamily','fontFormat','indent','outdent','image','upload','link','unlink','forecolor','bgcolor'],
+	buttonList : ['save','bold','italic','underline','left','center','right','justify','ol','ul','fontFormat','fontFamily','fontSize','indent','outdent','image','upload','link','unlink','forecolor','bgcolor'],
 	iconList : {"xhtml":1,"bgcolor":2,"forecolor":3,"bold":4,"center":5,"hr":6,"indent":7,"italic":8,"justify":9,"left":10,"ol":11,"outdent":12,"removeformat":13,"right":14,"save":25,"strikethrough":16,"subscript":17,"superscript":18,"ul":19,"underline":20,"image":21,"link":22,"unlink":23,"close":24,"arrow":26,"upload":27}
 	
 });
@@ -1665,16 +1665,8 @@ var nicSEOButton = nicEditorAdvancedButton.extend({
 	},
 
 	submit : function( ) {
-	    var fd = new FormData();
-	    fd.append("pageheader", this.title_val.value);
-	    fd.append("page", this.ne.options.page);
-	    fd.append("lang", this.ne.options.lang);
-	    fd.append("_SESSION_ID", this.ne.options.session);
-	    var xhr = new XMLHttpRequest();
-	    xhr.open("POST", this.ne.options.saveHeadersURI || this.options.saveHeadersURI);
-	    xhr.send(fd);
-	    this.form.setContent('Title modify done').setStyle({fontSize : '14px', fontWeight: 'bold', padding : '0px', margin : '2px 0'});
-//	    this.form.setStyle({ display: 'none' });
+            save_text( 'content/headers:' + this.ne.options.uri, this.title_val.value, 'Title modify done' );
+	    this.pane.remove();
 	}
 });
 

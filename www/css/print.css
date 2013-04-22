@@ -13,14 +13,6 @@ body {
     background: #ece9dd;
 }
 
-.editable {
-    background: rgba(50, 50, 255, 0.03);
-    border: 1px dotted #EEE;
-}
-.editable:hover {
-    background: rgba(50, 50, 255, 0.06);
-    border: 1px dotted #AAA;
-}
 a { color: #da0700; text-decoration: underline; cursor:pointer; }
 a:hover { text-decoration: none; }
 a img { border: 0; }

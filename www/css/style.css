@@ -13,14 +13,6 @@ body {
     background: #ece9dd;
 }
 
-.editable {
-    background: rgba(50, 50, 255, 0.03);
-    border: 1px dotted #EEE;
-}
-.editable:hover {
-    background: rgba(50, 50, 255, 0.06);
-    border: 1px dotted #AAA;
-}
 a { color: #da0700; text-decoration: underline; cursor:pointer; }
 a:hover { text-decoration: none; }
 a img { border: 0; }
@@ -60,7 +52,7 @@ h4 { font-size:16px; color:#b10301; line-height:18px; }
 #navigation { 
     padding:5px 0 7px 1px; 
     position:relative;  
-    z-index:10;  
+    z-index:1;  
     font-family: simpleness, Georgia, Helvetica, Sans-Serif;
 }
 #navigation ul { list-style:none; }
@@ -195,4 +187,3 @@ ul.dropdown-horizontal ul *.dir {
  background-position: 100% 50%;
  background-repeat: no-repeat;
 }
-

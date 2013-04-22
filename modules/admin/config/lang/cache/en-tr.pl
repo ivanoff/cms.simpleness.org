@@ -1,60 +1,54 @@
 {
 	''	=> ' ',
 	'&nbsp;'	=> '&nbsp;',
-	'0038-066-938-1344'	=> '0038-066-938-1344',
-	'2@ivanoff.org.ua'	=> '2@ivanoff.org.ua',
-	'contact me'	=> 'bana ulaşın',
-	'Contact Us'	=> 'Bize Ulaşın',
-	'Description is prepared.'	=> 'Açıklama hazırlanmış.',
+	'&nbsp;(c) 2010-2012,'	=> '&nbsp;(c) 2010-2012,',
+	'(c) 2010-2012,'	=> '(c) 2010-2012,',
+	'ab'	=> 'itibaren',
+	'abc'	=> 'abc',
+	'abcddekknneeee ddh'	=> 'abcddekknneeee ddh',
+	'Attention!'	=> 'Dikkat!',
+	'c'	=> 'c',
+	'd'	=> 'd',
+	'dd'	=> 'dd',
+	'dddd'	=> 'dddd',
+	'ddddnjh'	=> 'ddddnjh',
+	'dddh'	=> 'GKD',
+	'ddh'	=> 'GKD',
+	'ddhh'	=> 'ddhh',
 	'Download'	=> 'İndir',
-	'Download3'	=> 'Download3',
-	'e-mail:'	=> 'E-posta:',
-	'Feedback'	=> 'Geribesleme',
-	'Find out more'	=> 'Bilinmesi gerekenler',
-	'First of all, Simpleness...'	=> 'Her şeyden önce, basitliği ...',
+	'Download Simpleness CMS (v.0.3.0923, .tar.gz, 1,0 Mb)'	=> 'Sadelik CMS (v.0.3.0923,. Tar.gz, 1,0 Mb) indir',
+	'Download. Simpleness CMS'	=> 'Indir. Sadelik CMS',
+	'e'	=> 'e',
+	'ee'	=> 'ee',
+	'eee'	=> 'eee',
+	'eeee'	=> 'eeee',
+	'ekk'	=> 'ekk',
+	'ekkeeee'	=> 'ekkeeee',
+	'ekknn'	=> 'Dul',
+	'ekknne'	=> 'ekknne',
+	'ekknneeeenn'	=> 'ekknneeeenn',
 	'Gallery'	=> 'Galeri',
-	'Home'	=> 'Ev',
-	'Home page'	=> 'Ana sayfa',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'özellikle Kuzey-Batı Avrupa ve Karayipler&#39;deki bazı adalar ile bulunan Hollanda, İngiltere kurucu bir ülkedir.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'özellikle Kuzey-Batı Avrupa ve Karayipler&#39;deki bazı adalar ile bulunan Hollanda, İngiltere kurucu bir ülkedir. bulunan Hollanda Krallığı&#39;nın bir kurucu bir ülkedir,<br>özellikle Kuzey-Batı Avrupa ve Karayipler&#39;deki bazı adalar.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean. is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'özellikle Kuzey-Batı Avrupa ve Karayipler&#39;deki bazı adalar ile bulunan Hollanda, İngiltere kurucu bir ülkedir. bulunan Hollanda Krallığı&#39;nın bir kurucu bir ülkedir,<br>özellikle Kuzey-Batı Avrupa ve Karayipler&#39;deki bazı adalar.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the entirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'Güney-Orta Avrupa&#39;da üniter bir parlamenter cumhuriyettir. Için<br>kuzeyde, o boyunca Fransa, İsviçre, Avusturya ve Slovenya sınırları<br>Alps. Güney için, İtalyan bütünü oluşur<br>Yarımadası, Akdeniz&#39;de Sicilya, Sardunya-İki büyük adaları<br> Deniz ve diğer birçok küçük adalar.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
+	'Home page'	=> 'Ana Sayfa',
+	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'egemen bir devlet ve İber Yarımadası&#39;nda güneybatı Avrupa&#39;da bulunan Avrupa Birliği üyesidir.',
 	'Italy'	=> 'İtalya',
-	'Last version - 0.3.0923 was released at September of 23. You can download this system from'	=> 'Son sürüm - 0.3.0923 23 Eylül itibariyle serbest bırakıldı. Siz bu sisteme yükleyebilirsiniz',
+	'kk'	=> 'kk',
+	'kkn'	=> 'kkn',
+	'kknne'	=> 'kknne',
+	'kknneeee ddh'	=> 'kknneeee ddh',
+	'ne'	=> 'sadece',
+	'New repository on GitHub'	=> 'GitHub yeni depo',
+	'New version 0.3.0923 is available'	=> 'Yeni versiyonu 0.3.0923 kullanılabilir',
+	'New version 0.3.0923 is available. You can download it here:'	=> 'Yeni versiyonu 0.3.0923 mevcuttur. Burada indirebilirsiniz:',
+	'New version 0.3.0923 is&nbsp; available'	=> 'Yeni versiyonu 0.3.0923 olan',
+	'New version&nbsp; 0.3.0923 is available'	=> 'Yeni versiyonu',
 	'News'	=> 'Haber',
-	'phone:'	=> 'Telefon:',
-	'Simpleness CMS - is an open-source Perl CMS system.'	=> 'Sadelik CMS - açık kaynak Perl CMS sistemidir.',
-	'Simpleness CMS - simple and free CMS system'	=> 'Sadelik CMS - basit ve ücretsiz bir CMS sistemi',
+	'nn'	=> 'nn',
+	'nne'	=> 'nne',
+	'Simpleness CMS'	=> 'Simpleness CMS',
+	'Simpleness CMS on GitHub'	=> 'GitHub üzerinde sadelik CMS',
+	'Simpleness CMS system is under development. I adjust it at my leisure. All files are posted for review only. But it is working system - so, you can try it ;)'	=> 'Sadelik CMS sistemi geliştirme aşamasındadır. Ben benim boş ayarlayın. Tüm dosyalar sadece yorum için yayınlanmaktadır. Ama sistem çalışıyor - bu nedenle, bunu ;) deneyebilirsiniz',
+	'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'	=> 'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+	'Simpleness&nbsp; CMS'	=> 'Sadelik',
 	'Spain'	=> 'İspanya',
-	'The basic principle of the system - the simpler, the better.'	=> 'Sistemin temel prensibi - basit, o kadar iyi.',
 	'The Netherlands'	=> 'Hollanda',
-	'The NetherlandsItaly'	=> 'NetherlandsItaly',
-	'this page'	=> 'Bu sayfayı',
-	'To-do list'	=> 'Yapılacaklar listesi',
-	'Waiting for your comments about idea and code. If you wish to participate in development - please'	=> 'Fikir ve kod hakkında yorumlarınızı bekliyorum. Eğer geliştirme katılmak istiyorsanız - lütfen',
-	'{contacts/index}'	=> '{contacts/index}',
 };

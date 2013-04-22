@@ -8,17 +8,15 @@ my $r;
 {
     #password is md5(pass+md5(login)+md5(login+pass))
     '/login' => sub {
-        if( param('login') ) {
+        my ( $l, $p ) = param( 'login', 'password' );
+        if( $l ) {
             $r = sql( "SELECT * FROM base_users WHERE user_login=? 
-                                AND user_password=MD5(CONCAT(?,MD5(?),MD5(?)))", 
-                            param('login'), param('password'), param('login'), 
-                            param('password').param('login') 
-                        );
+                         AND user_password=MD5(CONCAT(?,MD5(?),MD5(?)))", $l, $p, $l, $p.$l );
             if ( $r->[0] ) {
                 my $g = sql( "SELECT * FROM base_users_groups WHERE group_id=?", $r->[0]{group_id} );
                 session( 'sgroup' , $g->[0]{group_name} );
                 session( 'ip'     , $ENV{REMOTE_ADDR} );
-                session( 'slogin' , md5_hex(param('login')) );
+                session( 'slogin' , md5_hex($l) );
                 session( 'sid'    , $r->[0]{user_id} );
 
                 my %settings_default = ( 'show_addthis' => 1, );

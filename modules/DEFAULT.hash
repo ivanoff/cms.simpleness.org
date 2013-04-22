@@ -9,7 +9,7 @@ use MAIN;
         $uri = '' unless $uri;
 
 ## get last 4 news (for left column etc)
-        defaults { news => sql("SELECT * FROM base_news WHERE lang=? ORDER BY news_date DESC LIMIT 4", lang) };
+        defaults { top_news => sql("SELECT * FROM base_news WHERE lang=? ORDER BY news_date DESC LIMIT 4", lang) };
 
 ## get galleries info
         my %gallery = map { $_->{gal_id} => $_ } @{sql ( "SELECT * FROM base_gallery WHERE lang=?", lang )};

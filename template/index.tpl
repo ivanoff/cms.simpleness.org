@@ -26,21 +26,59 @@
 	</script>
 [% END %]
 [% IF access.edit_content %]
+	<link rel="stylesheet" href="/css/admin.css" type="text/css" media="all" />
+
+	<script type="text/javascript">
+	    $(document).ready(function(){
+	        var cte_text = '<font color="#AAA"><small>click to edit</small></font>';
+	        $(".editable").each(function(){ 
+	            if ( $(this).text().replace(/(\n|\r|\s)+$/, '') == "" ) {
+	                $(this).html( cte_text );
+	                $(this).live('click', function () {
+	                    if( $(this).html() == cte_text ){
+	                        $(this).html("<br>");
+	                    };
+		        });
+	            }
+	        });
+	    });
+	</script>
+
 	<script type="text/javascript">
 	    var session = "[% session('_SESSION_ID') %]";
 	    var lang = "[% language %]";
 	    var title = "[% title %]"; 
 	    var page = "content:[% uri %]"; 
+	    var uri = "[% uri %]"; 
 	</script>
 	<script src="/js/nicEdit.js" type="text/javascript"></script>
 	<script src="/js/nicEditRun.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="/css/dropBox.css" type="text/css" media="all" />
+
+        <script src="/js/jquery-ui.js"></script>
 [% END %]
 </head>
 <body>
 [% IF access.edit_content %]
 <div id="myNicPanel" style="position: fixed; z-index: 900; width:100%;"></div>
 <div style="height: 25px;"></div>
+<div id="myNicPanel_info" style="position: fixed; z-index: 900; width:100%; text-align:center; background-color: #CFB;"></div>
+<script type="text/javascript">
+    function show_info( t ) {
+        if ( t ) {
+            $('#myNicPanel_info').text( t );
+            $("#myNicPanel_info").show('blind', {}, 500);
+            setTimeout(function() {
+                $("#myNicPanel_info").hide('blind', {}, 500)
+            }, 5000);
+        } else {
+            $("#myNicPanel_info").hide();
+        }
+    };
+    $(document).ready(function(){
+        show_info('');
+    });
+</script>
 [% END %]
 <!-- Shell -->
 <div id="shell">
@@ -96,9 +134,12 @@
 <a href="#" id="print_button" onclick="print();return false;"><img src="/images/btn_print.gif" border="0" align="RIGHT"></a>
 [% END %]
 
+[% UNLESS templates_only %]
 <div id="content:[% uri %]" class="editable">
 [% (access.edit_content)? content_edit : content %]
 </div>
+[% END %]
+
 [% body %]
 
 [% IF access.view_addthis %]

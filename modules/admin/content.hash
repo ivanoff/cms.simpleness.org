@@ -40,16 +40,11 @@ you_cannot 'manage_gallery' or
         back();
     },
 
-    '/admin/content/update/headers' => sub {
-        my ( $pageheader, $lang, $page ) = param( 'pageheader', 'lang', 'page' );
-        unless (defined $pageheader) {
-            back();
-            die;
-        };
-        $page =~ s/^content://;
+    '/admin/content/headers/update' => sub {
+        my ( $body, $lang, $page ) = param( 'body', 'lang', 'page' );
 
         sql("UPDATE base_content SET content_title=? WHERE content_page=? AND lang=?", 
-                $pageheader, $page, $lang );
+                $body, $page, $lang );
 
         $main::t->renew_content( 'content', $page );
         

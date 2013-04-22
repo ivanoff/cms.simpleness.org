@@ -3,6 +3,13 @@
 use strict;
 use MAIN;
 
+defaults { 
+    templates_only => 1, 
+    current_date   => sub{ 
+                        my @d = localtime(time); $d[5]+=1900; $d[4]++; 
+                        map {$_='0'.$_ if $_<10;} @d; return "$d[5]-$d[4]-$d[3]"; },
+};
+
 you_cannot 'edit_content' or
 
 {
@@ -18,7 +25,7 @@ you_cannot 'edit_content' or
 
             return redirect2('news');
         }
-        process( 'admin/news_add.tpl' );
+        process( 'admin/news/add.tpl' );
     },
 
     '/admin/news/edit/(\d+)' => sub {
@@ -33,6 +40,28 @@ you_cannot 'edit_content' or
             return redirect2('news');
         }
         process('admin/news_add.tpl', { news_id=>$news_id, n=>$n } );
+    },
+
+    '/admin/news/(\d+)/update' => sub {
+        my $news_key = $1;
+        $_ = param('body');
+        if(param('page') eq 'date') {
+            sql ( "UPDATE base_news SET news_date=? WHERE news_key=?", $_ , $news_key);
+        } else {
+            if ( is_default_lang ) {
+                sql( "DELETE FROM base_news WHERE news_key=? AND lang!=?", $news_key, lang);
+            }
+            if(param('page') eq 'header') {
+                s/\<.*?\>//g;
+                sql ( "UPDATE base_news SET news_name=? WHERE news_key=? AND lang=?", 
+                        $_ , $news_key, lang);
+            }
+            if(param('page') eq 'body') {
+                sql ( "UPDATE base_news SET news_body=? WHERE news_key=? AND lang=?", 
+                        $_, $news_key, lang);
+            }
+            $main::t->renew_content('news', $news_key);
+        };
     },
 
     '/admin/news/delete/(\d+)' => sub {

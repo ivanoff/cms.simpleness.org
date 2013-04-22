@@ -1,59 +1,54 @@
 {
 	''	=> ' ',
 	'&nbsp;'	=> '&nbsp;',
-	'0038-066-938-1344'	=> '0038-066-938-1344',
-	'2@ivanoff.org.ua'	=> '2@ivanoff.org.ua',
-	'contact me'	=> 'با من تماس بگ&#1740;ر&#1740;د',
-	'Contact Us'	=> 'تماس با ما',
-	'Description is prepared.'	=> 'توض&#1740;حات آماده شده است.',
+	'&nbsp;(c) 2010-2012,'	=> '&nbsp;(c) 2010-2012,',
+	'(c) 2010-2012,'	=> '(ج) 2010-2012،',
+	'ab'	=> 'از',
+	'abc'	=> 'الفبا',
+	'abcddekknneeee ddh'	=> 'abcddekknneeee ddh',
+	'Attention!'	=> 'توجه!',
+	'c'	=> 'ج',
+	'd'	=> 'د',
+	'dd'	=> 'محل تولد',
+	'dddd'	=> 'DDDD',
+	'ddddnjh'	=> 'ddddnjh',
+	'dddh'	=> 'DDH',
+	'ddh'	=> 'DDH',
+	'ddhh'	=> 'ddhh',
 	'Download'	=> 'دانلود',
-	'e-mail:'	=> 'پست الکترون&#1740;ک:',
-	'Feedback'	=> 'باز خورد',
-	'Find out more'	=> '&#1740;افتن پست ها&#1740; ب&#1740;شتر',
-	'First of all, Simpleness...'	=> 'اول از همه، سادگ&#1740; ...',
+	'Download Simpleness CMS (v.0.3.0923, .tar.gz, 1,0 Mb)'	=> 'دانلود س&#1740;ستم مد&#1740;ر&#1740;ت محتوا&#1740; سادگ&#1740; (v.0.3.0923. ها&#1740; tar.gz، 1،0 MB)',
+	'Download. Simpleness CMS'	=> 'دانلود کن&#1740;د. سادگ&#1740; س&#1740;ستم مد&#1740;ر&#1740;ت محتوا',
+	'e'	=> 'و',
+	'ee'	=> 'EE',
+	'eee'	=> 'EEE',
+	'eeee'	=> 'eeee',
+	'ekk'	=> 'OLS',
+	'ekkeeee'	=> 'ekkeeee',
+	'ekknn'	=> 'ب&#1740;وه',
+	'ekknne'	=> 'ekknne',
+	'ekknneeeenn'	=> 'ekknneeeenn',
 	'Gallery'	=> 'گالر&#1740;',
-	'Home'	=> 'خانه',
 	'Home page'	=> 'صفحه اصل&#1740;',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'تشک&#1740;ل &#1740;ک کشور پادشاه&#1740; هلند، عمدتا در شمال غرب اروپا و برخ&#1740; از جزا&#1740;ر کارائ&#1740;ب واقع شده است.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'تشک&#1740;ل &#1740;ک کشور پادشاه&#1740; هلند، عمدتا در شمال غرب اروپا و برخ&#1740; از جزا&#1740;ر کارائ&#1740;ب واقع شده است. تشک&#1740;ل &#1740;ک کشور پادشاه&#1740; هلند، واقع<br>عمدتا در شمال غرب اروپا و برخ&#1740; از جزا&#1740;ر کارائ&#1740;ب.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean. is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'تشک&#1740;ل &#1740;ک کشور پادشاه&#1740; هلند، عمدتا در شمال غرب اروپا و برخ&#1740; از جزا&#1740;ر کارائ&#1740;ب واقع شده است. تشک&#1740;ل &#1740;ک کشور پادشاه&#1740; هلند، واقع<br>عمدتا در شمال غرب اروپا و برخ&#1740; از جزا&#1740;ر کارائ&#1740;ب.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the entirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> '&#1740;ک جمهور&#1740; پارلمان&#1740; واحد در جنوب مرکز&#1740; اروپا است. به<br>در شمال، فرانسه، سوئ&#1740;س، اتر&#1740;ش و اسلوون&#1740; در امتداد مرز<br>رشته کوه ها&#1740; آلپ. به جنوب، آن را از تمام ا&#1740;تال&#1740;ا&#1740;&#1740; شامل<br>شبه جز&#1740;ره، س&#1740;س&#1740;ل، ساردن&#1740;، دو تا از بزرگتر&#1740;ن جزا&#1740;ر در در&#1740;ا&#1740; مد&#1740;ترانه<br> در&#1740;ا و بس&#1740;ار&#1740; از د&#1740;گر جزا&#1740;ر کوچکتر است.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
+	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> '&#1740;ک کشور مستقل و عضو اتحاد&#1740;ه اروپا در شبه جز&#1740;ره ا&#1740;بر&#1740; واقع در جنوب غرب&#1740; اروپا است.',
 	'Italy'	=> 'ا&#1740;تال&#1740;ا',
-	'Last version - 0.3.0923 was released at September of 23. You can download this system from'	=> 'آخر&#1740;ن نسخه - 0.3.0923 در سپتامبر 23 منتشر شد. شما م&#1740; توان&#1740;د ا&#1740;ن س&#1740;ستم را از دانلود',
+	'kk'	=> 'KK',
+	'kkn'	=> 'kkn',
+	'kknne'	=> 'kknne',
+	'kknneeee ddh'	=> 'kknneeee ddh',
+	'ne'	=> 'فقط',
+	'New repository on GitHub'	=> 'مخزن جد&#1740;د در GitHub',
+	'New version 0.3.0923 is available'	=> 'نسخه جد&#1740;د 0.3.0923 در دسترس است',
+	'New version 0.3.0923 is available. You can download it here:'	=> 'نسخه جد&#1740;د 0.3.0923 در دسترس است. شما م&#1740; توان&#1740;د آن را از ا&#1740;نجا دانلود کن&#1740;د:',
+	'New version 0.3.0923 is&nbsp; available'	=> 'نسخه جد&#1740;د 0.3.0923',
+	'New version&nbsp; 0.3.0923 is available'	=> 'نسخه جد&#1740;د',
 	'News'	=> 'اخبار',
-	'phone:'	=> 'تلفن:',
-	'Simpleness CMS - is an open-source Perl CMS system.'	=> 'سادگ&#1740; CMS - س&#1740;ستم CMS کد منبع باز پرل است.',
-	'Simpleness CMS - simple and free CMS system'	=> 'سادگ&#1740; CMS - س&#1740;ستم ساده و را&#1740;گان CMS',
+	'nn'	=> 'NN',
+	'nne'	=> 'شرق و جنوب شرق',
+	'Simpleness CMS'	=> 'سادگ&#1740; س&#1740;ستم مد&#1740;ر&#1740;ت محتوا',
+	'Simpleness CMS on GitHub'	=> 'سادگ&#1740; س&#1740;ستم مد&#1740;ر&#1740;ت محتوا بر رو&#1740; GitHub',
+	'Simpleness CMS system is under development. I adjust it at my leisure. All files are posted for review only. But it is working system - so, you can try it ;)'	=> 'سادگ&#1740; س&#1740;ستم مد&#1740;ر&#1740;ت محتوا س&#1740;ستم تحت توسعه است. من آن را در اوقات فراغت من را تنظ&#1740;م کن&#1740;د. همه فا&#1740;ل ها تنها بررس&#1740; شده است. اما آن است که کار س&#1740;ستم - بنابرا&#1740;ن، شما م&#1740; توان&#1740;د آن را امتحان کن&#1740;د ؛)',
+	'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'	=> 'سادگ&#1740; س&#1740;ستم مد&#1740;ر&#1740;ت محتوا',
+	'Simpleness&nbsp; CMS'	=> 'سادگ&#1740;',
 	'Spain'	=> 'کشور اسپان&#1740;ا',
-	'The basic principle of the system - the simpler, the better.'	=> 'اصل اساس&#1740; در س&#1740;ستم - ساده تر، بهتر.',
 	'The Netherlands'	=> 'هلند',
-	'The NetherlandsItaly'	=> 'NetherlandsItaly',
-	'this page'	=> 'ا&#1740;ن صفحه',
-	'To-do list'	=> 'به فهرست کارها&#1740; روزانه',
-	'Waiting for your comments about idea and code. If you wish to participate in development - please'	=> 'در انتظار نظرات خود را در مورد ا&#1740;ده ها و کد. اگر شما ما&#1740;ل به شرکت در حال توسعه - لطفا',
-	'{contacts/index}'	=> '{contacts/index}',
 };

@@ -1,43 +1,49 @@
 {
 	''	=> ' ',
-	'Contact Us'	=> 'Связаться с Нами',
+	'&nbsp;(c) 2010-2012,'	=> '&nbsp;(c) 2010-2012,',
+	'(c) 2010-2012,'	=> '(C) 2010-2012,',
+	'ab'	=> 'от',
+	'abc'	=> 'азбука',
+	'abcddekknneeee ddh'	=> 'abcddekknneeee ddh',
+	'c'	=> 'C',
+	'd'	=> 'ре',
+	'dd'	=> 'дд',
+	'dddd'	=> 'DDDD',
+	'ddddnjh'	=> 'ddddnjh',
+	'dddh'	=> 'DDH',
+	'ddekknneeee ddh'	=> 'ddekknneeee ddh',
+	'ddh'	=> 'DDH',
+	'ddhh'	=> 'ddhh',
 	'Download'	=> 'Скачать',
-	'Download3'	=> 'Download3',
+	'e'	=> 'и',
+	'ee'	=> 'EE',
+	'eee'	=> 'еее',
+	'eeee'	=> 'ээээ',
+	'ekk'	=> 'МНК',
+	'ekkeeee'	=> 'ekkeeee',
+	'ekknn'	=> 'Вдова',
+	'ekknne'	=> 'ekknne',
+	'ekknneeeenn'	=> 'ekknneeeenn',
 	'Gallery'	=> 'Галерея',
-	'Home'	=> 'Дома',
 	'Home page'	=> 'Главная страница',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.'	=> 'является составной страна Королевства Нидерландов, расположенные в основном в Северо-Западной Европе и некоторых островов в Карибском море.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean.	is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'является составной страна Королевства Нидерландов, расположенные в основном в Северо-Западной Европе и некоторых островов в Карибском море. является составной страна Королевства Нидерландов, расположенных<br>в основном в Северо-Западной Европе и некоторых островов в Карибском море.',
-	'is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with some islands in the Caribbean. is a constituent country of the Kingdom of the Netherlands, located 
-mainly in North-West Europe and with some islands in the Caribbean.'	=> 'является составной страна Королевства Нидерландов, расположенные в основном в Северо-Западной Европе и некоторых островов в Карибском море. является составной страна Королевства Нидерландов, расположенных<br>в основном в Северо-Западной Европе и некоторых островов в Карибском море.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the ejghguntirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the entirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'является унитарным парламентской республики в Южной и Центральной Европе. Для<br>севере она граничит Франции, Швейцарии, Австрии и Словении по<br>Альпы. На юге она состоит из совокупности итальянского<br>Полуострова, Сицилии, Сардинии, двух крупнейших островов в Средиземном море<br> Морской и много других мелких островов.',
-	'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.'	=> 'is a unitary parliamentary republic in South-Central Europe. To the 
-north, it borders France, Switzerland, Austria, and Slovenia along the 
-Alps. To the south, it consists of the untirety of the Italian 
-Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
- Sea–and many other smaller islands.',
-	'Italy'	=> 'Италия',
+	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'является суверенным государством и членом Европейского Союза на юго-западе Европы, на Пиренейском полуострове.',
+	'kk'	=> 'кк',
+	'kkn'	=> 'KKN',
+	'kknne'	=> 'kknne',
+	'kknneeee ddh'	=> 'kknneeee ddh',
+	'n'	=> 'N',
+	'ne'	=> 'только',
+	'New repository on GitHub'	=> 'Новый репозиторий на GitHub',
+	'New version 0.3.0923 is available'	=> 'Новая версия 0.3.0923 доступно',
+	'New version 0.3.0923 is available. You can download it here:'	=> 'Новая версия 0.3.0923 доступно. Вы можете скачать его здесь:',
+	'New version 0.3.0923 is&nbsp; available'	=> 'Новая версия 0.3.0923 является',
+	'New version&nbsp; 0.3.0923 is available'	=> 'Новая версия',
 	'News'	=> 'Новости',
+	'nn'	=> 'Н.Н.',
+	'nne'	=> 'ССВ',
+	'Simpleness CMS'	=> 'Простота CMS',
+	'Simpleness CMS on GitHub'	=> 'Простота CMS на GitHub',
+	'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'	=> 'Простота CMS',
+	'Simpleness&nbsp; CMS'	=> 'Простота',
 	'Spain'	=> 'Испания',
-	'The Netherlands'	=> 'Нидерланды',
-	'The NetherlandsItaly'	=> 'NetherlandsItaly',
-	'To-do list'	=> 'Список дел',
 };

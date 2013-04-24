@@ -51,6 +51,7 @@
 	'Simpleness CMS on GitHub'	=> 'Simpleness CMS på GitHub',
 	'Simpleness CMS system is under development. I adjust it at my leisure. All files are posted for review only. But it is working system - so, you can try it ;)'	=> 'Simpleness CMS system er under udvikling. Jeg justere det på min fritid. Alle filer er udstationeret til gennemgang alene. Men det arbejder systemet - så kan du prøve det ;)',
 	'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'	=> 'Simpleness CMS',
+	'Simpleness&nbsp; CMS'	=> 'Simpleness',
 	'Spain'	=> 'Spanien',
 	'The basic principle of the system - the simpler, the better.'	=> 'Det grundlæggende princip i system - enklere, jo bedre.',
 	'The Netherlands'	=> 'Holland',

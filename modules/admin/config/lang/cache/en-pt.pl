@@ -192,6 +192,7 @@
 	'Simpleness CMS on GitHub'	=> 'Simplicidade CMS no GitHub',
 	'Simpleness CMS system is under development. I adjust it at my leisure. All files are posted for review only. But it is working system - so, you can try it ;)'	=> 'Simplicidade do sistema CMS está em desenvolvimento. Eu ajustá-lo em meu lazer. Todos os arquivos são postados apenas para avaliação. Mas é sistema de trabalho - assim, você pode experimentá-lo ;)',
 	'Simpleness CMS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'	=> 'Simplicidade CMS',
+	'Simpleness&nbsp; CMS'	=> 'Simplicidade',
 	'simpleness.org'	=> ' ',
 	'Site Manager'	=> ' ',
 	'sold'	=> ' ',

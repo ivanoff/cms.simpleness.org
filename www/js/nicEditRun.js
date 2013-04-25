@@ -1,5 +1,6 @@
     var myNicEditor, myNicEditor_plain;
     var content_current_page = new Object();
+    var cid;
 
     var is_silent = function ( what ) {
         return ( $("div[id*='"+what+"'].silent").attr('id') );
@@ -21,6 +22,15 @@
 	    what_hash = { 'page' : a[1], 'body' : what };
         }
 
+        $.each(what_hash, function(key, value) {
+            if ( is_silent( where+'?'+key ) && !info ) return false;
+            if ( value == "<br>" ) value='';
+            what_hash[key] = value;
+        });
+        what_hash["_SESSION_ID"] = session;
+        what_hash["lang"] = lang;
+        $.post( where, what_hash );
+/*
 	var fd = new FormData();
 	fd.append("_SESSION_ID", session);
 	fd.append("lang", lang);
@@ -32,7 +42,7 @@
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", where);
 	xhr.send(fd);
-
+*/
         show_info( (info)? info : "content saved" );
         
         return true;
@@ -40,6 +50,7 @@
     };
 
     $('.editable').live('focusin', function() { 
+	cid = $(this).attr('id');
         $(this).bind("focusout", function() { 
 	    save_text( $(this).attr('id'), $(this).html() );
         });

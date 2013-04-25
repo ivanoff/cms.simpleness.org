@@ -879,7 +879,8 @@ var nicEditorPane = bkClass.extend({
 		this.elm = elm;
 		this.pos = elm.pos();
 		
-		this.contain = new bkElement('div').setStyle({zIndex : '99999', overflow : 'hidden', position : 'fixed', left : this.pos[0]+'px', top : this.pos[1]+'px'})
+		this.contain = new bkElement('div').setStyle({zIndex : '99999', overflow : 'hidden', position : 'fixed', left : this.pos[0]+'px', top : this.pos[1]+'px'});
+                this.contain.className = 'additional_window';
 		this.pane = new bkElement('div').setStyle({fontSize : '12px', border : '1px solid #ccc', 'overflow': 'hidden', padding : '4px', textAlign: 'left', backgroundColor : '#ffffc9'}).addClass('pane').setStyle(options).appendTo(this.contain);
 		
 		if(openButton && !openButton.options.noClose) {
@@ -887,8 +888,8 @@ var nicEditorPane = bkClass.extend({
 		}
 		
 		this.contain.noSelect().appendTo(document.body);
-		
-		this.position();
+//comment 'cause ie		
+//		this.position();
 		this.init();	
 	},
 	
@@ -1366,7 +1367,6 @@ var nicUploadOptions = {
 };
 /* END CONFIG */
 
-if(typeof window.FormData != "undefined") {
 
 var nicUploadButton = nicEditorAdvancedButton.extend({	
     nicURI : '/admin/images/upload',
@@ -1379,15 +1379,9 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
 
         new bkElement('div')
         .setStyle({ fontSize: '14px', fontWeight : 'bold', paddingBottom: '5px' })
-//        .setContent('<body><p id="f1_upload_process" style="position:absolute;visibility:hidden;">Loading...<br/><img src="/images/btn_loading.gif" /></p><p id="result"></p><form action="'+(this.ne.options.uploadURI || this.nicURI)+'" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="this.startUpload();" >File: <input name="image" type="file" /><input type="submit" name="submitBtn" value="Upload" /></form><iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe></body>')
-        .setContent('<body><p id="f1_upload_process" style="position:absolute;visibility:hidden;">Loading...<br/><img src="/images/btn_loading.gif" /></p><p id="result"></p><p id="upload_form"><form action="/admin/i" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="startUpload();" >File: <input name="image" type="file" /><input type="submit" name="submitBtn" value="Upload" /></p></form><iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe></body>')
+        .setContent('<body><p id="f1_upload_process" style="position:absolute;visibility:hidden;">Loading...<br/><img src="/images/btn_loading.gif" /></p><p id="result"></p><p id="upload_form"><form action="'+(this.ne.options.uploadURI || this.nicURI)+'" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="startUpload();" >File: <input name="image" type="file" /><input type="submit" name="submitBtn" value="Upload" /></p></form><iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe></body>')
         .appendTo(container);
-    },
-
-  onError : function() {
-    this.removePane();
-  }
-
+    }
 
 });
   
@@ -1395,111 +1389,23 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
         document.getElementById('upload_form').style.visibility = 'hidden';
         document.getElementById('f1_upload_process').style.visibility = 'visible';
         return true;
-    }
+    };
 
-    function stopUpload(success){
+    function stopUpload(success,text){
         show_info( (success == 1)? "The image was uploaded successfully!" : "There was an error during image upload!" );
-        nicUploadButton.onError();
+        $('.additional_window').hide();
+alert(text);
+/*
+    var editor = nicEditors.findEditor(cid);
+    var range = editor.getRng();                    
+    var editorField = editor.selElm();
+    editorField.nodeValue = editorField.nodeValue.substring(0, range.startOffset) +
+                            value +
+                            editorField.nodeValue.substring(range.endOffset, editorField.nodeValue.length);
+*/
         return true;
-    }
+    };
 
-} else {
-
-var nicUploadButton = nicEditorAdvancedButton.extend({	
-    nicURI : '/admin/images/upload',
-    errorText : 'Failed to upload image',
-
-  addPane : function() {
-
-    this.im = this.ne.selectedInstance.selElm().parentTag('IMG');
-
-    var container = new bkElement('div')
-      .setStyle({ padding: '10px' })
-      .appendTo(this.pane.pane);
-
-		new bkElement('div')
-      .setStyle({ fontSize: '14px', fontWeight : 'bold', paddingBottom: '5px' })
-      .setContent('Insert an Image')
-      .appendTo(container);
-
-    this.fileInput = new bkElement('input')
-      .setAttributes({ 'type' : 'file' })
-      .appendTo(container);
-
-    this.progress = new bkElement('progress')
-      .setStyle({ width : '100%', display: 'none' })
-      .setAttributes('max', 100)
-      .appendTo(container);
-
-    this.fileInput.onchange = this.uploadFile.closure(this);
-  },
-
-  onError : function(msg) {
-    this.removePane();
-    alert(msg || "Failed to upload image");
-  },
-
-  uploadFile : function() {
-    var file = this.fileInput.files[0];
-    if (!file || !file.type.match(/image.*/)) {
-      this.onError("Only image files can be uploaded");
-      return;
-    }
-    this.fileInput.setStyle({ display: 'none' });
-    this.setProgress(0);
-
-    var fd = new FormData(); // https://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/
-    fd.append("_SESSION_ID", session);
-    fd.append("lang", lang);
-    fd.append("image", file);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", this.ne.options.uploadURI || this.nicURI);
-
-    xhr.onload = function() {
-      try {
-        var res = JSON.parse(xhr.responseText);
-      } catch(e) {
-        return this.onError();
-      }
-      this.onUploaded(res.upload);
-    }.closure(this);
-    xhr.onerror = this.onError.closure(this);
-    xhr.upload.onprogress = function(e) {
-      this.setProgress(e.loaded / e.total);
-    }.closure(this);
-    xhr.send(fd);
-  },
-
-  setProgress : function(percent) {
-    this.progress.setStyle({ display: 'block' });
-    if(percent < .98) {
-      this.progress.value = percent;
-    } else {
-      this.progress.removeAttribute('value');
-    }
-  },
-
-  onUploaded : function(options) {
-    this.removePane();
-    var src = options.links.original;
-    if(!this.im) {
-      this.ne.selectedInstance.restoreRng();
-      var tmp = 'javascript:nicImTemp();';
-      this.ne.nicCommand("insertImage", src);
-      this.im = this.findElm('IMG','src', src);
-    }
-    var w = parseInt(this.ne.selectedInstance.elm.getStyle('width'));
-    if(this.im) {
-      this.im.setAttributes({
-        src : src,
-        width : (w && options.image.width) ? Math.min(w, options.image.width) : ''
-      });
-    }
-  }
-
-});
-
-}
 
 nicEditors.registerPlugin(nicPlugin,nicUploadOptions);
 

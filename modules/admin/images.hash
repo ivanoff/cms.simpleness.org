@@ -10,7 +10,7 @@ you_cannot 'manage_gallery' or
     '/admin/images/browse' => sub {
         header 'clear';
         return process('admin/images/browse.tpl', {
-                                fl=>[<$path/*.*>],
+                                fl=>[<path/*.*>],
                                 num=>$main::q->url_param('CKEditorFuncNum'),
                                 path=>images('PATH'),
                             } );
@@ -28,9 +28,11 @@ you_cannot 'manage_gallery' or
     '/admin/images/upload' => sub {
         my $upfile = param('image');
         binmode($upfile);
-        open F, '>', images('PATH').'/'.param->{image};
+        open F, '>', images('PATH').'/'.param('image');
         print F $_ while <$upfile>;
         close F;
+        header 'html';
+        return '<script language="javascript" type="text/javascript">window.top.window.stopUpload(1,"'+param('image')+'");</script>';
         header 'json';
         return process( 'admin/images/upload.tpl', { path=>images('PATH'), } );
     },

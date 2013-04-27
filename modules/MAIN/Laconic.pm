@@ -31,7 +31,7 @@ sub title {
 sub header {
     my ( $_, $params ) = @_;
     $params->{charset} ||= 'utf-8';
-    /html/ && do {$main::header = "Content-type: text/html; charset=$params->{charset};"};
+    /html|clear/ && do {$main::header = "Content-type: text/html; charset=$params->{charset};"};
     /xml/ && do {$main::header = "Content-type: text/xml; charset=$params->{charset};"};
     /json/ && do {$main::header = "Content-type: application/json; charset=$params->{charset};"};
     /gif/ && do {$main::header = "Content-type: image/gif;"};

@@ -1,6 +1,7 @@
     var myNicEditor, myNicEditor_plain;
     var content_current_page = new Object();
     var cid;
+    var saved_onreload=0;
 
     var is_silent = function ( what ) {
         return ( $("div[id*='"+what+"'].silent").attr('id') );
@@ -16,8 +17,8 @@
         } else {
             if ( is_silent(where) && !info ) return false;
 	    var a = where.split("?");
-            if( content_current_page[where] == a[1] ) return false;
-            content_current_page[where] = a[1];
+            if( content_current_page[where] == what ) return false;
+            content_current_page[where] = what;
 	    where = ( a[0]!='' )? a[0] : '/admin/content/update';
 	    what_hash = { 'page' : a[1], 'body' : what };
         }
@@ -52,12 +53,18 @@
     $('.editable').live('focusin', function() { 
 	cid = $(this).attr('id');
         $(this).bind("focusout", function() { 
-	    save_text( $(this).attr('id'), $(this).html() );
+            if ( saved_onreload != 1 ) {
+                saved_onreload = 1;
+	        save_text( $(this).attr('id'), $(this).html() );
+	    }
         });
         $(this).keydown(function(e) {
             if ( (e.ctrlKey && e.which == 82) || e.which == 116) {
-	        save_text( $(this).attr('id'), $(this).html() );
-	        alert('content has been saved');
+                if ( saved_onreload != 1 ) {
+                    saved_onreload = 1;
+	            save_text( $(this).attr('id'), $(this).html() );
+	            alert('content has been saved');
+	        }
             }
         });
     });

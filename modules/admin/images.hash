@@ -26,15 +26,24 @@ you_cannot 'manage_gallery' or
     },
 
     '/admin/images/upload' => sub {
-        my $upfile = param('image');
-        binmode($upfile);
-        open F, '>', images('PATH').'/'.param('image');
-        print F $_ while <$upfile>;
+
+        header ( 'clear', { no_cache => 1 } );
+
+        my ($file, $upload_size, $upload_align) = param( 'image', 'upload_size', 'upload_align' );
+        $upload_align = '' unless $upload_align =~ /^left|center|right$/;
+        return 0 unless -f $file;
+        binmode($file);
+        open F, '>', images('PATH').'/'.$file;
+        print F $_ while <$file>;
         close F;
-        header 'html';
-        return '<script language="javascript" type="text/javascript">window.top.window.stopUpload(1,"'+param('image')+'");</script>';
-        header 'json';
-        return process( 'admin/images/upload.tpl', { path=>images('PATH'), } );
+
+        foreach my $size ( @{images('SIZE')} ) {
+            make_path(images('PATH').'/'.$size);
+            resize ( images('PATH').'/'.$file, images('PATH').'/'.$size.'/'.$file, split( 'x', $size ) );
+        }
+
+        return process( 'admin/images/upload.tpl', { file=>$file, size=>$upload_size, 
+                                        align=>$upload_align, path=>images('PATH'), } );
     },
 
 };

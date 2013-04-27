@@ -43,6 +43,7 @@
 	    var title = "[% title %]"; 
 	    var page = "?[% uri %]"; 
 	    var uri = "[% uri %]"; 
+	    var image_sizes = [ 'full size', '[% config_images.SIZE.join("','") %]' ];
 	</script>
 	<script src="/js/nicEdit.js" type="text/javascript"></script>
 	<script src="/js/nicEditRun.js" type="text/javascript"></script>

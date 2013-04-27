@@ -889,7 +889,7 @@ var nicEditorPane = bkClass.extend({
 		
 		this.contain.noSelect().appendTo(document.body);
 //comment 'cause ie		
-//		this.position();
+		this.position();
 		this.init();	
 	},
 	
@@ -899,7 +899,7 @@ var nicEditorPane = bkClass.extend({
 		if(this.ne.nicPanel) {
 			var panelElm = this.ne.nicPanel.elm;	
 			var panelPos = panelElm.pos();
-			var newLeft = panelPos[0]+parseInt(panelElm.getStyle('width'))-(parseInt(this.pane.getStyle('width'))+8);
+			var newLeft = panelPos[0]+( panelElm.clientWidth || parseInt(panelElm.getStyle('width')))-(parseInt(this.pane.getStyle('width'))+8);
 			if(newLeft < this.pos[0]) {
 				this.contain.setStyle({left : newLeft+'px'});
 			}
@@ -1379,30 +1379,47 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
 
         new bkElement('div')
         .setStyle({ fontSize: '14px', fontWeight : 'bold', paddingBottom: '5px' })
-        .setContent('<body><p id="f1_upload_process" style="position:absolute;visibility:hidden;">Loading...<br/><img src="/images/btn_loading.gif" /></p><p id="result"></p><p id="upload_form"><form action="'+(this.ne.options.uploadURI || this.nicURI)+'" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="startUpload();" >File: <input name="image" type="file" /><input type="submit" name="submitBtn" value="Upload" /></p></form><iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe></body>')
+        .setContent('<body><p id="f1_upload_process" style="position:absolute;">Loading...<br/><img src="/images/btn_loading.gif" /></p><p id="result"></p><span id="upload_form"><form action="'+(this.ne.options.uploadURI || this.nicURI)+'" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="startUpload();" >Image file: <input name="image" type="file" /><br /><select name="upload_size" id="upload_size"></select><select name="upload_align" id="upload_align"></select><input type="submit" name="submitBtn" value="Upload" /></form></span><iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe></body>')
         .appendTo(container);
+
+        $.each([ 'left', 'center', 'right' ], function(key,value) {
+            $('#upload_align')
+                .append($("<option></option>")
+                .attr("value",value)
+                .text(value));
+        });
+
+        $.each(image_sizes, function(key,value) {   
+            $('#upload_size')
+                .append($("<option></option>")
+                .attr("value",value)
+                .text(value)); 
+        });
+
+        $('#f1_upload_process').hide();
+
     }
 
 });
   
     function startUpload() {
-        document.getElementById('upload_form').style.visibility = 'hidden';
-        document.getElementById('f1_upload_process').style.visibility = 'visible';
+        $('#upload_form').hide();
+        $('#f1_upload_process').show();
         return true;
     };
 
-    function stopUpload(success,text){
-        show_info( (success == 1)? "The image was uploaded successfully!" : "There was an error during image upload!" );
+    function stopUpload( success, text, align ){
+        if (success == 0) {
+            show_info( "There was an error during image upload!" );
+            return false;
+        }
+
         $('.additional_window').hide();
-alert(text);
-/*
-    var editor = nicEditors.findEditor(cid);
-    var range = editor.getRng();                    
-    var editorField = editor.selElm();
-    editorField.nodeValue = editorField.nodeValue.substring(0, range.startOffset) +
-                            value +
-                            editorField.nodeValue.substring(range.endOffset, editorField.nodeValue.length);
-*/
+        var editor = nicEditors.findEditor(cid);
+        text = '<img align="'+align+'" src="' + text + '">';
+        editor.nicCommand("insertHTML",text);
+	save_text(cid, editor.getContent(), "The image was uploaded successfully");
+
         return true;
     };
 

@@ -20,6 +20,7 @@ you_cannot 'manage_gallery' or
     '/admin/content/update' => sub {
         my ( $body, $lang, $page ) = param( 'body', 'lang', 'page' );
         $page =~ s/^content://;
+        $body =~ s/^[\r\n]+//;
 
         cache_delete( $page );
 #        if ( $page =~ /^_/ ) {};

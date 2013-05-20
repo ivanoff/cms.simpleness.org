@@ -8,12 +8,12 @@ you_cannot 'manage_gallery' or
 {
 
     '/admin/images/browse' => sub {
+        my $path = images('PATH').'/'.images('SIZE')->[0].'/';
         header 'clear';
-        return process('admin/images/browse.tpl', {
-                                fl=>[<path/*.*>],
-                                num=>$main::q->url_param('CKEditorFuncNum'),
-                                path=>images('PATH'),
-                            } );
+        process('admin/images/browse.tpl', {
+                        fl=>[<$path/*.*>],
+                        path=>images('PATH'),
+                    } );
     },
 
     '/admin/images/delete/(.*)' => sub {
@@ -33,16 +33,17 @@ you_cannot 'manage_gallery' or
         $upload_align = '' unless $upload_align =~ /^left|center|right$/;
         return 0 unless -f $file;
         binmode($file);
-        open F, '>', images('PATH').'/'.$file;
+        (my $new_file = $file) =~ s/.*[\\\/]//;
+        open F, '>', images('PATH').'/'.$new_file;
         print F $_ while <$file>;
         close F;
 
         foreach my $size ( @{images('SIZE')} ) {
             make_path(images('PATH').'/'.$size);
-            resize ( images('PATH').'/'.$file, images('PATH').'/'.$size.'/'.$file, split( 'x', $size ) );
+            resize ( images('PATH').'/'.$new_file, images('PATH').'/'.$size.'/'.$new_file, split( 'x', $size ) );
         }
 
-        return process( 'admin/images/upload.tpl', { file=>$file, size=>$upload_size, 
+        return process( 'admin/images/upload.tpl', { file=>$new_file, size=>$upload_size, 
                                         align=>$upload_align, path=>images('PATH'), } );
     },
 

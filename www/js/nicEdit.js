@@ -964,7 +964,9 @@ var nicEditorAdvancedButton = nicEditorButton.extend({
 			}
 			var type = f[itm].type;
 			
-			if(type == 'title') {
+			if(type == 'div') {
+					new bkElement('div').setContent(field.txt).appendTo(this.form);
+			} else if(type == 'title') {
 					new bkElement('div').setContent(field.txt).setStyle({fontSize : '14px', fontWeight: 'bold', padding : '0px', margin : '2px 0'}).appendTo(this.form);
 			} else {
 				var contain = new bkElement('div').setStyle({overflow : 'hidden', clear : 'both'}).appendTo(this.form);
@@ -1295,15 +1297,37 @@ var nicImageOptions = {
 /* END CONFIG */
 
 var nicImageButton = nicEditorAdvancedButton.extend({	
+	width : '550px',
 	addPane : function() {
+/*
+		this.pane = new nicEditorPane(this.contain,this.ne,{width : (this.width || '270px'), backgroundColor : '#fff'},this);
+		var itmContain = new bkElement('div').setStyle({textAlign : 'left'});
+		this.form = new bkElement('form').setAttributes({id : 'SEOform'}).addEvent('submit',this.submit.closureListener(this));
+		new bkElement('div').setContent('Title:').setStyle({fontSize : '14px', fontWeight: 'bold', padding : '0px', margin : '2px 0'}).appendTo(this.form);
+		this.title_val = new bkElement('input').setAttributes({id : 'title', 'value' : this.ne.options.pageheader, 'type' : 'text'}).setStyle({margin : '2px 0', fontSize : '13px', 'float' : 'left', width : '500px', height : '20px', border : '1px solid #ccc', overflow : 'hidden'}).appendTo(this.form);
+		new bkElement('input').setAttributes({'type' : 'submit'}).setStyle({backgroundColor : '#efefef',border : '1px solid #ccc', margin : '3px 0', 'float' : 'left', 'clear' : 'both'}).appendTo(this.form);
+		this.form.onsubmit = bkLib.cancelEvent;	
+		this.form.appendTo(itmContain);
+		this.pane.append(itmContain);
+*/
+
+//		this.pane = new nicEditorPane(this.contain,this.ne,{width : (this.width || '460px'), backgroundColor : '#fff'},this);
 		this.im = this.ne.selectedInstance.selElm().parentTag('IMG');
+
 		this.addForm({
 			'' : {type : 'title', txt : 'Add/Edit Image'},
-			'src' : {type : 'text', txt : 'URL', 'value' : 'http://', style : {width: '150px'}},
-			'alt' : {type : 'text', txt : 'Alt Text', style : {width: '100px'}},
-			'align' : {type : 'select', txt : 'Align', options : {none : 'Default','left' : 'Left', 'right' : 'Right'}}
+			'src' : {type : 'text', txt : 'URL', 'value' : 'http://', style : {width: '250px'}},
+			'alt' : {type : 'text', txt : 'Alt Text', style : {width: '250px'}},
+			'align' : {type : 'select', txt : 'Align', options : {none : 'Default','left' : 'Left', 'right' : 'Right'}},
 		},this.im);
+
+		this.pane.append( new bkElement('div').setContent('<br /><br /><b>List of images</b><br /><iframe src="/admin/images/browse" width="455" height="400"></iframe>') );
 	},
+
+//	submit : function( ) {
+//            save_text( 'content/headers:' + this.ne.options.uri, this.title_val.value, 'Title modify done' );
+//	    this.pane.remove();
+//	}
 	
 	submit : function(e) {
 		var src = this.inputs['src'].value;
@@ -1329,7 +1353,6 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 });
 
 nicEditors.registerPlugin(nicPlugin,nicImageOptions);
-
 
 
 
@@ -1373,6 +1396,7 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
     errorText : 'Failed to upload image',
 
     addPane : function() {
+
         var container = new bkElement('div')
         .setStyle({ padding: '10px' })
         .appendTo(this.pane.pane);
@@ -1398,10 +1422,16 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
 
         $('#f1_upload_process').hide();
 
+var range = this.ne.getContent();                    
+alert(range);
+
+//alert( GetCaretPosition(cid) );
+//alert ( $("div[id*='"+cid+"']").html() );
+
     }
 
 });
-  
+
     function startUpload() {
         $('#upload_form').hide();
         $('#f1_upload_process').show();
@@ -1415,7 +1445,16 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
         }
 
         $('.additional_window').hide();
+//$("div[id*='"+cid+"']").insertAtCaret("<b>Some bold text</b>");
+//alert ( $("div[id*='"+cid+"']").html() );
+
         var editor = nicEditors.findEditor(cid);
+
+var range = editor.getRng();                    
+alert(range.startOffset);
+var editorField = editor.selElm();
+alert( editorField.nodeValue.substring(0, range.startOffset) );
+
         text = '<img align="'+align+'" src="' + text + '">';
         editor.nicCommand("insertHTML",text);
 	save_text(cid, editor.getContent(), "The image was uploaded successfully");

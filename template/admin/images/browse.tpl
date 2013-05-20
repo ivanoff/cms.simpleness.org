@@ -11,11 +11,11 @@
 	figure {
 	    background: #d9dabb;
     	    display: block;
-    	    width: 130px;
-    	    height: 130px;
+    	    width: 100px;
+    	    height: 120px;
     	    float: left;
-    	    margin: 0 10px 10px 0;
-    	    padding: 10px 0 0 0;
+    	    margin: 0 5px 5px 0;
+    	    padding: 5px 0 0 0;
     	    text-align: center;
         }
 	figure img {
@@ -29,7 +29,7 @@
 <article>
 [% FOREACH k IN fl %]
 <figure>
-    <a href="#" onclick="window.opener.CKEDITOR.tools.callFunction([% num %], '/[% k %]');window.close();return false;"><img height="80" width="100" src="/[% k %]"></a>
+    <a href="#" onclick="window.opener.CKEDITOR.tools.callFunction([% num %], '/[% k %]');window.close();return false;"><img height="80" width="80" src="/[% k %]"></a>
     <figcaption>
 	<a href="#" onclick="window.opener.CKEDITOR.tools.callFunction([% num %], '/[% k %]');window.close();return false;">select</a>
 	<a href="/admin/images/delete/[%k%]" class="delete">delete</a>

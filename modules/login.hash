@@ -92,10 +92,12 @@ my $r;
 
     '/login/change' => sub {
         if( param('password') ) {
+            $r = sql( "SELECT * FROM base_users WHERE MD5(user_login)=?", session( 'slogin' ) );
+            my $login = $r->[0]{user_login};
             $r = sql( "SELECT * FROM base_users WHERE user_login=? 
                         AND user_password=MD5(CONCAT(?,MD5(?),MD5(?)))", 
-                        param('login'), param('password_old'), param('login'), 
-                        param('password_old').param('login'));
+                        $login, param('password_old'), $login, 
+                        param('password_old').$login);
             if ( $r->[0] ) {
                 sql( "UPDATE base_users SET user_password=MD5(CONCAT(?,MD5(?),MD5(?))) WHERE user_login=?",
                         param('password'), $r->[0]{user_login}, 

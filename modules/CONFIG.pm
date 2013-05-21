@@ -32,7 +32,7 @@ our $CONFIG = {
 
 # Cache dirs section
 
-        cache              => 1,
+        cache              => 0,
         cache_time         => 259200,
         cache_dir          => '../tmp/cache',
 

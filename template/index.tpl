@@ -105,7 +105,7 @@
 <a href="#" id="print_button" onclick="print();return false;"><img src="/images/btn_print.gif" border="0" align="RIGHT"></a>
 [% END %]
 
-[% UNLESS templates_only %]
+[% UNLESS read_only %]
 <div id="?[% uri %]" class="editable">
 [% (access.edit_content)? content_edit : content %]
 </div>

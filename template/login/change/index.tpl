@@ -15,8 +15,6 @@ function validate(form) {
 <form method="post" enctype="multipart/form-data" onsubmit="return validate();">
 
 <br />
-[% t('Your login') %]: <br /><input type="text" name="login" required /><br />
-
 [% t('Your password') %]: <br /><input type="password" name="password_old" id="password_old" required /><br />
 
 [% t('Your new passsword') %]: <br /><input type="password" name="password" id="password" required /><br />

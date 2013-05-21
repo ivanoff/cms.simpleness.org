@@ -7,7 +7,7 @@ title t('News');
 
 my $r;
 defaults { 
-    templates_only => 1,
+    read_only => 1,
     month  => sub{ $_ = shift;
                     my @m = qw( January February March April May June
                              July August September October November December );

@@ -4,7 +4,7 @@ use strict;
 use MAIN;
 use TRANSLATE;
 
-defaults { templates_only => 1, };
+defaults { read_only => 1, };
 
 {
 

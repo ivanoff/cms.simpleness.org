@@ -1,12 +1,28 @@
 <h2>[% t('Content') %]</h2>
 
-
-[% FOREACH page IN content %]
-<div id="link-[% page.content_id %]">
-    [% page.lang %], <a href="#">[% page.content_page || '/' %]</a>
-    <div id="content-[% page.content_id %]"></div>
-</div>
+<table>
+<tr>
+    <td></td>
+[% FOREACH l IN config.languages.sort %]
+    <td align="center">
+        <img src="/images/flags/[% l %].gif"> 
+    </td>
 [% END %]
+</tr>
+[% FOREACH page IN pages %]
+<tr>
+    <td>[% page.content_page || '/' %]</td>
+    [% FOREACH l IN config.languages.sort %]
+    <td align="center">
+        <div id="link-[% content.${l}.${${page.content_page}} %]">
+        <a href="#">[% (content.${l}.${${page.content_page}})? 'v' : '' %]</a>
+        <div id="content-[% content.${l}.${${page.content_page}} %]"></div>
+        </div>
+    </td>
+    [% END %]
+</tr>
+[% END %]
+</table>
 
 <script type="text/javascript">
     $('#link-1615').click(function () {

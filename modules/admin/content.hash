@@ -3,13 +3,18 @@
 use strict;
 use MAIN;
 
+defaults { read_only => 1, };
+
 you_cannot 'manage_gallery' or
 
 {
 
     '/admin/content' => sub {
-        my @content = @{sql ( "SELECT * FROM base_content ORDER BY lang, content_page" )};
-        process('admin/content.tpl', { content=>\@content, } );
+        my @pages = @{sql ( "SELECT content_page FROM base_content GROUP BY content_page ORDER BY content_page" )};
+        my @content = @{sql ( "SELECT * FROM base_content" )};
+        my $content;
+        $content->{$_->{lang}}{$_->{content_page}} = $_->{content_id} foreach @content;
+        process('admin/content.tpl', { pages=>\@pages, content=>$content, } );
     },
 
     '/admin/content/(\d+)' => sub {

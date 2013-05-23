@@ -8,21 +8,24 @@ you_cannot 'manage_gallery' or
 {
 
     '/admin/images/browse' => sub {
-        my $path = images('PATH').'/'.images('SIZE')->[0].'/';
-        header 'clear';
+        header( 'clear', { no_cache => 1 } );
+        my $files = [ glob images('PATH').'/'.images('SIZE')->[0].'/*.*' ];
+        map { s%.*/%%g; } @$files;
         process('admin/images/browse.tpl', {
-                        fl=>[<$path/*.*>],
-                        path=>images('PATH'),
+                        files => $files,
+                        path  => images('PATH'),
+                        size  => images('SIZE'),
                     } );
     },
 
     '/admin/images/delete/(.*)' => sub {
-        my $_ = shift;
-        return 0 if /\.\./;
-        return 0 unless -f;
-        return 0 unless /^images('PATH')/;
-        unlink $_;
-        back;
+        my $name = shift;
+        return 0 if $name =~ /\.\./;
+        foreach ( '', @{images('SIZE')} ) {
+            next unless -f images('PATH').'/'.$_.'/'.$name;
+            unlink images('PATH').'/'.$_.'/'.$name;
+        }
+        return 1;
     },
 
     '/admin/images/upload' => sub {

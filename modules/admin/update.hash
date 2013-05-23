@@ -8,6 +8,8 @@ return "can't find update file $CONFIG->{update_rules_file}" unless -f $CONFIG->
 my $up = eval { local $SIG{__DIE__}; do $CONFIG->{update_rules_file} };
 return "error in ../$CONFIG->{update_rules_file}" if ref $up ne 'HASH';
 
+defaults { read_only => 1, };
+
 you_cannot 'view_update' or
 
 {

@@ -1297,21 +1297,10 @@ var nicImageOptions = {
 /* END CONFIG */
 
 var nicImageButton = nicEditorAdvancedButton.extend({	
-	width : '550px',
-	addPane : function() {
-/*
-		this.pane = new nicEditorPane(this.contain,this.ne,{width : (this.width || '270px'), backgroundColor : '#fff'},this);
-		var itmContain = new bkElement('div').setStyle({textAlign : 'left'});
-		this.form = new bkElement('form').setAttributes({id : 'SEOform'}).addEvent('submit',this.submit.closureListener(this));
-		new bkElement('div').setContent('Title:').setStyle({fontSize : '14px', fontWeight: 'bold', padding : '0px', margin : '2px 0'}).appendTo(this.form);
-		this.title_val = new bkElement('input').setAttributes({id : 'title', 'value' : this.ne.options.pageheader, 'type' : 'text'}).setStyle({margin : '2px 0', fontSize : '13px', 'float' : 'left', width : '500px', height : '20px', border : '1px solid #ccc', overflow : 'hidden'}).appendTo(this.form);
-		new bkElement('input').setAttributes({'type' : 'submit'}).setStyle({backgroundColor : '#efefef',border : '1px solid #ccc', margin : '3px 0', 'float' : 'left', 'clear' : 'both'}).appendTo(this.form);
-		this.form.onsubmit = bkLib.cancelEvent;	
-		this.form.appendTo(itmContain);
-		this.pane.append(itmContain);
-*/
 
-//		this.pane = new nicEditorPane(this.contain,this.ne,{width : (this.width || '460px'), backgroundColor : '#fff'},this);
+	width : '550px',
+
+	addPane : function() {
 		this.im = this.ne.selectedInstance.selElm().parentTag('IMG');
 
 		this.addForm({
@@ -1324,11 +1313,6 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 		this.pane.append( new bkElement('div').setContent('<br /><br /><b>List of images</b><br /><iframe src="/admin/images/browse" width="455" height="400"></iframe>') );
 	},
 
-//	submit : function( ) {
-//            save_text( 'content/headers:' + this.ne.options.uri, this.title_val.value, 'Title modify done' );
-//	    this.pane.remove();
-//	}
-	
 	submit : function(e) {
 		var src = this.inputs['src'].value;
 		if(src == "" || src == "http://") {
@@ -1406,7 +1390,7 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
         .setContent('<body><p id="f1_upload_process" style="position:absolute;">Loading...<br/><img src="/images/btn_loading.gif" /></p><p id="result"></p><span id="upload_form"><form action="'+(this.ne.options.uploadURI || this.nicURI)+'" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="startUpload();" >Image file: <input name="image" type="file" /><br /><select name="upload_size" id="upload_size"></select><select name="upload_align" id="upload_align"></select><input type="submit" name="submitBtn" value="Upload" /></form></span><iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe></body>')
         .appendTo(container);
 
-        $.each([ 'left', 'center', 'right' ], function(key,value) {
+        $.each([ 'default', 'left', 'center', 'right' ], function(key,value) {
             $('#upload_align')
                 .append($("<option></option>")
                 .attr("value",value)
@@ -1422,8 +1406,8 @@ var nicUploadButton = nicEditorAdvancedButton.extend({
 
         $('#f1_upload_process').hide();
 
-var range = this.ne.getContent();                    
-alert(range);
+//var range = this.ne.getContent();                    
+//alert(range);
 
 //alert( GetCaretPosition(cid) );
 //alert ( $("div[id*='"+cid+"']").html() );
@@ -1451,9 +1435,9 @@ alert(range);
         var editor = nicEditors.findEditor(cid);
 
 var range = editor.getRng();                    
-alert(range.startOffset);
-var editorField = editor.selElm();
-alert( editorField.nodeValue.substring(0, range.startOffset) );
+//alert(range.startOffset);
+//var editorField = editor.selElm();
+//alert( editorField.nodeValue.substring(0, range.startOffset) );
 
         text = '<img align="'+align+'" src="' + text + '">';
         editor.nicCommand("insertHTML",text);

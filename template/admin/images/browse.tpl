@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Image browser</title>
-</head>
 
-<body>
-<h2>Browse</h2>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery-ui.js"></script>
 
     <style>
 	figure {
@@ -26,26 +21,36 @@
     	}
     </style>
 
+<select id='size'>
+[% FOREACH s IN size %]
+    <option value='[% s %]'>[% s %]</option>
+[% END %]
+    <option value=''>full size</option>
+</select>
+
 <article>
-[% FOREACH k IN fl %]
+[% FOREACH f IN files %]
 <figure>
-    <a href="#" onclick="window.opener.CKEDITOR.tools.callFunction([% num %], '/[% k %]');window.close();return false;"><img height="80" width="80" src="/[% k %]"></a>
+    <a href="#" class="insert" id="[% f %]"><img height="80" width="80" src="/[% path %]/[% size.0 %]/[% f %]"></a>
     <figcaption>
-	<a href="#" onclick="window.opener.CKEDITOR.tools.callFunction([% num %], '/[% k %]');window.close();return false;">select</a>
-	<a href="/admin/images/delete/[%k%]" class="delete">delete</a>
+	<a href="#" class="insert" id="[% f %]">select</a>
+	<a href="#" class="delete" id="[% f %]">delete</a>
     </figcaption>
 </figure>
 [% END %]
 </article>
 
 <script type="text/javascript">
+    $('.insert').click(function () {
+	$('#src', window.parent.document).val( '/[% path %]/'+ $('#size option:selected').val() +'/'+ $(this).attr("id") );
+	$('input[type="submit"]', window.parent.document).trigger('click');
+    });
     $('.delete').click(function () {
-	if ( confirm ('[% t('Are you sure to delete this image?') %]') ) 
-		{ location.replace('/admin/gallery/delete/'+$(this).attr('name')) }; 
+	if ( confirm ('[% t('Are you sure to delete this image?') %]') ) { 
+            window.parent.save_text( '/admin/images/delete/'+$(this).attr('id'), {}, 'image was deleted'); 
+	    $(this).parent().parent().animate({opacity:0}, 700, function(){ $(this).css({display:"none"}); });
+	}; 
 	return false;
     });
 </script>
 
-</body>
-
-</html>

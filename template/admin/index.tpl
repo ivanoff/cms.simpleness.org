@@ -36,7 +36,7 @@
 -->
 [% END %]
 
-<a href="/login/update">[% t('Update') %]</a><br />
+<a href="/admin/update">[% t('Update') %]</a><br />
 
 <a href="/login/change">[% t('Change password') %]</a><br />
 <a href="/login/exit">[% t('exit') %]</a><br />

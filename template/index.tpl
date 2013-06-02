@@ -34,6 +34,9 @@
 		        });
 	            }
 	        });
+	        $("#admin_key").css({ opacity: 0.1 })
+		    .mouseover( function(){ $(this).stop().animate({opacity:'1.0'},300); })
+		    .mouseout ( function(){ $(this).stop().animate({opacity:'0.1'},300); });
 	    });
 	</script>
 
@@ -46,7 +49,6 @@
 	    var image_sizes = [ 'full size', '[% config_images.SIZE.join("','") %]' ];
 	</script>
 	<script src="/js/nicEdit.js" type="text/javascript"></script>
-	<script src="/js/nicEditRun.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="/css/dropBox.css" type="text/css" media="all" />
 
         <script src="/js/jquery-ui.js"></script>
@@ -145,14 +147,7 @@
 
 	<p>
 	Created by <a href="http://ivanoff.org.ua" target="_blank">ivanoff</a>
-
 	<a href="/login"><img src="/images/btn_key.png" id="admin_key" border="0"></a>
-	<script type="text/javascript">
-	    $("#admin_key").css({ opacity: 0.1 })
-		.mouseover( function(){ $(this).stop().animate({opacity:'1.0'},300); })
-		.mouseout ( function(){ $(this).stop().animate({opacity:'0.1'},300); });
-	</script>
-
 	</p>
 
 	</div>

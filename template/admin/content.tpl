@@ -3,6 +3,7 @@
 <table>
 <tr>
     <td></td>
+    <td></td>
 [% FOREACH l IN config.languages.sort %]
     <td align="center">
         <img src="/images/flags/[% l %].gif"> 
@@ -11,11 +12,12 @@
 </tr>
 [% FOREACH page IN pages %]
 <tr>
+    <td><a href="/admin/content/delete/[% page.content_id %]">x</a></td>
     <td>[% page.content_page || '/' %]</td>
     [% FOREACH l IN config.languages.sort %]
     <td align="center">
         <div id="link-[% content.${l}.${${page.content_page}} %]">
-        <a href="#">[% (content.${l}.${${page.content_page}})? 'v' : '' %]</a>
+        <a href="//[% l %].[% config.site %]/[% page.content_page %]">[% (content.${l}.${${page.content_page}})? 'v' : '' %]</a>
         <div id="content-[% content.${l}.${${page.content_page}} %]"></div>
         </div>
     </td>

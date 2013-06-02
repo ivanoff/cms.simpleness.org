@@ -10,11 +10,17 @@ you_cannot 'manage_gallery' or
 {
 
     '/admin/content' => sub {
-        my @pages = @{sql ( "SELECT content_page FROM base_content GROUP BY content_page ORDER BY content_page" )};
+        my @pages = @{sql ( "SELECT MIN(content_id) content_id, content_page FROM base_content GROUP BY content_page ORDER BY content_page" )};
         my @content = @{sql ( "SELECT * FROM base_content" )};
         my $content;
         $content->{$_->{lang}}{$_->{content_page}} = $_->{content_id} foreach @content;
         process('admin/content.tpl', { pages=>\@pages, content=>$content, } );
+    },
+
+    '/admin/content/delete/(\d+)' => sub {
+        my $r = sql ( "SELECT content_page FROM base_content WHERE content_id=?", $1 );
+        sql ( "DELETE FROM base_content WHERE content_page=?", $r->[0]{content_page} );
+        back();
     },
 
     '/admin/content/(\d+)' => sub {

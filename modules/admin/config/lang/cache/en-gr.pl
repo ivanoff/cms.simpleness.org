@@ -217,6 +217,7 @@
 	'Support'	=> ' ',
 	't'	=> ' ',
 	'Tender'	=> ' ',
+	'Test'	=> 'Δοκιμή',
 	'Thank you!'	=> ' ',
 	'The basic principle &nbsp; &nbsp; of the system - the simpler, the better.'	=> 'Η βασική αρχή',
 	'The basic principle &nbsp;&nbsp; of the system - the simpler, the better.'	=> 'Η βασική αρχή',

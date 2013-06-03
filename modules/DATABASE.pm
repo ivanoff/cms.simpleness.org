@@ -12,6 +12,14 @@ sub new {
                 .':dbname='.$main::CONFIG->{'db_dbname'}
                 .';host='.$main::CONFIG->{'db_host'};
     my $dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, {PrintError => 1});
+
+    unless( $dbh ) {
+        to_log( "[SMART] Error while DBI connect. Try to create database and import all data." );
+        `mysql -u$main::CONFIG->{'db_user'} -p$main::CONFIG->{'db_password'} -e "create database $main::CONFIG->{'db_dbname'}"`;
+        `mysql -u$main::CONFIG->{'db_user'} -p$main::CONFIG->{'db_password'} $main::CONFIG->{'db_dbname'} < ../install.sql`;
+        $dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, {PrintError => 1});
+    }
+
     $self->{'connect'} = \$dbh;
     $self->{'prefix'} = $main::CONFIG->{'db_table_prefix'};
     bless $self, ref $class || $class;

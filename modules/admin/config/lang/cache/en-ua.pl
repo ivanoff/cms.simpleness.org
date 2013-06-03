@@ -107,6 +107,7 @@ Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
 	'Simpleness&nbsp;&nbsp;&nbsp;&nbsp; CMS'	=> 'Простота',
 	'Simpleness&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CMS'	=> 'Простота',
 	'Spain'	=> 'Іспанія',
+	'Test'	=> 'Тест',
 	'The basic principle &nbsp; &nbsp; of the system - the simpler, the better.'	=> 'Основний принцип',
 	'The basic principle &nbsp;&nbsp; of the system - the simpler, the better.'	=> 'Основний принцип',
 	'The basic principle of &nbsp; &nbsp; the system - the simpler, the better.'	=> 'Основний принцип',

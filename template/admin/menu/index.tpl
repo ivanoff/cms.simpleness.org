@@ -54,7 +54,7 @@
     function add_new_menu() {
         $.ajax({
             type: "GET",
-            url: '/admin/menu/add/'+$("#new_menu").val(),
+            url: '/admin/menu/add/'+$("#new_menu").val()+'/'+$("#new_menu_url").val(),
             data: ({ issession : 123 }),
             dataType: "xml",
 //            async: false,
@@ -70,8 +70,9 @@
                 data += '<ol></ol></li>';
                 $("#menu").append( data );
                 $("#new_menu").val('');
+                $("#new_menu_url").val('');
 
-                myNicEditor.addInstance('menu/[% m.menu_key %]:body'); 
+                myNicEditor.addInstance('/admin/menu/[% m.menu_key %]/update?body'); 
             },
         });
     }
@@ -89,6 +90,19 @@
         });
     }
 
+    $(document).ready(function(){
+        var menu_url_auto_fill = 1;
+        $('#new_menu_url').keypress(function() {
+            menu_url_auto_fill = 0;
+        });
+        $('#new_menu').keyup(function() {
+            if ( menu_url_auto_fill ) {
+                var url = $('#new_menu').val().replace( /[\s\/\'\"]/g, '_' );
+                $('#new_menu_url').val( '/'+url );
+            }
+        });
+    });
+    
 </script>
 
     <ol class="default vertical" id="menu">
@@ -97,4 +111,6 @@
 
 <input type="text" name="new_menu" value="" id="new_menu" placeholder="enter new menu name">
 <input type="button" value="add menu" onclick="add_new_menu();">
+<br />
+<input type="text" name="new_menu_url" value="" id="new_menu_url" placeholder="url">
  

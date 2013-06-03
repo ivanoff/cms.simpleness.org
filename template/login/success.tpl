@@ -9,3 +9,4 @@
 [% ELSE %]
             <a href="/user">[% t('User page') %]</a><br />
 [% END %]
+            <a href="/">[% t('Home') %]</a><br />

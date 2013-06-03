@@ -213,6 +213,7 @@
 	'Support'	=> ' ',
 	't'	=> ' ',
 	'Tender'	=> ' ',
+	'Test'	=> 'Test',
 	'Thank you!'	=> ' ',
 	'The basic principle &nbsp; &nbsp; of the system - the simpler, the better.'	=> 'Het basisprincipe',
 	'The basic principle &nbsp;&nbsp; of the system - the simpler, the better.'	=> 'Het basisprincipe',

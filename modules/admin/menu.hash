@@ -14,10 +14,13 @@ you_cannot 'edit_menu' or
         process( 'admin/menu/index.tpl', { menu=>\@menu, } );
     },
 
-    '/admin/menu/add/(.+)' => sub {
-        my ($name, $url) = ( $_[0], $_[0] );
-        $url =~ s/[\s\/\'\"]/_/g;
-        $url = '/'.$url;
+    '/admin/menu/add/(.+?)(/(.*))?' => sub {
+        my ($name, $url) = ( $_[0], $_[2] );
+        unless( $url ) {
+            $url = $name;
+            $url =~ s/[\s\/\'\"]/_/g;
+            $url = '/'.$url;
+        }
 
         my $r = sql "SELECT MAX(menu_order)+1 max_order FROM base_menu_url";
         sql( "INSERT INTO base_menu_url (menu_url, menu_order, menu_parent) 

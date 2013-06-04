@@ -145,6 +145,7 @@
 	'Signature'	=> 'podpis',
 	'Simpleness CMS'	=> 'Simpleness CMS',
 	'simpleness.org'	=> ' ',
+	'simpleness\s+cms'	=> 'simpleness \ s cms',
 	'Site Manager'	=> 'Kierownik Budowy',
 	'sold'	=> 'sprzedany',
 	'South America'	=> 'Ameryka Południowa',

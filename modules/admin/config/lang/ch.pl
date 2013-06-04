@@ -145,6 +145,7 @@
 	'Signature'	=> '签名',
 	'Simpleness CMS'	=> '简单CMS',
 	'simpleness.org'	=> ' ',
+	'simpleness\s+cms'	=> '简单\ S CMS',
 	'Site Manager'	=> '网站管理',
 	'sold'	=> '出售',
 	'South America'	=> '南美洲',

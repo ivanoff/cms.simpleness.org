@@ -145,6 +145,7 @@
 	'Signature'	=> 'امضا',
 	'Simpleness CMS'	=> 'سادگ&#1740; CMS',
 	'simpleness.org'	=> ' ',
+	'simpleness\s+cms'	=> 'سادگ&#1740; \ س&#1740;ستم مد&#1740;ر&#1740;ت محتوا',
 	'Site Manager'	=> 'مدیریت سایت',
 	'sold'	=> 'فروخته شده',
 	'South America'	=> 'جنوب امریکا',

@@ -145,6 +145,7 @@
 	'Signature'	=> 'imza',
 	'Simpleness CMS'	=> 'Sadelik CMS',
 	'simpleness.org'	=> ' ',
+	'simpleness\s+cms'	=> 'sadelik \ s cm',
 	'Site Manager'	=> 'site Yöneticisi',
 	'sold'	=> 'satıldı',
 	'South America'	=> 'Güney Amerika',

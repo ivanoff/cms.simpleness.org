@@ -145,6 +145,7 @@
 	'Signature'	=> '서명',
 	'Simpleness CMS'	=> 'Simpleness CMS',
 	'simpleness.org'	=> ' ',
+	'simpleness\s+cms'	=> '간결함 \의 CMS',
 	'Site Manager'	=> '사이트 관리자',
 	'sold'	=> '판매',
 	'South America'	=> '남아메리카',

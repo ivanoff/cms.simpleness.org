@@ -145,6 +145,7 @@
 	'Signature'	=> 'underskrift',
 	'Simpleness CMS'	=> 'Simpleness CMS',
 	'simpleness.org'	=> ' ',
+	'simpleness\s+cms'	=> 'simpleness \ s cms',
 	'Site Manager'	=> 'site Manager',
 	'sold'	=> 'solgt',
 	'South America'	=> 'Sydamerika',

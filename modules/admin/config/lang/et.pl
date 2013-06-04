@@ -145,6 +145,7 @@
 	'Signature'	=> 'allkiri',
 	'Simpleness CMS'	=> 'Simpleness CMS',
 	'simpleness.org'	=> ' ',
+	'simpleness\s+cms'	=> 'simpleness \ s cms',
 	'Site Manager'	=> 'Site Manager',
 	'sold'	=> 'müüdud',
 	'South America'	=> 'Lõuna-Ameerika',

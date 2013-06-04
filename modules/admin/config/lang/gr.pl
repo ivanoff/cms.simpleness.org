@@ -145,6 +145,7 @@
 	'Signature'	=> 'Υπογραφή',
 	'Simpleness CMS'	=> 'Απλότητα CMS',
 	'simpleness.org'	=> ' ',
+	'simpleness\s+cms'	=> 'απλότητα \ s CMS',
 	'Site Manager'	=> 'Διαχειριστής Ιστοσελίδας',
 	'sold'	=> 'πωλούνται',
 	'South America'	=> 'Νότια Αμερική',

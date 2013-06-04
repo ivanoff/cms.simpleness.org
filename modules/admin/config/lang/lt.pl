@@ -145,6 +145,7 @@
 	'Signature'	=> 'parašas',
 	'Simpleness CMS'	=> 'Simpleness TVS',
 	'simpleness.org'	=> ' ',
+	'simpleness\s+cms'	=> 'simpleness \ S TVS',
 	'Site Manager'	=> 'Svetainės valdymas',
 	'sold'	=> 'parduodami',
 	'South America'	=> 'Pietų Amerika',

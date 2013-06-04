@@ -48,7 +48,7 @@ our $CONFIG = {
                      nl=>'de Nederlandse taal', bg=>'Български език', ro=>'limba română', da=>'dansk', 
                      ko=>'한국어', pt=>'língua portuguesa', },
         languages_dont_translate => {
-                     ru => '2@ivanoff.org.ua',
+#                     ru => '2@ivanoff.org.ua',
                     },
         phrases_dont_translate => [
                      'Simpleness CMS', 'cms.simpleness.org', 'simpleness.org',

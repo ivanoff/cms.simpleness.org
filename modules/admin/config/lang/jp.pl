@@ -145,6 +145,7 @@
 	'Signature'	=> '署名',
 	'Simpleness CMS'	=> 'シンプルさのCMS',
 	'simpleness.org'	=> ' ',
+	'simpleness\s+cms'	=> 'シンプルさ\ S CMS',
 	'Site Manager'	=> '工事監督',
 	'sold'	=> '売ら',
 	'South America'	=> '南アメリカ',

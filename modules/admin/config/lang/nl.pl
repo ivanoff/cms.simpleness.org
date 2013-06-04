@@ -145,6 +145,7 @@
 	'Signature'	=> 'handtekening',
 	'Simpleness CMS'	=> 'Eenvoud CMS',
 	'simpleness.org'	=> ' ',
+	'simpleness\s+cms'	=> 'eenvoud \ s cms',
 	'Site Manager'	=> 'Site Manager',
 	'sold'	=> 'uitverkocht',
 	'South America'	=> 'Zuid-Amerika',

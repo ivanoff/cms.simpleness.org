@@ -145,6 +145,7 @@
 	'Signature'	=> 'paraksts',
 	'Simpleness CMS'	=> 'Simpleness CMS',
 	'simpleness.org'	=> ' ',
+	'simpleness\s+cms'	=> 'Simpleness \ s cm',
 	'Site Manager'	=> 'Vietnes pārvaldnieks',
 	'sold'	=> 'pārdod',
 	'South America'	=> 'Dienvidamerika',

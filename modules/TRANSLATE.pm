@@ -40,13 +40,13 @@ sub t {
     $word = '' unless $word;
 
     my $new_word = ${$self->{'words'}}{$word};
-    if( $new_word ) {
-        $word = $new_word if ( $new_word ne ' ' );
-    } else {
-#        $word = $self->new_word($word);
+    unless( $new_word ) {
+        $new_word = $self->translate ($word, 'en', $self->{'language'});
+        $new_word = ' ' if $new_word eq $word;
+        $self->{'words'}{$word} = $new_word;
+        $self->save_lang;
     }
-
-    return $word;
+    return ($new_word eq ' ')? $word : $new_word;
 }
 
 sub tu {
@@ -164,7 +164,10 @@ sub dictionary_translate {
         $words{$_} = 1 foreach keys %$ref;
     }
     $words{$_} = 1 foreach ( @{$main::CONFIG->{phrases_dont_translate}} );
-
+#    foreach my $dnd ( @{$main::CONFIG->{phrases_dont_translate}} ) {
+#        map{ $words{$_} = 1 if $words{$_} =~ /$dnd/is } keys %words;
+#    }
+    
     foreach my $lang ( @{$main::CONFIG->{languages}} ) {
         my $translate;
         my $t = TRANSLATE->new($lang);

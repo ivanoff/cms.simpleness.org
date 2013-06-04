@@ -52,6 +52,12 @@
     });
 
     function add_new_menu() {
+
+        $('#new_menu').fadeTo( 200, 0.2 );
+        $('#new_menu_url').fadeTo( 200, 0.2 );
+        $('#new_menu_button').attr('disabled','disabled').fadeTo( 200, 0.2 );
+        $('#new_menu_img').fadeTo( 500, 1 ).attr('src', '/images/lightbox/ico-loading.gif');
+
         $.ajax({
             type: "GET",
             url: '/admin/menu/add/'+$("#new_menu").val()+'/'+$("#new_menu_url").val(),
@@ -69,9 +75,13 @@
                 data += '</span> ';
                 data += '<ol></ol></li>';
                 $("#menu").append( data );
+
                 $("#new_menu").val('');
                 $("#new_menu_url").val('');
+                $('#new_menu').fadeTo( 200, 1 );
                 $('#new_menu_url').fadeTo( 200, 0.5 );
+                $('#new_menu_button').removeAttr('disabled').fadeTo( 200, 1 );
+                $('#new_menu_img').fadeTo( 500, 1 ).attr('src', '/images/spacer.gif');
 
                 myNicEditor.addInstance('/admin/menu/[% m.menu_key %]/update?body'); 
             },
@@ -113,7 +123,7 @@
     </ol>
 
 <input type="text" name="new_menu" value="" id="new_menu" placeholder="[% t('enter new menu name') %]">
-<input type="button" value="[% t('add menu') %]" onclick="add_new_menu();">
+<input type="button" value="[% t('add menu') %]" id="new_menu_button" onclick="add_new_menu();">
 <br />
 <input type="text" name="new_menu_url" value="" id="new_menu_url" placeholder="[% t('URL') %]">
- 
+<img id="new_menu_img" src="/images/spacer.gif">

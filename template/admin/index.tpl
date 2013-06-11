@@ -15,12 +15,13 @@
 
 [% IF access.edit_content %]
 <a href="/admin/content">[% t('show content pages') %]</a><br />
-<a href="/admin/renew/sitemap">[% t('renew the sitemap') %]</a><br />
 <!-- 
-<a href="/admin/lang_base">[% t('show dictionary') %]</a><br />
-<a href="/admin/lang_check">[% t('update language in database') %]</a><br />
 -->
+<a href="/admin/lang/dictionary">[% t('show dictionary') %]</a><br />
+<a href="/admin/lang/check">[% t('update language in database') %]</a><br />
 [% END %]
+
+<a href="/admin/renew/sitemap">[% t('renew the sitemap') %]</a><br />
 
 [% IF access.edit_users %]
 <a href="/admin/users">[% t('edit users') %]</a><br />
@@ -36,7 +37,9 @@
 -->
 [% END %]
 
+[% IF access.site_update %]
 <a href="/admin/update">[% t('Update') %]</a><br />
+[% END %]
 
 <a href="/login/change">[% t('Change password') %]</a><br />
 <a href="/login/exit">[% t('exit') %]</a><br />

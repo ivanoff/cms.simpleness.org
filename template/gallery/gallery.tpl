@@ -1,6 +1,7 @@
 <link href="/css/icon.css" rel="stylesheet">
 
 <h1>[% t('Gallery') %]</h1>
+
 <table><tr><td>
     <div class="gallery">
         <h2><div id="/admin/gallery/[% gal_key %]/update?header" class="editable">[% gallery.${gal_key}.gal_name %]</div></h2>
@@ -11,6 +12,7 @@
 [% IF access.manage_gallery %]
 	<script type="text/javascript">
 	    var gallery_key = "[% gal_key %]"; 
+	    cte_text = '<font color="#AAA"><small>[% t('Click to add new information about gallery') %]</small></font>';
 	</script>
 	<div class="dropZone">[% t('Drop new images here') %]</div>
 [% END %]

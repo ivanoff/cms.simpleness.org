@@ -23,7 +23,9 @@
 
 	<script type="text/javascript">
 	    $(document).ready(function(){
-	        var cte_text = '<font color="#AAA"><small>click to edit</small></font>';
+	        if( typeof cte_text == 'undefined' ){
+	            cte_text = '<font color="#AAA"><small>[% t('click to edit') %]</small></font>';
+	        }
 	        $(".editable").each(function(){ 
 	            if ( $(this).text().replace(/(\n|\r|\s)+$/, '') == "" ) {
 	                $(this).html( cte_text );

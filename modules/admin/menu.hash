@@ -8,10 +8,10 @@ you_cannot 'edit_menu' or
 {
 
     '/admin/menu' => sub {
-        my @menu = @{ sql( "SELECT * FROM base_menu m 
+        defaults { read_only => 1, };
+        process( 'admin/menu/index.tpl', { menu => sql( "SELECT * FROM base_menu m 
                     LEFT JOIN base_menu_url u ON (m.menu_key=u.menu_key)
-                    WHERE m.lang=? ORDER BY u.menu_order ASC", lang ) };
-        process( 'admin/menu/index.tpl', { menu=>\@menu, } );
+                    WHERE m.lang=? ORDER BY u.menu_order ASC", lang ), } );
     },
 
     '/admin/menu/add/(.+?)(/(.*))?' => sub {

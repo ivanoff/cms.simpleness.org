@@ -1710,7 +1710,7 @@ nicEditors.registerPlugin(nicPlugin,nicLogoutOptions);
 
         var what_hash = {};
 	if( where.indexOf("?") == -1 ) {
-            what_hash = what;
+            what_hash["body"] = what;
         } else {
             if ( is_silent(where) && !info ) return false;
 	    var a = where.split("?");

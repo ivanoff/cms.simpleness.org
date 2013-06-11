@@ -16,11 +16,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://admin.clear/bio</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://admin.clear/contacts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -56,16 +51,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://ar.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -77,11 +62,6 @@
 </url>
 <url>
     <loc>http://ar.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://ar.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -121,16 +101,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://ar.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://ar.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://bg.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -142,11 +112,6 @@
 </url>
 <url>
     <loc>http://bg.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://bg.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -186,16 +151,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://bg.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://bg.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://ch.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -207,11 +162,6 @@
 </url>
 <url>
     <loc>http://ch.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://ch.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -251,16 +201,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://ch.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://ch.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://da.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -272,11 +212,6 @@
 </url>
 <url>
     <loc>http://da.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://da.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -316,16 +251,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://da.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://da.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://de.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -337,11 +262,6 @@
 </url>
 <url>
     <loc>http://de.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://de.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -381,16 +301,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://de.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://de.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://es.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -402,11 +312,6 @@
 </url>
 <url>
     <loc>http://es.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://es.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -446,16 +351,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://es.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://es.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://et.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -467,11 +362,6 @@
 </url>
 <url>
     <loc>http://et.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://et.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -511,16 +401,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://et.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://et.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://fa.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -532,11 +412,6 @@
 </url>
 <url>
     <loc>http://fa.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://fa.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -576,16 +451,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://fa.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://fa.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://fr.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -597,11 +462,6 @@
 </url>
 <url>
     <loc>http://fr.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://fr.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -641,16 +501,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://fr.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://fr.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://gr.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -662,11 +512,6 @@
 </url>
 <url>
     <loc>http://gr.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://gr.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -706,16 +551,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://gr.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://gr.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://il.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -727,11 +562,6 @@
 </url>
 <url>
     <loc>http://il.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://il.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -771,16 +601,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://il.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://il.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://it.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -792,11 +612,6 @@
 </url>
 <url>
     <loc>http://it.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://it.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -836,16 +651,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://it.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://it.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://jp.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -857,11 +662,6 @@
 </url>
 <url>
     <loc>http://jp.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://jp.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -901,16 +701,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://jp.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://jp.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://ko.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -922,11 +712,6 @@
 </url>
 <url>
     <loc>http://ko.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://ko.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -966,16 +751,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://ko.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://ko.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://lt.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -987,11 +762,6 @@
 </url>
 <url>
     <loc>http://lt.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://lt.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -1031,16 +801,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://lt.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://lt.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://lv.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -1052,11 +812,6 @@
 </url>
 <url>
     <loc>http://lv.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://lv.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -1096,16 +851,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://lv.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://lv.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://nl.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -1117,11 +862,6 @@
 </url>
 <url>
     <loc>http://nl.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://nl.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -1161,16 +901,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://nl.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://nl.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://pl.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -1182,11 +912,6 @@
 </url>
 <url>
     <loc>http://pl.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://pl.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -1226,16 +951,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://pl.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://pl.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://pt.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -1247,11 +962,6 @@
 </url>
 <url>
     <loc>http://pt.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://pt.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -1291,16 +1001,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://pt.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://pt.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://ro.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -1312,11 +1012,6 @@
 </url>
 <url>
     <loc>http://ro.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://ro.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -1356,16 +1051,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://ro.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://ro.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://ru.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -1377,11 +1062,6 @@
 </url>
 <url>
     <loc>http://ru.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://ru.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -1421,16 +1101,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://ru.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://ru.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://tr.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -1442,11 +1112,6 @@
 </url>
 <url>
     <loc>http://tr.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://tr.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -1486,16 +1151,6 @@
     <priority>0.6</priority>
 </url>
 <url>
-    <loc>http://tr.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://tr.admin.clear/test</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
     <loc>http://ua.admin.clear</loc>
     <changefreq>monthly</changefreq>
     <priority>1</priority>
@@ -1507,11 +1162,6 @@
 </url>
 <url>
     <loc>http://ua.admin.clear/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://ua.admin.clear/bio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
@@ -1547,16 +1197,6 @@
 </url>
 <url>
     <loc>http://ua.admin.clear/news</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://ua.admin.clear/search</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
-<url>
-    <loc>http://ua.admin.clear/test</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>

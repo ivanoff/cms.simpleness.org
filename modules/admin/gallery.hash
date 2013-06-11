@@ -6,6 +6,7 @@ use MAIN;
 you_cannot 'manage_gallery' or
 
 {
+
     '/admin/gallery' => sub {
         if( param('new_gallery') ) {
             my $key = sql ( "SELECT MAX(gal_key)+1 gal_key FROM base_gallery" );
@@ -97,6 +98,14 @@ you_cannot 'manage_gallery' or
     '/admin/gallery/(\d+)/update' => sub {
         my $gal_key = $1;
         $_ = param('body');
+        my $a = sql ( "SELECT * FROM base_gallery WHERE gal_key=? AND lang=?", $gal_key, lang );
+        unless ( $a->[0] ) {
+            sql ( "INSERT INTO base_gallery ( gal_key, lang ) VALUES ( ?, ? )", $gal_key, lang);
+            make_path(images('PATH')."/$gal_key");
+            foreach my $size ( @{images('SIZE')} ) {
+                make_path(images('PATH')."/$gal_key/$size");
+            }
+        }
         if ( is_default_lang ) {
             sql( "DELETE FROM base_gallery WHERE gal_key=? AND lang!=?", $gal_key, lang);
         }

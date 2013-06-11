@@ -1,0 +1,115 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+use TRANSLATE;
+
+defaults { read_only => 1, };
+
+you_cannot 'edit_content' or
+
+{
+
+    '/admin/lang/dictionary(/(\w{2}))?' => sub {
+        my $lang = $2 || lang;
+        my $words;
+        foreach my $lang ( @{$main::CONFIG->{languages}} ) {
+            my $ref = eval { local $SIG{__DIE__}; do $main::CONFIG->{config_files_path}.'/lang/'.$lang.'.pl' };
+            next unless $ref;
+            $words->{$_}{$lang} = $ref->{$_} foreach keys %$ref;
+        }
+        process( 'admin/lang/dictionary.tpl', { dictionary => $words, lang=>$lang, } );
+    },
+
+    '/admin/lang/dictionary/(\w{2})/edit/(.*)' => sub {
+        my $t = TRANSLATE->new($1);
+        $t->{'words'}{$2}=param('body');
+        $t->save_lang;
+    },
+
+    '/admin/lang/dictionary/(\w{2})/delete/(.*)' => sub {
+        if( is_default_lang($1) ) {
+            foreach my $lang ( @{$main::CONFIG->{languages}} ) {
+                my $t = TRANSLATE->new($lang);
+                delete $t->{'words'}{$2};
+                $t->save_lang;
+            }
+        } else {
+            my $t = TRANSLATE->new($1);
+            $t->{'words'}{$2}=' ';
+            $t->save_lang;
+        }
+    },
+
+    '/admin/lang/check' => sub {
+        die if you_cannot 'edit_content';
+        my $res;
+        my %words;
+        foreach my $lang ( @{$main::CONFIG->{languages}} ) {
+            my $ref = eval { local $SIG{__DIE__}; do $main::CONFIG->{config_files_path}.'/lang/'.$lang.'.pl' };
+            $words{$_} = 1 foreach keys %$ref;
+        }
+        foreach my $lang ( @{$main::CONFIG->{languages}} ) {
+            my %translate;
+            my $t = TRANSLATE->new($lang);
+            $res .= "$lang<br />";
+            foreach ( keys %words ) {
+                next if /^\ ?$/;
+#                $res .= "$_<br >" if !$t->{words}{$_} || $t->{words}{$_} eq $_ || $t->{words}{$_} =~ /^\ ?$/;
+#                $translate{$_}=1 if !$t->{words}{$_} || $t->{words}{$_} eq $_ || $t->{words}{$_} =~ /^\ ?$/;
+                $translate{$_}=1 if !$t->{words}{$_} || $t->{words}{$_} =~ /^\ ?$/;
+            }
+            if ($lang eq 'en') {
+                $t->{'words'}{$_}=' ' foreach keys %translate;
+                $t->save_lang;
+                next;
+            }
+
+            my $th = $t->translate(\%translate, lang('default'), $lang);
+            %translate = %{$th} if $th;
+
+            $res .= join "<br>", (values %translate);
+            $t->{'words'}{$_}=$translate{$_} foreach keys %translate;
+            $t->save_lang;
+        }
+
+        foreach my $to ( @{$main::CONFIG->{languages}} ) {
+#try
+#            next if $to eq 'en';
+            my $r=0;
+            foreach my $i (1..5) {
+                $r = $main::t->lang_checking ( { table=>'base_news', id=>'news_key', id_main=>'news_id',
+                                          lang_from=>'en', lang_to=>$to,
+                                          dnd=>['news_date', ]
+                                        } );
+                last if $r;
+            }
+            $res .= $r;
+            foreach my $i (1..5) {
+                $r = $main::t->lang_checking ( { table=>'base_content', id=>'content_page', id_main=>'content_id',
+                                          lang_from=>'en', lang_to=>$to,
+                                          dnd=>['user_id', 'content_date_from', 'content_place', ]
+                                        } );
+                last if $r;
+            }
+            $res .= $r;
+        }
+=c
+        #gets from wiki lang
+        foreach my $lang ( @{$main::CONFIG->{languages}} ) {
+            my $tr = TRANSLATE->new($lang);
+            my $lang_file = $main::CONFIG->{modules_path}.'/lang/wiki_translate/result/'.$lang.'.pl';
+            next unless ( -f $lang_file );
+            $res .= "$lang_file: ";
+            my $ref = eval { local $SIG{__DIE__}; do $lang_file };
+            if ( ref($ref) eq 'HASH' ) {
+                $res .= " found ".((keys %$ref)+0)." new keys<br>";
+                $tr->{'words'} = { %{$tr->{'words'}}, %$ref };
+            }
+            $tr->save_lang;
+        }
+=cut
+        return $res;
+    },
+
+};

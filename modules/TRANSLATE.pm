@@ -5,6 +5,7 @@ package TRANSLATE;
 use strict;
 
 use MAIN::Laconic;
+use CONFIG;
 use utf8;
 use Encode;
 use WWW::Mechanize;
@@ -25,8 +26,8 @@ sub new {
         if (ref($ref) eq 'HASH') {
             $self->{'words'} = $ref;
         } else {
-                use File::Copy;
-                copy($lang_file, $lang_file.'.tmp') unless(-f $lang_file.'.tmp');
+            use File::Copy;
+            copy($lang_file, $lang_file.'.tmp') unless(-f $lang_file.'.tmp');
         }
     }
 

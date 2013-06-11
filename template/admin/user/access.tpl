@@ -17,6 +17,7 @@
 	'edit_menu' => 'edit main menu',
 	'print_page' => 'can print page',
 	'view_update' => 'can view updates',
+	'site_update' => 'can update site scripts',
     }
 %]
 

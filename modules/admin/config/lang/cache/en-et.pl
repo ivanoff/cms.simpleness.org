@@ -39,6 +39,11 @@
 	'Gallery'	=> 'Galerii',
 	'Home page'	=> 'Kodulehekülg',
 	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'on suveräänne riik ning kuulub Euroopa Liidu asub edela Euroopas Pürenee poolsaarel.',
+	'is a unitary parliamentary republic in South-Central Europe. To the 
+north, it borders France, Switzerland, Austria, and Slovenia along the 
+Alps. To the south, it consists of the untirety of the Italian 
+Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
+ Sea–and many other smaller islands.'	=> 'on ühtne parlamentaarne vabariik Lõuna-ja Kesk-Euroopas. To<br>põhjas piirneb Prantsusmaa, Šveits, Austria ja Sloveenia mööda<br>Alpides. Lõunasse, see koosneb untirety ka Itaalia<br>Poolsaarel, Sitsiilia, Sardiinia-kaks suurimat saart Vahemere<br> Sea-ja paljud teised väiksemad saared.',
 	'Italy'	=> 'Itaalia',
 	'kkn'	=> 'KKN',
 	'kknne'	=> 'kknne',

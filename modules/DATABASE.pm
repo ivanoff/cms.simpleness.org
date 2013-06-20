@@ -6,7 +6,7 @@ use strict;
 use DBI;
 
 sub new {
-    my ($class) = @_;
+    my $class = shift;
     my $self = {};
     my $dsn = 'DBI:'.$main::CONFIG->{'db_type'}
                 .':dbname='.$main::CONFIG->{'db_dbname'}
@@ -14,7 +14,7 @@ sub new {
     my $dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, {PrintError => 1});
 
     unless( $dbh ) {
-        to_log( "[SMART] Error while DBI connect. Try to create database and import all data." );
+        to_log( "[SMART][irony] Error while DBI connect. Try to create database and import all data." );
         `mysql -u$main::CONFIG->{'db_user'} -p$main::CONFIG->{'db_password'} -e "create database $main::CONFIG->{'db_dbname'}"`;
         `mysql -u$main::CONFIG->{'db_user'} -p$main::CONFIG->{'db_password'} $main::CONFIG->{'db_dbname'} < ../install.sql`;
         $dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, {PrintError => 1});
@@ -27,28 +27,22 @@ sub new {
 }
 
 sub sql {
-    use MAIN;
-#    to_log ( @_ );
-    my $self = shift;
-    my $sql = shift;
+    my ( $self, $sql, @params ) = @_;
     my $dbh = ${$self->{'connect'}};
 
     my $sth = $dbh->prepare($sql);
-    my $rv = $sth->execute(@_);
+    my $rv = $sth->execute(@params);
 
 #    if ( 1 ) {
     if ( $dbh->errstr ) {
         to_log ( $dbh->errstr ); 
         to_log ( "SQL: $sql" ); 
-        to_log ( "PARAMETERS: ". (join ", ", @_) ); 
+        to_log ( "PARAMETERS: ". (join ", ", @params) ); 
     }
     my @result;
 
-    if($sth->{NUM_OF_FIELDS}) {    
-        while(my ($r) = $sth->fetchrow_hashref()) {
-            last unless defined($r);
-            push @result, $r;
-        }
+    if($sth->{NUM_OF_FIELDS}) {
+        push @result, $_ while $_ = $sth->fetchrow_hashref;
     }
 
     $sth->finish();

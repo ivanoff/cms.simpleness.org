@@ -38,6 +38,11 @@
 	'Gallery'	=> 'رواق',
 	'Home page'	=> 'الصفحة الرئيسية',
 	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'هي دولة ذات سيادة وعضو في الاتحاد الأوروبي تقع في جنوب غرب أوروبا في شبه الجزيرة الايبيرية.',
+	'is a unitary parliamentary republic in South-Central Europe. To the 
+north, it borders France, Switzerland, Austria, and Slovenia along the 
+Alps. To the south, it consists of the untirety of the Italian 
+Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
+ Sea–and many other smaller islands.'	=> 'هي جمهورية برلمانية موحدة في أوروبا الجنوبية الوسطى. إلى<br>الشمالية، على الحدود مع فرنسا وسويسرا والنمسا وسلوفينيا على طول<br>جبال الألب. إلى الجنوب، وتتكون من untirety من الإيطالية<br>شبه جزيرة، صقلية، سردينيا، وهما أكبر الجزر في البحر الأبيض المتوسط<br> البحر والعديد من الجزر الصغيرة الأخرى.',
 	'Italy'	=> 'إيطاليا',
 	'kk'	=> 'KK',
 	'kkn'	=> 'KKN',

@@ -10,6 +10,12 @@
 	'Dictionary'	=> 'Dicionário',
 	'Find out more'	=> 'Saiba mais',
 	'First of all, Simpleness...'	=> 'Primeiro de tudo, Simpleness ...',
+	'is a unitary parliamentary republic in South-Central Europe. To the 
+north, it borders France, Switzerland, Austria, and Slovenia along the 
+Alps. To the south, it consists of the untirety of the Italian 
+Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
+ Sea–and many other smaller islands.'	=> 'é uma república parlamentar unitária na Europa Centro-Sul. Para o<br>norte, faz fronteira com a França, Suíça, Áustria e Eslovênia ao longo do<br>Alpes. Para o sul, que consiste na untirety do Italiano<br>Península, Sicília, Sardenha-as duas maiores ilhas no Mediterrâneo<br> Mar-e muitas outras ilhas menores.',
+	'Italy'	=> 'Itália',
 	'Last version - 0.3.0923 was released at September of 23. You can download this system from'	=> 'Última versão - 0.3.0923 foi lançado em setembro de 23. Você pode baixar este sistema de',
 	'Last version - 0.3.0923 was released&nbsp;&nbsp; at September of 23. You can download this system from'	=> 'Última versão - 0.3.0923 foi lançado',
 	'Last version - 0.3.0923 was&nbsp; released at September of 23. You can download this system from'	=> 'Última versão - 0.3.0923 foi',

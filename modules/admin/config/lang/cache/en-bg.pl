@@ -104,6 +104,11 @@
 	'Home page'	=> 'Начална страница',
 	'id'	=> ' ',
 	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'е суверенна държава и член на Европейския съюз, разположен в югозападната част на Европа на Иберийския полуостров.',
+	'is a unitary parliamentary republic in South-Central Europe. To the 
+north, it borders France, Switzerland, Austria, and Slovenia along the 
+Alps. To the south, it consists of the untirety of the Italian 
+Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
+ Sea–and many other smaller islands.'	=> 'е единна парламентарна република, в Южна и Централна Европа. Към<br>север граничи с Франция, Швейцария, Австрия и Словения по<br>Алпите. На юг, той се състои от untirety на Италианската<br>Полуостров, Сицилия, Сардиния, двата най-големи острова в Средиземно море<br> Sea-и много други по-малки острови.',
 	'Italy'	=> 'Италия',
 	'jack-up drilling rig'	=> ' ',
 	'January'	=> ' ',

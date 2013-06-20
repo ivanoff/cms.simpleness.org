@@ -39,6 +39,11 @@
 	'Gallery'	=> 'Galeria',
 	'Home page'	=> 'Strona główna',
 	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'jest suwerennym państwem i członkiem Unii Europejskiej znajduje się w południowo-zachodniej Europie, na Półwyspie Iberyjskim.',
+	'is a unitary parliamentary republic in South-Central Europe. To the 
+north, it borders France, Switzerland, Austria, and Slovenia along the 
+Alps. To the south, it consists of the untirety of the Italian 
+Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
+ Sea–and many other smaller islands.'	=> 'jest jednolita republika parlamentarna w Europie Środkowej i Południowej. Aby<br>północ, graniczy Francja, Szwajcaria, Austria i Słowenia razem<br>Alpy. Na południe, składa się z untirety z włoskim<br>Peninsula, Sycylia, Sardynia-dwie największe wyspy na Morzu Śródziemnym<br> Sea-i wiele innych mniejszych wysp.',
 	'Italy'	=> 'Włochy',
 	'kk'	=> 'kk',
 	'kkn'	=> 'KKN',

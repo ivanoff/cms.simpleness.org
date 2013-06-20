@@ -38,6 +38,11 @@
 	'Gallery'	=> 'גלריה',
 	'Home page'	=> 'דף הבית',
 	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'היא מדינה ריבונית וחברה באיחוד האירופי ממוקם בדרום מערב אירופה בחצי האי האיברי.',
+	'is a unitary parliamentary republic in South-Central Europe. To the 
+north, it borders France, Switzerland, Austria, and Slovenia along the 
+Alps. To the south, it consists of the untirety of the Italian 
+Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
+ Sea–and many other smaller islands.'	=> 'היא רפובליקה פרלמנטרית אחידה בדרום מרכז אירופה. כדי<br>צפונה, זה גובל בצרפת, שווייץ, אוסטריה, סלובניה ולאורך<br>הרי האלפים. לכיוון הדרום, זה מורכב של untirety האיטלקי<br>חצי האי, סיציליה, סרדיניה-שני האיים הגדולים ביותר בים התיכון<br> ים ורב איים קטנים נוספים.',
 	'Italy'	=> 'איטליה',
 	'kk'	=> 'KK',
 	'kkn'	=> 'KKN',

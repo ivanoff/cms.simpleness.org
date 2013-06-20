@@ -39,6 +39,11 @@
 	'Gallery'	=> 'Galerija',
 	'Home page'	=> 'Mājas lapa',
 	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'ir suverēna valsts un Eiropas Savienības atrodas dienvidrietumu Eiropā par Ibērijas pussalā loceklis.',
+	'is a unitary parliamentary republic in South-Central Europe. To the 
+north, it borders France, Switzerland, Austria, and Slovenia along the 
+Alps. To the south, it consists of the untirety of the Italian 
+Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
+ Sea–and many other smaller islands.'	=> 'ir vienots parlamentāra republika Dienvidaustrumu Centrāleiropā. Līdz<br>ziemeļiem, tas robežojas Francija, Šveice, Austrija un Slovēniju gar<br>Alpi. Uz dienvidiem, tas sastāv no untirety no Itālijas<br>Pussala, Sicīlija, Sardīnija-divas lielākās salas Vidusjūrā<br> Jūras un daudzas citas mazākas salas.',
 	'Italy'	=> 'Itālija',
 	'kk'	=> 'kk',
 	'kkn'	=> 'KKN',

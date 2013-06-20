@@ -49,6 +49,12 @@
 	'Home page'	=> 'Главная страница',
 	'how'	=> 'как',
 	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'является суверенным государством и членом Европейского Союза на юго-западе Европы, на Пиренейском полуострове.',
+	'is a unitary parliamentary republic in South-Central Europe. To the 
+north, it borders France, Switzerland, Austria, and Slovenia along the 
+Alps. To the south, it consists of the untirety of the Italian 
+Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
+ Sea–and many other smaller islands.'	=> 'является унитарным парламентская республика, в Южной и Центральной Европе. Чтобы<br>севере граничит Франции, Швейцарии, Австрии, Словении и вдоль<br>Альпы. К югу, он состоит из untirety из итальянских<br>Полуострова, Сицилия, Сардиния-двух крупнейших островов в Средиземном море<br> Морской и много других мелких островов.',
+	'Italy'	=> 'Италия',
 	'kk'	=> 'кк',
 	'kkn'	=> 'KKN',
 	'kknne'	=> 'kknne',

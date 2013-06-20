@@ -103,6 +103,11 @@
 	'Home page'	=> 'Αρχική σελίδα',
 	'id'	=> ' ',
 	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'είναι ένα κυρίαρχο κράτος και μέλος της Ευρωπαϊκής Ένωσης, που βρίσκεται στη νοτιοδυτική Ευρώπη για την Ιβηρική Χερσόνησο.',
+	'is a unitary parliamentary republic in South-Central Europe. To the 
+north, it borders France, Switzerland, Austria, and Slovenia along the 
+Alps. To the south, it consists of the untirety of the Italian 
+Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
+ Sea–and many other smaller islands.'	=> 'είναι μια ενιαία κοινοβουλευτική δημοκρατία στη Νότιο-Κεντρική Ευρώπη. Προς το<br>βορρά, συνορεύει με τη Γαλλία, την Ελβετία, την Αυστρία και τη Σλοβενία &#8203;&#8203;κατά μήκος της<br>Άλπεις. Προς τα νότια, που αποτελείται από το untirety της Ιταλικής<br>Χερσόνησο, Σικελία, Σαρδηνία, τα δύο μεγαλύτερα νησιά της Μεσογείου<br> Sea-και πολλά άλλα μικρότερα νησιά.',
 	'Italy'	=> 'Ιταλία',
 	'jack-up drilling rig'	=> ' ',
 	'January'	=> ' ',

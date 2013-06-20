@@ -38,6 +38,11 @@
 	'Gallery'	=> 'ギャラリー',
 	'Home page'	=> 'ホームページ',
 	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> '主権国家とイベリア半島の南西ヨーロッパに位置する欧州連合のメンバーです。',
+	'is a unitary parliamentary republic in South-Central Europe. To the 
+north, it borders France, Switzerland, Austria, and Slovenia along the 
+Alps. To the south, it consists of the untirety of the Italian 
+Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
+ Sea–and many other smaller islands.'	=> '南、中央ヨーロッパにおけるユニタリ議会共和国です。へ<br>北、それに沿ってフランス、スイス、オーストリア、スロベニアと国境を接し<br>アルプス。南に、それはイタリアのuntiretyで構成されています<br>半島、シチリア、サルデーニャ - 地中海の2つの最大の島<br>&#160;海や他の多くの小さな島。',
 	'Italy'	=> 'イタリア',
 	'kk'	=> 'KK',
 	'kkn'	=> 'KKN',

@@ -36,6 +36,11 @@
 	'Gallery'	=> 'Galeri',
 	'Home page'	=> 'Ana Sayfa',
 	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> 'egemen bir devlet ve İber Yarımadası&#39;nda güneybatı Avrupa&#39;da bulunan Avrupa Birliği üyesidir.',
+	'is a unitary parliamentary republic in South-Central Europe. To the 
+north, it borders France, Switzerland, Austria, and Slovenia along the 
+Alps. To the south, it consists of the untirety of the Italian 
+Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
+ Sea–and many other smaller islands.'	=> 'Güney-Orta Avrupa&#39;da üniter bir parlamenter cumhuriyettir. Kime<br>kuzey, bu birlikte Fransa, İsviçre, Avusturya ve Slovenya sınırları<br>Alps. Güneyde, bu İtalyan untirety oluşur<br>Yarımadası, Akdeniz&#39;de Sicilya, Sardunya-iki büyük ada<br> Deniz-ve diğer birçok küçük adalar.',
 	'Italy'	=> 'İtalya',
 	'kk'	=> 'kk',
 	'kkn'	=> 'kkn',

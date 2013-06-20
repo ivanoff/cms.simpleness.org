@@ -38,6 +38,11 @@
 	'Gallery'	=> '画廊',
 	'Home page'	=> '主页',
 	'is a sovereign state and a member of the European Union located in southwestern Europe on the Iberian Peninsula.'	=> '是一个主权国家，位于欧洲西南部伊比利亚半岛上的欧洲联盟的成员。',
+	'is a unitary parliamentary republic in South-Central Europe. To the 
+north, it borders France, Switzerland, Austria, and Slovenia along the 
+Alps. To the south, it consists of the untirety of the Italian 
+Peninsula, Sicily, Sardinia–the two largest islands in the Mediterranean
+ Sea–and many other smaller islands.'	=> '是一个统一的中南欧洲的议会制共和国。到<br>北部，法国，瑞士，奥地利和斯洛文尼亚接壤沿<br>阿尔卑斯山。以南，它由意大利untirety<br>半岛，西西里岛，撒丁岛的两个最大的海岛在地中海<br>&#160;海和其他许多较小的岛屿。',
 	'Italy'	=> '意大利',
 	'kk'	=> 'KK',
 	'kkn'	=> 'KKN',

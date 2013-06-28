@@ -20,7 +20,7 @@ you_cannot 'manage_gallery' or
             redirect2('admin/gallery/'.$key->[0]{gal_key});
         } else {
             my %gallery = map { $_->{gal_key} => $_ } @{sql ( "SELECT * FROM base_gallery WHERE lang=?", lang )};
-            return process('admin/gallery.tpl', { gallery=>\%gallery, } );
+            return process('admin/gallery/gallery.tpl', { gallery=>\%gallery, } );
         }
     },
 
@@ -73,6 +73,12 @@ you_cannot 'manage_gallery' or
         my $gal_key = $1;
         my $upfile = param('Filedata');
         binmode($upfile);
+        if ( ! -d images('PATH').'/'.$gal_key ) {
+            make_path( images('PATH').'/'.$gal_key );
+            foreach my $size ( @{images('SIZE')} ) {
+                make_path( images('PATH').'/'.$gal_key.'/'.$size );
+            }
+        }
         my $file = images('PATH').'/'.$gal_key.'/'.param->{Filedata};
         open F, '>', $file;
         while ( <$upfile> ) {

@@ -4,7 +4,7 @@ use strict;
 use MAIN;
 
 my %gallery = map { $_->{gal_key} => $_ }
-                @{sql( "SELECT * FROM base_gallery WHERE lang=?", lang )};
+            @{sql( "SELECT * FROM base_gallery WHERE lang=?", lang )};
 
 defaults { gallery=>\%gallery, image=>1, read_only => 1, };
 

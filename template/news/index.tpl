@@ -1,3 +1,7 @@
+<h2>[% t('News') %]</h2>
+
+[% IF access.add_news %]
+
 <link href="/css/icon.css" rel="stylesheet">
 <script type="text/javascript">
     $(document).ready(function(){
@@ -9,10 +13,8 @@
     });
 </script>
 
-<h2>[% t('News') %]</h2>
-
-[% IF access.add_news %]
 <a href="/admin/news/add"><img border="0" src="/images/btn_plus.gif">[% t('add news') %]</a><br /><br />
+
 [% END %]
 
 [% FOREACH n IN news %]

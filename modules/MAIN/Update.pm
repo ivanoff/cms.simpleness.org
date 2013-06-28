@@ -1,5 +1,3 @@
-#!/usr/bin/perl
-
 package MAIN::Update;
 
 use strict;

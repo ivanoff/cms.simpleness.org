@@ -6,7 +6,9 @@ use MAIN;
 my %gallery = map { $_->{gal_key} => $_ }
             @{sql( "SELECT * FROM base_gallery WHERE lang=?", lang )};
 
-defaults { gallery=>\%gallery, image=>1, read_only => 1, };
+my $max_gal_id = sql( "SELECT MAX(gal_key) gal_key FROM base_gallery" )->[0]{gal_key};
+
+defaults { gallery=>\%gallery, max_gal_id=>$max_gal_id, image=>1, read_only => 1, };
 
 {
 

@@ -13,8 +13,7 @@
     });
 </script>
 
-<a href="/gallery/[% gallery.keys.max+1 %]"><img border="0" src="/images/btn_plus.gif">[% t('add gallery') %]</a><br /><br />
-
+<a href="/gallery/[% max_gal_id + 1 %]"><img border="0" src="/images/btn_plus.gif">[% t('add gallery') %]</a><br /><br />
 [% END %]
 
 [% FOREACH g IN gallery.keys %]

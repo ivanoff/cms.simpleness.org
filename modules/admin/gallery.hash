@@ -7,40 +7,6 @@ you_cannot 'manage_gallery' or
 
 {
 
-    '/admin/gallery' => sub {
-        if( param('new_gallery') ) {
-            my $key = sql ( "SELECT MAX(gal_key)+1 gal_key FROM base_gallery" );
-            sql ( "INSERT INTO base_gallery (gal_name, gal_description,lang,gal_key) VALUES (?,?,?,?)", 
-                        param('new_gallery'), param('new_gallery_description'), lang, $key->[0]{gal_key});
-            make_path("images('PATH')/$key->[0]{gal_key}");
-            foreach my $size ( @{images('SIZE')} ) {
-                make_path("images('PATH')/$key->[0]{gal_key}/$size");
-            }
-            $main::t->renew_content('gallery');
-            redirect2('admin/gallery/'.$key->[0]{gal_key});
-        } else {
-            my %gallery = map { $_->{gal_key} => $_ } @{sql ( "SELECT * FROM base_gallery WHERE lang=?", lang )};
-            return process('admin/gallery/gallery.tpl', { gallery=>\%gallery, } );
-        }
-    },
-
-    '/admin/gallery/(\d+)' => sub {
-        my $gal_key = $1;
-        if(param('gallery_name_new')) {
-            if ( is_default_lang ) {
-                sql( "DELETE FROM base_gallery WHERE gal_key=? AND lang!=?", $gal_key, lang);
-            }
-            sql ( "UPDATE base_gallery SET gal_name=?, gal_description=? WHERE gal_key=? AND lang=?", 
-                        param('gallery_name_new'), param('gallery_description_new'), $gal_key, lang);
-            $main::t->renew_content('gallery', $gal_key);
-        }
-        my %gallery = map { $_->{gal_key} => $_ } @{sql ( "SELECT * FROM base_gallery WHERE lang=?", lang )};
-        defaults { image=>1, };
-        my $size = images('SIZE')->[0];
-        my $path = images('PATH');
-        process('admin/gallery.tpl', { images=>[<$path/$gal_key/$size/*.*>], gallery=>\%gallery, } );
-    },
-
     '/admin/gallery/delete/i(\d+)' => sub {
         my $id = $1;
         my $image = sql("SELECT * FROM base_gallery_images WHERE img_id=?", $id );
@@ -55,7 +21,8 @@ you_cannot 'manage_gallery' or
     },
 
     '/admin/gallery/delete/(\d+)' => sub {
-        remove_tree("images('PATH')/$1");
+        remove_tree(images('PATH')."/".$1);
+        sql ( "DELETE FROM base_gallery_images WHERE gal_key=?", $1 );
         sql ( "DELETE FROM base_gallery WHERE gal_key=?", $1 );
         my $id = sql ( "SELECT MAX(gal_key) gal_key FROM base_gallery" );
         redirect2('admin/gallery/'.$id->[0]{gal_key});
@@ -103,7 +70,6 @@ you_cannot 'manage_gallery' or
 
     '/admin/gallery/(\d+)/update' => sub {
         my $gal_key = $1;
-        $_ = param('body');
         my $a = sql ( "SELECT * FROM base_gallery WHERE gal_key=? AND lang=?", $gal_key, lang );
         unless ( $a->[0] ) {
             sql ( "INSERT INTO base_gallery ( gal_key, lang ) VALUES ( ?, ? )", $gal_key, lang);
@@ -115,6 +81,7 @@ you_cannot 'manage_gallery' or
         if ( is_default_lang ) {
             sql( "DELETE FROM base_gallery WHERE gal_key=? AND lang!=?", $gal_key, lang);
         }
+        $_ = param('body');
         if(param('page') eq 'header') {
             s/\<.*?\>//g;
             sql ( "UPDATE base_gallery SET gal_name=? WHERE gal_key=? AND lang=?", 

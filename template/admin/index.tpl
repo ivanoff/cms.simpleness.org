@@ -2,7 +2,8 @@
 
 
 [% IF access.manage_gallery %]
-<a href="/admin/gallery">[% t('Gallery manager') %]</a><br />
+<a href="/gallery">[% t('Gallery manager') %]</a><br />
+<a href="/gallery/[% max_gal_id + 1 %]">[% t('add gallery') %]</a><br />
 [% END %]
 
 [% IF access.add_news %]

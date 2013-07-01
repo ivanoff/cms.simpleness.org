@@ -2,14 +2,14 @@
 
 use strict;
 use MAIN;
-use TRANSLATE;
 
 defaults { read_only => 1, };
 
 {
 
     '/admin' => sub {
-        process('admin/index.tpl');
+        my $max_gal_id = sql( "SELECT MAX(gal_key) gal_key FROM base_gallery" )->[0]{gal_key};
+        process('admin/index.tpl', { max_gal_id=>$max_gal_id } );
     },
 
 };

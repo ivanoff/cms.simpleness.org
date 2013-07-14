@@ -11,8 +11,7 @@ our @ISA     = qw( Exporter );
 our @EXPORT  = qw( update need_to_update file_to_md5 get_remote_content compare );
 
 sub file_to_md5 {
-print $_[0]."\n";
-    return 0 unless @_ || !-f $_[0];
+    return 0 if !@_ || !-f $_[0];
     open F, '<', $_[0];
     my $content = join '', <F>;
     close F;
@@ -38,20 +37,13 @@ sub get_remote_content {
     return 0 if $file =~ /\.\./;
     my $mech = WWW::Mechanize::GZip->new();
     my $f = $mech->get( "https://raw.github.com/ivanoff/cms.simpleness.org/master/".$file );
-    return ( $mech->content =~ /This is not the web page/ )? 0 : $mech->content;
+#    return ( $mech->content =~ /This is not the web page/ )? 0 : $mech->content;
+    return $mech->content;
 }
 
 sub compare {
     my ( $old, $new ) = @_;
     return diff \$old, \$new;
-}
-
-sub update {
-    utime time+$main::CONFIG->{update_rules_timeout}, 
-          time+$main::CONFIG->{update_rules_timeout}, $main::CONFIG->{update_rules_file};
-    open my $log, '>>', $main::CONFIG->{update_log_file};
-
-    close $log;
 }
 
 1;

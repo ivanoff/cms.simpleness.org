@@ -5,30 +5,18 @@ use MAIN;
 use MAIN::Update;
 
 return "can't find update file $CONFIG->{update_rules_file}" unless -f $CONFIG->{update_rules_file};
-my $up = eval { local $SIG{__DIE__}; do $CONFIG->{update_rules_file} };
+my $remoute = get_remote_content( 'modules/admin/config/update.pl' );
+my $up = eval "$remoute";
 return "error in ../$CONFIG->{update_rules_file}" if ref $up ne 'HASH';
 
 defaults { read_only => 1, };
 
 you_cannot 'view_update' or
-
 {
 
-    '/admin/update(/(.*))?' => sub {
-
-        my $files;
-        foreach ( keys %{$up->{files}} ) {
-            $files->{$_}=file_to_md5('../'.$_);
-            if ( $2 && $files->{$_} ne $up->{files}{$_} ){
-                $files->{$_} = $up->{files}{$_};
-                open my $f, '>', $_;
-                print \$f &get_remote_content( $_ );
-                close $f;
-            }
-
-        }
-        
-        process ('admin/update/index.tpl', { old => $up->{files}, new => $files });
+    '/admin/update' => sub {
+        my %files = map { $_ => file_to_md5('../'.$_) } keys %{$up->{files}};
+        process ('admin/update/index.tpl', { old => $up->{files}, new => \%files });
     },
 
     '/admin/update/diff/(.*)' => sub {
@@ -39,7 +27,18 @@ you_cannot 'view_update' or
         open F, '<', '../'.$file;
         my $current = join '', <F>;
         close F;
-        process ('admin/update/diff.tpl', { diff => compare ( $remote, $current ) });
+        process ('admin/update/diff.tpl', { diff => compare ( $remote, $current, ) });
+    },
+
+    '/admin/update/go' => sub {
+        foreach ( keys %{$up->{files}} ) {
+            next if $up->{files}{$_} eq file_to_md5('../'.$_);
+            make_path( "../$1" ) if /(.*)\/.*?/ && !-d $1;
+            open my $f, '>', '../'.$_;
+            print {$f} &get_remote_content( $_ );
+            close $f;
+        }
+        process ('admin/update/done.tpl');
     },
 
 };

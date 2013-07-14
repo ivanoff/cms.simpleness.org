@@ -79,7 +79,6 @@
     'template/gallery/gallery.tpl' => '3263ce5747bd2814e1d4e108e751b53a',
     'template/gallery/image.tpl' => '16be6f670541838e134cf75f4b223084',
     'template/gallery/index.tpl' => '702e5083799647e330449f617a755029',
-    'template/index.tpl' => '049fbf04b9114a8f7e2d7a91e847c197',
     'template/login/change/done.tpl' => 'c48e538f0130dc7452dae5f19fc7771e',
     'template/login/change/index.tpl' => '0a0bf23847a0a97e72b3c1dffbe573af',
     'template/login/index.tpl' => '85c3868a2d813cfa9788792f8390044a',

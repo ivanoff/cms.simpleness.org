@@ -7,6 +7,7 @@
 [% END %]
 
 [% IF access.add_news %]
+<a href="/news">[% t('news manager') %]</a><br />
 <a href="/admin/news/add">[% t('add news') %]</a><br />
 [% END %]
 
@@ -22,7 +23,9 @@
 <a href="/admin/lang/check">[% t('update language in database') %]</a><br />
 [% END %]
 
+[% IF access.edit_content %]
 <a href="/admin/renew/sitemap">[% t('renew the sitemap') %]</a><br />
+[% END %]
 
 [% IF access.edit_users %]
 <a href="/admin/users">[% t('edit users') %]</a><br />

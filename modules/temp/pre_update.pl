@@ -19,15 +19,24 @@ use lib '..';
 use CONFIG;
 use MAIN::Update;
 
+#print keys %{&filelist};
 die "can't find update file ../$CONFIG->{update_rules_file}" unless -f '../'.$CONFIG->{update_rules_file};
 my $up = eval { local $SIG{__DIE__}; do '../'.$CONFIG->{update_rules_file} };
 die "error in ../$CONFIG->{update_rules_file}" if ref $up ne 'HASH';
 
-my ( $h, $v, $a, $r );
-GetOptions ( "help" => \$h, "version:f" => \$v, "add=s" => \$a, "remove=s" => \$r, ) or die( &help_message );
-die( &help_message ) if $h;
+my ( $h, $v, $c, $a, $r, $l, $m );
+GetOptions ( 
+        "help"  => \$h, 
+        "version:f" => \$v, 
+        "commit"    => \$c, 
+        "ls"    => \$l, 
+        "miss"  => \$m, 
+        "add=s" => \$a, 
+        "remove=s"  => \$r, ) or die( &help_message );
+die( &help_message ) if $h || !grep { defined $_ } ( $v, $c, $a, $r, $l, $m );
 
-if ( defined $v && $v =~ /^\d+(\.\d+)?$/ ) {
+if ( (defined $v && $v =~ /^\d+(\.\d+)?$/) || $c ) {
+    $v = $up->{version} + 0.01;
     print "Current version: ".$up->{version}."\n";
     die "long jump to new version" if $v > $up->{version}+1;
     die "backward version" if $v && $v < $up->{version};
@@ -41,6 +50,23 @@ if ( defined $v && $v =~ /^\d+(\.\d+)?$/ ) {
     }
 }
 
+if ( $l ) {
+    foreach my $file ( sort keys $up->{files} ) {
+        print $file."\n";
+    }
+}
+
+if ( $m ) {
+    my $all_files = &filelist;
+    foreach my $file ( sort keys %$all_files ) {
+        next if $up->{files}{'/'.$file};
+        print $file."\n";
+    }
+    foreach my $file ( sort keys $up->{files} ) {
+        print "!".$file."\n" unless $all_files->{$file};
+    }
+}
+
 if ( $a ) {
     foreach my $file ( split ',', $a ) {
         $up->{files} = { %{$up->{files}}, %{filelist($file)} };
@@ -49,7 +75,7 @@ if ( $a ) {
 }
 
 if ( $r ) {
-    foreach my $regex ( split ',', $a ) {
+    foreach my $regex ( split ',', $r ) {
         $regex =~ s/\./\./g;
         $regex =~ s/\*/.*/g;
         $regex =~ s/\?/./g;
@@ -86,7 +112,7 @@ sub filelist {
     my $result = {};
     my $mask = shift || '*';
     foreach ( <../../$mask> ) {
-        return {} if /\.(svn|git)$/;
+        return {} if m%/(\.svn|\.git|temp|tmp)/%;
         /^(?:\.\.\/){2}(.*)$/;
         $result = { %$result, %{filelist( $1.'/*' )} } if -d;
         $result->{$1} = file_to_md5($_) if -f;
@@ -102,6 +128,7 @@ Usage:  $0 [parameters] [command]
 Command line parameters:
   -h,  --help           show this help
   -v,  --version        show/change current version
+  -l,  --ls             list files
   -a,  --add            add files to update list
   -r,  --remove         remove files from update list
 

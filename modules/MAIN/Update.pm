@@ -11,6 +11,7 @@ our @ISA     = qw( Exporter );
 our @EXPORT  = qw( update need_to_update file_to_md5 get_remote_content compare );
 
 sub file_to_md5 {
+print $_[0]."\n";
     return 0 unless @_ || !-f $_[0];
     open F, '<', $_[0];
     my $content = join '', <F>;

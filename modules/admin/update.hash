@@ -14,11 +14,18 @@ you_cannot 'view_update' or
 
 {
 
-    '/admin/update' => sub {
+    '/admin/update(/(.*))?' => sub {
 
         my $files;
         foreach ( keys %{$up->{files}} ) {
             $files->{$_}=file_to_md5('../'.$_);
+            if ( $2 && $files->{$_} ne $up->{files}{$_} ){
+                $files->{$_} = $up->{files}{$_};
+                open my $f, '>', $_;
+                print \$f &get_remote_content( $_ );
+                close $f;
+            }
+
         }
         
         process ('admin/update/index.tpl', { old => $up->{files}, new => $files });

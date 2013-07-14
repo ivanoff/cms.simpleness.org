@@ -111,6 +111,7 @@
 	'New news body'	=> ' ',
 	'New news header'	=> ' ',
 	'News'	=> ' ',
+	'news manager'	=> ' ',
 	'No'	=> ' ',
 	'no answer'	=> ' ',
 	'North America'	=> ' ',

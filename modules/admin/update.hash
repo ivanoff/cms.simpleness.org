@@ -11,7 +11,7 @@ return "error in ../$CONFIG->{update_rules_file}" if ref $up ne 'HASH';
 
 defaults { read_only => 1, };
 
-you_cannot 'view_update' or
+you_cannot 'site_update' or
 {
 
     '/admin/update' => sub {

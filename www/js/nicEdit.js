@@ -1709,7 +1709,9 @@ nicEditors.registerPlugin(nicPlugin,nicLogoutOptions);
     	$(window).unbind("focusout");
 
         var what_hash = {};
-	if( where.indexOf("?") == -1 ) {
+        if( typeof what === 'object' && Object.keys(what) instanceof Array ) {
+            what_hash = what;
+	} else if( where.indexOf("?") == -1 ) {
             what_hash["body"] = what;
         } else {
             if ( is_silent(where) && !info ) return false;

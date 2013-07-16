@@ -80,7 +80,6 @@
 	<!-- Navigation -->
 	<div id="navigation">
 		<ul class="dropdown dropdown-horizontal">
-
 [% BLOCK main_menu %]
     [% FOREACH m IN menu %]
         [% NEXT IF m.menu_parent != level %]

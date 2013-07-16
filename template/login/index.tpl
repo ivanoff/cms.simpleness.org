@@ -16,13 +16,14 @@
 <br />
 <input name="ref" value="[% referer %]" type="hidden">
 <input style="font-weight: bold;" type="submit" name="submit" />
-
 </form>
 
 <br /><br />
 
+<!--
 <a href="/login/register">[% t('Register') %]</a>
 |
 <a href="/login/recover">[% t('Recover password') %]</a>
+-->
 
 </div>

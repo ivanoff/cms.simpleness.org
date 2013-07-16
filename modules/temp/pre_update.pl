@@ -128,6 +128,7 @@ Usage:  $0 [parameters] [command]
 Command line parameters:
   -h,  --help           show this help
   -v,  --version        show/change current version
+  -c,  --commit         commit with new version release
   -l,  --ls             list files
   -a,  --add            add files to update list
   -r,  --remove         remove files from update list

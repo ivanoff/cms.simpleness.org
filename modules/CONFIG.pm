@@ -49,6 +49,8 @@ our $CONFIG = {
                      ko=>'한국어', pt=>'língua portuguesa', },
         languages_dont_translate => {
 #                     ru => '2@ivanoff.org.ua',
+#                     ua => '', #default email
+#                     en => '',
                     },
         phrases_dont_translate => [
                      'Simpleness CMS', 'cms.simpleness.org', 'simpleness.org',

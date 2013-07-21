@@ -27,7 +27,7 @@
 	            cte_text = '<font color="#AAA"><small>[% t('click to edit') %]</small></font>';
 	        }
 	        $(".editable").each(function(){ 
-	            if ( $(this).text().replace(/(\n|\r|\s)+$/, '') == "" ) {
+	            if ( $(this).html().replace(/(\n|\r|\s)+$/, '') == "" ) {
 	                $(this).html( cte_text );
 	                $(this).live('click', function () {
 	                    if( $(this).html() == cte_text ){
@@ -147,7 +147,8 @@
 </div>
 
 	<p>
-	Created by <a href="http://ivanoff.org.ua" target="_blank">ivanoff</a>
+	Created by <a href="http://ivanoff.org.ua" target="_blank">ivanoff</a> / 
+	Powered by <a href="http://cms.simpleness.org" target="_blank">Simpleness CMS</a>
 	<a href="/login"><img src="/images/btn_key.png" id="admin_key" border="0"></a>
 	</p>
 

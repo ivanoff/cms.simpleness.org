@@ -29,7 +29,7 @@
 <a href="/gallery/[% gallery.${g}.gal_key %]">[% gallery.${g}.gal_name %]</a>
 </h3>
 </legend>
-<img align="top" src="/[% config_images.PATH %]/[% g %]/[% config_images.SIZE.0 %]/[% img.${g}.img_name %]" alt="[% gallery.${g}.gal_name %]">
+<a href="/gallery/[% gallery.${g}.gal_key %]"><img align="top" src="/[% config_images.PATH %]/[% g %]/[% config_images.SIZE.0 %]/[% img.${g}.img_name %]" alt="[% gallery.${g}.gal_name %]"></a>
 </figure>
 
 [% END %]

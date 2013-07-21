@@ -36,11 +36,7 @@ you_cannot 'manage_gallery' or
         cache_delete( $page );
 #        if ( $page =~ /^_/ ) {};
 
-        if ( is_default_lang( $lang ) ) {
-            sql( "DELETE FROM base_content WHERE content_page=?", $page );
-        } else {
-            sql( "DELETE FROM base_content WHERE content_page=? AND lang=?", $page, $lang );
-        }
+        sql( "DELETE FROM base_content WHERE content_page=? AND lang=?", $page, $lang );
 
         if ( $body ) {
             sql("INSERT INTO base_content ( content_body, content_page, lang ) 

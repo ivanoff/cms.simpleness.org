@@ -106,7 +106,7 @@ unless ( $yes_default ) {
     print "\nPlease, enter parameters below:\n";
     $CONFIG->{site}  = param( "site url",    $CONFIG->{site} );
     $CONFIG->{email} = param( "your e-mail", $CONFIG->{email} );
-#    my $pass  = param( "password for admin area" );
+    my $pass  = param( "password for admin area", 'admin' );
     
     
     ### Update config file ###
@@ -125,14 +125,16 @@ unless ( $yes_default ) {
 }
 
 ### Import and update database ###
-open SQL, '<', 'install.sql';
-$dbh->do( $_ ) for split /;\n/, join( '', <SQL> );
-close SQL;
+if( param( "Do you want import install.sql?", 'y' ) eq 'y' ) {
+    open SQL, '<', 'install.sql';
+    $dbh->do( $_ ) for split /;\n/, join( '', <SQL> );
+    close SQL;
+}
 
-my $sth = $dbh->prepare( "UPDATE base_users SET user_password='' WHERE user_login=?" );
-my $rv = $sth->execute( 'admin' );
-#my $sth = $dbh->prepare( "UPDATE base_users SET user_password=MD5(CONCAT(?,MD5(?),MD5(?))) WHERE user_login=?" );
-#my $rv = $sth->execute( $pass, 'admin', $pass.'admin', 'admin' );
+#my $sth = $dbh->prepare( "UPDATE base_users SET user_password='' WHERE user_login=?" );
+#my $rv = $sth->execute( 'admin' );
+my $sth = $dbh->prepare( "UPDATE base_users SET user_password=MD5(CONCAT(?,MD5(?),MD5(?))) WHERE user_login=?" );
+my $rv = $sth->execute( $pass, 'admin', $pass.'admin', 'admin' );
 
 
 ### Remove this file

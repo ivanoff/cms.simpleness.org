@@ -2,6 +2,7 @@ package TRANSLATE;
 
 use strict;
 
+use MAIN;
 use MAIN::Laconic;
 use CONFIG;
 use utf8;

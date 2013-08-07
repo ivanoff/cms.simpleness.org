@@ -1,0 +1,29 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+
+{
+    '/comments' => sub {
+
+        my $customer = sql("SELECT * FROM base_users WHERE user_login=?", session('slogin') );
+
+        if( param('text') && ( (param('email')&&param('name') ) || $customer->[0]{user_id} ) ) {
+            my $name  = (param('name'))?  param('name')  : $customer->[0]{user_name};
+            my $email = (param('email'))? param('email') : $customer->[0]{user_login};
+            my $text  = param('text');
+
+            my $page = $1 if $ENV{'HTTP_REFERER'} =~ m%https?://.*?(/.*)%;
+            sql("INSERT INTO base_comments (comments_page, comments_owner, comments_body, comments_key, lang)
+                 VALUES (?,?,?,?,?)", $page, $email, $text, 1, lang);
+
+#            redirect('comments/success');
+        }
+
+    },
+
+    '/comments/success' => sub {
+        process( 'comments/success.tpl' );
+    },
+
+};

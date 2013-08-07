@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+use lib "../subdomain";
+
+{
+
+    '(.*)' => sub {
+
+        my ( $url, $subdomain ) = @_;
+        $subdomain = join '/', reverse split /\./, $subdomain;
+	return 0 if $url =~ /\.\.\// || $subdomain =~ /\.\.\//;
+
+        $main::CONFIG->{languages} = [ qw( en ru de ) ];
+        return undef;
+
+    },
+
+};

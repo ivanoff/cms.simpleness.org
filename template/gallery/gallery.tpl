@@ -57,14 +57,6 @@
 	}
 	return false;
     });
-    $('.move-right').click(function () {
-	$(this).parent().insertAfter( $(this).parent().next() );
-//	p1 = $(this).parent().html();
-//	p2 = $(this).parent().next().html();
-//	$(this).parent().next().html( p1 );
-//	$(this).parent().html( p2 );
-	return false;
-    });
 </script>
 [% END %]
 

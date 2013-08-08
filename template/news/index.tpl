@@ -19,9 +19,9 @@
 
 [% FOREACH n IN news %]
 
-<small><b>[% SET d = n.news_date.substr(0,10).split('-'); t(month(d.1)) _ ' ' _ d.2 _', ' _ d.0 %]</b></small>
-&nbsp;
     <div class="news index">
+<small><b>[% SET d = n.news_date.substr(0,10).split('-'); t(month(d.1)) _ ' ' _ d.2 _', ' _ d.0 %]</b></small><br>
+&nbsp;
 [% IF access.add_news %]
 <i class='icon-trash delete' name="[% n.news_key %]" alt="[% t('delete') %]"></i>
 [% END %]

@@ -52,11 +52,8 @@ if ( $SESSION->param('ip') && $SESSION->param('ip') ne $ENV{REMOTE_ADDR} ) {
 #-250
 
 ## Get current language
-my $lang = ($ENV{'SERVER_NAME'} =~ /^([a-z]{2})\./i)? $1 : lang('default');
-unless ( grep {$_ eq $lang} @{$CONFIG->{languages}} ) {
-    print "Status: 404 Not Found\n\n";
-    exit 0;
-}
+my $lang = ($ENV{'SERVER_NAME'} =~ /^([a-z]{2})\./i)? $1 : '';
+$lang = lang('default') unless grep {$_ eq $lang} @{$CONFIG->{languages}};
 
 $t = TRANSLATE->new($lang);
 $db = DATABASE->new;
@@ -80,12 +77,14 @@ $tt = {
 
 ## exec &begin link in DEFAULT subsection with REDIRECT_URL parameter
 module( '&begin', "/DEFAULT.hash", [ $ENV{'REDIRECT_URL'} ] );
-#-0
+
 my $body;
-eval {
-    ## get result from subsections with $ENV{'REDIRECT_URL'} link
-    $body = module($ENV{'REDIRECT_URL'});
-};
+#-0
+if ( $ENV{'SERVER_NAME'} =~ /^(.*)\.$CONFIG->{site}$/i ) {
+    eval { $body = module( $1 , "/SUBDOMAIN.hash", [ $ENV{'REDIRECT_URL'} ] ); };
+    print $@;
+}
+eval { $body = module( $ENV{'REDIRECT_URL'} ); } unless $body;
 #-100
 
 module( '&end', "/DEFAULT.hash", [ $ENV{'REDIRECT_URL'} ] );

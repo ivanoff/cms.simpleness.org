@@ -15,7 +15,7 @@ defaults { gallery=>\%gallery, max_gal_id=>$max_gal_id, image=>1, read_only => 1
     '/gallery' => sub {
         my %images = map { $_->{gal_key} => $_ } 
                     @{sql ( "SELECT * FROM base_gallery_images 
-                            GROUP BY gal_key ORDER BY img_order DESC" )};
+                            ORDER BY img_order ASC" )};
         process( 'gallery/index.tpl', { img=>\%images } );
     },
 

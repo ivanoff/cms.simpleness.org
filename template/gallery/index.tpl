@@ -7,7 +7,7 @@
     $(document).ready(function(){
         $('.delete').click(function () {
             save_text( '/admin/gallery/delete/'+$(this).attr('name'), {}, 'gallery was deleted'); 
-	    $(this).parent().animate({opacity:0}, 700, function(){ $(this).css({display:"none"}); });
+	    $(this).parent().parent().parent().animate({opacity:0}, 700, function(){ $(this).css({display:"none"}); });
 	    return false;
         });
     });

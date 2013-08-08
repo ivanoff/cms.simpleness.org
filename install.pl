@@ -100,15 +100,15 @@ while ( my $error = db_connect ) {
     $CONFIG->{db_password} = param( "database password", $CONFIG->{db_password} );
 }
 
-
+my $pass;
 ### get parameters ###
 unless ( $yes_default ) {
     print "\nPlease, enter parameters below:\n";
     $CONFIG->{site}  = param( "site url",    $CONFIG->{site} );
     $CONFIG->{email} = param( "your e-mail", $CONFIG->{email} );
-    my $pass  = param( "password for admin area", 'admin' );
-    
-    
+    $pass  = param( "password for admin area", 'admin' );
+
+
     ### Update config file ###
     open F, '<', 'modules/CONFIG.pm';
     my @cfg = <F>;

@@ -201,6 +201,7 @@
 	'user\'s password'	=> 'пароль пользователя',
 	'users'	=> 'пользователей',
 	'waiting'	=> 'ожидание',
+	'Weather forecast'	=> 'Прогноз погоды',
 	'Wellcome back'	=> 'Добро пожаловать обратно',
 	'Western Africa'	=> 'Западная Африка',
 	'Western Asia'	=> 'Западная Азия',

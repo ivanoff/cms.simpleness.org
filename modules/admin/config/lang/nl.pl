@@ -201,6 +201,7 @@
 	'user\'s password'	=> 'wachtwoord van de gebruiker',
 	'users'	=> 'gebruikers',
 	'waiting'	=> 'wachten',
+	'Weather forecast'	=> 'Weerbericht',
 	'Wellcome back'	=> 'welkom terug',
 	'Western Africa'	=> 'West-Afrika',
 	'Western Asia'	=> 'West-Azië',

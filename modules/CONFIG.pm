@@ -61,7 +61,7 @@ our $CONFIG = {
 
 # Error config section
 
-        show_errors        => 0,
+        show_errors        => 1,
         log_error          => '../log/error.log',
         log_sql            => '../log/clear.sql',
 

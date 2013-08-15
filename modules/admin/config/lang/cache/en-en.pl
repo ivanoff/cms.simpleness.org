@@ -18,4 +18,5 @@
 	'show content pages'	=> 'show content pages',
 	'Update'	=> 'Update',
 	'URL'	=> 'URL',
+	'Weather forecast'	=> 'Weather forecast',
 };

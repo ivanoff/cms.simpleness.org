@@ -201,6 +201,7 @@
 	'user\'s password'	=> ' ',
 	'users'	=> ' ',
 	'waiting'	=> ' ',
+	'Weather forecast'	=> ' ',
 	'Wellcome back'	=> ' ',
 	'Western Africa'	=> ' ',
 	'Western Asia'	=> ' ',

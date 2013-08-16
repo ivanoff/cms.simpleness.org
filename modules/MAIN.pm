@@ -242,6 +242,15 @@ if( keys %{$_->{Image}} ) {
 
 }
 
+sub cookie_expires {
+    my $ts = shift;
+    my @wdays = qw/Sun Mon Tue Wed Thu Fri Sat/;
+    my @months = qw/Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec/;
+    my @m = ($ts)? gmtime($ts) : gmtime();
+    return sprintf('%s, %02d-%s-%04d %02d:%02d:%02d GMT',
+                    $wdays[$m[6]], $m[3], $months[$m[4]], $m[5] + 1900, $m[2], $m[1], $m[0]);
+}
+
 =head1 MAIN
 
 =head1 SYNOPSIS

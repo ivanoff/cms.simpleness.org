@@ -101,16 +101,9 @@ if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
 } else {
     my $session_id = ( $ENV{HTTP_COOKIE} && $ENV{HTTP_COOKIE} =~ /CGISESSID=([0-9a-f]{32})/ )? $1 : $SESSION->id();
 #remove all $q
-    my $cookie = $q->cookie(-name=>'CGISESSID',
-                            -value=>$session_id,
-                            -expires=>$CONFIG->{session_expires},
-                            -path=>'/',
-                            -domain=>$CONFIG->{site},
-                            );
-
     print 
         $q->header(-charset=>"utf-8",
-            -cookie=>$cookie,
+            -cookie=>"CGISESSID=$session_id; domain=$CONFIG->{site}; path=/; expires=".cookie_expires(time+$CONFIG->{session_expires}),
             -Pragma        => 'no-cache',
             -Cache_Control => join(', ', qw(
                 private

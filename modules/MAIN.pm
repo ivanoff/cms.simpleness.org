@@ -96,8 +96,9 @@ sub module {
         return $ref unless ref($ref);
         if (ref($ref) eq 'HASH') { %main = (%main, %$ref); };
     }
+    return $main{''}( @$arg ) unless $link;
     foreach (sort {length $b <=> length $a} keys %main) {
-        if (my @arr = ($link)? $link =~ /^$_$/ : () ) {
+        if (my @arr = $link =~ /^$_$/ ) {
             return $main{$_}( @$arg, @arr );
         }
     }

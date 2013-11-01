@@ -48,7 +48,6 @@ sub sql {
     return \@result;
 }
 
-
 sub DESTROY {
     my $self = shift;
     my $dbh = ${$self->{'connect'}};

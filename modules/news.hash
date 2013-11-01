@@ -5,23 +5,22 @@ use MAIN;
 
 title t('News');
 
-my $r;
 defaults { 
     read_only => 1,
-    month  => sub{ $_ = shift;
-                    my @m = qw( January February March April May June
-                             July August September October November December );
-                     return $m[$_-1]; },
+    month  => sub{ 
+        qw( January February March April May June
+            July August September October November December )[(shift)-1] 
+    },
 };
 
 {
     '/news' => sub {
-        $r = sql( "SELECT * FROM base_news WHERE lang=? ORDER BY news_date DESC", lang );
-        process( 'news/index.tpl', { news => $r } );
+        my $r = sql( "SELECT * FROM base_news WHERE lang=? ORDER BY news_date DESC", lang );
+        process 'news/index.tpl', { news => $r };
     },
 
     '/news/(\d+)' => sub {
-        $r = sql( "SELECT * FROM base_news WHERE lang=? AND news_key=?", lang, $1 );
-        process( 'news/one.tpl', { news => $r, news_key => $1 } );
+        my $r = sql( "SELECT * FROM base_news WHERE lang=? AND news_key=?", lang, $1 );
+        process 'news/one.tpl', { news => $r, news_key => $1 };
     },
 };

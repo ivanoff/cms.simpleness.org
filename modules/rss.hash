@@ -6,6 +6,6 @@ use MAIN;
 {
     '/rss' => sub {
         header 'xml';
-        process( 'xml/rss.tpl' );
+        process 'xml/rss.tpl';
     },
 };

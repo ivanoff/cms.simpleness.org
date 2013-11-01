@@ -17,27 +17,23 @@ our $CONFIG = {
         modules_path       => '../modules',
         config_files_path  => '../modules/admin/config',
 
-# DB section
-
+# DATABASE
         db_type            => 'mysql',
         db_host            => 'localhost',
         db_dbname          => 'clear',
         db_user            => 'clear',
         db_password        => 'clear',
 
-# Sessions dirs section
+# SESSIONS
+        session_dir        => '../tmp/session', # path to store sesions
+        session_expires    => 60*60*3,          # session expires ( in seconds )
 
-        session_dir        => '../tmp/session',
-        session_expires    => '+1h',
+# CACHE
+        cache              => 0,                # 0 - don't cache pages, 1 - do cache pages
+        cache_dir          => '../tmp/cache',   # path to store cache
+        cache_time         => 60*60*24*31,      # cache expire time (in seconds )
 
-# Cache dirs section
-
-        cache              => 0,
-        cache_time         => 259200,
-        cache_dir          => '../tmp/cache',
-
-# Language section
-
+# LANGUAGE
         default_language   => 'en',
         languages          => [ qw( en ru ua fr de es it gr ch jp tr ar fa il pl lv et lt nl bg ro da ko pt ) ],
 
@@ -59,15 +55,13 @@ our $CONFIG = {
         languages_cache    => 1,
         languages_cache_path => '../modules/admin/config/lang/cache',
 
-# Error config section
-
+# ERROR CONFIG
         show_errors        => 1,
         log_error          => '../log/error.log',
         log_sql            => '../log/clear.sql',
 
 # Automatically updates section
 # frequency parameter regexp string 'YYYY-MM-DD;HH:MM:SS;DOW;DOY'
-
         update_automatically    => 1,
         update_log_file         => '../log/upgate.log',
         update_rules_file       => '../modules/admin/config/update.pl',

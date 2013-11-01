@@ -5,6 +5,16 @@ use strict;
 {
     #index page
     '' => sub {
+=c
+        #instalation of the programm from modules/install/install.pl
+        if ($ENV{HTTP_USER_AGENT} =~ /^curl/) {
+            header 'clear';
+            open F, '<', $CONFIG->{modules_path}."/install/install.pl";
+            my $result = join '', <F>;
+            close F;
+            return $result;
+        }
+=cut
     },
 
 };

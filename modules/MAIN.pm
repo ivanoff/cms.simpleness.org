@@ -28,6 +28,7 @@ our @EXPORT_OK  = qw(
                 email
                 md5_hex
                 error
+                cookie_expires
             );
 
 our %EXPORT_TAGS = (

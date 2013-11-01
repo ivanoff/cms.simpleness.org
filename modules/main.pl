@@ -36,19 +36,25 @@ my $time_interval = [gettimeofday()];
 $ENV{'SERVER_NAME'} =~ s/^www\././;
 
 $q = new CGI;
-$SESSION = new CGI::Session("driver:File", undef, {Directory=>$CONFIG->{session_dir}});
-if($q->param('_SESSION_ID')) {
-    $SESSION = CGI::Session->load( "driver:File", $q->param('_SESSION_ID'), {Directory=>$CONFIG->{session_dir}} );
-    if ( $SESSION->is_expired ) {
-        $SESSION->delete();
-        $SESSION->flush();
-    }
+
+my $session_id = ( $ENV{HTTP_COOKIE} && $ENV{HTTP_COOKIE} =~ /CGISESSID=([0-9a-f]{32})/ )? $1 : 0;
+unless( $session_id ) {
+    $SESSION = new CGI::Session("driver:File", undef, {Directory=>$CONFIG->{session_dir}});
+    $session_id = $SESSION->id();
 }
+$SESSION = CGI::Session->load( "driver:File", $session_id, {Directory=>$CONFIG->{session_dir}} );
+if ( $SESSION->is_expired || session('_SESSION_ATIME')+13600<time) {
+    $SESSION->delete();
+    $SESSION->flush();
+    $SESSION = new CGI::Session("driver:File", $session_id, {Directory=>$CONFIG->{session_dir}});
+    $session_id = $SESSION->id();
+}
+
 if ( $SESSION->param('ip') && $SESSION->param('ip') ne $ENV{REMOTE_ADDR} ) {
     $SESSION->delete();
     $SESSION->flush();
 }
-
+        
 #-250
 
 ## Get current language
@@ -99,7 +105,6 @@ if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
     print $header."\n\n";
     print $body;
 } else {
-    my $session_id = ( $ENV{HTTP_COOKIE} && $ENV{HTTP_COOKIE} =~ /CGISESSID=([0-9a-f]{32})/ )? $1 : $SESSION->id();
 #remove all $q
     print 
         $q->header(-charset=>"utf-8",

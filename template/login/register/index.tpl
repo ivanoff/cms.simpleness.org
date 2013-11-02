@@ -25,7 +25,7 @@ function validate(form) {
 [% t('Repeat Your password') %]: <br /><input type="password" name="password_r" required /><br />
 
 <br />
-<input name="ref" value="[% referer %]" type="hidden">
+<input name="ref" value="[% env('HTTP_REFERER') %]" type="hidden">
 <input style="font-weight: bold;" type="submit" name="submit" />
 
 </form>

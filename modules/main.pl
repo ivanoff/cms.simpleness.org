@@ -3,10 +3,7 @@
 use strict;
 use warnings;
 
-use DBI;
 use Template;
-
-use CGI;
 use CGI::Session;
 
 use CONFIG;
@@ -14,7 +11,7 @@ use DATABASE;
 use TRANSLATE;
 use MAIN;
 
-our ( $db, $q, $t, $tt, $template, $SESSION, $header, );
+our ( $db, $t, $tt, $template, $SESSION, $header, );
 
 {
     # create SubTemplate package for override 'process' method
@@ -35,8 +32,6 @@ our ( $db, $q, $t, $tt, $template, $SESSION, $header, );
 my $time_interval = [gettimeofday()];
 $ENV{'SERVER_NAME'} =~ s/^www\././;
 
-$q = new CGI;
-
 my $session_id = ( $ENV{HTTP_COOKIE} && $ENV{HTTP_COOKIE} =~ /CGISESSID=([0-9a-f]{32})/ )? $1 : 0;
 unless( $session_id ) {
     $SESSION = new CGI::Session("driver:File", undef, {Directory=>$CONFIG->{session_dir}});
@@ -54,8 +49,6 @@ if ( $SESSION->param('ip') && $SESSION->param('ip') ne $ENV{REMOTE_ADDR} ) {
     $SESSION->delete();
     $SESSION->flush();
 }
-        
-#-250
 
 ## Get current language
 my $lang = ($ENV{'SERVER_NAME'} =~ /^([a-z]{2})\./i)? $1 : '';
@@ -63,22 +56,21 @@ $lang = lang('default') unless grep {$_ eq $lang} @{$CONFIG->{languages}};
 
 $t = TRANSLATE->new($lang);
 $db = DATABASE->new;
-#-50
 $template = SubTemplate->new($CONFIG_TEMPLATE);
-#-50
+
+#fake CGI module
+use CGI;
+our $q = CGI->new;
 
 ## Default variables for Template Toolkit
 $tt = {
-    v            => {$q->Vars},
-    uri          => $ENV{'REDIRECT_URL'},
-    referer      => $ENV{'HTTP_REFERER'},
-    session      => sub { $_=shift; $SESSION->param($_) },
-    config       => $CONFIG,
+    env           => sub{ $ENV{(shift)} },
+    session       => sub{ $SESSION->param(shift) },
+    config        => $CONFIG,
     config_images => $CONFIG_IMAGES,
-    t            => sub{ $_=shift; return $t->t($_); },
-    language     => $t->{'language'},
-    direct_rtl   => sub{ $t->{'language'} =~ /(il|fa|ar)/ },
-    access       => access( $ENV{'REDIRECT_URL'}, $SESSION->param('slogin') ),
+    t             => sub{ $t->t(shift) },
+    language      => $t->{'language'},
+    access        => access( $ENV{'REDIRECT_URL'}, $SESSION->param('slogin') ),
 };
 
 ## exec &begin link in DEFAULT subsection with REDIRECT_URL parameter
@@ -105,24 +97,19 @@ if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
     print $header."\n\n";
     print $body;
 } else {
-#remove all $q
-    print 
-        $q->header(-charset=>"utf-8",
-            -cookie=>"CGISESSID=$session_id; domain=$CONFIG->{site}; path=/; expires=".cookie_expires(time+$CONFIG->{session_expires}),
-            -Pragma        => 'no-cache',
-            -Cache_Control => join(', ', qw(
-                private
-                no-cache
-                no-store
-                must-revalidate
-                max-age=0
-                pre-check=0
-                post-check=0
-            )),
-        );
+    my $expires_date = cookie_expires(time+$CONFIG->{session_expires});
+    my $current_date = cookie_expires(time);
+    print <<EOF;
+Set-Cookie: CGISESSID=$session_id; domain=$CONFIG->{site}; path=/; expires=$expires_date
+Date: $current_date
+Pragma: no-cache
+Cache-control: private, no-cache, no-store, must-revalidate, max-age=0, pre-check=0, post-check=0
+Content-Type: text/html; charset=utf-8
+
+EOF
 
     my $page=$template->process('index.tpl', { body=>$body, }, );
-#-100
+
     if ( $template->error() ) {
         to_log( $template->error() );
         $page = $template->error() if $CONFIG->{show_errors};

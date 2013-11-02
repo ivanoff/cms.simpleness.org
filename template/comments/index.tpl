@@ -16,7 +16,7 @@
 <td align="left"><textarea name="text" rows=6 cols=55 id="text"></textarea></td></tr>
 
 <tr align="left">
-<td><input name="ref" value='[% referer %]' type="hidden"></td>
+<td><input name="ref" value='[% env('HTTP_REFERER') %]' type="hidden"></td>
 <td>
 <input type="submit" value='[% t('Send message') %]'>
 </td></tr>

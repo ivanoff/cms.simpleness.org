@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" [% IF direct_rtl %] dir="rtl"[% END %]>
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" [% IF language.search('il|fa|ar') %] dir="rtl"[% END %]>
 <head>
 	<title>[% title %]</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -46,8 +46,8 @@
 	    var session = "[% session('_SESSION_ID') %]";
 	    var lang = "[% language %]";
 	    var title = "[% title %]"; 
-	    var page = "?[% uri %]"; 
-	    var uri = "[% uri %]"; 
+	    var page = "?[% env('REDIRECT_URL') %]"; 
+	    var uri = "[% env('REDIRECT_URL') %]"; 
 	    var image_sizes = [ 'full size', '[% config_images.SIZE.join("','") %]' ];
 	</script>
 	<script src="/js/nicEdit.js" type="text/javascript"></script>
@@ -83,7 +83,7 @@
 [% BLOCK main_menu %]
     [% FOREACH m IN menu %]
         [% NEXT IF m.menu_parent != level %]
-        <li><a href="[% m.menu_url %]" [% 'class="active"' IF uri == m.menu_url %]><span>[% m.menu_name %]</span></a>
+        <li><a href="[% m.menu_url %]" [% 'class="active"' IF env('REDIRECT_URL') == m.menu_url %]><span>[% m.menu_name %]</span></a>
             <ul>[% INCLUDE main_menu level = m.menu_key %]</ul>
         </li>
     [% END %]
@@ -91,7 +91,7 @@
 [% INCLUDE main_menu level = 0 %]
 
 [% IF session('slogin') %]
-			<li><a href="/admin" [% 'class="active"' IF uri == '/admin' %]><span>[% t('Admin page') %]</span></a></li>
+			<li><a href="/admin" [% 'class="active"' IF env('REDIRECT_URL') == '/admin' %]><span>[% t('Admin page') %]</span></a></li>
 [% END %]
 			
 		</ul>
@@ -109,7 +109,7 @@
 [% END %]
 
 [% UNLESS read_only %]
-<div id="?[% uri %]" class="editable">
+<div id="?[% env('REDIRECT_URL') %]" class="editable">
 [% (access.edit_content)? content_edit : content %]
 </div>
 [% END %]

@@ -15,7 +15,7 @@
         });
         $("select option[value='"+(( typeof lang === 'undefined' )?  'en' : lang ) +"']").attr("selected","selected");
         $('#languages').change(function(){
-	    location = "//" + $(this).val() + ".[% config.site %][% uri %]";
+	    location = "//" + $(this).val() + ".[% config.site %][% env('REDIRECT_URL') %]";
 	});
     });
 </script>

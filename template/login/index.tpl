@@ -14,7 +14,7 @@
 <input type="password" name="password" required /><br />
 
 <br />
-<input name="ref" value="[% referer %]" type="hidden">
+<input name="ref" value="[% env('HTTP_REFERER') %]" type="hidden">
 <input style="font-weight: bold;" type="submit" name="submit" />
 </form>
 

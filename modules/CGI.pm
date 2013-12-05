@@ -84,10 +84,7 @@ sub cookie_expires {
                     $wdays[$m[6]], $m[3], $months[$m[4]], $m[5] + 1900, $m[2], $m[1], $m[0]);
 }
 
-
 # thanks to Lincoln D. Stein
-
-
 # unescape URL-encoded data
 sub unescape {
   my $todecode = shift;

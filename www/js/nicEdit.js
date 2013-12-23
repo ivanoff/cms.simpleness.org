@@ -1653,7 +1653,7 @@ var nicSEOButton = nicEditorAdvancedButton.extend({
 	},
 
 	submit : function( ) {
-            save_text( 'content/headers:' + this.ne.options.uri, this.title_val.value, 'Title modify done' );
+            save_text( '/admin/content/headers/update', this.title_val.value, 'Title modify done' );
 	    this.pane.remove();
 	}
 });
@@ -1729,6 +1729,7 @@ nicEditors.registerPlugin(nicPlugin,nicLogoutOptions);
         });
         what_hash["_SESSION_ID"] = session;
         what_hash["lang"] = lang;
+        what_hash["page"] = uri;
         $.post( where, what_hash );
 /*
 	var fd = new FormData();

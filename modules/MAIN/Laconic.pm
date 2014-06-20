@@ -13,6 +13,7 @@ our @EXPORT  = qw(
                 t lang is_default_lang
                 cache
                 param
+                param_set
                 session
                 images
             );
@@ -82,6 +83,10 @@ sub param {
     return $main::q->Vars unless @_;
     return $main::q->param( $_[0] ) unless $_[1];
     return map { $main::q->param( $_ ) } @_;
+}
+
+sub param_set {
+    return $main::q->param( @_ );
 }
 
 sub session {

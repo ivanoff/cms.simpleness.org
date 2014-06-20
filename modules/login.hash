@@ -4,10 +4,12 @@ use strict;
 use MAIN;
 
 my $r;
+$main::SESSION->{_ENABLED} = 1;
 
 {
     #password is md5(pass+md5(login)+md5(login+pass))
     '/login' => sub {
+        cache(0);   # don't cache this page
         my ( $l, $p ) = param( 'login', 'password' );
         if( $l ) {
             $r = sql( "SELECT * FROM base_users WHERE user_login=? 
@@ -34,7 +36,7 @@ my $r;
     '/login/success' => sub {
         defaults { read_only => 1, };
         cache(0);   # don't cache this page
-        $r = sql( "SELECT * FROM base_users WHERE user_login=?", session('slogin') );
+        $r = sql( "SELECT * FROM base_users WHERE MD5(user_login)=?", session('slogin') );
         process( 'login/success.tpl', { name => $r->[0]{user_name}, } );
     },
 
@@ -45,6 +47,7 @@ my $r;
     },
 
     '/login/recover' => sub {
+        cache(0);   # don't cache this page
         if( param('login') ) {
             $r = sql( "SELECT * FROM base_users WHERE user_login=?", param('login') );
             if ( $r->[0] ) {
@@ -72,6 +75,7 @@ my $r;
             $r = sql( "SELECT * FROM base_users_recover WHERE recover=?", $recover );
             if ( $r->[0] ) {
                 my $r2 = sql( "SELECT * FROM base_users WHERE user_id=?", $r->[0]{user_id} );
+                param_set( 'login', $r2->[0]{user_login} );
                 sql( "UPDATE base_users SET user_password=MD5(CONCAT(?,MD5(?),MD5(?))) WHERE user_login=?",
                         param('password'), $r2->[0]{user_login}, 
                         param('password').$r2->[0]{user_login}, $r2->[0]{user_login} );
@@ -84,6 +88,7 @@ my $r;
                     Message => process( 'messages/recover_done.tpl', 
                                                 { name => $r->[0]{user_name}, } ),
                 } );
+                return module( '/login' );
             }
             return process( 'login/recover/done.tpl' );
         } else {
@@ -92,6 +97,7 @@ my $r;
     },
 
     '/login/change' => sub {
+        cache(0);   # don't cache this page
         if( param('password') ) {
             $r = sql( "SELECT * FROM base_users WHERE MD5(user_login)=?", session( 'slogin' ) );
             my $login = $r->[0]{user_login};
@@ -110,7 +116,8 @@ my $r;
     },
 
     '/login/register' => sub {
-    return ""; ##don't register for a while
+        cache(0);   # don't cache this page
+#    return ""; ##don't register for a while
         if( param('login') =~ /[A-Z0-9\.\_\%\+\-]+@[A-Z0-9\.\-]+\.[A-Z]{2,4}/i ) {
             $r = sql( "SELECT * FROM base_users WHERE user_login=?", param('login') );
             if ( $r->[0] ) {
@@ -118,18 +125,11 @@ my $r;
             } else {
                 sql( "INSERT INTO base_users (user_id, user_login, user_password, 
                                 user_email, user_name, user_lang, group_id) 
-                                VALUES (NULL,?,MD5(CONCAT(?,MD5(?),MD5(?))),?,?,?,6)", 
-                        param('login'), param('password'), param('login'), 
-                        param('password').param('login'),'',param('name'),lang||'ru');
-                email ( { 
-                        Message => process('messages/contacts.tpl', { 
-                                        name  => param('name'), 
-                                        email => param('login'), 
-                                        text  => 'registration: '.md5_hex(param('password')) 
-                            } ),
-                    } );
+                                VALUES (NULL,?,MD5(CONCAT(?,MD5(?),MD5(?))),?,?,?,5)", 
+                        param('login'), rand(), param('login'), 
+                        rand().param('login'),param('login'),param('name'),lang||'ru');
+                return module '/login/recover';
             }
-            module( '/login' );
         }
         process( 'login/register/index.tpl' );
     },

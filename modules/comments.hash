@@ -3,27 +3,60 @@
 use strict;
 use MAIN;
 
+sub comments_show {
+    my $show = shift;
+    my $r = sql( "SELECT user_id FROM base_users WHERE MD5(user_login)=?", session( 'slogin' ) );
+    sql( "DELETE FROM base_users_config WHERE user_id=? AND config_name='comments_show'", $r->[0]{user_id} );
+    sql( "INSERT INTO base_users_config (user_id, config_name, config_value) 
+            VALUES (?, 'comments_show', ?)", $r->[0]{user_id}, $show );
+}
+
 {
     '/comments' => sub {
+        header 'clear';
 
-        my $customer = sql("SELECT * FROM base_users WHERE user_login=?", session('slogin') );
+        my $comm = sql( "SELECT * FROM base_comments WHERE comment_url=? AND lang=? AND comment_private!=1", 
+                        ( $ENV{'HTTP_REFERER'} =~ m%https?://(.*)% )? $1 : '', lang );
+        my $right = process( 'comments/right.tpl', { comments => $comm } );
 
-        if( param('text') && ( (param('email')&&param('name') ) || $customer->[0]{user_id} ) ) {
-            my $name  = (param('name'))?  param('name')  : $customer->[0]{user_name};
-            my $email = (param('email'))? param('email') : $customer->[0]{user_login};
-            my $text  = param('text');
+        my $hide_comment = -1;
+        unless ( you_cannot 'comment' ) {
+            my $r = sql( "SELECT user_id FROM base_users WHERE MD5(user_login)=?", session( 'slogin' ) );
 
-            my $page = $1 if $ENV{'HTTP_REFERER'} =~ m%https?://.*?(/.*)%;
-            sql("INSERT INTO base_comments (comments_page, comments_owner, comments_body, comments_key, lang)
-                 VALUES (?,?,?,?,?)", $page, $email, $text, 1, lang);
+            $comm = sql( "SELECT * FROM base_comments WHERE comment_url=? AND lang=? AND user_id=?", 
+                        ( $ENV{'HTTP_REFERER'} =~ m%https?://(.*)% )? $1 : '', lang, $r->[0]{user_id} );
+            $right .= process( 'comments/right.tpl', { comments => $comm } );
 
-#            redirect('comments/success');
+            $r = sql( "SELECT config_value FROM base_users_config WHERE user_id=? AND config_name='comments_show'", $r->[0]{user_id} );
+            $r->[0]{config_value} = 1 unless $r->[0];
+            $hide_comment = $r->[0]{config_value};
+        }
+
+        process 'comments/index.tpl', { showcomm => $hide_comment, right => $right };
+    },
+
+    '/comments/add' => sub {
+        my $customer = sql("SELECT * FROM base_users WHERE MD5(user_login)=?", session('slogin') );
+        if( param('text') && $customer->[0]{user_id} ) {
+            my $page = $1 if $ENV{'HTTP_REFERER'} =~ m%https?://(.*)%;
+            my $private = (param('type') == 2)? 0 : param('private');
+
+            sql("INSERT INTO base_comments (user_id, lang, comment_type, comment_url, 
+                                            comment_body, comment_position, comment_private)
+                 VALUES (?,?,?,?,?,?,?)", $customer->[0]{user_id}, lang, param('type'), $page,
+                                        param('text'), param('position'), $private, );
         }
 
     },
 
     '/comments/success' => sub {
         process( 'comments/success.tpl' );
+    },
+
+    '/comments/show/(0|1)' => sub {
+        cache(0);   # don't cache this page
+        comments_show( $1 );
+        header 'clear';
     },
 
 };

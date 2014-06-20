@@ -1,4 +1,4 @@
-<h2>[% t('Login') %]</h2>
+<h2>[% t('Login') %] | <a href="/login/register">[% t('Register') %]</a></h2>
 
 <b>[% t('Please enter your login and password') %]</b> &nbsp; 
 <small>(<a href="/login/recover">[% t('Recover password') %]</a>)</small>
@@ -20,10 +20,8 @@
 
 <br /><br />
 
-<!--
 <a href="/login/register">[% t('Register') %]</a>
 |
 <a href="/login/recover">[% t('Recover password') %]</a>
--->
 
 </div>

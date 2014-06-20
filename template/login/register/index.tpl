@@ -1,4 +1,4 @@
-<h2>[% t('Register') %]</h2>
+<h2>[% t('Register') %] | <a href="/login">[% t('Login') %]</a></h2>
 
 <script language="javascript">
 function validate(form) {

@@ -6,7 +6,7 @@ use MAIN;
 {
     '/contacts' => sub {
 
-        my $customer = sql("SELECT * FROM base_users WHERE user_login=?", session('slogin') );
+        my $customer = sql("SELECT * FROM base_users WHERE MD5(user_login)=?", session('slogin') );
 
         if( param('text') && ( (param('email')&&param('name') ) || $customer->[0]{user_id} ) ) {
             my $name  = (param('name'))?  param('name')  : $customer->[0]{user_name};
@@ -21,7 +21,7 @@ use MAIN;
             my %filesname;
             my $i = 1;
             while( param('file'.$i) ) {
-                $filesname{ param( 'file'.$i ) } = $main::q->tmpFileName( param( 'file'.$i ) );
+                $filesname{ param( 'file'.$i ) } = $main::q->tmpFileName( 'file'.$i );
                 $i++;
             }
 
@@ -30,6 +30,7 @@ use MAIN;
                                     email=>$email, text=>$text, ref=>param('ref') } ),
                     Image  => \%filesname,
                 } );
+
 
             redirect('contacts/success');
         }

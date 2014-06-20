@@ -14,12 +14,17 @@
 	    var gallery_key = "[% gal_key %]"; 
 	    cte_text = '<font color="#AAA"><small>[% t('Click to add new information about gallery') %]</small></font>';
 	</script>
-	<div class="dropZone">[% t('Drop new images here') %]</div>
+	<div class="dropZone"><b>[% t('Drop new images here') %]</b></div>
 [% END %]
       <ul id="gallerys" class="gallerys">
 [% FOREACH img IN images %]
 	    <li>
     [% PROCESS gallery/image.tpl img=img %]
+	    </li>
+[% END %]
+[% IF access.manage_gallery %]
+	    <li class='last_li'>
+	        <div class="dropZone" style="width:200px;height:200px;"><b>[% t('Drop new images here') %]</b></div>
 	    </li>
 [% END %]
       </ul>
@@ -64,7 +69,6 @@
 </td></tr></table>
 
 [% IF access.manage_gallery %]
-	<div class="dropZone">[% t('Drop new images here') %]</div>
 	<script src="/js/dropBox.js" type="text/javascript"></script>
 [% END %]
 

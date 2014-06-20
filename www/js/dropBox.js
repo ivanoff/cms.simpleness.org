@@ -4,7 +4,7 @@ $(document).ready(function() {
     var default_text = dropZone.html();
 
     if (typeof(window.FileReader) == 'undefined') {
-//        dropZone.text('Не поддерживается браузером!');
+//        dropZone.text('Do not support by browser!');
         dropZone.addClass('error');
     }
 
@@ -25,7 +25,7 @@ $.each( dropZone , function(j,z) {
         dropZone.addClass('drop');
         
 $.each( event.dataTransfer.files , function(i, file) {
-        dropZone.html('Загрузка ' + file.name + " <img src='/images/btn_loading.gif'>");
+        dropZone.html('Upload ' + file.name + " <img src='/images/btn_loading.gif' style='width:16px;height:16px'>");
 	var fd = new FormData();
 	fd.append("Filedata", file);
 	fd.append("_SESSION_ID", session);
@@ -36,7 +36,8 @@ $.each( event.dataTransfer.files , function(i, file) {
 	xhr.send(fd);
 
 	if (xhr.status==200) {
-	    $(".gallery ul").append(xhr.responseXML.getElementsByTagName("result")[0].firstChild.nodeValue);
+	    $(".gallery ul").append('<li>'+xhr.responseXML.getElementsByTagName("result")[0].firstChild.nodeValue+'</li>');
+	    $(".gallery ul").append( $(".gallery ul .last_li") );
 	    $(function() { $('.gallery a').lightBox(); });
 	}
 
@@ -49,15 +50,15 @@ $.each( event.dataTransfer.files , function(i, file) {
 
     function uploadProgress(event) {
         var percent = parseInt(event.loaded / event.total * 100);
-        dropZone.text('Загрузка: ' + percent + '%');
+        dropZone.text('Upload: ' + percent + '%');
     }
     
     function stateChange(event) {
         if (event.target.readyState == 4) {
             if (event.target.status == 200) {
-                dropZone.text('Загрузка успешно завершена!');
+                dropZone.text('Uploud was succesfull! :)');
             } else {
-                dropZone.text('Произошла ошибка!');
+                dropZone.text('There was an error while uploading!');
                 dropZone.addClass('error');
             }
     	    dropZone.fadeTo("slow", 0.33).fadeTo("slow", 1);

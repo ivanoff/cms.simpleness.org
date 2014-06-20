@@ -1729,7 +1729,7 @@ nicEditors.registerPlugin(nicPlugin,nicLogoutOptions);
         });
         what_hash["_SESSION_ID"] = session;
         what_hash["lang"] = lang;
-        what_hash["page"] = uri;
+        if ( !what_hash["page"] ) what_hash["page"] = uri;
         $.post( where, what_hash );
 /*
 	var fd = new FormData();

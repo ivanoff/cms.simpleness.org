@@ -37,16 +37,16 @@ you_cannot 'manage_gallery' or
     },
 
     '/admin/gallery/upload/(\d+)' => sub {
-        my $gal_key = $1;
-        my $upfile = param('Filedata');
-        binmode($upfile);
+        my $gal_key  = $1;
+        my $filename = param('Filedata');
         if ( ! -d images('PATH').'/'.$gal_key ) {
             make_path( images('PATH').'/'.$gal_key );
             foreach my $size ( @{images('SIZE')} ) {
                 make_path( images('PATH').'/'.$gal_key.'/'.$size );
             }
         }
-        my $file = images('PATH').'/'.$gal_key.'/'.param->{Filedata};
+        my $file = images('PATH').'/'.$gal_key.'/'.$filename;
+        my $upfile = $main::q->upload( 'Filedata' );
         open F, '>', $file;
         while ( <$upfile> ) {
             print F $_;

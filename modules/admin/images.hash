@@ -34,11 +34,10 @@ you_cannot 'manage_gallery' or
 
         my ($file, $upload_size, $upload_align) = param( 'image', 'upload_size', 'upload_align' );
         $upload_align = '' unless $upload_align =~ /^left|center|right$/;
-        return 0 unless -f $file;
-        binmode($file);
         (my $new_file = $file) =~ s/.*[\\\/]//;
+        my $upfile = $main::q->upload( 'image' );
         open F, '>', images('PATH').'/'.$new_file;
-        print F $_ while <$file>;
+        print F $_ while <$upfile>;
         close F;
 
         foreach my $size ( @{images('SIZE')} ) {

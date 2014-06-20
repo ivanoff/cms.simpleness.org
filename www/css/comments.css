@@ -1,0 +1,44 @@
+#comments {
+  float:left;
+  width:350px;
+}
+#comment-wrapper {
+  position: relative;
+}
+#commentWrapper {
+  position: absolute;
+  margin-left: 35px;
+  width: 180px;
+  left: 1000px;
+}
+#comment {
+  top: 0;
+  margin-top: 20px;
+  border-top: 1px solid purple;
+  padding-top: 19px;
+  width:350px;
+  position: fixed;
+  top: 0;
+}
+.commentWrapperf {
+  top: 0;
+  position: absolute;
+  margin-left: 35px;
+  width:130px;
+  left: 1000px;
+}
+#commentf {
+  position: absolute;
+  top: 0;
+  margin-top: 0px;
+  border-top: 1px solid purple;
+  padding-top: 19px;
+}
+#comment_show {
+  position: absolute;
+  left: 2px;
+}
+#comment_hide {
+  position: absolute;
+  left: 15px;
+}

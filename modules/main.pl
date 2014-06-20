@@ -4,7 +4,6 @@ use strict;
 use warnings;
 
 use Template;
-use CGI::Session;
 
 use CONFIG;
 use DATABASE;
@@ -32,23 +31,10 @@ our ( $db, $t, $tt, $template, $SESSION, $header, );
 my $time_interval = [gettimeofday()];
 $ENV{'SERVER_NAME'} =~ s/^www\././;
 
-my $session_id = ( $ENV{HTTP_COOKIE} && $ENV{HTTP_COOKIE} =~ /CGISESSID=([0-9a-f]{32})/ )? $1 : 0;
-unless( $session_id ) {
-    $SESSION = new CGI::Session("driver:File", undef, {Directory=>$CONFIG->{session_dir}});
-    $session_id = $SESSION->id();
-}
-$SESSION = CGI::Session->load( "driver:File", $session_id, {Directory=>$CONFIG->{session_dir}} );
-if ( $SESSION->is_expired || session('_SESSION_ATIME')+13600<time) {
-    $SESSION->delete();
-    $SESSION->flush();
-    $SESSION = new CGI::Session("driver:File", $session_id, {Directory=>$CONFIG->{session_dir}});
-    $session_id = $SESSION->id();
-}
-
-if ( $SESSION->param('ip') && $SESSION->param('ip') ne $ENV{REMOTE_ADDR} ) {
-    $SESSION->delete();
-    $SESSION->flush();
-}
+use lib '.';
+use CGI;
+our $q = CGI->new( { Directory => $CONFIG->{session_dir}, Session_enabled => 0, } );
+$SESSION = $q->{Session};
 
 ## Get current language
 my $lang = ($ENV{'SERVER_NAME'} =~ /^([a-z]{2})\./i)? $1 : '';
@@ -57,10 +43,6 @@ $lang = lang('default') unless grep {$_ eq $lang} @{$CONFIG->{languages}};
 $t = TRANSLATE->new($lang);
 $db = DATABASE->new;
 $template = SubTemplate->new($CONFIG_TEMPLATE);
-
-#fake CGI module
-use CGI;
-our $q = CGI->new;
 
 ## Default variables for Template Toolkit
 $tt = {
@@ -92,21 +74,13 @@ $body = error( 2, $template->error() ) if $template->error();
 
 if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
     print "Status: 404 Not Found\n\n";
+    to_log( "[NOT FOUND] $ENV{'REDIRECT_URL'}. REF: $ENV{'REDIRECT_URL'}" );
 } elsif ( $header ) {
     ## if there is any information in header - show it
     print $header."\n\n";
     print $body;
 } else {
-    my $expires_date = cookie_expires(time+$CONFIG->{session_expires});
-    my $current_date = cookie_expires(time);
-    print <<EOF;
-Set-Cookie: CGISESSID=$session_id; domain=$CONFIG->{site}; path=/; expires=$expires_date
-Date: $current_date
-Pragma: no-cache
-Cache-control: private, no-cache, no-store, must-revalidate, max-age=0, pre-check=0, post-check=0
-Content-Type: text/html; charset=utf-8
-
-EOF
+    print $q->header;
 
     my $page=$template->process('index.tpl', { body=>$body, }, );
 

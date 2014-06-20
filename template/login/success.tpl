@@ -4,9 +4,13 @@
 
 <br />
 
+<a href="/admin">[% t('Admin page') %]</a><br />
+
+<!--
 [% IF access.edit_user_access %]
             <a href="/admin">[% t('Admin page') %]</a><br />
 [% ELSE %]
             <a href="/user">[% t('User page') %]</a><br />
 [% END %]
             <a href="/">[% t('Home') %]</a><br />
+-->

@@ -28,7 +28,6 @@ our @EXPORT_OK  = qw(
                 email
                 md5_hex
                 error
-                cookie_expires
             );
 
 our %EXPORT_TAGS = (
@@ -99,7 +98,7 @@ sub module {
     }
     return $main{''}( @$arg ) unless $link;
     foreach (sort {length $b <=> length $a} keys %main) {
-        if (my @arr = $link =~ /^$_$/ ) {
+        if (my @arr = ($link)? $link =~ /^$_$/ : () ) {
             return $main{$_}( @$arg, @arr );
         }
     }
@@ -121,6 +120,7 @@ sub to_log {
 sub error {
     my ( $error_no, $error_text ) = @_;
     to_log( $error_text );
+    header 'clear';
     return ( $main::CONFIG->{show_errors} )? $error_text : 'err.#'.$error_no;
 }
 
@@ -242,15 +242,6 @@ if( keys %{$_->{Image}} ) {
     }
     my $rv = $bulk->send($email);
 
-}
-
-sub cookie_expires {
-    my $ts = shift;
-    my @wdays = qw/Sun Mon Tue Wed Thu Fri Sat/;
-    my @months = qw/Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec/;
-    my @m = ($ts)? gmtime($ts) : gmtime();
-    return sprintf('%s, %02d-%s-%04d %02d:%02d:%02d GMT',
-                    $wdays[$m[6]], $m[3], $months[$m[4]], $m[5] + 1900, $m[2], $m[1], $m[0]);
 }
 
 =head1 MAIN

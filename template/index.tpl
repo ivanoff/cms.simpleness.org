@@ -91,7 +91,11 @@
 [% INCLUDE main_menu level = 0 %]
 
 [% IF session('slogin') %]
-			<li><a href="/admin" [% 'class="active"' IF env('REDIRECT_URL') == '/admin' %]><span>[% t('Admin page') %]</span></a></li>
+	<li><a href="/admin" [% 'class="active"' IF env('REDIRECT_URL') == '/admin' %]><span>[% t('Admin page') %]</span></a></li>
+	<li><a href="/login/exit"><span>[% t('exit') %]</span></a></li>
+[% ELSE %]
+	<li><a href="/login" [% 'class="active"' IF env('REDIRECT_URL') == '/login' %]><span>[% t('login') %]</span></a></li>
+	<li><a href="/login/register" [% 'class="active"' IF env('REDIRECT_URL') == '/login/register' %]><span>[% t('Register') %]</span></a></li>
 [% END %]
 			
 		</ul>

@@ -226,7 +226,7 @@ sub Vars {
 }
 
 sub param {
-    my ( $self, $name ) = @_;
+    my ( $self, $name, $val ) = @_;
     $self->{vars}{$name} = $val if $val;
     return unescape( ( defined $self->{vars}{$name} )? $self->{vars}{$name} : $self->{Session}{vars}{$name} );
 }

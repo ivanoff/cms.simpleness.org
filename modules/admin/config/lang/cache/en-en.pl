@@ -9,6 +9,7 @@
 	'Dictionary'	=> 'Dictionary',
 	'edit menu'	=> 'edit menu',
 	'enter new menu name'	=> 'enter new menu name',
+	'login'	=> 'login',
 	'Manage menu'	=> 'Manage menu',
 	'Menu'	=> 'Menu',
 	'New gallery description'	=> 'New gallery description',

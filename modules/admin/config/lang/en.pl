@@ -85,6 +85,7 @@
 	'June'	=> ' ',
 	'Latest News'	=> ' ',
 	'less than'	=> ' ',
+	'login'	=> ' ',
 	'Login'	=> ' ',
 	'login is busy'	=> ' ',
 	'login is not busy'	=> ' ',

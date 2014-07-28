@@ -1769,9 +1769,10 @@ nicEditors.registerPlugin(nicPlugin,nicLogoutOptions);
         });
     });
 
-    bkLib.onDomLoaded(function() {
 
-	var current_text = '';
+bkLib.onDomLoaded(function() {
+
+        var current_text = '';
         myNicEditor = new nicEditor({
 		fullPanel : true, 
 		onSave : function(content, id, instance) {
@@ -1800,6 +1801,6 @@ nicEditors.registerPlugin(nicPlugin,nicLogoutOptions);
 	    }
 	});
 
-    });
+});
 
 

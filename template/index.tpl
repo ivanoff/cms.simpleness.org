@@ -1,59 +1,37 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" [% IF language.search('il|fa|ar') %] dir="rtl"[% END %]>
 <head>
-	<title>[% title %]</title>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<meta name="description" content="[% meta.description %]" />
-	<meta name="keywords" content="[% meta.keywords %]" />
-	<meta name="category" content="[% meta.category %]" />
-	<link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
-	<link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
-	<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="only screen and (max-device-width: 640px)" />
-	<script type="text/javascript" src="/js/jquery.js"></script>
+    <title>[% title %]</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="[% meta.description %]" />
+    <meta name="keywords" content="[% meta.keywords %]" />
+    <meta name="category" content="[% meta.category %]" />
+    <link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
+    <link rel="stylesheet" href="/css/mobile.css" type="text/css" media="only screen and (max-device-width: 640px)" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
 [% IF image %]
-	<link href="/css/lightbox.css" rel="stylesheet" type="text/css" media="screen" />
-	<link href="/css/gallery.css" rel="stylesheet" type="text/css" media="screen" />
-	<script type="text/javascript" src="/js/lightbox.js"></script>
-	<script type="text/javascript">
-	    $(function() { $('.gallery a').lightBox(); });
-	</script>
+    <link href="/css/lightbox.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="/css/gallery.css" rel="stylesheet" type="text/css" media="screen" />
+    <script type="text/javascript" src="/js/lightbox.js"></script>
+    <script type="text/javascript">
+        $(function() { $('.gallery a').lightBox(); });
+    </script>
 [% END %]
 [% IF access.edit_content %]
-	<link rel="stylesheet" href="/css/admin.css" type="text/css" media="all" />
-
-	<script type="text/javascript">
-	    $(document).ready(function(){
-	        if( typeof cte_text == 'undefined' ){
-	            cte_text = '<font color="#AAA"><small>[% t('click to edit') %]</small></font>';
-	        }
-	        $(".editable").each(function(){ 
-	            if ( $(this).html().replace(/(\n|\r|\s)+$/, '') == "" ) {
-	                $(this).html( cte_text );
-	                $(this).live('click', function () {
-	                    if( $(this).html() == cte_text ){
-	                        $(this).html("<br>");
-	                    };
-		        });
-	            }
-	        });
-	        $("#admin_key").css({ opacity: 0.1 })
-		    .mouseover( function(){ $(this).stop().animate({opacity:'1.0'},300); })
-		    .mouseout ( function(){ $(this).stop().animate({opacity:'0.1'},300); });
-	    });
-	</script>
-
-	<script type="text/javascript">
-	    var session = "[% session('_SESSION_ID') %]";
-	    var lang = "[% language %]";
-	    var title = "[% title %]"; 
-	    var page = "?[% env('REDIRECT_URL') %]"; 
-	    var uri = "[% env('REDIRECT_URL') %]"; 
-	    var image_sizes = [ 'full size', '[% config_images.SIZE.join("','") %]' ];
-	</script>
-	<script src="/js/nicEdit.js" type="text/javascript"></script>
-	<link rel="stylesheet" href="/css/dropBox.css" type="text/css" media="all" />
-
-        <script src="/js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/css/admin.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="/css/dropBox.css" type="text/css" media="all" />
+    <script type="text/javascript">
+        var session = "[% session('_SESSION_ID') %]";
+        var lang = "[% language %]";
+        var title = "[% title %]"; 
+        var page = "?[% env('REDIRECT_URL') %]"; 
+        var uri = "[% env('REDIRECT_URL') %]"; 
+        var image_sizes = [ 'full size', '[% config_images.SIZE.join("','") %]' ];
+    </script>
+    <script src="/js/nicEdit.js" type="text/javascript"></script>
+    <script src="/js/nicEditMy.js" type="text/javascript"></script>
+    <script src="/js/jquery-ui.js"></script>
 [% END %]
 </head>
 <body>
@@ -76,7 +54,7 @@
 		</div>
 	</div>
 	<!-- /Header -->
-	
+
 	<!-- Navigation -->
 	<div id="navigation">
 		<ul class="dropdown dropdown-horizontal">
@@ -97,12 +75,12 @@
 	<li><a href="/login" [% 'class="active"' IF env('REDIRECT_URL') == '/login' %]><span>[% t('login') %]</span></a></li>
 	<li><a href="/login/register" [% 'class="active"' IF env('REDIRECT_URL') == '/login/register' %]><span>[% t('Register') %]</span></a></li>
 [% END %]
-			
+
 		</ul>
 		<div class="cl">&nbsp;</div>
 	</div>
 	<!-- /Navigation -->
-	
+
 	<!-- Main -->
 	<div id="main" class="big-box">
 		<div class="bg-top">
@@ -137,12 +115,11 @@
 </div>
 
 
-				
 			</div>
 		</div>
 	</div>
 	<!-- /Main -->
-	
+
 	<!-- Footer -->
 	<div id="footer">
 
@@ -158,6 +135,7 @@
 
 	</div>
 	<!-- /Footer -->
+
 </div>
 <!-- /Shell -->
 </body>

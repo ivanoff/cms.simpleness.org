@@ -16,7 +16,7 @@ use MAIN;
         defaults { gallery => \%gallery, };
 
 ## get all content with '_' sign in the name's first letter (ex: info for header and footter)
-        my %sources = map { $_->{content_page} => $_ } @{sql("select * from base_content WHERE content_page REGEXP '_.*' AND lang=?", lang)};
+        my %sources = map { $_->{content_page} => $_ } @{sql("select * from base_content WHERE content_page LIKE '\_%' AND lang=?", lang)};
         defaults { sources => \%sources, };
 
 ## get main menu

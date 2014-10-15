@@ -40,7 +40,9 @@ sub sql {
     my @result;
 
     if($sth->{NUM_OF_FIELDS}) {
-        push @result, $_ while $sth->fetchrow_hashref;
+        foreach ( my $r = $sth->fetchrow_hashref ) {
+            push @result, $r;
+        }
     }
 
     $sth->finish();

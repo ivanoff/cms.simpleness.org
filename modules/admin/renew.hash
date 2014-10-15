@@ -15,7 +15,7 @@ you_cannot 'email_page' or
     '/admin/renew/sitemap' => sub {
         our %history;
         my $mech = WWW::Mechanize->new();
-        my $cp = sql( "select content_page from base_content where content_page NOT REGEXP '_.*' group by content_page" );
+        my $cp = sql( "select content_page from base_content where content_page NOT LIKE '\_%' group by content_page" );
         my $gallery = sql( "SELECT gal_key FROM base_gallery WHERE lang='en'" );
         foreach ( @{$CONFIG->{languages}} ) {
             $_ = ( is_default_lang($_) )? $CONFIG->{site} : $_.'.'.$CONFIG->{site};

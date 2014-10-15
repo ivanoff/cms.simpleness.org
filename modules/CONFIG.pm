@@ -18,7 +18,7 @@ our $CONFIG = {
         config_files_path  => '../modules/admin/config',
 
 # DATABASE
-        db_type            => 'mysql',
+        db_type            => 'mysql',          # mysql or Pg
         db_host            => 'localhost',
         db_dbname          => 'clear',
         db_user            => 'clear',

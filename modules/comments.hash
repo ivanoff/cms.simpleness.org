@@ -6,33 +6,54 @@ use MAIN;
 sub comments_show {
     my $show = shift;
     my $r = sql( "SELECT user_id FROM base_users WHERE MD5(user_login)=?", session( 'slogin' ) );
+    return 0 unless @$r;
     sql( "DELETE FROM base_users_config WHERE user_id=? AND config_name='comments_show'", $r->[0]{user_id} );
     sql( "INSERT INTO base_users_config (user_id, config_name, config_value) 
             VALUES (?, 'comments_show', ?)", $r->[0]{user_id}, $show );
 }
 
 {
-    '/comments' => sub {
-        header 'clear';
 
-        my $comm = sql( "SELECT * FROM base_comments WHERE comment_url=? AND lang=? AND comment_private!=1", 
-                        ( $ENV{'HTTP_REFERER'} =~ m%https?://(.*)% )? $1 : '', lang );
+    '/comments' => sub {
+        cache(0);
+        my $comments = sql( "SELECT * FROM base_comments c
+    		    LEFT JOIN base_users u ON ( u.user_id = c.user_id )
+    		    WHERE c.lang=? AND c.comment_private!=1
+    		    AND comment_type=1 ORDER BY date DESC", lang );
+        process 'comments/index.tpl', { comments => $comments };
+    },
+
+    '/comments/owner(?:/(\d+))?' => sub {
+        cache(0);
+        my $user_id = $1 || session( 'sid' );
+        my $owner   = $user_id eq session( 'sid' );
+        my $user = sql( "SELECT * FROM base_users WHERE user_id=?", $user_id );
+        my $comments = sql( "SELECT * FROM base_comments 
+    		    WHERE user_id=? "
+    		    .( !$owner? "AND comment_private!=1" : "" )
+    		    ." ORDER BY date DESC "
+    		    , $user_id );
+        process 'comments/index.tpl', { comments => $comments, owner => $owner, user => $user, };
+    },
+
+    '/comments/right' => sub {
+        header 'clear';
+        cache(0);
+
+        my $comm = sql( "SELECT * FROM base_comments 
+    			WHERE comment_url=? AND lang=? AND 
+    			(( comment_private!=1 AND comment_type=1 ) OR (user_id=?))", 
+                        ( $ENV{'HTTP_REFERER'} =~ m%https?://(.*)% )? $1 : '', lang, session('sid') );
         my $right = process( 'comments/right.tpl', { comments => $comm } );
 
         my $hide_comment = -1;
         unless ( you_cannot 'comment' ) {
-            my $r = sql( "SELECT user_id FROM base_users WHERE MD5(user_login)=?", session( 'slogin' ) );
-
-            $comm = sql( "SELECT * FROM base_comments WHERE comment_url=? AND lang=? AND user_id=?", 
-                        ( $ENV{'HTTP_REFERER'} =~ m%https?://(.*)% )? $1 : '', lang, $r->[0]{user_id} );
-            $right .= process( 'comments/right.tpl', { comments => $comm } );
-
-            $r = sql( "SELECT config_value FROM base_users_config WHERE user_id=? AND config_name='comments_show'", $r->[0]{user_id} );
+            my $r = sql( "SELECT config_value FROM base_users_config WHERE user_id=? AND config_name='comments_show'", session( 'sid' ) );
             $r->[0]{config_value} = 1 unless $r->[0];
             $hide_comment = $r->[0]{config_value};
         }
 
-        process 'comments/index.tpl', { showcomm => $hide_comment, right => $right };
+        process 'comments/field.tpl', { showcomm => $hide_comment, right => $right };
     },
 
     '/comments/add' => sub {
@@ -49,14 +70,25 @@ sub comments_show {
 
     },
 
+    '/comments/delete/(\d+)' => sub {
+        header 'clear';
+        my $comment = sql( "SELECT * FROM base_comments c
+    		    LEFT JOIN base_users u ON ( u.user_id = c.user_id )
+    		    WHERE c.comment_id=? AND MD5( u.user_login )=?", $1, session('slogin') );
+	return 0 unless @$comment || access->{edit_content};
+	sql( "DELETE FROM base_comments WHERE comment_id=?", $1 );
+	return 1;
+    },
+
     '/comments/success' => sub {
         process( 'comments/success.tpl' );
     },
 
-    '/comments/show/(0|1)' => sub {
+    '/comments/show/-?(0|1)' => sub {
         cache(0);   # don't cache this page
         comments_show( $1 );
         header 'clear';
+        return ' ';
     },
 
 };

@@ -46,7 +46,8 @@ $main::SESSION->{_ENABLED} = 1;
         redirect2 ('');
     },
 
-    '/login/recover' => sub {
+    '/login/recover(/new)?' => sub {
+	my $new = shift;
         cache(0);   # don't cache this page
         if( param('login') ) {
             $r = sql( "SELECT * FROM base_users WHERE user_login=?", param('login') );
@@ -55,10 +56,11 @@ $main::SESSION->{_ENABLED} = 1;
                 my $hash = md5_hex( param('login').time.$r->[0]{user_id}.rand().$r->[0]{user_password} );
                 sql("INSERT INTO base_users_recover (user_id, recover) VALUES (?,?)", 
                         $r->[0]{user_id}, $hash);
+                my ( $subj, $message ) = ( $new )? ( "Set new password", "new_password" ) : ( "Recovery password", "recover" );
                 email ( { 
                          To => param('login'),
-                    Subject => "Recovery password",
-                    Message => process('messages/recover.tpl', 
+                    Subject => $subj,
+                    Message => process('messages/'.$message.'.tpl', 
                                 { name=>$r->[0]{user_name}, hash => $hash, } ),
                     } );
             }
@@ -68,7 +70,8 @@ $main::SESSION->{_ENABLED} = 1;
         }
     },
 
-    '/login/recover/([0-9a-f]{32})' => sub {
+    '/login/recover(/new)?/([0-9a-f]{32})' => sub {
+	my $new = shift;
         cache(0);   # don't cache this page
         if( param('password') ) {
             my $recover = shift;
@@ -87,8 +90,8 @@ $main::SESSION->{_ENABLED} = 1;
                     Subject => "Recovery password done",
                     Message => process( 'messages/recover_done.tpl', 
                                                 { name => $r->[0]{user_name}, } ),
-                } );
-                return module( '/login' );
+                } ) unless $new;
+        	return module( '/login' );
             }
             return process( 'login/recover/done.tpl' );
         } else {
@@ -127,8 +130,8 @@ $main::SESSION->{_ENABLED} = 1;
                                 user_email, user_name, user_lang, group_id) 
                                 VALUES (NULL,?,MD5(CONCAT(?,MD5(?),MD5(?))),?,?,?,5)", 
                         param('login'), rand(), param('login'), 
-                        rand().param('login'),param('login'),param('name'),lang||'ru');
-                return module '/login/recover';
+                        rand().param('login'), param('login'), param('name'),lang||'ru');
+		return module '/login/recover/new';
             }
         }
         process( 'login/register/index.tpl' );

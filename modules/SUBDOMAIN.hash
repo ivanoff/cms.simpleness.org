@@ -10,6 +10,9 @@ use MAIN;
         my ( $url, $subdomain ) = @_;
 
 	return 0 if $url =~ /\.\.\// || $subdomain =~ /\.\.\//;
+	my $lng = lang;
+#	use '.lang' subfolder
+	$dd .= '/.'.$1 if !is_default_lang && $subdomain =~ s/^($lng)\.(.*)/$2/;
         $subdomain = join '/', reverse split /\./, $subdomain;
 	my $conf = eval { local $SIG{__DIE__}; do "$dd/$subdomain/config.pl" };
 
@@ -18,6 +21,18 @@ use MAIN;
     	    foreach( 'index.htm', 'index.html', 'CONTENTS.htm', 'page.htm' ) {
     		redirect($_) if -f "$dd/$subdomain/$_";
     	    }
+	}
+
+	my $words_file = "$dd/words.txt";
+	if( -e $words_file ) {
+	    open my $f, '<', $words_file;
+	    while( <$f> ) {
+		my @add_words   = split ';', $_;
+		my @add_domains = split ',', shift @add_words;
+		next unless grep { /^$subdomain$/ } @add_domains;
+		push @{ $conf->{words} }, @add_words;
+	    }
+	    close $f;
 	}
 
         my $url = "$dd/$subdomain/$url";
@@ -43,15 +58,19 @@ use MAIN;
         $header =~ s/'/\'/g; #'
 	$header .= '. '.$conf->{header} if $header ne $conf->{header};
 	title $header;
-	my $add = '<br /><b>'.$conf->{words}[int rand(@{$conf->{words}}/10)].'</b>';
+
+	$conf->{words} ||= [];
+	my $add  = '<b>'.$conf->{words}[int rand(int @{$conf->{words}}/10)].'</b>';
 	$add = $add.'. '.$conf->{words}[int rand(@{$conf->{words}})] for (1..7);
-	$add = $add.'.<br \>';
-	$add = '' if @{$conf->{words}} <= 1; 
-	if ($url =~ m%/$conf->{index}$% ) {
-	    $add = $add.'<h1>'.$conf->{header}.'</h1>';
-	    title $conf->{header};
-	}
-	$content = $add.$content;
+	defaults { add_w => (@{$conf->{words}})? $add : undef };
+
+#	$add = $add.'.<br \>';
+#	$add = '' if @{$conf->{words}} <= 1; 
+#	if ($url =~ m%/$conf->{index}$% ) {
+#	    $add = $add.'<h1>'.$conf->{header}.'</h1>';
+#	    title $conf->{header};
+#	}
+#	$content = $add.$content;
 	return process('subdomain/index.tpl', { content => $content, header => $header, index => $conf->{index}||'' } );
     },
 

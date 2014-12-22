@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+
+{
+
+    '/admin/d/(.*)' => sub {
+	cache_delete( $1 );
+	header 'clear';
+	return 'done';
+    },
+
+};

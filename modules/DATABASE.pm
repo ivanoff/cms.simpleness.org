@@ -40,15 +40,14 @@ sub sql {
     my @result;
 
     if($sth->{NUM_OF_FIELDS}) {
-        foreach ( my $r = $sth->fetchrow_hashref ) {
-            push @result, $r;
-        }
+        push @result, $_ while $_ = $sth->fetchrow_hashref;
     }
 
     $sth->finish();
 
     return \@result;
 }
+
 
 sub DESTROY {
     my $self = shift;

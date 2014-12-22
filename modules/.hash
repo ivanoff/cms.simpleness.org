@@ -2,19 +2,23 @@
 
 use strict;
 
+defaults { 
+    month  => sub{ 
+        qw( January February March April May June
+            July August September October November December )[(shift)-1] 
+    },
+};
+
 {
     #index page
     '' => sub {
-=c
-        #instalation of the programm from modules/install/install.pl
-        if ($ENV{HTTP_USER_AGENT} =~ /^curl/) {
-            header 'clear';
-            open F, '<', $CONFIG->{modules_path}."/install/install.pl";
-            my $result = join '', <F>;
-            close F;
-            return $result;
-        }
-=cut
+        cache(60*60*1*1);
+        my $comments = sql( "SELECT * FROM base_comments c
+    		    LEFT JOIN base_users u ON ( u.user_id = c.user_id )
+    		    WHERE c.lang=? AND c.comment_private!=1
+    		    AND comment_type=1 ORDER BY date DESC LIMIT 5", lang );
+        process ( 'index/index.tpl' ).
+        process ( 'comments/index.tpl', { comments => $comments } );
     },
 
 };

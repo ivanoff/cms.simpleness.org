@@ -1,6 +1,8 @@
-<link href="/css/icon.css" rel="stylesheet">
-
 <h1>[% t('Gallery') %]</h1>
+<script src="/js/lightbox.js"></script>
+[% IF access.manage_gallery -%]
+<script src="/js/dropBox.js"></script>
+[% END -%]
 
 <table><tr><td>
     <div class="gallery">
@@ -67,10 +69,6 @@
 
     </div>
 </td></tr></table>
-
-[% IF access.manage_gallery %]
-	<script src="/js/dropBox.js" type="text/javascript"></script>
-[% END %]
 
 <a href="/gallery">&lt;&lt;[% t('back') %]</a>
 

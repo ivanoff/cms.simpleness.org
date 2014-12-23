@@ -1,6 +1,6 @@
 <html>
 <head></head>
-<link rel="stylesheet" href="/css/comments.css" type="text/css" />
+<link rel="stylesheet" href="/css/comments.css" />
 <body>
 
 <script>

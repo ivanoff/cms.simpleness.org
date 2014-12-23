@@ -1,10 +1,7 @@
 <h1>[% t('Menu') %]</h1>
 <h3>[% t('Add new menu') %]</h3>
-<link href="/css/sort.css" rel="stylesheet">
-<link href="/css/icon.css" rel="stylesheet">
-
-<script src="/js/jquery-ui.js"></script>
-<script src="/js/sort.js"></script>
+<link href="/css/admin_menu_sort.css" rel="stylesheet">
+<script src="/js/admin_menu_sort.js"></script>
 
 <script>
 

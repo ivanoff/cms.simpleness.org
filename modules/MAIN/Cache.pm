@@ -11,7 +11,7 @@ use Cache::Memcached::Fast;
 
 our $VERSION = '0.3';
 our @ISA     = qw( Exporter );
-our @EXPORT  = qw( cache_save cache_delete cache_load cache_md5_filename );
+our @EXPORT  = qw( cache_save cache_delete cache_delete_page cache_load cache_md5_filename );
 
 sub cache_md5_filename {
     md5_hex ( ($ENV{'SERVER_NAME'}||'') . ($ENV{'REQUEST_URI'}||'') );

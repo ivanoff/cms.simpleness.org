@@ -1,7 +1,4 @@
 
-    <script src="/js/jquery.js"></script>
-    <script src="/js/jquery-ui.js"></script>
-
     <style>
 	figure {
 	    background: #d9dabb;

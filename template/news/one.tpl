@@ -1,4 +1,3 @@
-<link href="/css/icon.css" rel="stylesheet">
 <script type="text/javascript">
     $(document).ready(function(){
         $('.delete').click(function () {
@@ -17,7 +16,6 @@
 
 [% IF access.add_news %]
 <a href="/admin/news/add"><img border="0" src="/images/btn_plus.gif">[% t('add news') %]</a><br /><br />
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
 
 <script>
     $(function() {

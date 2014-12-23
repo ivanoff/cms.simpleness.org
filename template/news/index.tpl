@@ -2,7 +2,6 @@
 
 [% IF access.add_news %]
 
-<link href="/css/icon.css" rel="stylesheet">
 <script type="text/javascript">
     $(document).ready(function(){
         $('.delete').click(function () {

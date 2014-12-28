@@ -4,7 +4,7 @@
 
 <br />
 
-<a href="/admin">[% t('Admin page') %]</a><br />
+[% PROCESS admin/index.tpl %]
 
 <!--
 [% IF access.edit_user_access %]

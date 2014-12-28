@@ -36,9 +36,10 @@ $.each( event.dataTransfer.files , function(i, file) {
 	xhr.send(fd);
 
 	if (xhr.status==200) {
-	    $(".gallery ul").append('<li>'+xhr.responseXML.getElementsByTagName("result")[0].firstChild.nodeValue+'</li>');
-	    $(".gallery ul").append( $(".gallery ul .last_li") );
-	    $(function() { $('.gallery a').lightBox(); });
+            $(".gallery ul").append('<li>'+xhr.responseXML.getElementsByTagName("result")[0].firstChild.nodeValue+'</li>');
+            $(".gallery ul").append( $(".gallery ul .last_li") );
+            $(function() { $('.gallery a').lightBox(); });
+            $('.delete').click( onDelete );
 	}
 
 });

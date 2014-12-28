@@ -20,6 +20,7 @@ $main::SESSION->{_ENABLED} = 1;
                 session( 'ip'     , $ENV{REMOTE_ADDR} );
                 session( 'slogin' , md5_hex($l) );
                 session( 'sid'    , $r->[0]{user_id} );
+                session( 'sname'  , $r->[0]{user_name} );
 
                 my %settings_default = ( 'show_addthis' => 1, );
                 $r = sql( "SELECT * FROM base_users_settings WHERE user_id=?", $r->[0]{user_id} );

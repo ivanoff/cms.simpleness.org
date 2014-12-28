@@ -1,8 +1,17 @@
 {
 	''	=> ' ',
 	'&nbsp;'	=> '&nbsp;',
+	'bbb b1'	=> 'BBB b1',
+	'body uuu2'	=> 'тяло uuu2',
+	'ddd'	=> 'DDD',
 	'description of the gallery'	=> 'описание на галерията',
 	'Download'	=> 'Изтегляне',
 	'Download Simpleness CMS (v.0.36, .tar.gz, 0,5 Mb)'	=> 'Изтегляне на простота CMS (v.0.36,. Tar.gz, 0,5 Mb)',
+	'gjkghjghjhgjh u y mm'	=> 'gjkghjghjhgjh ф у мм',
+	'Header nnn'	=> 'Header NNN',
+	'hhh a1'	=> 'еее a1',
+	'Simpleness &nbsp; CMS'	=> 'Простота',
+	'Simpleness CMS'	=> 'Простота CMS',
 	'Simpleness CMS on GitHub'	=> 'Простота CMS на GitHub',
+	'Simpleness&nbsp; CMS'	=> 'Простота',
 };

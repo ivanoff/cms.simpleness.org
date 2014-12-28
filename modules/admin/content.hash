@@ -33,7 +33,7 @@ you_cannot 'manage_gallery' or
         $page =~ s/^content://;
         $body =~ s/^[\r\n]+//;
 
-        cache_delete( $page );
+#        cache_delete( $page );
 #        if ( $page =~ /^_/ ) {};
 
         sql( "DELETE FROM base_content WHERE content_page=? AND lang=?", $page, $lang );
@@ -43,7 +43,7 @@ you_cannot 'manage_gallery' or
                     VALUES ( ?, ?, ? )", $body, $page, $lang );
         }
 
-        $main::t->renew_content( 'content', $page ) if is_default_lang( $lang );
+#        $main::t->renew_content( 'content', $page ) if is_default_lang( $lang );
         
         back();
     },

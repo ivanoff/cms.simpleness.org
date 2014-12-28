@@ -80,13 +80,14 @@ our $CONFIG_IMAGES = {
 # Template toolkit section
 
 our $CONFIG_TEMPLATE = {
-        INCLUDE_PATH      => '../template',  # or list ref
-        POST_CHOMP        => 1,              # cleanup whitespace 
-        PRE_PROCESS       => '',             # prefix each template
-        EVAL_PERL         => 1,              # evaluate Perl code blocks
-#        INTERPOLATE       => 1,             # expand "$var" in plain text
-#        DEBUG             => 1,
-        RECURSION         => 1,
+        INCLUDE_PATH    => '../template',  # or list ref
+        POST_CHOMP      => 1,              # cleanup whitespace 
+        PRE_PROCESS     => '',             # prefix each template
+        EVAL_PERL       => 1,              # evaluate Perl code blocks
+#        INTERPOLATE     => 1,             # expand "$var" in plain text
+#        DEBUG           => 1,
+        RECURSION       => 1,
+        POST_CHOMP      => 1,
 };
 
 1;

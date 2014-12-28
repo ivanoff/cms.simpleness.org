@@ -1,15 +1,16 @@
 <h1>[% t('Gallery') %]</h1>
 <script src="/js/lightbox.js"></script>
+<script src="/js/gallery.js"></script>
 [% IF access.manage_gallery -%]
 <script src="/js/dropBox.js"></script>
 [% END -%]
 
 <table><tr><td>
     <div class="gallery">
-        <h2><div id="/admin/gallery/[% gal_key %]/update?header" class="editable">[% gallery.${gal_key}.gal_name %]</div></h2>
-	<div id="/admin/gallery/[% gal_key %]/update?body" class="editable">
-	    [% gallery.${gal_key}.gal_description %]
-	</div>
+        <h2>
+[% PROCESS editable.tpl name='/admin/gallery/' _ gal_key _ '/update?header' value = gallery.${gal_key}.gal_name %]
+        </h2>
+[% PROCESS editable.tpl name='/admin/gallery/' _ gal_key _ '/update?body' value = gallery.${gal_key}.gal_description %]
 	<br />
 [% IF access.manage_gallery %]
 	<script type="text/javascript">
@@ -56,14 +57,15 @@
 </script>
 
 <script type="text/javascript">
-    $('.delete').click(function () {
+    onDelete = function () {
 //	if ( confirm ('[% t('Are you sure to delete this image?') %]') ) 
 	{
             save_text( '/admin/gallery/delete/'+$(this).attr('name'), {}, 'image was deleted'); 
 	    $(this).parent().animate({opacity:0}, 700, function(){ $(this).css({display:"none"}); });
 	}
 	return false;
-    });
+    }
+    $('.delete').click( onDelete );
 </script>
 [% END %]
 

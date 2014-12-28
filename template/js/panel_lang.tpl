@@ -1,9 +1,7 @@
-<select name="languages" id="languages">
-</select>
 <script type="text/javascript">
     $(document).ready(function(){
         selectValues = { [% FOREACH l IN config.languages.sort %]"[% l %]" : "[% config.languages_t.${l} %]", [% END %] "": "" };
-        $.each(selectValues, function(key, value) {
+        $.each(langValues, function(key, value) {
             if ( key ) {
                 $('#languages')
                     .append($("<option></option>")
@@ -15,7 +13,7 @@
         });
         $("select option[value='"+(( typeof lang === 'undefined' )?  'en' : lang ) +"']").attr("selected","selected");
         $('#languages').change(function(){
-	    location = "//" + $(this).val() + ".[% config.site %][% env('REDIRECT_URL') %]";
+	    location = "//" + $(this).val() + "." + site + uri;
 	});
     });
 </script>

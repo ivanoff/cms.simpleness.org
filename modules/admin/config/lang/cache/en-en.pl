@@ -16,8 +16,11 @@
 	'New gallery header'	=> 'New gallery header',
 	'news manager'	=> 'news manager',
 	'Publish the gallery'	=> 'Publish the gallery',
+	'read more'	=> 'read more',
 	'show content pages'	=> 'show content pages',
 	'Update'	=> 'Update',
+	'update language'	=> 'update language',
 	'URL'	=> 'URL',
+	'Users'	=> 'Users',
 	'Weather forecast'	=> 'Weather forecast',
 };

@@ -146,10 +146,10 @@ h4 { font-size:16px; color:#b10301; line-height:18px; }
 .last { margin-right:0 !important; }
 
 /* Footer */
-#footer { padding:10px 0;}
-#footer p { color:#8c8772; font-size:12px; text-align:right; }
-#footer a { color:#8c8772; text-decoration:none; }
-#footer a:hover { text-decoration:underline; }
+footer { padding:10px 0;}
+footer p { color:#8c8772; font-size:12px; text-align:right; }
+footer a { color:#8c8772; text-decoration:none; }
+footer a:hover { text-decoration:underline; }
 
 
 ul.dropdown ul {

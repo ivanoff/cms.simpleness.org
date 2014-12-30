@@ -1,6 +1,4 @@
-<h2>[% t('Login') %]</h2>
-
-<b>[% t('Wellcome back') %], [% name %]</b>
+<h2>[% t('Wellcome back') %], [% name %]</h2>
 
 <br />
 

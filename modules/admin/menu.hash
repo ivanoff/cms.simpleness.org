@@ -69,8 +69,8 @@ you_cannot 'edit_menu' or
             sql( "DELETE FROM base_menu WHERE menu_key=? AND lang!=?", $id, lang);
         }
 
-        sql "UPDATE base_menu SET menu_name=? WHERE lang=? AND menu_key=?", $name, lang, $id;
-        sql "UPDATE base_menu_url SET menu_url=? WHERE menu_key=?", $url, $id;
+        sql( "UPDATE base_menu SET menu_name=? WHERE lang=? AND menu_key=?", $name, lang, $id );
+        sql( "UPDATE base_menu_url SET menu_url=? WHERE menu_key=?", $url, $id );
 
         $main::t->renew_content( 'menu', $id );
 

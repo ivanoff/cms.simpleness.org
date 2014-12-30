@@ -38,7 +38,7 @@
 <i class='icon-trash delete' name="[% n.news_key %]" alt="[% t('delete') %]"></i>
 <input type="text" id="datepicker" value="[% SET d = n.news_date.substr(0,10).split('-'); d.0 _ '-' _ d.1 _'-' _ d.2 %]" />
 [% ELSE %]
-<small><b>[% SET d = n.news_date.substr(0,10).split('-'); t(month(d.1)) _ ' ' _ d.2 _', ' _ d.0 %]</b></small>
+<h4><b>[% SET d = n.news_date.substr(0,10).split('-'); t(month(d.1)) _ ' ' _ d.2 _', ' _ d.0 %]</b></h4>
 [% END %]
 
         <h2><div id="/admin/news/[% n.news_key %]/update?header" class="editable">[% n.news_name %]</div></h2>

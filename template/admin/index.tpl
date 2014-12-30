@@ -12,7 +12,7 @@
 [% IF access.manage_gallery %]
 <span class="col">
 <b><i class="icon-picture"></i> [% t('Gallery') %]</b><br />
-<a href="/gallery">[% t('Gallery manager') %]</a><br />
+<a href="/gallery">[% t('gallery manager') %]</a><br />
 <a href="/gallery/[% max_gal_id + 1 %]">[% t('add gallery') %]</a><br />
 </span>
 [% END %]
@@ -34,7 +34,7 @@
 [% IF access.edit_user_access %]
 <a href="/admin/user/access">[% t('edit access of groups') %]</a><br />
 [% END %]
-<a href="/login/change">[% t('Change password') %]</a><br />
+<a href="/login/change">[% t('change password') %]</a><br />
 <a href="/login/exit">[% t('exit') %]</a><br />
 </span>
 
@@ -60,7 +60,7 @@
 <b><i class="icon-download-alt"></i> [% t('Update') %]</b><br />
 <a href="/admin/lang/check">[% t('update language') %]</a><br />
 <a href="/admin/renew/sitemap">[% t('renew the sitemap') %]</a><br />
-<a href="/admin/update">[% t('Update') %]</a><br />
+<a href="/admin/update">[% t('update') %]</a><br />
 </span>
 [% END %]
 

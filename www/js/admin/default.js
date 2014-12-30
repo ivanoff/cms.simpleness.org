@@ -71,10 +71,6 @@ function show_info( t ) {
 
 $(document).ready(function(){
 
-    $(".admin_key").css({ opacity: 0.1 })
-	    .mouseover( function(){ $(this).stop().animate({opacity:'1.0'},300); })
-	    .mouseout ( function(){ $(this).stop().animate({opacity:'0.1'},300); });
-
     show_info('');
 
     if( typeof cte_text == 'undefined' ){

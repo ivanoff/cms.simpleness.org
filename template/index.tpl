@@ -13,11 +13,13 @@
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="/js/jquery/jquery.js"></script>
+<script src="/js/jquery/jquery-ui.js"></script>
 [% PROCESS js/variables.tpl %]
         <script src="/js/default.js"></script>
 [% IF access.edit_content %]
-        <link rel="stylesheet" href="/css/default_admin.css" />
-        <script src="/js/default_admin.js"></script>
+        <link rel="stylesheet" href="/css/admin/default.css" />
+        <script src="/js/admin/default.js"></script>
         <script src="/js/nicEdit.js"></script>
 [% END %]
     </head>
@@ -54,12 +56,12 @@
 
 [% IF session('slogin') %]
 	<li><a href="/admin" [% 'class="active"' IF env('REDIRECT_URL') == '/admin' %]><span>[% t('Admin page') %]</span></a></li>
-	<li><a href="/login/exit"><span>[% t('exit') %]</span></a></li>
+	<li><a href="/login/exit"><span>[% t('Exit') %]</span></a></li>
 [%   IF access.edit_menu %]
         <li><a href="/admin/menu"><i class="icon-tasks"></i></a></li>
 [%   END %]
 [% ELSE %]
-	<li><a href="/login" [% 'class="active"' IF env('REDIRECT_URL') == '/login' %]><span>[% t('login') %]</span></a></li>
+	<li><a href="/login" [% 'class="active"' IF env('REDIRECT_URL') == '/login' %]><span>[% t('Login') %]</span></a></li>
 	<li><a href="/login/register" [% 'class="active"' IF env('REDIRECT_URL') == '/login/register' %]><span>[% t('Register') %]</span></a></li>
 [% END %]
 		</ul>

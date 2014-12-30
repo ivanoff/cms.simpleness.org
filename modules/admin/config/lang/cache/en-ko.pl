@@ -1,11 +1,17 @@
 {
 	''	=> ' ',
 	'bbb b1'	=> 'BBB의 B1',
+	'bbb b9'	=> 'bbb b9',
 	'body uuu2'	=> '몸 uuu2',
 	'ddd'	=> 'DDD',
 	'gjkghjghjhgjh u y mm'	=> 'gjkghjghjhgjh U Y mm',
 	'Header nnn'	=> '헤더 NNN',
 	'hhh a1'	=> 'HHH의 A1',
+	'hhh a8'	=> 'hhh a8',
 	'Simpleness CMS'	=> '간결함 CMS',
 	'Simpleness&nbsp; CMS'	=> '단순성',
+	'To-do list'	=> 'To-do list',
+	'URjkL'	=> 'URjkL',
+	'URjL'	=> 'URjL',
+	'URL'	=> 'URL',
 };

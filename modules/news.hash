@@ -11,6 +11,7 @@ defaults {
         qw( January February March April May June
             July August September October November December )[(shift)-1] 
     },
+    news_max_key => sql( "SELECT MAX( news_key ) + 1 nk FROM base_news WHERE lang=?", lang )->[0]{nk},
 };
 
 {
@@ -21,6 +22,6 @@ defaults {
 
     '/news/(\d+)' => sub {
         my $r = sql( "SELECT * FROM base_news WHERE lang=? AND news_key=?", lang, $1 );
-        process 'news/one.tpl', { news => $r, news_key => $1 };
+        process 'news/one.tpl', { n => $r->[0], news_key => $1 };
     },
 };

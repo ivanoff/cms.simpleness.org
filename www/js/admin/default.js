@@ -18,8 +18,8 @@ function show_info( t ) {
 
     var current_text = '';
 
-    var is_silent = function ( what ) {
-        return ( $("div[id*='"+what+"'].silent").attr('id') );
+    var is_dont_save = function ( what ) {
+        return ( $("div[id*='"+what+"'].dont_save").attr('id') );
     }
 
     var save_text = function ( where, what, info ) {
@@ -32,7 +32,7 @@ function show_info( t ) {
         } else if( where.indexOf("?") == -1 ) {
             what_hash["body"] = what;
         } else {
-            if ( is_silent(where) && !info ) return false;
+            if ( is_dont_save(where) && !info ) return false;
             var a = where.split("?");
             if( content_current_page[where] == what ) return false;
             content_current_page[where] = what;
@@ -41,7 +41,7 @@ function show_info( t ) {
         }
 
         $.each(what_hash, function(key, value) {
-            if ( is_silent( where+'?'+key ) && !info ) return false;
+            if ( is_dont_save( where+'?'+key ) && !info ) return false;
             if ( value == "<br>" ) value='';
             what_hash[key] = value;
         });
@@ -54,7 +54,7 @@ function show_info( t ) {
 	fd.append("_SESSION_ID", session);
 	fd.append("lang", lang);
         $.each(what_hash, function(key, value) {
-            if ( is_silent( where+'?'+key ) && !info ) return false;
+            if ( is_dont_save( where+'?'+key ) && !info ) return false;
             if ( value == "<br>" ) value='';
             fd.append(key, value);
         });

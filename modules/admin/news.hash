@@ -5,9 +5,6 @@ use MAIN;
 
 defaults { 
     read_only => 1, 
-    current_date   => sub{ 
-                        my @d = localtime(time); $d[5]+=1900; $d[4]++; 
-                        map {$_='0'.$_ if $_<10;} @d; return "$d[5]-$d[4]-$d[3]"; },
 };
 
 you_cannot 'edit_content' or
@@ -44,6 +41,9 @@ you_cannot 'edit_content' or
 
     '/admin/news/(\d+)/update' => sub {
         my $news_key = $1;
+        # check if any news with key eq news_key and add news if not
+        my $n = sql( "SELECT * FROM base_news WHERE news_key=? AND lang=?", $news_key, lang );
+        sql( "INSERT INTO base_news ( news_hidden, news_key, lang ) VALUES ( 1, ?, ? )", $news_key, lang ) unless $n->[0];
         $_ = param('body');
         if(param('page') eq 'date') {
             sql ( "UPDATE base_news SET news_date=? WHERE news_key=?", $_ , $news_key);
@@ -53,12 +53,12 @@ you_cannot 'edit_content' or
             }
             if(param('page') eq 'header') {
                 s/\<.*?\>//g;
-                sql ( "UPDATE base_news SET news_name=? WHERE news_key=? AND lang=?", 
-                        $_ , $news_key, lang);
+                sql ( "UPDATE base_news SET news_name=?, news_date=news_date 
+                        WHERE news_key=? AND lang=?", $_ , $news_key, lang);
             }
             if(param('page') eq 'body') {
-                sql ( "UPDATE base_news SET news_body=? WHERE news_key=? AND lang=?", 
-                        $_, $news_key, lang);
+                sql ( "UPDATE base_news SET news_body=?, news_date=news_date 
+                        WHERE news_key=? AND lang=?", $_, $news_key, lang);
             }
             $main::t->renew_content('news', $news_key);
         };
@@ -66,6 +66,10 @@ you_cannot 'edit_content' or
 
     '/admin/news/delete/(\d+)' => sub {
         sql( "DELETE FROM base_news WHERE news_key=?", $1 );
+    },
+
+    '/admin/news/hide/(1|0)/eye-(\d+)' => sub {
+        sql( "UPDATE base_news SET news_hidden=?, news_date=news_date WHERE news_key=?", $1, $2 );
     },
 
 };

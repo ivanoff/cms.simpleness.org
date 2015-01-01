@@ -8,6 +8,13 @@ use MAIN;
         my $uri = shift;
         $uri = '' unless $uri;
 
+        defaults {
+            current_date => sub { my @d = localtime( time ); $d[5]+=1900; $d[4]++; 
+                    map {$_='0'.$_ if $_<10;} @d; return "$d[5]-$d[4]-$d[3]"; },
+            current_time => sub { my @d = localtime( time ); 
+                    map {$_='0'.$_ if $_<10;} @d; return "$d[2]:$d[1]:$d[0]"; },
+        };
+        
 ## get last 4 news (for left column etc)
         defaults { top_news => sql("SELECT * FROM base_news WHERE lang=? ORDER BY news_date DESC LIMIT 4", lang) };
 

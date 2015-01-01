@@ -4,16 +4,16 @@
 [% IF access.add_news %]
 <span class="col">
 <b><i class="icon-time"></i> [% t('News') %]</b><br />
+<a href="/admin/news/add"><i class="icon-plus-sign"></i> [% t('add news') %]</a><br />
 <a href="/news">[% t('news manager') %]</a><br />
-<a href="/admin/news/add">[% t('add news') %]</a><br />
 </span>
 [% END %]
 
 [% IF access.manage_gallery %]
 <span class="col">
 <b><i class="icon-picture"></i> [% t('Gallery') %]</b><br />
+<a href="/gallery/[% max_gal_id + 1 %]"><i class="icon-plus-sign"></i> [% t('add gallery') %]</a><br />
 <a href="/gallery">[% t('gallery manager') %]</a><br />
-<a href="/gallery/[% max_gal_id + 1 %]">[% t('add gallery') %]</a><br />
 </span>
 [% END %]
 

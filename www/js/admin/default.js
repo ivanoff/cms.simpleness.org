@@ -49,19 +49,7 @@ function show_info( t ) {
         what_hash["lang"] = lang;
         if ( !what_hash["page"] ) what_hash["page"] = uri;
         $.post( where, what_hash );
-/*
-	var fd = new FormData();
-	fd.append("_SESSION_ID", session);
-	fd.append("lang", lang);
-        $.each(what_hash, function(key, value) {
-            if ( is_dont_save( where+'?'+key ) && !info ) return false;
-            if ( value == "<br>" ) value='';
-            fd.append(key, value);
-        });
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", where);
-	xhr.send(fd);
-*/
+
         show_info( (info)? info : "content saved" );
         
         return true;

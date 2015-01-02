@@ -25,7 +25,7 @@ $.each( dropZone , function(j,z) {
         dropZone.addClass('drop');
         
 $.each( event.dataTransfer.files , function(i, file) {
-        dropZone.html('Upload ' + file.name + " <img src='/images/btn_loading.gif' style='width:16px;height:16px'>");
+        dropZone.html('Uploading ' + file.name + " <img src='/images/btn_loading.gif' style='width:16px;height:16px' border='0'>");
 	var fd = new FormData();
 	fd.append("Filedata", file);
 	fd.append("_SESSION_ID", session);

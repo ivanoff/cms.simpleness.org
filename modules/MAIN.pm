@@ -24,7 +24,7 @@ our @EXPORT_OK  = qw(
                 access 
                 module
                 to_log
-                resize
+                resize image_rotate
                 email
                 md5_hex
                 error
@@ -149,6 +149,17 @@ sub redirect2 {
 ## redirect to HTTP_REFERER page
 sub back {
     redirect( $1 ) if $ENV{'HTTP_REFERER'} =~ m%https?://.*?/(.*)%;
+}
+
+## rotate image
+sub image_rotate {
+    use Image::Magick;
+    my $file = shift;
+    return 0 if !$file || !-e $file;
+    my $img = Image::Magick->new;
+    $img->Read($file);
+    $img->Rotate( degrees => 90 );
+    $img->Write($file);
 }
 
 ## resize image

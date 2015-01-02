@@ -44,3 +44,11 @@
 .col {  float: left; width: 280px; margin: 0 25px 40px 0; display: inline; }
 .col a { margin-left: 15px; }
 .col b { background: #f2f2f2; border-radius: 5px; padding: 4px 35px 0 10px; }
+
+.gallerys .ear { 
+    background: #eee; 
+    padding: 0 5px 0 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.gallerys .ear i { padding-left: 5px; }

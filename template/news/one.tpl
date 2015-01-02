@@ -13,9 +13,9 @@
         <h4><b>[% t(month(d.1)) _ ' ' _ d.2 _', ' _ d.0 %]</b></h4>
 [% END %]
 
-<h2>[% PROCESS editable.tpl value = n.news_name name = "/admin/news/" _ news_key _ "/update?header" %]</h2>
+<h2>[% PROCESS editable.tpl value = n.news_name || t('New news header') name = "/admin/news/" _ news_key _ "/update?header" %]</h2>
 
-[% PROCESS editable.tpl value = n.news_body name = "/admin/news/" _ news_key _ "/update?body" %]
+[% PROCESS editable.tpl value = n.news_body || t('New news body') name = "/admin/news/" _ news_key _ "/update?body" %]
 
         <br />
 [% IF access.add_news %]

@@ -5,11 +5,25 @@ use DBI;
 
 sub new {
     my $class = shift;
-    my $self = {};
-    my $dsn = 'DBI:'.$main::CONFIG->{'db_type'}
+    my ( $self, $dsn, $dbh );
+    if( $main::CONFIG->{demo_enabled} ) {
+        my $ip = $ENV{REMOTE_ADDR};
+        $ip =~ s/\./_/g;
+        $dsn = 'DBI:'.$main::CONFIG->{'db_type'}
+                .':dbname='.$main::CONFIG->{'db_dbname'}.'_'.$ip
+                .';host='.$main::CONFIG->{'db_host'};
+        $dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, {PrintError => 1});
+        if( $dbh ) {
+            $self->{'is_demo'} = 1;
+            $main::CONFIG->{'db_dbname'} .= '_'.$ENV{REMOTE_ADDR};
+        }
+    }
+    unless( $dbh ) {
+        $dsn = 'DBI:'.$main::CONFIG->{'db_type'}
                 .':dbname='.$main::CONFIG->{'db_dbname'}
                 .';host='.$main::CONFIG->{'db_host'};
-    my $dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, {PrintError => 1});
+        $dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, {PrintError => 1});
+    }
 
     unless( $dbh ) {
         to_log( "[SMART][irony] Error while DBI connect. Try to create database and import all data." );

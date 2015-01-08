@@ -3,6 +3,8 @@
 use strict;
 use MAIN;
 
+$main::CONFIG_IMAGES->{PATH} .= "/$ENV{REMOTE_ADDR}/" if $main::db->{'is_demo'};
+
 you_cannot 'manage_gallery' or
 
 {

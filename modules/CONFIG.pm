@@ -68,6 +68,9 @@ our $CONFIG = {
         update_rules_timeout    => 60*60*24,
         update_frequency_regexp => qr/;6;/,  #every friday
 
+# DEMO
+        demo_enabled    => 1,   # enable demo mode ( login: demo/demo )
+
 };
 
 # Images section

@@ -12,6 +12,19 @@ $main::SESSION->{_ENABLED} = 1;
         cache(0);   # don't cache this page
         my ( $l, $p ) = param( 'login', 'password' );
         if( $l ) {
+            if( $main::CONFIG->{demo_enabled} && $l eq 'demo' && $p eq 'demo' && !$main::db->{'is_demo'} ) {
+                my $ip = $ENV{REMOTE_ADDR};
+                $ip =~ s/\./_/g;
+                $main::CONFIG->{'db_dbname'} .= '_'.$ip;
+                `mysql -u$main::CONFIG->{'db_user'} -p$main::CONFIG->{'db_password'} -e "create database $main::CONFIG->{'db_dbname'}"`;
+                `mysql -u$main::CONFIG->{'db_user'} -p$main::CONFIG->{'db_password'} $main::CONFIG->{'db_dbname'} < ../install_demo.sql`;
+                my $dsn = 'DBI:'.$main::CONFIG->{'db_type'}
+                        .':dbname='.$main::CONFIG->{'db_dbname'}
+                        .';host='.$main::CONFIG->{'db_host'};
+                my $dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, {PrintError => 1});
+                $main::db->{'connect'} = \$dbh;
+                $main::db->{'is_demo'} = 1 if $dbh;
+            }
             $r = sql( "SELECT * FROM base_users WHERE user_login=? 
                          AND user_password=MD5(CONCAT(?,MD5(?),MD5(?)))", $l, $p, $l, $p.$l );
             if ( $r->[0] ) {

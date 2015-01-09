@@ -159,13 +159,18 @@ $main::SESSION->{_ENABLED} = 1;
         process( 'login/register/already.tpl' );
     },
 
+    '/login/demo' => sub {
+        process( 'login/demo_off.tpl' );
+    },
+    
     '/login/demo/off' => sub {
         my $ip = $ENV{REMOTE_ADDR};
         $ip =~ s/\./_/g;
         return 0 if !$main::db->{'is_demo'} || !$ip || !$main::CONFIG->{'db_dbname'} =~ /$ip$/;
         remove_tree( images('PATH')."/".$ENV{REMOTE_ADDR} );
         `mysql -u$main::CONFIG->{'db_user'} -p$main::CONFIG->{'db_password'} -e "drop database $main::CONFIG->{'db_dbname'}"`;
-        process( 'login/demo_off.tpl' );
+        session;
+        redirect2 ('/login/demo');
     },
 
 };

@@ -48,6 +48,7 @@
 	'delete'	=> ' ',
 	'deleted'	=> ' ',
 	'Demo mode is off'	=> ' ',
+	'Demo off'	=> ' ',
 	'Deny rules'	=> ' ',
 	'Description'	=> ' ',
 	'dictionary'	=> ' ',

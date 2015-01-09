@@ -8,6 +8,7 @@
 	'Click to add new information about gallery'	=> 'Click to add new information about gallery',
 	'click to edit'	=> 'click to edit',
 	'Demo mode is off'	=> 'Demo mode is off',
+	'Demo off'	=> 'Demo off',
 	'Dictionary'	=> 'Dictionary',
 	'edit menu'	=> 'edit menu',
 	'enter new menu name'	=> 'enter new menu name',

@@ -15,7 +15,7 @@ sub new {
         $dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, {PrintError => 1});
         if( $dbh ) {
             $self->{'is_demo'} = 1;
-            $main::CONFIG->{'db_dbname'} .= '_'.$ENV{REMOTE_ADDR};
+            $main::CONFIG->{'db_dbname'} .= '_'.$ip;
         }
     }
     unless( $dbh ) {

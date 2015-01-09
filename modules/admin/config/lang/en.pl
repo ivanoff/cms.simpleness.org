@@ -47,6 +47,7 @@
 	'December'	=> ' ',
 	'delete'	=> ' ',
 	'deleted'	=> ' ',
+	'Demo mode is off'	=> ' ',
 	'Deny rules'	=> ' ',
 	'Description'	=> ' ',
 	'dictionary'	=> ' ',

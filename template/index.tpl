@@ -64,6 +64,9 @@
 	<li><a href="/login" [% 'class="active"' IF env('REDIRECT_URL') == '/login' %]><span>[% t('Login') %]</span></a></li>
 	<li><a href="/login/register" [% 'class="active"' IF env('REDIRECT_URL') == '/login/register' %]><span>[% t('Register') %]</span></a></li>
 [% END %]
+[% IF is_demo %]
+        <li><a href="/login/demo/off">Demo off</a></li>
+[% END %]
 		</ul>
 		<div class="cl">&nbsp;</div>
 	    </menu>

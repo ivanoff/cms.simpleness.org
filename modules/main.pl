@@ -52,6 +52,7 @@ $tt = {
     config_images => $CONFIG_IMAGES,
     t             => sub{ $t->t(shift) },
     language      => $t->{'language'},
+    is_demo       => $db->{is_demo},
     access        => access( $ENV{'REDIRECT_URL'}, $SESSION->param('slogin') ),
 };
 

@@ -170,7 +170,7 @@ $main::SESSION->{_ENABLED} = 1;
         remove_tree( images('PATH')."/".$ENV{REMOTE_ADDR} );
         `mysql -u$main::CONFIG->{'db_user'} -p$main::CONFIG->{'db_password'} -e "drop database $main::CONFIG->{'db_dbname'}"`;
         session;
-        redirect2 ('/login/demo');
+        redirect2 ('login/demo');
     },
 
 };

@@ -3,9 +3,6 @@
 use strict;
 use MAIN;
 
-my $img_path = $main::db->{'is_demo'} ? $ENV{REMOTE_ADDR} : '';
-$main::CONFIG_IMAGES->{PATH} .= "/$img_path/";
-
 you_cannot 'manage_gallery' or
 
 {
@@ -72,8 +69,8 @@ you_cannot 'manage_gallery' or
         }
         my $order = sql ( "SELECT MIN(img_order)-1 img_order
                     FROM base_gallery_images WHERE gal_key=?", $gal_key );
-        sql ( "INSERT INTO base_gallery_images (img_name, img_path, gal_key, img_order) 
-                    VALUES (?, ?, ?, ?)", param->{Filedata}, $img_path, $gal_key, $order->[0]{img_order} );
+        sql ( "INSERT INTO base_gallery_images (img_name, gal_key, img_order) 
+                    VALUES (?, ?, ?)", param->{Filedata}, $gal_key, $order->[0]{img_order} );
 #        unlink $filename;
         my $image = sql ( "SELECT img_name, gal_key FROM base_gallery_images
                     WHERE img_name=? and gal_key=?", param->{Filedata}, $gal_key );

@@ -2,6 +2,7 @@
 
 use strict;
 use MAIN;
+use File::Copy::Recursive qw( dircopy );
 
 my $r;
 $main::SESSION->{_ENABLED} = 1;
@@ -13,9 +14,11 @@ $main::SESSION->{_ENABLED} = 1;
         my ( $l, $p ) = param( 'login', 'password' );
         if( $l ) {
             if( $main::CONFIG->{demo_enabled} && $l eq 'demo' && $p eq 'demo' && !$main::db->{'is_demo'} ) {
+            # prepare demo mode envirement
                 my $ip = $ENV{REMOTE_ADDR};
                 $ip =~ s/\./_/g;
                 $main::CONFIG->{'db_dbname'} .= '_'.$ip;
+                # create demo database and reconnect
                 `mysql -u$main::CONFIG->{'db_user'} -p$main::CONFIG->{'db_password'} -e "create database $main::CONFIG->{'db_dbname'}"`;
                 `mysql -u$main::CONFIG->{'db_user'} -p$main::CONFIG->{'db_password'} $main::CONFIG->{'db_dbname'} < ../install_demo.sql`;
                 my $dsn = 'DBI:'.$main::CONFIG->{'db_type'}
@@ -24,6 +27,10 @@ $main::SESSION->{_ENABLED} = 1;
                 my $dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, {PrintError => 1});
                 $main::db->{'connect'} = \$dbh;
                 $main::db->{'is_demo'} = 1 if $dbh;
+                # create demo gallery folders
+#                mkdir( images('PATH').'/'.$ip );
+                dircopy( images('PATH').'/'.$_, images('PATH').'/'.$ip.'/'.$_ ) foreach qw( 1 2 3 );
+                sql( "UPDATE base_content SET content_date_from=NOW()");
             }
             $r = sql( "SELECT * FROM base_users WHERE user_login=? 
                          AND user_password=MD5(CONCAT(?,MD5(?),MD5(?)))", $l, $p, $l, $p.$l );
@@ -166,9 +173,10 @@ $main::SESSION->{_ENABLED} = 1;
     '/login/demo/off' => sub {
         my $ip = $ENV{REMOTE_ADDR};
         $ip =~ s/\./_/g;
-        return 0 if !$main::db->{'is_demo'} || !$ip || !$main::CONFIG->{'db_dbname'} =~ /$ip$/;
-        remove_tree( images('PATH')."/".$ENV{REMOTE_ADDR} );
-        `mysql -u$main::CONFIG->{'db_user'} -p$main::CONFIG->{'db_password'} -e "drop database $main::CONFIG->{'db_dbname'}"`;
+        return 0 if !$main::db->{'is_demo'} || !$ip;
+        remove_tree( images('PATH') ) if images('PATH') =~ /$ip\/*$/;
+        `mysql -u$main::CONFIG->{'db_user'} -p$main::CONFIG->{'db_password'} -e "drop database $main::CONFIG->{'db_dbname'}"`
+            if $main::CONFIG->{'db_dbname'} =~ /$ip$/;
         session;
         redirect2 ('login/demo');
     },

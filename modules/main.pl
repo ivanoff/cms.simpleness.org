@@ -44,6 +44,12 @@ $t = TRANSLATE->new($lang);
 $db = DATABASE->new;
 $template = SubTemplate->new($CONFIG_TEMPLATE);
 
+if( $db->{'is_demo'} ) {
+    my $add_img_path = $ENV{REMOTE_ADDR};
+    $add_img_path =~ s/\./_/g;
+    $CONFIG_IMAGES->{PATH} .= "/$add_img_path/";
+}
+
 ## Default variables for Template Toolkit
 $tt = {
     env           => sub{ $ENV{(shift)} },

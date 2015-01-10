@@ -83,7 +83,7 @@
 
 [% UNLESS read_only;
      PROCESS editable.tpl 
-        name=env('REDIRECT_URL') 
+        name='?' _ env('REDIRECT_URL')
         value=(access.edit_content)? content_edit : content;
    END %]
 

@@ -89,7 +89,10 @@ if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
 } else {
     print $q->header;
 
-    my $page=$template->process('index.tpl', { body=>$body, }, );
+    my $r = sql( "SELECT config_value FROM base_users_config WHERE config_name='template_name'" );
+    my $template_name = $r->[0]{config_value}? "_templates/$r->[0]{config_value}/" : "";
+
+    my $page=$template->process($template_name."index.tpl", { body=>$body, }, );
 
     if ( $template->error() ) {
         to_log( $template->error() );

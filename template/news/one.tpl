@@ -10,7 +10,7 @@
         <i class='icon-trash delete' name="[% news_key %]" alt="[% t('delete') %]"></i>
         <input type="text" id="datepicker" value="[% d ? d.0 _ '-' _ d.1 _'-' _ d.2 : current_date %]" />
 [% ELSE %]
-        <h4><b>[% t(month(d.1)) _ ' ' _ d.2 _', ' _ d.0 %]</b></h4>
+        <div class="date"><h4><b>[% t(month(d.1)) _ ' ' _ d.2 _', ' _ d.0 %]</b></h4></div>
 [% END %]
 
 <h2>[% PROCESS editable.tpl value = n.news_name || t('New news header') name = "/admin/news/" _ news_key _ "/update?header" %]</h2>

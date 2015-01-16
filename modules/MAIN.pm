@@ -151,6 +151,10 @@ sub back {
     redirect( $1 ) if $ENV{'HTTP_REFERER'} =~ m%https?://.*?/(.*)%;
 }
 
+sub back2 {
+    redirect2( $1 ) if $ENV{'HTTP_REFERER'} =~ m%https?://.*?/(.*)%;
+}
+
 ## rotate image
 sub image_rotate {
     use Image::Magick;

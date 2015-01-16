@@ -1,0 +1,401 @@
+/* layout.css
+ * The purpose of this stylesheet is to set the styles for layout-specific elements.
+ */
+
+body
+{
+	position: relative;
+	background-color: #fff;
+}
+p.error
+{
+	background-color: #ffc;
+	color: #000;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	color: #d00;
+	line-height: 40px;
+	width: 100%;
+	padding: 40px 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	display: block !important;
+	box-shadow: 0 0 50px rgba(0,0,0, .5);
+}
+p.largescreen,
+p.msie
+{
+	display: none;
+}
+
+#c-carousel
+{
+	height: 100%;
+	min-height: 250px;
+	max-height: 1250px;
+	width: 100%;
+	min-width: 990px;
+	overflow: hidden;
+	position: relative;
+	z-index: 1;
+}
+body.largescreen #c-carousel
+{
+	position: fixed !important;
+}
+
+
+/*
+ * FOOTER
+ */
+#c-footer
+{
+	background-color: #111;
+	width: 100%;
+	min-width: 990px;
+	height: auto;
+	min-height: 100%;
+	position: relative;
+	z-index: 10;
+}
+
+body.largescreen #c-footer
+{
+	top: 100%;
+}
+
+#c-footer,
+#c-footer p,
+#c-footer li,
+#c-footer a
+{
+	color: #999;
+	font-size: 16px;
+}
+#c-bubble
+{
+	background-color: #000;
+	width: 150px;
+	margin: 0 0 10px -495px;
+	padding: 16px 30px 19px 30px;
+	position: absolute;
+	left: 50%;
+	top: -67px;
+	z-index: 3;
+}
+#c-bubble:after
+{
+	content: url(../img/point.png);
+	position: absolute;
+	margin: 0 0 0 -18px;
+	bottom: -10px;
+	left: 50%;
+}
+#c-bubble p
+{
+	color: #fff;
+	margin: 0;
+	text-align: center;
+}
+
+#c-next
+{
+	color: #666;
+	text-decoration: none;
+/* 	font-size: 16px; */
+	display: block;
+	padding: 10px 30px 10px 30px;
+	position: absolute;
+	top: -63px;
+	right: 5px;
+}
+#c-next:hover
+{
+	border-color: #666;
+	color: #333;
+}
+
+
+#c-current, #c-list
+{
+	width: 990px;
+	margin: 0 auto;
+	padding: 100px 0 0 0;
+}
+#c-current ul, #c-list ul
+{
+	box-shadow: 0 0 50px #000;
+}
+#c-description
+{
+	margin-top: 15px;
+}
+#c-list
+{
+	padding-bottom: 200px;
+}
+#c-current p, #c-list p
+{
+	font-style: italic;
+}
+#c-footer ul,
+#c-footer ul *
+{
+	font-size: 20px;
+	margin: 0;
+	padding: 0;
+}
+#c-footer ul li
+{
+	list-style: none;
+	display: block;
+}
+#c-footer ul li span
+{
+	line-height: 40px;
+	padding: 10px 20px;
+	display: inline-block;
+}
+#c-footer ul li a
+{
+	text-decoration: none;
+}
+#c-footer ul li span.nr
+{
+	border-right: 1px solid #161616;
+	width: 40px;
+	float: left;
+}
+
+#c-list ul li
+{
+	border-top: 1px solid #161616;
+	background-color: #000;
+}
+#c-list ul li:first-child
+{
+	border-top: none;
+}
+#c-list ul li:hover
+{
+	background-color: #161616;
+}
+#c-list ul li.ad90
+{
+	height: 90px;
+	padding-left: 80px;
+}
+#c-list ul li.ad60
+{
+	height: 60px;
+	padding: 10px 0 10px 100px;
+}
+#c-list ul li.ad60:hover {
+	background-color: #000;
+}
+#c-list ul li:hover span.nr
+{
+	border-color: #000;
+}
+#c-list ul li span.title
+{
+	width: 860px;
+}
+
+#c-current ul *
+{
+	color: #000;
+}
+#c-current ul li
+{
+	background-color: #CDA055;
+	position: relative;
+	height: 60px;
+}
+#c-current ul li span.title
+{
+	width: 650px;
+	height: 40px;
+	overflow: hidden;
+}
+#c-current ul li span.sour,
+#c-current ul li span.down,
+#c-current ul li span.open
+{
+	background: url(../img/arrow-down.png) no-repeat 15px center #CDA055;
+	border-left: 1px solid #000;
+	width: 30px;
+	height: 40px;
+	float: right;
+}
+#c-current ul li span.sour
+{
+	background-image: url(../img/code.png);
+
+}
+#c-current ul li span.open
+{
+	background-image: url(../img/arrow-out.png);
+
+}
+#c-current ul li span.sour:hover,
+#c-current ul li span.down:hover,
+#c-current ul li span.open:hover
+{
+	background-color: #A6782A;
+}
+
+
+#c-sourcecode
+{
+	display: none;
+}
+#c-sourcecode p
+{
+	font-size: 18px;
+	font-weight: bold;
+	font-style: normal;
+	color: #fff;
+	margin-top: 50px;
+}
+#c-sourcecode pre.prettyprint
+{
+	box-shadow: 0 0 50px #000;
+	border-radius: 0;
+	border: none;
+	width: auto;
+	padding: 20px;
+	margin: 0;
+}
+#c-sourcecode pre.prettyprint li
+{
+	color: #333;
+}
+
+#c-ref
+{
+	margin: 75px 0 0 0;
+}
+
+#c-copy
+{
+	border-top: 1px solid #222;
+	height: 40px;
+	width: 990px;
+	margin: 0 0 0 -495px;
+	padding: 10px 0;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+}
+
+#c-copy > span, #c-copy > span *
+{
+	font-size: 12px;
+	color: #999;
+}
+#c-copy > *
+{
+	display: inline-block;
+	vertical-align: top;
+}
+#c-copy > a
+{
+	background: url(../img/cc-logo-small.png) 20px 0 no-repeat transparent;
+	height: 40px;
+	width: 250px;
+	overflow: hidden;
+	text-indent: -1000px;
+}
+#c-copy > span
+{
+	height: 25px;
+	padding-top: 15px;
+}
+#c-copy .addthis_toolbox
+{
+	position: absolute;
+	right: 20px;
+	top: 30px;
+}
+#c-follow
+{
+	background: url(../img/twitter-bird.png) 0 0 no-repeat transparent;
+	font-size: 14px;
+	height: 35px;
+	padding: 3px 0 0 60px;
+	margin: 0;
+	position: absolute;
+	top: -32px;
+	left: 195px;
+}
+#c-follow a
+{
+	text-decoration: none;
+}
+#c-follow a:hover
+{
+	color: #fff;
+	text-decoration: none;
+}
+
+#c-donate
+{
+	position: absolute;
+	top: -15px;
+	right: 50px;
+}
+
+
+/*
+ * HOME
+ */
+body.home #c-carousel
+{
+	background: url(../img/bg.jpg) center center repeat transparent;
+}
+
+body.home #c-carousel > h1
+{
+	background: url(../img/cc-logo.png) center center no-repeat transparent;
+	width: 760px;
+	height: 510px;
+	margin: -305px 0 0 -380px;
+	padding: 0;
+	overflow: hidden;
+	text-indent: -10000px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 1;
+}
+body.largescreen.home #c-carousel > h1
+{
+	position: fixed;
+}
+
+body.home #c-carousel > span
+{
+	background: url(../img/staple.png) center center no-repeat transparent;
+	display: block;
+	width: 100px;
+	height: 75px;
+	margin: -150px 0 0 -500px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 2;
+}
+body.largescreen.home #c-carousel > span
+{
+	position: fixed;
+}
+body.home #c-bubble
+{
+	width: 300px;
+	margin-left: -180px;
+	top: -89px;
+}

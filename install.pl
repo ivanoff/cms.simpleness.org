@@ -87,7 +87,8 @@ sub db_connect {
 
 #create database tec_odn;
 #create user tec_odn;
-#GRANT ALL PRIVILEGES ON tec_odn.* TO tec_odn@localhost identified by 'tec_odnzzz';
+#GRANT ALL PRIVILEGES ON `tec_odn%`.* TO `tec_odn`@`localhost` identified by 'tec_odnzzz';
+#FLUSH PRIVILEGES;
 
 my $answer;
 print "\nChecking for database:\n";

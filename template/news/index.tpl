@@ -9,6 +9,7 @@
 [% NEXT IF n.news_hidden && !access.add_news %]
 
 <div class="news index">
+    <div class="date">
     <h4>
 [% IF access.add_news %]
 [%   PROCESS admin/news/eye.tpl key = n.news_key hidden = n.news_hidden %]
@@ -16,6 +17,7 @@
 [% END %]
         <b>[% SET d = n.news_date.substr(0,10).split('-'); t(month(d.1)) _ ' ' _ d.2 _', ' _ d.0 %]</b>
     </h4>
+    </div>
     <h3>
         <a href="/news/[% n.news_key %]">[% n.news_name %]</a>
     </h3>

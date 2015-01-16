@@ -5,6 +5,8 @@
 	'Add new menu'	=> 'Add new menu',
 	'Are you sure to delete this image?'	=> 'Are you sure to delete this image?',
 	'change password'	=> 'change password',
+	'change template'	=> 'change template',
+	'Change template'	=> 'Change template',
 	'Click to add new information about gallery'	=> 'Click to add new information about gallery',
 	'click to edit'	=> 'click to edit',
 	'Demo mode is off'	=> 'Demo mode is off',

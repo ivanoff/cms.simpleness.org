@@ -48,6 +48,7 @@ h4 { font-size:16px; color:#b10301; line-height:16px; }
 /* Header */
 #header .bg-bottom { padding:20px 14px 16px 20px; height:100%; }
 #header .bg-bottom-right { padding-bottom:12px; float: right; }
+#header h1 { font-color:#995555; }
 
 /* Navigation */
 #navigation { 

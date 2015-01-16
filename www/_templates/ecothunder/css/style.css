@@ -1,0 +1,192 @@
+body {
+	background: url(/_templates/ecothunder/images/bg-body.gif) repeat center;
+	color: #80662b;
+	font-family: 'Cuprum', sans-serif;
+	font-size: 17px;
+	margin: 0;
+	min-width: 950px;
+	padding: 0;
+}
+a {
+	outline: none;
+}
+img {
+	border: 0;
+}
+p a {
+	color: #80662B;
+	font-style: italic;
+}
+#header {
+	background: url(/_templates/ecothunder/images/bg-header.gif) repeat-x top center;
+	height: 106px;
+	overflow: hidden;
+	width: 100%;
+}
+#header div {
+	margin: 0 auto;
+	overflow: hidden;
+	width: 950px;
+}
+#header div div#logo {
+	float: left;
+	width: 310px;
+	margin:7px 25px 0 0;
+}
+#header div div#logo a {
+	color: #2e5306;
+	text-shadow: 1px 1px 0 #f2fcd9;
+}
+#header div div#logo a:hover {
+	color: #2e0653;
+	text-decoration: none;
+}
+#header div div#navigation {
+	background: url(/_templates/ecothunder/images/bg-navigation-right-curve.gif) no-repeat right top;
+	font-family: 'Cuprum', sans-serif;
+	font-size: 18px;
+	float: right;
+	height: auto;
+	line-height: 50px;
+	margin-top: 27px;
+	text-transform: lowercase;
+	width: 584px;
+}
+#header div div#navigation div {
+	background: url(/_templates/ecothunder/images/bg-navigation-left-curve.gif) no-repeat left top;
+	padding-left: 4px;
+	height: 63px;
+	width: auto;
+}
+#header div div#navigation div ul {
+	background: url(/_templates/ecothunder/images/bg-navigation.gif) repeat-x;
+	clear: both;
+	float: left;
+	height: 63px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	min-width: 500px;
+}
+#header div div#navigation div ul li:first-child {
+	background: none;
+}
+#header div div#navigation div ul li {
+	background: url(/_templates/ecothunder/images/separator-navigation.gif) no-repeat center left;
+	float: left;
+	padding: 0 15px;
+}
+#header div div#navigation div ul li a {
+	color: #b99b5f;
+	text-decoration: none;
+	text-shadow: 1px 1px 0 #efd9c4;
+}
+#header div div#navigation div ul li.current a, #header div div#navigation div ul li a:hover {
+	color: #2e5306;
+	text-shadow: 1px 1px 0 #f2fcd9;
+}
+#content {
+	background: url(/_templates/ecothunder/images/bg-headliner.gif) repeat top center;
+	height: auto;
+	width: 100%;
+}
+#content #inner {
+	margin: 0 auto;
+	overflow: hidden;
+	width: 950px;
+}
+#content #inner #admins {
+	text-align:right;
+}
+#content #inner a {
+	color: #2e5306;
+	text-shadow: 1px 1px 0 #f2fcd9;
+}
+#content #inner a:hover {
+	color: #2e0653;
+	text-decoration: none;
+}
+#footer {
+	background: url(/_templates/ecothunder/images/bg-footer.gif) repeat-x left top;
+	height: 110px;
+	width: 100%;
+}
+#footer a {
+	color: #dadada;
+	font-style:normal;
+	text-decoration:none;
+}
+#footer div {
+	color: #dadada;
+	float: none;
+	height: auto;
+	margin: 0 auto;
+	overflow: hidden;
+	padding-top: 10px;
+	width: 950px;
+}
+#footer #admins {
+	text-align:center;
+}
+#footer div div {
+	float: left;
+	height: auto;
+	margin-left: 46px;
+}
+#footer div div.first {
+	margin-left:  0;
+}
+#footer div div p {
+	font-size: 12px;
+	line-height: 18px;
+	margin: 0;
+	text-align: left;
+}
+#footer div div h3 {
+	color: #fcfcfc;
+	font-size: 20px;
+	height: 30px;
+	margin-bottom: 10px;
+}
+#footer div div div {
+	height: auto;
+	margin-left: 0;
+	margin-top: 10px;
+}
+#footer div div div p {
+	font-size: 14px;
+	line-height: 25px;
+	margin: 0;
+}
+#footer div div div p span {
+	color: #383435;
+	display: inline;
+	font-style: italic;
+}
+#footer div div form {
+	height: 40px;
+	margin-top: 25px;
+	overflow: hidden;
+}
+#footer div div form label {
+	float: left;
+}
+#footer div div form input#subscribe {
+	background: url(/_templates/ecothunder/images/sprites-inputs.gif) no-repeat 0 -131px;
+	border: 0;
+	color: #fffeff;
+	height: 29px;
+	font-family: Arial;
+	font-size: 12px;
+	line-height: 29px;
+	padding: 0 5px;
+	width: 160px;
+}
+#footer div div form input.submit {
+	background: url(/_templates/ecothunder/images/sprites-buttons.gif) no-repeat 0 -218px;
+	border: 0;
+	float: left;
+	height: 29px;
+	margin-left: 12px;
+	width: 100px;
+}

@@ -28,6 +28,9 @@
 
 <span class="col">
 <b><i class="icon-user"></i> [% session('sname') %]</b><br />
+[% IF access.edit_content %]
+<a href="/admin/templates">[% t('change template') %]</a><br />
+[% END %]
 [% IF access.edit_users %]
 <a href="/admin/users">[% t('edit users') %]</a><br />
 [% END %]

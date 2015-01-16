@@ -4,21 +4,22 @@
     float: right;
 }
 
+figure { padding:0 20px 10px; float:left; }
+
 /* === news === */
 .news {  margin: 0 25px 25px 0; }
 .news h3 { padding: 0 5px 0 10px; }
-.news h4 { background: #f2f2f2; border-radius: 5px; padding: 4px 35px 0 10px; }
+.news .date { background-color: rgba(0, 0, 0, 0.07); border-radius: 5px; }
+.news h4 { padding: 5px 35px 5px 10px; }
 .news h4 b { color: #555 }
 .news p { margin-left: 20px; }
 
 /* === gallery === */
-
 .gallery{
 	padding:20px 0 30px 0;
 	position:relative;
 	margin:0 auto 0;
 	display:block;
-	width:960px;
 	}
 
 .wrapper .gallery h2{
@@ -26,10 +27,6 @@
 	text-align:left;
 	margin:0 0 20px 0;
 	padding:0;
-	color:#2C2C2C;
-	background-color:#444;
-	font-size:45px;
-	text-transform:uppercase;
 	line-height:normal;
 	}
 
@@ -46,7 +43,7 @@
 	margin:0 10px 10px 0;
 	}
 
-.gallery ul li img{
+.gallery img{
 	width:174px;
 	height:174px;
 	padding:4px;

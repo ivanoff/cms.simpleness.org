@@ -5,11 +5,11 @@
 <a href="/gallery/[% max_gal_id + 1 %]"><i class="icon-plus-sign"></i> [% t('add gallery') %]</a><br /><br />
 [% END %]
 
-<div style="display: inline-block;">
+<div style="display: inline-block;" class="gallery">
 
 [% FOREACH g IN gallery.keys %]
 
-<figure style="padding:20px; float: left;">
+<figure>
 <legend>
 <h3>
 [% IF access.manage_gallery %]

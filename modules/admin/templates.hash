@@ -1,0 +1,26 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+
+you_cannot 'edit_content' or
+
+{
+
+    '/admin/templates' => sub {
+        my @templates = qw{ default };
+        opendir my $dh, $main::CONFIG_TEMPLATE->{INCLUDE_PATH}."/_templates/";
+        push @templates, sort grep { !/^\.*$/ } readdir $dh;
+        closedir $dh;
+        process ( 'admin/templates/index.tpl' , { templates => \@templates } );
+    },
+
+    '/admin/templates/([\w-]+)' => sub {
+        sql( "delete from base_users_config where config_name='template_name' and user_id=0" );
+        sql( "insert into base_users_config ( config_name, config_value ) values ( 'template_name', ? )", $1 )
+            if $1 ne 'default';
+        header ( 'clear', { no_cache => 1 } );
+        back2();
+    },
+
+};

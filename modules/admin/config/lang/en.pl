@@ -29,6 +29,8 @@
 	'Central Asia'	=> ' ',
 	'Change password'	=> ' ',
 	'change password'	=> ' ',
+	'change template'	=> ' ',
+	'Change template'	=> ' ',
 	'Click to add new information about gallery'	=> ' ',
 	'click to edit'	=> ' ',
 	'cms.simpleness.org'	=> ' ',

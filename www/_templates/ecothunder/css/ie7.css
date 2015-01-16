@@ -1,0 +1,51 @@
+#content div#section div span {
+	margin-top: 37px;
+}
+#content div#section div#figure span {
+	margin-top: -5px;
+}
+#content div#section span.background {
+	top: 5px;
+}
+#content div div span {
+	top: 346px;
+}
+#content div.section div {
+	padding-top: 36px;
+}
+#content div.section h4 {
+	padding-top: 35px;
+}
+#content div form div fieldset {
+	padding-top: 20px;
+}
+#content div form div fieldset input#zipcode {
+	margin-top: -41px;
+}
+#content div table tr td label input#newsletter, #content div table tr td label input#terms, #content div form div fieldset div label input#newsletter, #content div form div fieldset div label input#terms, #content div form div fieldset div label input#shipping, #content div form div fieldset div label input#saveas {
+	vertical-align: text-bottom;
+}
+#content div table tr td label.email {
+	vertical-align: middle;
+}
+#content div form table tr td input#send {
+	height: 37px;
+}
+#content div#featured ul li span {
+	margin-top: -3px;
+}
+#content div div span {
+	top: 346px;
+}
+#footer {
+	padding-top: 30px;
+}
+#footer div {
+	padding-top: 0;
+}
+#footer div div p {
+	margin-top: -20px;
+}
+#footer div div h3 {
+	margin-bottom: 30px;
+}

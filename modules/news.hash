@@ -22,6 +22,7 @@ defaults {
 
     '/news/(\d+)' => sub {
         my $r = sql( "SELECT * FROM base_news WHERE lang=? AND news_key=?", lang, $1 );
+        title $r->[0]{news_name}.' - '.t('News');
         process 'news/one.tpl', { n => $r->[0], news_key => $1 };
     },
 };

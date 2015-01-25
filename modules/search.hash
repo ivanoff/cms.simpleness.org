@@ -15,7 +15,9 @@ title t('Search');
                     WHERE lang=? AND lower(news_body) REGEXP ?"
                     , lang, '.*'.(lc $text).'.*' );
 
-            my @r = map { 
+            my @r = 
+                sort { $b->{body} =~ /<b>/ <=> $a->{body} =~ /<b>/ } 
+                map { 
                     $_->{body} =~ s/<[^>]+>//g;
                     $_->{body} = $1 if $_->{body} =~ /[^\w](.{0,50}$text.{0,50})[^\w]/si;
                     $_->{body} =~ s/($text)/<b>$1<\/b>/ig;

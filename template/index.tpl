@@ -36,6 +36,7 @@
 [% PROCESS editable.tpl name='?_header'; %]
 
                     <div class="bg-bottom-right">
+[% INCLUDE search/line.tpl %]
                         <select name="languages" id="languages"></select>
                     </div>
 		    <div class="cl">&nbsp;</div>

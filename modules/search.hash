@@ -11,12 +11,16 @@ title t('Search');
             my $result_content = sql( "SELECT *, content_body body FROM base_content 
                     WHERE lang=? AND lower(content_body) REGEXP ? AND NOT content_page REGEXP '_.*'"
                     , lang, '.*'.(lc $text).'.*' );
+            my $result_news = sql( "SELECT *, news_body body FROM base_news 
+                    WHERE lang=? AND lower(news_body) REGEXP ?"
+                    , lang, '.*'.(lc $text).'.*' );
+
             my @r = map { 
                     $_->{body} =~ s/<[^>]+>//g;
                     $_->{body} = $1 if $_->{body} =~ /[^\w](.{0,50}$text.{0,50})[^\w]/si;
                     $_->{body} =~ s/($text)/<b>$1<\/b>/ig;
                     $_;
-                } @$result_content;
+                } ( @$result_content, @$result_news );
             process 'search/result.tpl', { results => \@r, text => $text };
         } else {
             process 'search/index.tpl';

@@ -1,0 +1,26 @@
+#!/usr/bin/perl
+
+use strict;
+use MAIN;
+
+title t('Search');
+
+{
+    '/search' => sub {
+        if( my $text = param( 'text' ) ) {
+            my $result_content = sql( "SELECT *, content_body body FROM base_content 
+                    WHERE lang=? AND lower(content_body) REGEXP ? AND NOT content_page REGEXP '_.*'"
+                    , lang, '.*'.(lc $text).'.*' );
+            my @r = map { 
+                    $_->{body} =~ s/<[^>]+>//g;
+                    $_->{body} = $1 if $_->{body} =~ /[^\w](.{0,50}$text.{0,50})[^\w]/si;
+                    $_->{body} =~ s/($text)/<b>$1<\/b>/ig;
+                    $_;
+                } @$result_content;
+            process 'search/result.tpl', { results => \@r, text => $text };
+        } else {
+            process 'search/index.tpl';
+        }
+    },
+
+};

@@ -8,13 +8,17 @@ title t('Search');
 {
     '/search' => sub {
         if( my $text = param( 'text' ) ) {
-            my $result_content = sql( "SELECT *, content_body body FROM base_content 
+            my $result_content = sql( "SELECT *, content_body body, content_page link FROM base_content 
                     WHERE lang=? AND lower(content_body) REGEXP ? AND NOT content_page REGEXP '_.*'"
                     , lang, '.*'.(lc $text).'.*' );
-            my $result_news = sql( "SELECT *, news_body body FROM base_news 
+            my $result_news = sql( "SELECT *, news_body body, CONCAT( '/news/', news_key ) link FROM base_news 
                     WHERE lang=? AND lower(news_body) REGEXP ?"
                     , lang, '.*'.(lc $text).'.*' );
-
+            my $result_gallery = sql( "SELECT *, CONCAT( gal_name , '. ' , gal_description ) AS body, 
+                    CONCAT( '/gallery/', gal_key ) AS link 
+                    FROM base_gallery 
+                    WHERE lang=? HAVING lower( body ) REGEXP ?"
+                    , lang, '.*'.(lc $text).'.*' );
             my @r = 
                 sort { $b->{body} =~ /<b>/ <=> $a->{body} =~ /<b>/ } 
                 map { 
@@ -22,7 +26,7 @@ title t('Search');
                     $_->{body} = $1 if $_->{body} =~ /[^\w](.{0,50}$text.{0,50})[^\w]/si;
                     $_->{body} =~ s/($text)/<b>$1<\/b>/ig;
                     $_;
-                } ( @$result_content, @$result_news );
+                } ( @$result_content, @$result_news, @$result_gallery );
             process 'search/result.tpl', { results => \@r, text => $text };
         } else {
             process 'search/index.tpl';

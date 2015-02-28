@@ -68,3 +68,12 @@
 [% END %]
 
 <div class="x"></div>
+
+[% IF access.realtor_import %]
+<span class="col">
+<b><i class="icon-download-alt"></i> [% t('Realtor') %]</b><br />
+<a href="/admin/realtor/import">[% t('import file') %]</a><br />
+</span>
+[% END %]
+
+<div class="x"></div>

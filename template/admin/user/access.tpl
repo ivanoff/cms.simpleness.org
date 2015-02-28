@@ -17,6 +17,7 @@
 	'edit_menu' => 'edit main menu',
 	'print_page' => 'can print page',
 	'site_update' => 'can update site scripts',
+	'realtor_import' => 'import realtor database',
     }
 %]
 
@@ -38,8 +39,9 @@
 	    [% a %]
         </th>
 [% FOREACH n IN groups %]
+[% check =  ( rules.${n.group_id}.${a} || ( session('sgroup') == n.group_name && access.${a} ) )? 'checked="checked"' : '' %]
 	<td align="center">
-	    <input type="checkbox" value="1" name="[% n.group_name %]-[% a %]" [% 'checked="checked"' IF rules.${n.group_id}.${a} %] >
+	    <input type="checkbox" value="1" name="[% n.group_name %]-[% a %]" [% check %] >
         </td>
 [% END %]
 	<td>

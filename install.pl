@@ -29,6 +29,7 @@ my @modules = qw(
     POSIX
     Encode
     Text::Diff
+    Spreadsheet::ParseExcel
   );
 
 sub param {
@@ -62,6 +63,7 @@ if(@install) {
     if( param( "Do you want to install missed modules?", 'y' ) eq 'y' ) {
 =c
     `perl -MCPAN -e 'force install $_'` foreach ( @install );
+# sudo apt-get install libspreadsheet-parseexcel-perl
 =cut
     foreach ( @install ) {
         open my $p, '|-', "sudo perl -MCPAN -e 'shell'";

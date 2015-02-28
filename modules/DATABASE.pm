@@ -22,7 +22,7 @@ sub new {
         $dsn = 'DBI:'.$main::CONFIG->{'db_type'}
                 .':dbname='.$main::CONFIG->{'db_dbname'}
                 .';host='.$main::CONFIG->{'db_host'};
-        $dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, {PrintError => 1});
+        $dbh = DBI->connect($dsn, $main::CONFIG->{'db_user'}, $main::CONFIG->{'db_password'}, { PrintError => 1, mysql_enable_utf8 => 1 });
     }
 
     unless( $dbh ) {

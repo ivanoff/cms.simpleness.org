@@ -23,12 +23,13 @@ use MAIN;
         defaults { gallery => \%gallery, };
 
 ## get comments info
-        my $comm = sql( "SELECT * FROM base_comments
-			WHERE comment_url=? AND lang=? AND
-			      comment_private!=1 AND comment_type=1",
-                        ( $ENV{'HTTP_REFERER'} =~ m%https?://(.*)% )? $1 : '', lang );
-        defaults { comment_show_field => ( session('sid') || $comm )? 1 : 0 };
-
+        if( $CONFIG->{comments_enabled} ) {
+            my $comm = sql( "SELECT * FROM base_comments
+			    WHERE comment_url=? AND lang=? AND
+			          comment_private!=1 AND comment_type=1",
+                            ( $ENV{'HTTP_REFERER'} =~ m%https?://(.*)% )? $1 : '', lang );
+            defaults { comment_show_field => ( session('sid') || $comm )? 1 : 0 };
+        }
 ## get all content with '_' sign in the name's first letter (ex: info for header and footter)
         my %sources = map { $_->{content_page} => $_ } @{sql("select * from base_content WHERE content_page REGEXP '_.*' AND lang=?", lang)};
         defaults { sources => \%sources, };

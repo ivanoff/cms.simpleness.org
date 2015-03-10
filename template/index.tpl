@@ -11,12 +11,12 @@
         <link rel="stylesheet" href="/css/print.css" media="print" />
         <link rel="stylesheet" href="/css/default.css" />
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+<!--
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-<!--
+-->
         <script src="/js/jquery/jquery.js"></script>
         <script src="/js/jquery/jquery-ui.js"></script>
--->
 [% PROCESS js/variables.tpl %]
         <script src="/js/default.js"></script>
 [% IF access.edit_content %]

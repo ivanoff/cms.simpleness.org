@@ -12,13 +12,12 @@ defaults {
 {
     #index page
     '' => sub {
-        cache(60*60*1*1);
-        my $comments = sql( "SELECT * FROM base_comments c
-    		    LEFT JOIN base_users u ON ( u.user_id = c.user_id )
-    		    WHERE c.lang=? AND c.comment_private!=1
-    		    AND comment_type=1 ORDER BY date DESC LIMIT 5", lang );
-        process ( 'index/index.tpl' ).
-        process ( 'comments/index.tpl', { comments => $comments } );
+#        cache(60*60*1*1);
+#        my $comments = sql( "SELECT * FROM base_comments c
+#    		    LEFT JOIN base_users u ON ( u.user_id = c.user_id )
+#    		    WHERE c.lang=? AND c.comment_private!=1
+#    		    AND comment_type=1 ORDER BY date DESC LIMIT 5", lang );
+#        process ( 'comments/index.tpl', { comments => $comments } );
     },
 
 };

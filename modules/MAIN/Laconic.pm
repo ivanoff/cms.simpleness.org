@@ -18,8 +18,8 @@ our @EXPORT  = qw(
                 images
             );
 
-
 sub defaults {
+    return $main::tt->{ $_[0] } if ref $_[0] ne 'HASH';
     $main::tt = { %{$main::tt}, %{$_[0]}, };
 }
 

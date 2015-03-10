@@ -1,6 +1,8 @@
-CREATE  TABLE `base_realtor_config` (
+DROP TABLE IF EXISTS `base_realtor_config`;
+CREATE TABLE `base_realtor_config` (
   `realtor_config_id` INT NOT NULL AUTO_INCREMENT ,
-  `realtor_data_column_id` INT NULL ,
-  `name` VARCHAR(1024) NULL ,
-  `content` VARCHAR(45) NULL ,
+  `column_id` INT NULL ,
+  `name` blob,
+  `content` blob,
+  `hidden` boolean,
   PRIMARY KEY (`realtor_config_id`) );

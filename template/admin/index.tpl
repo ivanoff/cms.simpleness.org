@@ -73,6 +73,7 @@
 <span class="col">
 <b><i class="icon-download-alt"></i> [% t('Realtor') %]</b><br />
 <a href="/admin/realtor/import">[% t('import file') %]</a><br />
+<a href="/admin/realtor/config">[% t('header manager') %]</a><br />
 </span>
 [% END %]
 

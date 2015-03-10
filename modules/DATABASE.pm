@@ -2,6 +2,7 @@ package DATABASE;
 
 use strict;
 use DBI;
+use MAIN;
 
 sub new {
     my $class = shift;

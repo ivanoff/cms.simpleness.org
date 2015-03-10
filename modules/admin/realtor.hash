@@ -1,0 +1,114 @@
+#!/usr/bin/perl
+
+use strict;
+use utf8;
+use MAIN;
+use Spreadsheet::ParseExcel;
+
+my $types = {
+    url      => undef,
+    header   => undef,
+    description => undef,
+    district => undef,
+    city     => undef,
+    street   => qr/str|ave|ул/i,
+    price    => qr/\d+([\._\s]?\d{3})*([\.,]?\d{2})?(USD|\$)?$/i,
+    size     => qr/^\d+$/,
+    images   => qr/jpg|png/i,
+    video    => qr/youtube/i,
+    coordinates => qr/^\d+\.\d+,\s*\d+\.\d+$/,
+    cadastre_UA => qr/\d{10}-\d{2}-\d{3}-\d{4}/,
+    cadastre_RU => qr/\d{2}:\d{2}:\d{6}:\d{2}/,
+};
+
+defaults { 
+    read_only => 1, 
+    types     => [ sort keys %$types ], 
+};
+
+sub column_looks_like {
+    my ( $was, $_ ) = @_;
+    return $was if !$_ || /^\s*$/;
+
+    if ( /^[-+]?(\d*[.])?\d+$/ ) {
+        $was->{datatype} = 'float' if $was->{datatype} ne 'blob';
+    } else {
+        $was->{datatype} = 'blob';
+    }
+
+    foreach my $type ( keys %$types ) {
+        $was->{type} ||= $type if $types->{ $type } && $_ =~ $types->{ $type };
+    }
+
+    return $was;
+}
+
+you_cannot 'realtor_import' or
+
+{
+    '/admin/realtor/config' => sub {
+        if ( param('submit') ) {
+            my $h = sql "SELECT * FROM base_realtor_config WHERE column_id!=0";
+            foreach my $id ( map { $_->{column_id} } @$h ) {
+                sql( "UPDATE base_realtor_config 
+                      SET type=?, hidden=? WHERE column_id=?", 
+                      param("type-$id"), param("hide-$id")? 1 : 0, $id );
+            }
+        }
+        my $h = sql "SELECT * FROM base_realtor_config 
+                      WHERE column_id!=0 
+                      ORDER BY column_id";
+        process( 'admin/realtor/config.tpl', { headers => $h, } );
+    },
+
+    '/admin/realtor/import' => sub {
+        my ( $result, $header_line, $col_params, );
+        if ( param('file') =~ /\.xls$/ ) {
+            my $parser   = Spreadsheet::ParseExcel->new();
+            my $workbook = $parser->parse( $::q->tmpFileName( 'file' ) );
+            my ( $worksheet ) = $workbook->worksheets();
+            for my $row ( 0 .. $worksheet->row_range() ) {
+                for my $col ( 0 .. $worksheet->col_range() ) {
+                    my $cell = $worksheet->get_cell( $row, $col );
+                    if( $cell ) {
+                        $result->[ $row ][ $col ] = $cell->value();
+                        $result->[ $header_line ][ $col ] ||= '';
+                        $col_params->[ $col ] = column_looks_like( $col_params->[ $col ], $cell->value() ) if $header_line;
+                    }
+                }
+                $header_line = $row if !$header_line && $result->[ $row ];
+            }
+            $col_params->[ 0 ]{type} = 'url';
+        }
+
+        if ( $header_line ) {
+            sql "UPDATE base_realtor_config SET column_id=0";
+            my %header_types = map { utf8::decode($_->{name}); $_->{name} => $_ } 
+                                   @{sql "SELECT * FROM base_realtor_config"};
+            my $i = 0;
+            foreach( @{ $result->[ $header_line ] } ) {
+                if ( $header_types{ $_ } ) {
+                    sql( "UPDATE base_realtor_config SET column_id=? WHERE name=?", ++$i, $_ );
+                    next;
+                }
+                sql( "INSERT INTO base_realtor_config ( column_id, name, type, hidden )
+                        VALUES ( ?, ?, ?, ? )", ++$i, $_, $col_params->[$i-1]{type}, 0 );
+            }
+
+            sql 'DROP TABLE IF EXISTS base_realtor_data'; 
+            my $i = 1;
+            my @fl = map { "`".($i++)."` ".($_->{datatype} || 'blob') } @$col_params;
+            sql 'CREATE TABLE base_realtor_data ('.( join ',', @fl ).');';
+            for my $i ( $header_line+1 .. @$result ) {
+                my $k = @{ $result->[ $header_line ] }-1;
+                sql ( "INSERT INTO base_realtor_data 
+                        VALUES ( ".( join ',', map {'?'} 0..$k ) ." )", 
+                        @{$result->[ $i ]}[0..$k] );
+            }
+            return redirect2('admin/realtor/config');
+        }
+
+        process( 'admin/realtor/import.tpl', { table => $result } );
+    },
+
+};

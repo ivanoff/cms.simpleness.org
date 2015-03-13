@@ -3,8 +3,8 @@
 [% t('Select file to import') %]
 <br />
 <input type="file" name="file"> 
-<small>[% t('Accepted formats') %]: xlsx,xls,csv,tar,gz</small>
+<small>[% t('Accepted formats') %]: xlsx,xls,csv</small>
 <br />
 <input type="submit" value='[% t('Send file') %]'>
-
+<input type="button" value="[% t('cancel') %]" onclick="window.location='/realtor';">
 </form>

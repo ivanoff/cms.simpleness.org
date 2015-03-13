@@ -21,6 +21,7 @@
 	'back'	=> ' ',
 	'Black Sea'	=> ' ',
 	'Cancel'	=> ' ',
+	'cancel'	=> ' ',
 	'Cancel all uploads'	=> ' ',
 	'Caspian Sea'	=> ' ',
 	'categories'	=> ' ',

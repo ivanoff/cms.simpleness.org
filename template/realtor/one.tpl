@@ -7,15 +7,34 @@
     <p>
         [% r.${type.description} %]
     </p>
+[% IF r.${type.coordinates} %]
+[%   ll = r.${type.coordinates}.match('([\d\.]+)') %]
+    <h3>
+        [% t('map') %]
+    </h3>
+    <p>
+        <a href="http://maps.google.com/?q=[% r.${type.coordinates}.replace( ' ', '' ) %]" target="_blank">view on google maps</a><br />
+    </p>
+[% END %]
 [% IF r.${type.images} %]
+
+<script src="/js/lightbox.js"></script>
+<script src="/js/gallery.js"></script>
+
     <h3>
         [% t('photos') %]
     </h3>
-    <p>
-        [% FOREACH image IN r.${type.images}.split(',') %]
-        <img src="[% image %]" width="200">
-        [% END %]
-    </p>
+    <div class="gallery">
+      <ul id="gallerys" class="gallerys">
+[% FOREACH image IN r.${type.images}.split(',') %]
+        <li>
+	    <a href="/images/gallery/realtor/640x480/[% image %]" title="image_title">
+	    <img align="top" src="/images/gallery/realtor/[% config_images.SIZE.0 %]/[% image %]" alt="" id="[% image %]"></a>
+	</li>
+[% END %]
+      </ul>
+    </div>
+    <br class="x" />
 [% END %]
 [% IF r.${type.video} %]
 [% hash = r.${type.video}.match('v=(\w+)') %]
@@ -24,15 +43,6 @@
     </h3>
     <p>
         <iframe width="420" height="315" src="https://www.youtube.com/embed/[% hash.0 %]" frameborder="0" allowfullscreen></iframe>
-    </p>
-[% END %]
-[% IF r.${type.coordinates} %]
-[% ll = r.${type.coordinates}.match('([\d\.]+)') %]
-    <h3>
-        [% t('map') %]
-    </h3>
-    <p>
-        <a href="http://maps.google.com/?q=[% r.${type.coordinates}.replace( ' ', '' ) %]" target="_blank">view on google maps</a><br />
     </p>
 [% END %]
 

@@ -1,7 +1,11 @@
 <h2>[% t('Realtor') %]</h2>
 
+[% IF access.realtor_import %]
+    <a href="/admin/realtor/config"><i class="icon-th-list"></i> [% t('header manager') %]</a> |
+    <a href="/admin/realtor/import"><i class="icon-download-alt"></i> [% t('import file') %]</a><br /><br />
+[% END %]
+
 [% FOREACH r IN realtor %]
-[%# NEXT IF n.news_hidden && !access.add_news %]
 
 <div class="news index">
     <div class="date">

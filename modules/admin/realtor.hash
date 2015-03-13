@@ -4,11 +4,14 @@ use strict;
 use utf8;
 use MAIN;
 use Spreadsheet::ParseExcel;
+use Spreadsheet::XLSX;
+use Text::CSV;
+use Digest::MD5 qw( md5_hex );
+use LWP::Simple;
 
 my $types = {
     url      => undef,
     header   => undef,
-    description => undef,
     district => undef,
     city     => undef,
     street   => qr/str|ave|ул/i,
@@ -16,9 +19,11 @@ my $types = {
     size     => qr/^\d+$/,
     images   => qr/jpg|png/i,
     video    => qr/youtube/i,
-    coordinates => qr/^\d+\.\d+,\s*\d+\.\d+$/,
-    cadastre_UA => qr/\d{10}-\d{2}-\d{3}-\d{4}/,
-    cadastre_RU => qr/\d{2}:\d{2}:\d{6}:\d{2}/,
+    description    => undef,
+    coordinates    => qr/^\d+\.\d+,\s*\d+\.\d+$/,
+    cadastre_UA    => qr/\d{10}-\d{2}-\d{3}-\d{4}/,
+    cadastre_RU    => qr/\d{2}:\d{2}:\d{6}:\d{2}/,
+    '&lt;text&gt;' => undef,
 };
 
 defaults { 
@@ -54,6 +59,32 @@ you_cannot 'realtor_import' or
                       SET type=?, hidden=? WHERE column_id=?", 
                       param("type-$id"), param("hide-$id")? 1 : 0, $id );
             }
+            # prepare images
+            my $image_id = sql "SELECT column_id FROM base_realtor_config 
+                                WHERE type = 'images' AND column_id!=0 AND hidden=0";
+            my $path = images('PATH').'/realtor/';
+            if ( @$image_id && ! -d $path ) {
+                make_path( $path.$_ ) foreach ( '', @{ images('SIZE') } );
+            }
+            foreach my $i ( @$image_id ) {
+                my $images_all = sql "SELECT `$i->{column_id}` i FROM base_realtor_data";
+                foreach my $images ( @$images_all ) {
+                    my @images_new;
+                    my $images_to_update = $images->{i};
+                    $images->{i} =~ s/http/,http/g;
+                    my @i = grep { $_ } split /[,;\s]/, $images->{i};
+                    foreach my $url ( @i ) {
+                        my $filename =  md5_hex( $url ).( $url =~ /(\.(jpg|png|tiff))$/i? $1 : 'jpg' );
+                        push @images_new, $filename;
+                        next if -e $path.$filename;
+                        getstore( $url, $path.$filename );
+                        resize( $path.$filename, "$path/$_/$filename", split( 'x', $_ ) ) foreach @{ images('SIZE') };
+                    }
+                    sql( "UPDATE base_realtor_data SET `$i->{column_id}`=? 
+                          WHERE `$i->{column_id}`=?", join( ' ,', @images_new ), $images_to_update );
+                }
+            }
+            return redirect('realtor');
         }
         my $h = sql "SELECT * FROM base_realtor_config 
                       WHERE column_id!=0 
@@ -62,28 +93,61 @@ you_cannot 'realtor_import' or
     },
 
     '/admin/realtor/import' => sub {
-        my ( $result, $header_line, $col_params, );
+        my ( $result, $header_line, $col_params );
+
+        return process( 'admin/realtor/import.tpl', { table => $result } ) unless param('file');
+
         if ( param('file') =~ /\.xls$/ ) {
             my $parser   = Spreadsheet::ParseExcel->new();
             my $workbook = $parser->parse( $::q->tmpFileName( 'file' ) );
-            my ( $worksheet ) = $workbook->worksheets();
-            for my $row ( 0 .. $worksheet->row_range() ) {
-                for my $col ( 0 .. $worksheet->col_range() ) {
-                    my $cell = $worksheet->get_cell( $row, $col );
-                    if( $cell ) {
-                        $result->[ $row ][ $col ] = $cell->value();
-                        $result->[ $header_line ][ $col ] ||= '';
-                        $col_params->[ $col ] = column_looks_like( $col_params->[ $col ], $cell->value() ) if $header_line;
-                    }
+            my ( $sheet ) = $workbook->worksheets();
+            for my $row ( 0 .. $sheet->row_range() ) {
+                for my $col ( 0 .. $sheet->col_range() ) {
+                    my $cell = $sheet->get_cell( $row, $col );
+                    $result->[ $row ][ $col ] = ( $cell )? $cell->value() : '';
                 }
-                $header_line = $row if !$header_line && $result->[ $row ];
             }
-            $col_params->[ 0 ]{type} = 'url';
         }
+
+        if ( param('file') =~ /\.xlsx$/ ) {
+            my $parser = Spreadsheet::XLSX -> new ( $::q->tmpFileName( 'file' ) );
+            my ( $sheet ) = @{$parser->{Worksheet}};
+            for my $row ( 0 .. $sheet->{MaxRow} ) {
+                for my $col ( 0 .. $sheet->{MaxCol} ) {
+                    my $cell = $sheet->{ Cells }[ $row ][ $col ];
+                    $result->[ $row ][ $col ] = ( $cell )? $cell->{Val} : '';
+                }
+            }
+        }
+
+        if ( param('file') =~ /\.csv$/ ) {
+            my $csv = Text::CSV->new( { sep_char => ';' } );
+            open( my $data, '<:utf8', $::q->tmpFileName( 'file' ) ) or return "Could not open csv file: $!\n";
+            my $row = 0;
+            while ( my $line = <$data> ) {
+                chomp $line;
+                if ( $csv->parse( $line ) ) {
+                    $result->[ $row++ ] = [ $csv->fields() ];
+                } else {
+                    return "Line could not be parsed: $line\n";
+                }
+            }
+            close $data;
+        }
+
+        for my $row ( 0 .. @$result-1 ) {
+            for my $col ( 0 .. @{$result->[$row]}-1 ) {
+                next unless $header_line;
+                $result->[ $header_line ][ $col ] ||= '';
+                $col_params->[ $col ] = column_looks_like( $col_params->[ $col ], $result->[ $row ][ $col ] );
+            }
+            $header_line = $row if !$header_line && grep { $_ } @{$result->[ $row ]};
+        }
+        $col_params->[ 0 ]{type} = 'url';
 
         if ( $header_line ) {
             sql "UPDATE base_realtor_config SET column_id=0";
-            my %header_types = map { utf8::decode($_->{name}); $_->{name} => $_ } 
+            my %header_types = map { $_->{name} => $_ } 
                                    @{sql "SELECT * FROM base_realtor_config"};
             my $i = 0;
             foreach( @{ $result->[ $header_line ] } ) {
@@ -108,7 +172,6 @@ you_cannot 'realtor_import' or
             return redirect2('admin/realtor/config');
         }
 
-        process( 'admin/realtor/import.tpl', { table => $result } );
     },
 
 };

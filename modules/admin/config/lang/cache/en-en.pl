@@ -4,6 +4,7 @@
 	'add menu'	=> 'add menu',
 	'Add new menu'	=> 'Add new menu',
 	'Are you sure to delete this image?'	=> 'Are you sure to delete this image?',
+	'cancel'	=> 'cancel',
 	'change password'	=> 'change password',
 	'change template'	=> 'change template',
 	'Change template'	=> 'Change template',

@@ -49,4 +49,11 @@ you_cannot 'manage_gallery' or
                                         align=>$upload_align, path=>images('PATH'), } );
     },
 
+    '/admin/images/rotate/(.*)/(.*?)' => sub {
+        my ( $path, $name ) = ( $1, $2 );
+        return if $path =~ /\.\./;
+        image_rotate( images('PATH').'/'.$path.'/'.$_.'/'.$name ) foreach ( @{images('SIZE')}, '' );
+        back;
+    },
+
 };

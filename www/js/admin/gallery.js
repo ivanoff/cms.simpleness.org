@@ -13,7 +13,7 @@ $(document).ready(function(){
 
         $('.rotate_image').click(function () {
             id   = $(this).attr('id');
-            save_text( '/admin/gallery/rotate/'+$(this).attr('name'), {}, 'please, wait...' ); 
+            save_text( '/admin/images/rotate/'+$(this).attr('name'), {}, 'please, wait...' ); 
             $("#i"+id).animate( {opacity:0.5}, 500 );
             setTimeout(function() {
                 show_info( "image was clockwised" );

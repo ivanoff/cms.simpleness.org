@@ -7,12 +7,6 @@ you_cannot 'manage_gallery' or
 
 {
 
-    '/admin/gallery/rotate/(.*)/(.*?)' => sub {
-        my ( $path, $name ) = ( $1, $2 );
-        image_rotate( images('PATH').'/'.$path.'/'.$_.'/'.$name ) foreach ( '', @{images('SIZE')} );
-        back;
-    },
-
     '/admin/gallery/delete/i(\d+)' => sub {
         my $id = $1;
         my $image = sql("SELECT * FROM base_gallery_images WHERE img_id=?", $id );

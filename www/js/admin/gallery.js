@@ -1,12 +1,13 @@
 $(document).ready(function(){
         $('.delete').click(function () {
-            save_text( '/admin/gallery/delete/'+$(this).attr('name'), {}, 'gallery was deleted'); 
+            save_text( '/admin/gallery/delete/g'+$(this).attr('name'), {}, 'gallery was deleted'); 
 	    $(this).parent().parent().parent().animate({opacity:0}, 700, function(){ $(this).css({display:"none"}); });
 	    return false;
         });
 
         $('.delete_image').click(function () {
-            save_text( '/admin/gallery/delete/'+$(this).attr('name'), {}, 'image was deleted'); 
+            save_text( '/admin/gallery/delete/i'+$(this).attr('id'), {}, 'please, wait...' ); 
+            save_text( '/admin/images/delete/'+$(this).attr('name'), {}, 'image was deleted' ); 
 	    $(this).parent().parent().animate({opacity:0}, 700, function(){ $(this).css({display:"none"}); });
 	    return false;
         });

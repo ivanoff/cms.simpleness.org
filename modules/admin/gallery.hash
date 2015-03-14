@@ -6,21 +6,14 @@ use MAIN;
 you_cannot 'manage_gallery' or
 
 {
-
     '/admin/gallery/delete/i(\d+)' => sub {
-        my $id = $1;
-        my $image = sql("SELECT * FROM base_gallery_images WHERE img_id=?", $id );
-        if ( $image->[0]{img_name} ) {
-            sql("DELETE FROM base_gallery_images WHERE img_id=?", $id );
-            foreach my $size ( (@{images('SIZE')}, '') ) {
-                my $_ = images('PATH').'/'.$image->[0]{gal_key}.'/'.$size.'/'.$image->[0]{img_name};
-                unlink if -f $_;
-            }
-        }
+        my $i = sql( "SELECT * FROM base_gallery_images WHERE img_id=?", $1 );
+        return 0 unless $i->[0];
+        sql( "DELETE FROM base_gallery_images WHERE img_id=?", $1 );
         back;
     },
 
-    '/admin/gallery/delete/(\d+)' => sub {
+    '/admin/gallery/delete/g(\d+)' => sub {
         remove_tree(images('PATH')."/".$1);
         sql ( "DELETE FROM base_gallery_images WHERE gal_key=?", $1 );
         sql ( "DELETE FROM base_gallery WHERE gal_key=?", $1 );

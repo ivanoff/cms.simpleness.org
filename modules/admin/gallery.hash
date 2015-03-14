@@ -7,15 +7,9 @@ you_cannot 'manage_gallery' or
 
 {
 
-    '/admin/gallery/rotate/i(\d+)' => sub {
-        my $id = $1;
-        my $image = sql("SELECT * FROM base_gallery_images WHERE img_id=?", $id );
-        if ( $image->[0]{img_name} ) {
-            foreach my $size ( (@{images('SIZE')}, '') ) {
-                my $_ = images('PATH').'/'.$image->[0]{gal_key}.'/'.$size.'/'.$image->[0]{img_name};
-                image_rotate( $_ ) if -e $_;
-            }
-        }
+    '/admin/gallery/rotate/(.*)/(.*?)' => sub {
+        my ( $path, $name ) = ( $1, $2 );
+        image_rotate( images('PATH').'/'.$path.'/'.$_.'/'.$name ) foreach ( '', @{images('SIZE')} );
         back;
     },
 

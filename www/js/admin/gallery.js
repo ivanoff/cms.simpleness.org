@@ -12,13 +12,13 @@ $(document).ready(function(){
         });
 
         $('.rotate_image').click(function () {
-            id = $(this).attr('name');
-            save_text( '/admin/gallery/rotate/'+id, {}, 'please, wait...' ); 
-            $("#"+id).animate( {opacity:0.5}, 500 );
+            id   = $(this).attr('id');
+            save_text( '/admin/gallery/rotate/'+$(this).attr('name'), {}, 'please, wait...' ); 
+            $("#i"+id).animate( {opacity:0.5}, 500 );
             setTimeout(function() {
                 show_info( "image was clockwised" );
-                $("#"+id).attr( "src", $("#"+id).attr( "src" ) + '?' + Math.random() );
-                $("#"+id).animate( {opacity:1}, 500 );
+                $("#i"+id).attr( "src", $("#i"+id).attr( "src" ) + '?t=' + Math.random() );
+                $("#i"+id).animate( {opacity:1}, 500 );
             }, 1500);
 	    return false;
         });

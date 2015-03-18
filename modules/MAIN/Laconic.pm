@@ -8,7 +8,7 @@ our @ISA     = qw( Exporter );
 our @EXPORT  = qw(
                 defaults title header
                 ban you_cannot you_can_not
-                process
+                process process_pdf
                 sql
                 t lang is_default_lang
                 cache
@@ -34,6 +34,8 @@ sub header {
     /xml/ && do {$main::header = "Content-type: text/xml; charset=$params->{charset};"};
     /json/ && do {$main::header = "Content-type: application/json; charset=$params->{charset};"};
     /gif/ && do {$main::header = "Content-type: image/gif;"};
+    /pdf/ && do { $::header = "Content-type: application/pdf\nContent-Disposition: attachment; filename=$params->{filename};" };
+    /rtf/ && do { $::header = "Content-Type: application/rtf\nContent-Disposition: attachment; filename=$params->{filename};" };
     if ( $params->{no_cache} ) {
         $main::header .= "\nCache-Control: no-cache, must-revalidate\nExpires: Sat, 26 Jul 1997 05:00:00 GMT;";
     }

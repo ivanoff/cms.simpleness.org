@@ -7,4 +7,11 @@
 <br />
 <input type="submit" value='[% t('Send file') %]'>
 <input type="button" value="[% t('cancel') %]" onclick="window.location='/realtor';">
+<br /><br />
+[% t('Insert URL of spreadsheet GoogleDocs') %]
+<br />
+<input name="google_spreadsheet">
+<input type="submit" value='[% t('Import from GoogleDocs') %]'>
+<input type="button" value="[% t('cancel') %]" onclick="window.location='/realtor';">
+<br /><br />
 </form>

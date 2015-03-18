@@ -90,6 +90,8 @@
 	'Home'	=> ' ',
 	'id'	=> ' ',
 	'import file'	=> ' ',
+	'Import from GoogleDocs'	=> ' ',
+	'Insert URL of spreadsheet GoogleDocs'	=> ' ',
 	'jack-up drilling rig'	=> ' ',
 	'January'	=> ' ',
 	'July'	=> ' ',

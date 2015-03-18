@@ -13,7 +13,7 @@ my $time_interval = [ gettimeofday() ];
 
 eval {
     local $SIG{ALRM} = sub { die "alarm\n" };
-    alarm 60;
+    alarm 5*60;
 
     # get session parameters
     our $index_session;

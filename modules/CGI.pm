@@ -201,7 +201,7 @@ sub header {
 
     my $current_date = $self->{Session}->expire( 0 );
     my $expires_date = $self->{Session}->expire( ( $self->{Session}->{_ENABLED} || $self->{Session}{vars}{sid} )? $main::CONFIG->{session_expires} : -1 );
-    my $set_cookie = "Set-Cookie: CGISESSID=$p->{-cookie}; domain=$main::CONFIG->{site}; path=/; expires=$expires_date\n";
+    my $set_cookie = "Set-Cookie: CGISESSID=$p->{-cookie}; domain=$main::CONFIG->{site}; path=/; expires=$expires_date";
 
 return "Content-Type: $p->{-type}; charset=utf-8
 Date: $current_date

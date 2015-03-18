@@ -46,10 +46,10 @@ you_cannot 'manage_gallery' or
         back;
     },
 
-    '/admin/images/rotate/(.*/)?(.*?)' => sub {
-        my ( $path, $name ) = ( $1 || '', $2 );
+    '/admin/images/(un)?rotate/(.*/)?(.*?)' => sub {
+        my ( $d, $path, $name ) = ( $1, $2 || '', $3 );
         return 0 if !$name || $path =~ /\.\./;
-        image_rotate( images('PATH')."/$path/$_/$name" ) foreach ( @{images('SIZE')}, '' );
+        image_rotate( images('PATH')."/$path/$_/$name", $d? -90 : undef ) foreach ( @{images('SIZE')}, '' );
         back;
     },
 

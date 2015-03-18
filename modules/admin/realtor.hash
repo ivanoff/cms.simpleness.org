@@ -16,6 +16,7 @@ my $types = {
     city     => undef,
     street   => qr/str|ave|ул/i,
     price    => qr/\d+([\._\s]?\d{3})*([\.,]?\d{2})?(USD|\$)?$/i,
+    price_2  => undef,
     size     => qr/^\d+$/,
     images   => qr/jpg|png/i,
     video    => qr/youtube/i,
@@ -55,12 +56,16 @@ you_cannot 'realtor_import' or
         if ( param('submit') ) {
             my $h = sql "SELECT * FROM base_realtor_config WHERE column_id!=0";
             foreach my $id ( map { $_->{column_id} } @$h ) {
-                sql( "UPDATE base_realtor_config 
-                      SET type=?, hidden=? WHERE column_id=?", 
-                      param("type-$id"), param("hide-$id")? 1 : 0, $id );
+                sql( "UPDATE base_realtor_config
+                      SET type=?, dimension=?, hidden=?, details_hide=?, pdf_hide=? WHERE column_id=?", 
+                      param("type-$id"), param("dimension-$id"), param("hidden-$id")? 1 : 0
+                      , param("details_hide-$id")? 1 : 0, param("pdf_hide-$id")? 1 : 0, $id );
             }
+
+            remove_tree( $::CONFIG->{cache_dir}.'/pdf' ) if -d $::CONFIG->{cache_dir}.'/pdf';
+
             # prepare images
-            my $image_id = sql "SELECT column_id FROM base_realtor_config 
+            my $image_id = sql "SELECT column_id FROM base_realtor_config
                                 WHERE type = 'images' AND column_id!=0 AND hidden=0";
             my $path = images('PATH').'/realtor/';
             if ( @$image_id && ! -d $path ) {
@@ -69,6 +74,7 @@ you_cannot 'realtor_import' or
             foreach my $i ( @$image_id ) {
                 my $images_all = sql "SELECT `$i->{column_id}` i FROM base_realtor_data";
                 foreach my $images ( @$images_all ) {
+                    next if $images->{i} !~ /http/;
                     my @images_new;
                     my $images_to_update = $images->{i};
                     $images->{i} =~ s/http/,http/g;
@@ -95,11 +101,20 @@ you_cannot 'realtor_import' or
     '/admin/realtor/import' => sub {
         my ( $result, $header_line, $col_params );
 
-        return process( 'admin/realtor/import.tpl', { table => $result } ) unless param('file');
+        return process( 'admin/realtor/import.tpl', { table => $result } ) if !param('file') && !param('google_spreadsheet');
+
+        my $filename = $::q->tmpFileName( 'file' );
+
+        if ( param('google_spreadsheet') =~ m%.*spreadsheets/(.+)/% ) {
+            mkdir $::CONFIG->{cache_dir} unless -d $::CONFIG->{cache_dir};
+            $filename = $::CONFIG->{cache_dir}.'/googledocs.tsv';
+            getstore( "https://docs.google.com/spreadsheets/$1/export?format=tsv", $filename );
+            param_set( 'file', $filename );
+        }
 
         if ( param('file') =~ /\.xls$/ ) {
             my $parser   = Spreadsheet::ParseExcel->new();
-            my $workbook = $parser->parse( $::q->tmpFileName( 'file' ) );
+            my $workbook = $parser->parse( $filename );
             my ( $sheet ) = $workbook->worksheets();
             for my $row ( 0 .. $sheet->row_range() ) {
                 for my $col ( 0 .. $sheet->col_range() ) {
@@ -110,7 +125,8 @@ you_cannot 'realtor_import' or
         }
 
         if ( param('file') =~ /\.xlsx$/ ) {
-            my $parser = Spreadsheet::XLSX -> new ( $::q->tmpFileName( 'file' ) );
+            my $parser = eval{ Spreadsheet::XLSX -> new ( $filename ) };
+            return $@ if $@;
             my ( $sheet ) = @{$parser->{Worksheet}};
             for my $row ( 0 .. $sheet->{MaxRow} ) {
                 for my $col ( 0 .. $sheet->{MaxCol} ) {
@@ -120,16 +136,17 @@ you_cannot 'realtor_import' or
             }
         }
 
-        if ( param('file') =~ /\.csv$/ ) {
-            my $csv = Text::CSV->new( { sep_char => ';' } );
-            open( my $data, '<:utf8', $::q->tmpFileName( 'file' ) ) or return "Could not open csv file: $!\n";
+        if ( param('file') =~ /\.(t|c)sv$/ ) {
+            my $sep = $1 eq 't'? "\t" : ',';
+            my $csv = Text::CSV->new( { sep_char => $sep, allow_loose_quotes => 1 } );
+            open( my $data, '<:utf8', $filename ) or return "Could not open csv file: $!\n";
             my $row = 0;
             while ( my $line = <$data> ) {
                 chomp $line;
                 if ( $csv->parse( $line ) ) {
                     $result->[ $row++ ] = [ $csv->fields() ];
                 } else {
-                    return "Line could not be parsed: $line\n";
+                    return "Line could not be parsed ( ".$csv->error_diag()." ) : $line\n";
                 }
             }
             close $data;
@@ -147,26 +164,29 @@ you_cannot 'realtor_import' or
 
         if ( $header_line ) {
             sql "UPDATE base_realtor_config SET column_id=0";
-            my %header_types = map { $_->{name} => $_ } 
+            my %header_types = map { $_->{name} => $_ }
                                    @{sql "SELECT * FROM base_realtor_config"};
             my $i = 0;
             foreach( @{ $result->[ $header_line ] } ) {
+                utf8::encode( $_ );
                 if ( $header_types{ $_ } ) {
                     sql( "UPDATE base_realtor_config SET column_id=? WHERE name=?", ++$i, $_ );
                     next;
+                } else {
+                    sql( "INSERT INTO base_realtor_config ( column_id, name, type, dimension, hidden, details_hide, pdf_hide )
+                          VALUES ( ?, ?, ?, ?, ?, ?, ? )", ++$i, $_, $col_params->[$i-1]{type}, '', 0, 0, 0 );
                 }
-                sql( "INSERT INTO base_realtor_config ( column_id, name, type, hidden )
-                        VALUES ( ?, ?, ?, ? )", ++$i, $_, $col_params->[$i-1]{type}, 0 );
             }
 
-            sql 'DROP TABLE IF EXISTS base_realtor_data'; 
+            sql 'DROP TABLE IF EXISTS base_realtor_data';
             my $i = 1;
             my @fl = map { "`".($i++)."` ".($_->{datatype} || 'blob') } @$col_params;
             sql 'CREATE TABLE base_realtor_data ('.( join ',', @fl ).');';
             for my $i ( $header_line+1 .. @$result ) {
                 my $k = @{ $result->[ $header_line ] }-1;
-                sql ( "INSERT INTO base_realtor_data 
-                        VALUES ( ".( join ',', map {'?'} 0..$k ) ." )", 
+                next unless join '', @{$result->[ $i ]}[0..$k];
+                sql ( "INSERT INTO base_realtor_data
+                        VALUES ( ".( join ',', map {'?'} 0..$k ) ." )",
                         @{$result->[ $i ]}[0..$k] );
             }
             return redirect2('admin/realtor/config');

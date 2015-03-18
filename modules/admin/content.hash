@@ -36,11 +36,13 @@ you_cannot 'manage_gallery' or
 #        cache_delete( $page );
 #        if ( $page =~ /^_/ ) {};
 
+        my $title = eval{ sql ( "SELECT content_title FROM base_content WHERE content_page=? AND lang=?", $page, $lang )->[0]{content_title} };
+
         sql( "DELETE FROM base_content WHERE content_page=? AND lang=?", $page, $lang );
 
         if ( $body ) {
-            sql("INSERT INTO base_content ( content_body, content_page, lang ) 
-                    VALUES ( ?, ?, ? )", $body, $page, $lang );
+            sql("INSERT INTO base_content ( content_title, content_body, content_page, lang ) 
+                    VALUES ( ?, ?, ?, ? )", $title, $body, $page, $lang );
         }
 
 #        $main::t->renew_content( 'content', $page ) if is_default_lang( $lang );

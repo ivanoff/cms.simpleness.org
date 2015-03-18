@@ -3,31 +3,63 @@
 use strict;
 use MAIN;
 
-title t('Realtor');
-
 my $header = sql( "SELECT * FROM base_realtor_config WHERE column_id!=0 ORDER BY column_id ASC" );
-$header = [ grep { !$_->{hidden} } @$header ];
-my $type   = { map { $_->{type} => $_->{column_id}  } @$header };
+my $id_by_type = {
+    main     => { map { $_->{type} => $_->{column_id}  } grep { !$_->{hidden} }       @$header },
+    details  => { map { $_->{type} => $_->{column_id}  } grep { !$_->{details_hide} } @$header },
+    pdf      => { map { $_->{type} => $_->{column_id}  } grep { !$_->{pdf_hide} }     @$header },
+};
+my $conf = { map { $_->{column_id} => $_ } @$header };
 
-defaults { 
-    read_only => 1,
-    header => $header, 
-    type   => $type,
-    month  => sub{ 
-        qw( January February March April May June
-            July August September October November December )[(shift)-1] 
-    },
+defaults {
+    id_by_type => $id_by_type,
+#    dim    => $dim,
+    header => $header,
+    month  => sub{ qw( January February March April May June July August September October November December )[(shift)-1] },
+};
+
+sub make_data {
+    $_[2] ||= 'main';
+    my $id = $id_by_type->{$_[2]}{$_[1]};
+    return undef unless $id;
+    my $res = $_[0]->{$id};
+    $res .= ' '. $conf->{$id}{dimension} if $conf->{$id}{dimension};
+    return $res;
 };
 
 {
     '/realtor' => sub {
-        process 'realtor/index.tpl', { realtor => sql( "SELECT * FROM base_realtor_data ORDER BY 1 DESC" ) };
+        my $d_id = sql( "SELECT column_id FROM base_realtor_config WHERE type='district' AND column_id!=0" );
+        my $district = sql( "SELECT `$d_id->[0]{column_id}` g FROM base_realtor_data GROUP BY `$d_id->[0]{column_id}`" ) if @$d_id;
+        my $where = "WHERE `$d_id->[0]{column_id}` = ?" if param( 'district' );
+        my @params = ( param( 'district' ) ) if param( 'district' );
+        my $realtor = sql( "SELECT * FROM base_realtor_data $where ORDER BY 1 DESC", @params );
+        process 'realtor/index.tpl', { realtor => $realtor, district => $district, dis=>param( 'district' ), data => sub{ make_data( @_ ) } };
     },
 
     '/realtor/(.+)' => sub {
-        my $id = sql( "SELECT * FROM base_realtor_config WHERE type='url' AND column_id!=0" )->[0]{column_id};
-        my $r  = sql( "SELECT * FROM base_realtor_data WHERE `$id`=?", $1 );
-#        title $r->[0]{realtor_name}.' - '.t('Realtor');
-        process 'realtor/one.tpl', { r => $r->[0], realtor_key => $1 };
+        my $r = sql( "SELECT * FROM base_realtor_data WHERE `$id_by_type->{main}{url}`=?", $1 );
+        title make_data( $r->[0], 'district' ) .' - '. make_data( $r->[0], 'price' );
+        process 'realtor/one.tpl', { r => $r->[0], realtor_key => $1, data => sub{ make_data( $r->[0], @_ ) } };
     },
+
+    '/realtor/(.+).pdf' => sub {
+        my $id = $1;
+        header ( 'pdf', { filename=> $::CONFIG->{site}."_$id.pdf" } );
+        my $pdf_path = $::CONFIG->{cache_dir}.'/pdf/';
+        mkdir $pdf_path unless -d $pdf_path;
+        if ( -e "$pdf_path/$id.pdf" ) {
+            open my $f, "<", "$pdf_path/$id.pdf";
+            return join '', <$f>;
+            close $f;
+        }
+        my $r    = sql( "SELECT * FROM base_realtor_data WHERE `$id_by_type->{main}{url}`=?", $id );
+        my $body = process 'realtor/pdf.tpl', { r => $r->[0], realtor_key => $id, data => sub{ make_data( $r->[0], @_ ) } };
+        $body    = text2pdf( process( 'pdf.tpl', { body => $body, } ) );
+        open my $f, ">", "$pdf_path/$id.pdf";
+        print $f $body;
+        close $f;
+        return $body;
+    },
+
 };

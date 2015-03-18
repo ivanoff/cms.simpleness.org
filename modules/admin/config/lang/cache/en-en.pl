@@ -20,6 +20,8 @@
 	'header manager'	=> 'header manager',
 	'hide news'	=> 'hide news',
 	'import file'	=> 'import file',
+	'Import from GoogleDocs'	=> 'Import from GoogleDocs',
+	'Insert URL of spreadsheet GoogleDocs'	=> 'Insert URL of spreadsheet GoogleDocs',
 	'login'	=> 'login',
 	'Manage menu'	=> 'Manage menu',
 	'map'	=> 'map',

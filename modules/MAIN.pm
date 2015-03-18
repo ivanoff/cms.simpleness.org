@@ -2,6 +2,7 @@ package MAIN;
 
 use strict;
 use warnings;
+use utf8;
 
 use Email::Send;
 use Email::MIME::Creator;
@@ -21,9 +22,10 @@ our @ISA     = qw( Exporter );
 our @EXPORT_OK  = qw(
                 $CONFIG $CONFIG_TEMPLATE $CONFIG_IMAGES
                 redirect redirect2 back
-                access 
+                access
                 module
                 to_log
+                text2pdf
                 resize image_rotate
                 email
                 md5_hex
@@ -155,14 +157,34 @@ sub back2 {
     redirect2( $1 ) if $ENV{'HTTP_REFERER'} =~ m%https?://.*?/(.*)%;
 }
 
+## simple text to pdf. get html content and return pdf content
+sub text2pdf {
+    my $_ = shift;
+    utf8::decode($_);
+    my $filename = $$.time;
+
+    open my $f, '>', "/tmp/$filename.html";
+    print {$f} $_; 
+    close $f;
+
+    `xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltopdf /tmp/$filename.html /tmp/$filename.pdf`;
+
+    open $f, '<', "/tmp/$filename.pdf";
+    my $res = join '', <$f>;
+    close $f;
+
+    unlink "/tmp/$filename.html", "/tmp/$filename.pdf";
+    return $res;
+}
+
 ## rotate image
 sub image_rotate {
     use Image::Magick;
-    my $file = shift;
+    my ( $file, $degrees ) = @_;
     return 0 if !$file || !-e $file;
     my $img = Image::Magick->new;
     $img->Read($file);
-    $img->Rotate( degrees => 90 );
+    $img->Rotate( degrees => $degrees || 90 );
     $img->Write($file);
 }
 

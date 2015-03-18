@@ -1,43 +1,64 @@
-<h2>#[% r.${type.url} %]. [% r.${type.district} %] - [% r.${type.street} %]</h2>
+<a href="#" onclick="print();return false;"><img src="/images/btn_print.gif" border="0" align="right"></a>
+<a href="[% data('url') %].pdf"><img src="/images/btn_pdf.gif" border="0" align="right"></a>
+
+<a href="/realtor#[% data('url') %]"> &lt;&lt; [% t('back to the list') %]</a><br />
+
+<h2>№[% data('url') %]. [% data('district') %] - [% data('street') %]</h2>
 
 <div class="news index">
     <h3>
-        [% r.${type.price} %]$ / [% r.${type.size} %] / [% r.${type.header} %]
+[% INCLUDE realtor/sub_header.tpl %]
     </h3>
     <p>
-        [% r.${type.description} %]
+        [% data('description') %]
     </p>
-[% IF r.${type.coordinates} %]
-[%   ll = r.${type.coordinates}.match('([\d\.]+)') %]
+[% IF data('coordinates') %]
+[%   ll = data('coordinates').match('([\d\.]+)') %]
     <h3>
         [% t('map') %]
     </h3>
     <p>
-        <a href="http://maps.google.com/?q=[% r.${type.coordinates}.replace( ' ', '' ) %]" target="_blank">view on google maps</a><br />
+        <a href="http://maps.google.com/?q=[% data('coordinates').replace( ' ', '' ) %]" target="_blank">view on google maps</a><br />
     </p>
 [% END %]
-[% IF r.${type.images} %]
+[% IF data('images') %]
 
 <script src="/js/lightbox.js"></script>
 <script src="/js/gallery.js"></script>
+[% IF access.manage_gallery %]
+    <script src="/js/admin/realtor.js"></script>
+[% END %]
 
     <h3>
         [% t('photos') %]
     </h3>
     <div class="gallery">
       <ul id="gallerys" class="gallerys">
-[% FOREACH image IN r.${type.images}.split(',') %]
+[% i = 0 %]
+[% FOREACH image IN data('images').split(',') %]
+[% image = image.replace( ' ', '' ) %]
+[% i = i + 1 %]
         <li>
-	    <a href="/images/gallery/realtor/640x480/[% image %]" title="image_title">
-	    <img align="top" src="/images/gallery/realtor/[% config_images.SIZE.0 %]/[% image %]" alt="" id="[% image %]"></a>
-	</li>
+[% IF access.manage_gallery %]
+        <div class="ear" style="width:100px">
+<!--
+        <i class="icon-move"></i>
+        <i class='icon-trash delete_image' name="realtor/[% image %]" id="[% i %]" alt="[% t('delete') %]"></i>
+-->
+        <i class='rotate_image cursor_pointer' name="realtor/[% image %]" id="[% i %]">↷</i>
+        <i class='unrotate_image cursor_pointer' name="realtor/[% image %]" id="[% i %]">↶</i>
+        </div>
+[% END %]
+            <a href="/images/gallery/realtor/640x480/[% image %]" title="image_title">
+            <img align="top" src="/images/gallery/realtor/[% config_images.SIZE.0 %]/[% image %]" alt="" id="i[% i %]"></a>
+        </li>
 [% END %]
       </ul>
     </div>
     <br class="x" />
 [% END %]
-[% IF r.${type.video} %]
-[% hash = r.${type.video}.match('v=(\w+)') %]
+[% IF data('video') %]
+[% hash = data('video').match('v=(\w+)') %]
     <h3>
         [% t('video') %]
     </h3>
@@ -49,15 +70,21 @@
     <br />
     <div class="date">
     <h4>
-        [% t('Full information') %]
+        [% t('Details') %]
     </h4>
     </div>
+
+<ul>
 [% FOREACH h IN header %]
-[% NEXT UNLESS r.${h.column_id} %]
-    <p>
-<b>- [% h.name %]</b>: &nbsp; [% r.${h.column_id} %]
-    </p>
+[% NEXT IF h.details_hide || !r.${h.column_id} %]
+    <li>
+ <b>[% h.name %]</b>: [% r.${h.column_id} %] [% h.dimension %]
+    </li>
 [% END %]
+</ul>
 
 </div>
 
+<a href="/realtor#[% data('url') %]"> &lt;&lt; [% t('back') %]</a><br />
+<a href="[% data('url') %].pdf"><img src="/images/btn_pdf.gif" border="0"></a>
+<a href="#" onclick="print();return false;"><img src="/images/btn_print.gif" border="0"></a>

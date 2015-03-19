@@ -37,7 +37,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<a href="/admin" [% 'class="active"' IF env('REDIRECT_URL') == '/admin' %]><span>[% t('Admin page') %]</span></a>
 	<span>|</span> <a href="/login/exit"><span>[% t('Exit') %]</span></a>
 [%   IF access.edit_menu %]
-        <span>|</span> <a href="/admin/menu"><i class="icon-tasks"></i></a>
+        <span>|</span> <a href="/admin/menu"><span class="symbol">&#0063;</span></a>
 [%   END %]
 [% ELSE %]
 	<a href="/login" [% 'class="active"' IF env('REDIRECT_URL') == '/login' %]><span>[% t('Login') %]</span></a>

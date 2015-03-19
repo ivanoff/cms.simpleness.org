@@ -1,8 +1,8 @@
 [% FOREACH m IN menu %]
         [% NEXT IF m.menu_parent != level %]
         <li id="[% m.menu_key %]">
-        <i class='icon-move'></i>
-        <i class='icon-trash' onclick="delete_menu(this);return(false);"></i> 
+        <span class="cursor_pointer symbol">&#226;</span>
+        <span class='cursor_pointer symbol' onclick="delete_menu(this);return(false);">&#206;</span>
 [% 
 #     PROCESS editable.tpl 
 #        name=env('REDIRECT_URL') 

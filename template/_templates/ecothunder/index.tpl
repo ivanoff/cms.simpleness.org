@@ -53,7 +53,7 @@
 <a href="/admin" [% 'class="active"' IF env('REDIRECT_URL') == '/admin' %]><span>[% t('Admin page') %]</span></a>
  | <a href="/login/exit"><span>[% t('Exit') %]</span></a>
 [%   IF access.edit_menu %]
- | <a href="/admin/menu"><i class="icon-tasks"></i></a>
+ | <a href="/admin/menu"><span class="symbol">&#0063;</span></a>
 [%   END %]
 </div>
 [% END %]

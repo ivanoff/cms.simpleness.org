@@ -61,7 +61,7 @@
 	<li><a href="/admin" [% 'class="active"' IF env('REDIRECT_URL') == '/admin' %]><span>[% t('Admin page') %]</span></a></li>
 	<li><a href="/login/exit"><span>[% t('Exit') %]</span></a></li>
 [%   IF access.edit_menu %]
-        <li><a href="/admin/menu"><i class="icon-tasks"></i></a></li>
+        <li><a href="/admin/menu"><span class="symbol">&#0063;</span></a></li>
 [%   END %]
 [% ELSE %]
 	<li><a href="/login" [% 'class="active"' IF env('REDIRECT_URL') == '/login' %]><span>[% t('Login') %]</span></a></li>
@@ -81,7 +81,7 @@
 	        <div class="bg-bottom">
 
 [% IF access.print_page %]
-                    <span id="print_button"><a href="#" onclick="print();return false;"><i class="icon-print"></i></a></span>
+                    <span id="print_button"><a href="#" onclick="print();return false;"><span class="cursor_pointer symbol">&#0089;</span></a></span>
 [% END %]
 
 [% UNLESS read_only;

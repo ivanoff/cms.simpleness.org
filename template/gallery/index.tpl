@@ -2,7 +2,7 @@
 
 [% IF access.manage_gallery %]
 <script src="/js/admin/gallery.js"></script>
-<a href="/gallery/[% max_gal_id + 1 %]"><i class="icon-plus-sign"></i> [% t('add gallery') %]</a><br /><br />
+<span class="symbol">&#193;</span> <a href="/gallery/[% max_gal_id + 1 %]">[% t('add gallery') %]</a><br /><br />
 [% END %]
 
 <div style="display: inline-block;" class="gallery">
@@ -13,7 +13,7 @@
 <legend>
 <h3>
 [% IF access.manage_gallery %]
-<i class='icon-trash delete' name="[% g %]" alt="[% t('delete') %]"></i>
+<span class='cursor_pointer symbol delete' name="[% g %]" alt="[% t('delete') %]">&#205;</span>
 [% END %]
 <a href="/gallery/[% gallery.${g}.gal_key %]">[% gallery.${g}.gal_name %]</a>
 </h3>

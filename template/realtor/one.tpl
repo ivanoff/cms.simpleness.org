@@ -1,7 +1,7 @@
+<a href="/realtor#[% data('url') %]"> &lt;&lt; [% t('back to the list') %]</a><br />
+
 <a href="#" onclick="print();return false;"><img src="/images/btn_print.gif" border="0" align="right"></a>
 <a href="[% data('url') %].pdf"><img src="/images/btn_pdf.gif" border="0" align="right"></a>
-
-<a href="/realtor#[% data('url') %]"> &lt;&lt; [% t('back to the list') %]</a><br />
 
 <h2>№[% data('url') %]. [% data('district') %] - [% data('street') %]</h2>
 
@@ -41,12 +41,8 @@
         <li>
 [% IF access.manage_gallery %]
         <div class="ear" style="width:100px">
-<!--
-        <i class="icon-move"></i>
-        <i class='icon-trash delete_image' name="realtor/[% image %]" id="[% i %]" alt="[% t('delete') %]"></i>
--->
-        <i class='rotate_image cursor_pointer' name="realtor/[% image %]" id="[% i %]">↷</i>
-        <i class='unrotate_image cursor_pointer' name="realtor/[% image %]" id="[% i %]">↶</i>
+        <span class='rotate_image cursor_pointer symbol' name="realtor/[% image %]" id="[% i %]">&#169;</span>
+        <span class='unrotate_image cursor_pointer symbol' name="realtor/[% image %]" id="[% i %]">&#170;</span>
         </div>
 [% END %]
             <a href="/images/gallery/realtor/640x480/[% image %]" title="image_title">

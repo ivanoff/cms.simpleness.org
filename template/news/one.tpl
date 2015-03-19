@@ -7,7 +7,7 @@
 [% IF access.add_news %]
         <script src="/js/admin/news.js"></script>
 [%   PROCESS admin/news/eye.tpl key = news_key hidden = n.news_hidden || !d %]
-        <i class='icon-trash delete' name="[% news_key %]" alt="[% t('delete') %]"></i>
+        <span class='delete cursor_pointer symbol' name="[% news_key %]" alt="[% t('delete') %]">&#206;</span>
         <input type="text" id="datepicker" value="[% d ? d.0 _ '-' _ d.1 _'-' _ d.2 : current_date %]" />
 [% ELSE %]
         <div class="date"><h4><b>[% t(month(d.1)) _ ' ' _ d.2 _', ' _ d.0 %]</b></h4></div>

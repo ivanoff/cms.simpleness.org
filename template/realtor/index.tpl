@@ -1,6 +1,6 @@
 [% IF access.realtor_import %]
-    <a href="/admin/realtor/config"><i class="icon-th-list"></i> [% t('header manager') %]</a> |
-    <a href="/admin/realtor/import"><i class="icon-download-alt"></i> [% t('import file') %]</a><br /><br />
+    <span class="symbol">&#0066;</span> <a href="/admin/realtor/config">[% t('header manager') %]</a> |
+    <span class="symbol">&#0042;</span> <a href="/admin/realtor/import">[% t('import file') %]</a><br /><br />
 [% END %]
 
 [% IF district %]
@@ -22,9 +22,9 @@
         №[% data( r, 'url' ) %]
         <a href="/realtor/[% data( r, 'url') %]">[% data( r, 'district') %] - [% data( r, 'street') %]</a>
         &nbsp;
-        [% IF data( r, 'coordinates')  %] <i class='icon-globe' alt="[% t('video') %]"></i> [% END %]
-        [% IF data( r, 'images') %] <i class='icon-camera' alt="[% t('photos') %]"></i> [% END %]
-        [% IF data( r, 'video')  %] <i class='icon-facetime-video' alt="[% t('video') %]"></i> [% END %]
+        [% IF data( r, 'coordinates')  %] <span class='symbol' alt="[% t('video') %]">&#0117;</span> [% END %]
+        [% IF data( r, 'images') %] <span class='symbol' alt="[% t('photos') %]">&#0097;</span> [% END %]
+        [% IF data( r, 'video')  %] <span class='symbol' alt="[% t('video') %]">&#0099;</span> [% END %]
     </h4>
     </div>
 [% FOREACH image IN data( r, 'images').split(',').0 %]

@@ -2,7 +2,7 @@
 
 [% IF access.add_news %]
     <script src="/js/admin/news.js"></script>
-    <a href="/news/[% news_max_key %]"><i class="icon-plus-sign"></i> [% t('add news') %]</a><br /><br />
+    <span class="symbol">&#193;</span> <a href="/news/[% news_max_key %]">[% t('add news') %]</a><br /><br />
 [% END %]
 
 [% FOREACH n IN news %]
@@ -13,7 +13,7 @@
     <h4>
 [% IF access.add_news %]
 [%   PROCESS admin/news/eye.tpl key = n.news_key hidden = n.news_hidden %]
-        <i class='icon-trash delete' name="[% n.news_key %]" alt="[% t('delete') %]"></i>
+        <span class='delete cursor_pointer symbol' name="[% n.news_key %]" alt="[% t('delete') %]">&#206;</span>
 [% END %]
         <b>[% SET d = n.news_date.substr(0,10).split('-'); t(month(d.1)) _ ' ' _ d.2 _', ' _ d.0 %]</b>
     </h4>

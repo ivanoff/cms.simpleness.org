@@ -21,6 +21,7 @@
 	'August'	=> ' ',
 	'Australasia'	=> ' ',
 	'back'	=> ' ',
+	'back to the full list'	=> ' ',
 	'back to the list'	=> ' ',
 	'Black Sea'	=> ' ',
 	'cadastre_RU'	=> ' ',

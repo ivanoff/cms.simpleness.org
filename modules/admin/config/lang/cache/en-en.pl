@@ -6,6 +6,7 @@
 	'Add new menu'	=> 'Add new menu',
 	'all districts'	=> 'all districts',
 	'Are you sure to delete this image?'	=> 'Are you sure to delete this image?',
+	'back to the full list'	=> 'back to the full list',
 	'back to the list'	=> 'back to the list',
 	'cadastre_RU'	=> 'cadastre_RU',
 	'cadastre_UA'	=> 'cadastre_UA',

@@ -83,9 +83,7 @@ if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
     print "Status: 404 Not Found\n\n";
     to_log( "[NOT FOUND] $ENV{'REDIRECT_URL'}. REF: $ENV{'REDIRECT_URL'}" );
 } elsif ( $header ) {
-    ## if there is any information in header - show it
-    print $header."\n\n";
-    print $body;
+    print $header."\n\n".$body;
 } else {
     print $q->header;
 

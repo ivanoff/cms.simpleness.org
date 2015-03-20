@@ -3,9 +3,9 @@
     <head>
         <title>[% title %]</title>
         <meta charset="utf-8" />
-        <meta name="description" content="[% meta.description %]" />
-        <meta name="keywords" content="[% meta.keywords %]" />
-        <meta name="category" content="[% meta.category %]" />
+        <meta name="description" content="[% title.replace('"','') %] [% meta.description %]" />
+        <meta name="keywords" content="[% get_keywords(body _ content).join(',') %],[% meta.keywords %],[% title.replace('"','') %]" />
+        <meta name="category" content="[% meta.category %] [% title.replace('[\.-]',',') %]" />
         <link rel="stylesheet" href="/css/mobile.css" media="screen and (max-width: 600px)" />
         <link rel="stylesheet" href="/css/style.css" media="screen and (min-width: 600px)" />
         <link rel="stylesheet" href="/css/print.css" media="print" />

@@ -30,12 +30,13 @@ sub title {
 sub header {
     my ( $_, $params ) = @_;
     $params->{charset} ||= 'utf-8';
+    /404/  && return $main::header = "Status: 404 Not Found\n\n";
     /html|clear/ && do {$main::header = "Content-type: text/html; charset=$params->{charset};"};
-    /xml/ && do {$main::header = "Content-type: text/xml; charset=$params->{charset};"};
+    /xml/  && do {$main::header = "Content-type: text/xml; charset=$params->{charset};"};
     /json/ && do {$main::header = "Content-type: application/json; charset=$params->{charset};"};
-    /gif/ && do {$main::header = "Content-type: image/gif;"};
-    /pdf/ && do { $::header = "Content-type: application/pdf\nContent-Disposition: attachment; filename=$params->{filename};" };
-    /rtf/ && do { $::header = "Content-Type: application/rtf\nContent-Disposition: attachment; filename=$params->{filename};" };
+    /gif/  && do {$main::header = "Content-type: image/gif;"};
+    /pdf/  && do { $::header = "Content-type: application/pdf\nContent-Disposition: attachment; filename=$params->{filename};" };
+    /rtf/  && do { $::header = "Content-Type: application/rtf\nContent-Disposition: attachment; filename=$params->{filename};" };
     if ( $params->{no_cache} ) {
         $main::header .= "\nCache-Control: no-cache, must-revalidate\nExpires: Sat, 26 Jul 1997 05:00:00 GMT;";
     }

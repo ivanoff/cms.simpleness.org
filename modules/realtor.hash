@@ -37,6 +37,15 @@ sub make_data {
         process 'realtor/index.tpl', { realtor => $realtor, district => $district, dis=>param( 'district' ), data => sub{ make_data( @_ ) } };
     },
 
+    '/realtor/buy/(.+)' => sub {
+        my $d = shift;
+        my $d_id = sql( "SELECT column_id FROM base_realtor_config WHERE type='district' AND column_id!=0" );
+        my $district = sql( "SELECT `$d_id->[0]{column_id}` g FROM base_realtor_data GROUP BY `$d_id->[0]{column_id}`" ) if @$d_id;
+        my $realtor = sql( "SELECT * FROM base_realtor_data WHERE `$d_id->[0]{column_id}` = ? ORDER BY 1 DESC", $d );
+        return header 404 unless @$realtor;
+        process 'realtor/index.tpl', { realtor => $realtor, district => $district, dis => $d, data => sub{ make_data( @_ ) } };
+    },
+
     '/realtor/(.+)' => sub {
         my $r = sql( "SELECT * FROM base_realtor_data WHERE `$id_by_type->{main}{url}`=?", $1 );
         title make_data( $r->[0], 'district' ) .' - '. make_data( $r->[0], 'price' );

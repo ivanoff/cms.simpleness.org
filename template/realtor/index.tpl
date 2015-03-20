@@ -4,6 +4,9 @@
 [% END %]
 
 [% IF district %]
+[% IF dis %]
+<br /><a href="/realtor"> &lt;&lt; [% t('back to the full list') %]</a><br />
+[% END %]
 [% t('filter by district') %]:
 <select name="filter_district" onchange="window.location = '?district='+this.value;">
     <option [% 'selected' UNLESS dis %] value="">[% t('all districts') %]</option>
@@ -16,7 +19,7 @@
 [% FOREACH r IN realtor %]
 
 <div class="news index">
-    <a name="[% data( r, 'url' ) %]">
+    <a name="[% data( r, 'url' ) %]"></a>
     <div class="date">
     <h4>
         №[% data( r, 'url' ) %]

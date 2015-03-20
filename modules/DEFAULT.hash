@@ -15,6 +15,9 @@ use MAIN;
                     map {$_='0'.$_ if $_<10;} @d; return "$d[2]:$d[1]:$d[0]"; },
         };
         
+## get keywords
+        defaults { get_keywords => sub{ my($t,$c,$m)=@_;$t=~s/<.*?>//smg;utf8::decode($t);$c||=10;$m||=5;my %h;map{$h{$_}||=0;$h{$_}++;$h{$_}+=1 if /\s/;}($t=~/(\w{$m,}\s\w{$m,})/smg,$t=~/(\w{$m,})/smg); my @a = map{utf8::encode($_);$_}sort {$h{$b}<=>$h{$a}} keys %h; return [@a[0..$c]] } };
+
 ## get last 4 news (for left column etc)
         defaults { top_news => sql("SELECT * FROM base_news WHERE lang=? ORDER BY news_date DESC LIMIT 4", lang) };
 

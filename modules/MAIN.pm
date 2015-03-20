@@ -52,6 +52,7 @@ sub access {
 
 sub find_hash {
     my ( $link, $module ) = @_;
+    utf8::decode( $link );
     my @additional = ( $ENV{'SERVER_NAME'}, '' );
     foreach my $additional_path ( @additional ) {
         my $path = $CONFIG->{modules_path}.'/'.$additional_path.'/';

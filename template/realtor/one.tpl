@@ -1,5 +1,5 @@
 
-<br /><a href="/realtor?district=[% data('district') %]#[% data('url') %]"> &lt;&lt; [% t('back to the list') %] [% data('district') %]</a> // <a href="/realtor#[% data('url') %]"> &lt;&lt; [% t('back to the full list') %]</a><br />
+<br /><a href="/участок/купить/[% data('district') %]#[% data('url') %]"> &lt;&lt; [% t('back to the list') %] [% data('district') %]</a> // <a href="/участок#[% data('url') %]"> &lt;&lt; [% t('back to the full list') %]</a><br />
 
 <a href="#" onclick="print();return false;"><img src="/images/btn_print.gif" border="0" align="right"></a>
 <a href="[% data('url') %].pdf"><img src="/images/btn_pdf.gif" border="0" align="right"></a>
@@ -82,6 +82,6 @@
 
 </div>
 
-<a href="/realtor#[% data('url') %]"> &lt;&lt; [% t('back') %]</a><br />
+<a href="/участок#[% data('url') %]"> &lt;&lt; [% t('back') %]</a><br />
 <a href="[% data('url') %].pdf"><img src="/images/btn_pdf.gif" border="0"></a>
 <a href="#" onclick="print();return false;"><img src="/images/btn_print.gif" border="0"></a>

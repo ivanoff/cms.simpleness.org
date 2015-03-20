@@ -5,10 +5,10 @@
 
 [% IF district %]
 [% IF dis %]
-<br /><a href="/realtor"> &lt;&lt; [% t('back to the full list') %]</a><br />
+<br /><a href="/участок"> &lt;&lt; [% t('back to the full list') %]</a><br />
 [% END %]
 [% t('filter by district') %]:
-<select name="filter_district" onchange="window.location = '?district='+this.value;">
+<select name="filter_district" onchange="window.location = '/участок/купить/'+this.value;">
     <option [% 'selected' UNLESS dis %] value="">[% t('all districts') %]</option>
 [% FOREACH d IN district %]
     <option [% 'selected' IF dis == d.g %] value="[% d.g %]">[% d.g %]</option>
@@ -23,7 +23,7 @@
     <div class="date">
     <h4>
         №[% data( r, 'url' ) %]
-        <a href="/realtor/[% data( r, 'url') %]">[% data( r, 'district') %] - [% data( r, 'street') %]</a>
+        <a href="/участок/купить/[% data( r, 'district') %]/[% data( r, 'url') %]">[% data( r, 'district') %] - [% data( r, 'street') %]</a>
         &nbsp;
         [% IF data( r, 'coordinates')  %] <span class='symbol' alt="[% t('video') %]">&#0117;</span> [% END %]
         [% IF data( r, 'images') %] <span class='symbol' alt="[% t('photos') %]">&#0097;</span> [% END %]
@@ -31,7 +31,7 @@
     </h4>
     </div>
 [% FOREACH image IN data( r, 'images').split(',').0 %]
-    <a href="/realtor/[% data( r, 'url') %]"><img align="right" width="120" src="/images/gallery/realtor/[% config_images.SIZE.0 %]/[% image %]" style="padding:4px; border:1px solid #AAA;"></a>
+    <a href="/участок/[% data( r, 'url') %]"><img align="right" width="120" src="/images/gallery/realtor/[% config_images.SIZE.0 %]/[% image %]" style="padding:4px; border:1px solid #AAA;"></a>
 [% END %]
     <h3>
 [%
@@ -47,7 +47,7 @@
         [% info.0 ? info.0 _ '...' : data( r, 'description') %]
     </p>
     <p>
-        <a href="/realtor/[% data( r, 'url') %]"><small>[% t('read more') %]…</small></a>
+        <a href="/участок/[% data( r, 'url') %]"><small>[% t('read more') %]…</small></a>
     </p>
     <br class="x" />
 </div>

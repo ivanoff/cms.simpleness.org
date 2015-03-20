@@ -72,4 +72,20 @@ use MAIN;
         defaults { 'content_edit' => $content_edit };
     },
 
+    '/участок(.*)' => sub {
+        module ( '/realtor'.$1 );
+    },
+
+    '/участок/купить/?' => sub {
+        module ( '/realtor' );
+    },
+
+    '/участок/купить/(.+)' => sub {
+        module ( '/realtor/buy/'.$1 );
+    },
+
+    '/участок/купить/(.+)/(.+)' => sub {
+        module ( '/realtor/'.$2 );
+    },
+
 };

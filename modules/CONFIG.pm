@@ -34,15 +34,10 @@ our $CONFIG = {
         cache_time         => 60*60*24*31,      # cache expire time (in seconds )
 
 # LANGUAGE
-        default_language   => 'en',
-        languages          => [ qw( en ru ua fr de es it gr ch jp tr ar fa il pl lv et lt nl bg ro da ko pt ) ],
+        default_language   => 'ru',
+        languages          => [ qw( ru ) ],
 
-        languages_t        => { en=>'english language', ru=>'русский язык', ua=>'українська мова', fr=>'la langue française', 
-                     de=>'deutsche sprache', es=>'español', it=>'lingua italiana', gr=>'ελληνική γλώσσα', ch=>'汉语', 
-                     jp=>'日本語', tr=>'Türk dili', ar=>'اللغة العربية', fa=>'زبان فارسی', il=>'עִבְרִית', 
-                     pl=>'język polski', lv=>'latviešu valoda', et=>'eesti keel', lt=>'Lietùvių kalbà', 
-                     nl=>'de Nederlandse taal', bg=>'Български език', ro=>'limba română', da=>'dansk', 
-                     ko=>'한국어', pt=>'língua portuguesa', },
+        languages_t        => { en=>'english language', ru=>'русский язык', ua=>'українська мова', },
         languages_dont_translate => {
 #                     ru => '2@ivanoff.org.ua',
 #                     ua => '', #default email

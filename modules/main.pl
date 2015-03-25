@@ -83,6 +83,7 @@ if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
     print "Status: 404 Not Found\n\n";
     to_log( "[NOT FOUND] $ENV{'REDIRECT_URL'}. REF: $ENV{'REDIRECT_URL'}" );
 } elsif ( $header ) {
+
     print $header."\n\n".$body;
 } else {
     print $q->header;
@@ -97,10 +98,10 @@ if ( !$body && !$tt->{content} && !defined $SESSION->param('slogin') ) {
         $page = $template->error() if $CONFIG->{show_errors};
     }
 
+    cache_save ( $page );
+
     print $page;
     print "\n<!-- ".(tv_interval($time_interval)*1000)." ms -->";
-
-    cache_save ( $page );
 
 }
 

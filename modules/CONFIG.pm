@@ -29,9 +29,15 @@ our $CONFIG = {
         session_expires    => 60*60*3,          # session expires ( in seconds )
 
 # CACHE
-        cache              => 0,                # 0 - don't cache pages, 1 - do cache pages
-        cache_dir          => '../tmp/cache',   # path to store cache
-        cache_time         => 60*60*24*31,      # cache expire time (in seconds )
+        cache => {
+            memcached => {                   # memcached parameters
+                servers => [ '127.0.0.1:11211' ], 
+            },
+#            file_md5 => {                    # cache content to files with md5 name
+#                dir     => '../tmp/cache',   # path to store file cache
+#                expire  => 60*60*24*31,      # cache expire time (in seconds )
+#            },
+        },
 
 # LANGUAGE
         default_language   => 'en',

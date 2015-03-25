@@ -6,19 +6,22 @@ use warnings;
 use MAIN::Laconic;
 use File::Path qw( make_path );
 use Digest::MD5 qw( md5_hex );
-
 use Cache::Memcached::Fast;
 
-our $VERSION = '0.3';
+our $VERSION = '0.4';
 our @ISA     = qw( Exporter );
-our @EXPORT  = qw( cache_save cache_delete cache_delete_page cache_load cache_md5_filename );
+our @EXPORT  = qw( cache_save cache_delete cache_delete_page cache_load cache_md5_filename cache_url );
+
+sub cache_url {
+    return ( ( $ENV{'SERVER_NAME'} || '' ) . ( $ENV{'REQUEST_URI'} || '' ) );
+}
 
 sub cache_md5_filename {
-    md5_hex ( ($ENV{'SERVER_NAME'}||'') . ($ENV{'REQUEST_URI'}||'') );
+    md5_hex ( &cache_url );
 }
 
 sub cache_dir {
-    $main::CONFIG->{cache_dir}.'/'.substr(&cache_md5_filename, 0, 1).'/'.substr(&cache_md5_filename, 0, 2);
+    $main::CONFIG->{cache}{file_md5}{dir}.'/'.substr(&cache_md5_filename, 0, 1).'/'.substr(&cache_md5_filename, 0, 2);
 }
 
 sub cache_filename {
@@ -26,26 +29,34 @@ sub cache_filename {
 }
 
 sub cache_save {
-    return 0 if !$main::CONFIG->{cache};
+    return 0 if !$::CONFIG->{cache};
     return 0 if ( session('slogin') );
+
     my $content = shift;
-=c
-    make_path( &cache_dir ) unless -e &cache_dir;
-    open F, '>', &cache_filename;
-    print F $content;
-    close F;
-    utime time+$main::CONFIG->{cache_time}, time+$main::CONFIG->{cache_time}, &cache_filename;
-=cut
-my $memd = new Cache::Memcached::Fast({ servers => ['localhost:11211'] });
-$memd->add( &cache_md5_filename, $content, $main::CONFIG->{cache_time} ); 
+
+    if ( $::CONFIG->{cache}{file_md5} ) {
+        make_path( &cache_dir ) unless -e &cache_dir;
+        open F, '>', &cache_filename;
+        print F $content;
+        close F;
+        utime time+$::CONFIG->{cache}{file_md5}{expire}
+            , time+$::CONFIG->{cache}{file_md5}{expire}
+            , &cache_filename;
+    }
+    if ( $::CONFIG->{cache}{memcached} ) {
+        my $memd = new Cache::Memcached::Fast( $::CONFIG->{cache}{memcached} );
+        $memd->add( &cache_url, $content ); 
+    }
     return 1;
 }
 
 sub cache_delete {
     my $cache_name = shift;
-    unlink $cache_name if -e $cache_name;
-    my $memd = new Cache::Memcached::Fast({ servers => ['localhost:11211'] });
-    $memd->delete( $cache_name );
+    unlink $cache_name if $::CONFIG->{cache}{file_md5} && -e $cache_name;
+    if ( $::CONFIG->{cache}{memcached} ) {
+        my $memd = new Cache::Memcached::Fast( $::CONFIG->{cache}{memcached} );
+        $memd->delete( $cache_name );
+    }
     return 1;
 }
 
@@ -56,24 +67,26 @@ sub cache_delete_page {
 }
 
 sub cache_load {
-    return 0 if !$main::CONFIG->{cache}
-             || $ENV{'REQUEST_METHOD'} eq 'POST'
-             || ( $main::index_session && $main::index_session->{slogin} )
-#             || !-e &cache_filename
-#             || (stat(&cache_filename))[9] < time ;
-;
+    return 0 if !$::CONFIG->{cache}
+         || $ENV{'REQUEST_METHOD'} eq 'POST'
+         || ( $::index_session && $::index_session->{slogin} );
 
-my $memd = new Cache::Memcached::Fast({ servers => ['localhost:11211'] });
-my $result = $memd->get( &cache_md5_filename );
-return 0 unless $result;
-$result .= "<!-- ".&cache_md5_filename." -->\n";
-return [$result];
+    my $result;
+    if ( $::CONFIG->{cache}{file_md5} ) {
+        return 0 if !-e &cache_filename || (stat(&cache_filename))[9] < time ;
+        open F, &cache_filename;
+        $result = join '', <F>;
+        close F;
+        $result .= "<!-- ".&cache_filename." ".( ((stat(&cache_filename))[9] - time)/60/60 )." -->\n" if $result;
+    }
 
-#    open F, &cache_filename;
-#    my @result = <F>;
-#    close F;
-#    push @result, "<!-- ".&cache_filename." ".( ((stat(&cache_filename))[9] - time)/60/60 )." -->\n";
-#    return \@result;
+    if ( $::CONFIG->{cache}{memcached} ) {
+        my $memd = new Cache::Memcached::Fast( $::CONFIG->{cache}{memcached} );
+        $result = $memd->get( &cache_url );
+        $result .= "<!-- ".&cache_url." memcached -->\n" if $result;
+    }
+
+    return $result;
 }
 
 1;

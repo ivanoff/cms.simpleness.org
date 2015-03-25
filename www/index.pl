@@ -24,12 +24,12 @@ eval {
     if ( my $body = cache_load ) {
         # show page from cache
         print "Content-Type: text/html; charset=utf-8\nCache-Control: no-cache, must-revalidate\nExpires: Sat, 26 Jul 1997 05:00:00 GMT\n\n";
-        print @$body;
+        print $body;
         print "\n<!-- ".(tv_interval($time_interval)*1000)." ms cache -->";
     } else {
         # main lifecycle
-        require 'main.pl';
-        print "\n<!-- ".cache_md5_filename." -->";
+        eval { require 'main.pl' };
+        print $@;
     }
 
 #    update if $CONFIG->{update_automatically} && need_to_update;

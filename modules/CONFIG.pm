@@ -30,10 +30,17 @@ our $CONFIG = {
 
 # CACHE
         cache => {
-            memcached => {                   # memcached parameters
+            memcached => {                  # memcached parameters
                 servers => [ '127.0.0.1:11211' ], 
+                expire  => 60*60*24*29,     # Expiration times can be set from 0, meaning "never expire", to 30 days. 
+                                            # Any time higher than 30 days is interpreted as a unix timestamp date.
             },
-#            file_md5 => {                    # cache content to files with md5 name
+#            file      => {                   # cache content to files with plain name
+#                dir     => '../tmp/mirror',  # path to store file cache
+#                expire  => 60*60*24*31,      # cache expire time (in seconds )
+#                ext     => ".cache",         # additional file extention
+#            },
+#            file_md5  => {                   # cache content to files with md5 name
 #                dir     => '../tmp/cache',   # path to store file cache
 #                expire  => 60*60*24*31,      # cache expire time (in seconds )
 #            },

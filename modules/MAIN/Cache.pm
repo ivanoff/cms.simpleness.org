@@ -34,6 +34,24 @@ sub cache_save {
 
     my $content = shift;
 
+    if ( $::CONFIG->{cache}{memcached} ) {
+        my $memd = new Cache::Memcached::Fast( $::CONFIG->{cache}{memcached} );
+        $memd->set( &cache_url, $content ); 
+    }
+
+    if ( $::CONFIG->{cache}{file} ) {
+        my ( $path, $name ) = ( $1, $2 ) if &cache_url =~ m%(.*)/(.*?)$%;
+        $path = $::CONFIG->{cache}{file}{dir} . "/" . $path;
+        $name .= $::CONFIG->{cache}{file}{ext};
+        make_path( $path ) unless -e $path;
+        open F, '>', "$path/$name";
+        print F $content;
+        close F;
+        utime time+$::CONFIG->{cache}{file}{expire}
+            , time+$::CONFIG->{cache}{file}{expire}
+            , "$path/$name";
+    }
+
     if ( $::CONFIG->{cache}{file_md5} ) {
         make_path( &cache_dir ) unless -e &cache_dir;
         open F, '>', &cache_filename;
@@ -43,10 +61,7 @@ sub cache_save {
             , time+$::CONFIG->{cache}{file_md5}{expire}
             , &cache_filename;
     }
-    if ( $::CONFIG->{cache}{memcached} ) {
-        my $memd = new Cache::Memcached::Fast( $::CONFIG->{cache}{memcached} );
-        $memd->add( &cache_url, $content ); 
-    }
+
     return 1;
 }
 
@@ -72,18 +87,28 @@ sub cache_load {
          || ( $::index_session && $::index_session->{slogin} );
 
     my $result;
+
+    if ( $::CONFIG->{cache}{memcached} ) {
+        my $memd = new Cache::Memcached::Fast( $::CONFIG->{cache}{memcached} );
+        $result = $memd->get( &cache_url );
+        $result .= "<!-- ".&cache_url." memcached -->\n" if $result;
+    }
+
+    if ( $::CONFIG->{cache}{file} ) {
+        my $file = $::CONFIG->{cache}{file}{dir} . "/" . &cache_url . $::CONFIG->{cache}{file}{ext};
+        return 0 if !-e $file || (stat( $file ))[9] < time ;
+        open F, $file;
+        $result = join '', <F>;
+        close F;
+        $result .= "<!-- $file ".( ((stat( $file ))[9] - time)/60/60 )." -->\n" if $result;
+    }
+
     if ( $::CONFIG->{cache}{file_md5} ) {
         return 0 if !-e &cache_filename || (stat(&cache_filename))[9] < time ;
         open F, &cache_filename;
         $result = join '', <F>;
         close F;
         $result .= "<!-- ".&cache_filename." ".( ((stat(&cache_filename))[9] - time)/60/60 )." -->\n" if $result;
-    }
-
-    if ( $::CONFIG->{cache}{memcached} ) {
-        my $memd = new Cache::Memcached::Fast( $::CONFIG->{cache}{memcached} );
-        $result = $memd->get( &cache_url );
-        $result .= "<!-- ".&cache_url." memcached -->\n" if $result;
     }
 
     return $result;

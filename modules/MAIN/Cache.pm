@@ -40,9 +40,11 @@ sub cache_save {
     }
 
     if ( $::CONFIG->{cache}{file} ) {
-        my ( $path, $name ) = ( $1, $2 ) if &cache_url =~ m%(.*)/(.*?)$%;
-        $path = $::CONFIG->{cache}{file}{dir} . "/$path/.cache";
+        my $u = &cache_url.$::CONFIG->{cache}{file}{ext};
+        my ( $path, $name ) = ( $1, $2 ) if $u =~ m%(.*)/(.*?)$%;
+        $path = $::CONFIG->{cache}{file}{dir} . "/$path";
         make_path( $path ) unless -e $path;
+
         open F, '>', "$path/$name";
         print F $content;
         close F;

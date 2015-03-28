@@ -38,7 +38,7 @@ our $CONFIG = {
 #            file      => {                   # cache content to files with plain name
 #                dir     => '../tmp/mirror',  # path to store file cache
 #                expire  => 60*60*24*31,      # cache expire time (in seconds )
-#                ext     => ".cache",         # additional file extention
+#                ext     => ".htm",           # additional file extention
 #            },
 #            file_md5  => {                   # cache content to files with md5 name
 #                dir     => '../tmp/cache',   # path to store file cache

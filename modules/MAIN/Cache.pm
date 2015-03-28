@@ -41,8 +41,7 @@ sub cache_save {
 
     if ( $::CONFIG->{cache}{file} ) {
         my ( $path, $name ) = ( $1, $2 ) if &cache_url =~ m%(.*)/(.*?)$%;
-        $path = $::CONFIG->{cache}{file}{dir} . "/" . $path;
-        $name .= $::CONFIG->{cache}{file}{ext};
+        $path = $::CONFIG->{cache}{file}{dir} . "/$path/.cache";
         make_path( $path ) unless -e $path;
         open F, '>', "$path/$name";
         print F $content;
@@ -95,7 +94,9 @@ sub cache_load {
     }
 
     if ( $::CONFIG->{cache}{file} ) {
-        my $file = $::CONFIG->{cache}{file}{dir} . "/" . &cache_url . $::CONFIG->{cache}{file}{ext};
+        my ( $path, $name ) = ( $1, $2 ) if &cache_url =~ m%(.*)/(.*?)$%;
+        $path = $::CONFIG->{cache}{file}{dir} . "/$path/.cache";
+        my $file = "$path/$name";
         return 0 if !-e $file || (stat( $file ))[9] < time ;
         open F, $file;
         $result = join '', <F>;

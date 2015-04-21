@@ -221,7 +221,6 @@ sub resize {
 }
 
 sub email {
-
     $_ = shift;
     my $from = $_->{From} || $CONFIG->{email};
     my $to = $_->{To} || $CONFIG->{email};

@@ -101,7 +101,8 @@ our ( @ISA, @EXPORT );
 
     sub expire {
         my $self = shift;
-        $_ = shift || '30m';
+        $_ = shift;
+        $_ ||= '30m';
         my $date = time;
         $date += $1 if /^(\d+)$/;
         $date += $1 * 60 if /^\+(\d+)m$/;

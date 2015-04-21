@@ -33,7 +33,8 @@ defaults {
 };
 
 sub column_looks_like {
-    my ( $was, $_ ) = @_;
+    my $was = shift;
+    $_ = shift;
     return $was if !$_ || /^\s*$/;
 
     if ( /^[-+]?(\d*[.])?\d+$/ ) {

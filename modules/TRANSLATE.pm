@@ -104,7 +104,8 @@ sub translate_simple {
 
 #returns words between tags
 sub words_between_tags {
-    my ( $self, $_ ) = @_;
+    my $self = shift;
+    $_ = shift;
     s/<pre>.*?<\/pre>/-=-/smig;
     s/<.*?>/-=-/g;
     my %words = map { s/^\s+//s; s/\s+$//s; $_ => 1 } grep { $_ !~ /^[\s\d\?\.\,]*$/s } split '-=-', $_;

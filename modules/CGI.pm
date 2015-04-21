@@ -100,9 +100,9 @@ our ( @ISA, @EXPORT );
     }
 
     sub expire {
-        my ( $self, $_ ) = @_;
+        my $self = shift;
+        $_ = shift || '30m';
         my $date = time;
-        $_ = '30m' unless $_;
         $date += $1 if /^(\d+)$/;
         $date += $1 * 60 if /^\+(\d+)m$/;
         $date += $1 * 60 * 60 if /^\+(\d+)h$/;
@@ -240,7 +240,8 @@ sub https { $ENV{HTTPS} }
 sub virtual_port { $ENV{SERVER_PORT} }
 
 sub expire_time {
-    my ( $self, $_ ) = @_;
+    my $self = shift;
+    $_ = shift;
     my @m = ( $_ && /^(\d+)$/ )? gmtime( $1 ) : gmtime();
     my @wdays = qw/Sun Mon Tue Wed Thu Fri Sat/;
     my @months = qw/Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec/;

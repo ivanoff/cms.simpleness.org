@@ -96,7 +96,7 @@ sub translate_simple {
         $mech->get( "http://translate.google.com/?tl=$to&fl=$from&q=$text" );
     };
     return $text if $@;
-    my $_ = encode 'utf8', $mech->content;
+    $_ = encode 'utf8', $mech->content;
     return $text unless ( (/<span.*?backgroundColor='#ebeff9'.*?>(.*?)<\/span>/) );
     $_ = join '', (/<span.*?backgroundColor='#ebeff9'.*?>(.*?)<\/span>/g);
     return $_;
@@ -216,7 +216,7 @@ sub lang_checking {
             $source->{$row->{$key}} = $self->translate($row->{$key}, $params->{lang_from}, $params->{lang_to} );
             ##replace don't translate phrases
             foreach my $phrase ( @{$main::CONFIG->{phrases_dont_translate}} ) {
-                my $_ = $t->t( $phrase );
+                $_ = $t->t( $phrase );
                 next unless $_;
                 $_ = $phrase if /^\ *$/;
                 $source->{$row->{$key}} =~ s/\Q$_\E/$phrase/g;

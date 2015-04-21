@@ -21,7 +21,7 @@ our ( $db, $t, $tt, $template, $SESSION, $header, );
         my ($self, $template, $vars, $outstream, @opts) = @_;
         my $output;
         $vars = ($vars)? { %$tt, %$vars } : $tt;
-        my $_ = $ENV{'SERVER_NAME'}.'/'.$template;
+        $_ = $ENV{'SERVER_NAME'}.'/'.$template;
         $template = $_ if -e $main::CONFIG_TEMPLATE->{INCLUDE_PATH}.'/'.$_;
         my $r = $self->SUPER::process( $template , $vars, ($outstream)?$outstream:\$output, @opts);
         return ($outstream)? $r : $output;

@@ -28,7 +28,8 @@ sub title {
 }
 
 sub header {
-    my ( $_, $params ) = @_;
+    $_ = shift;
+    my $params = shift;
     $params->{charset} ||= 'utf-8';
     /404/  && return $main::header = "Status: 404 Not Found\n\n";
     /html|clear/ && do {$main::header = "Content-type: text/html; charset=$params->{charset};"};

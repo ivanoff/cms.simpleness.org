@@ -160,7 +160,7 @@ sub back2 {
 
 ## simple text to pdf. get html content and return pdf content
 sub text2pdf {
-    my $_ = shift;
+    $_ = shift;
     utf8::decode($_);
     my $filename = $$.time;
 
@@ -222,7 +222,7 @@ sub resize {
 
 sub email {
 
-    my $_ = shift;
+    $_ = shift;
     my $from = $_->{From} || $CONFIG->{email};
     my $to = $_->{To} || $CONFIG->{email};
     my $subject = $_->{Subject} || 'Message from website';

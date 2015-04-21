@@ -13,7 +13,7 @@ our @ISA     = qw( Exporter );
 our @EXPORT  = qw( cache_save cache_delete cache_delete_page cache_load cache_md5_filename cache_url );
 
 sub cache_url {
-    return ( ( $ENV{'SERVER_NAME'} || '' ) . ( $ENV{'REQUEST_URI'} || '' ) );
+    return ( ( $ENV{'SERVER_NAME'} || '' ) .'/'. ( $ENV{'REQUEST_URI'} || '' ) );
 }
 
 sub cache_md5_filename {
@@ -40,11 +40,9 @@ sub cache_save {
     }
 
     if ( $::CONFIG->{cache}{file} ) {
-        my $u = &cache_url.$::CONFIG->{cache}{file}{ext};
-        my ( $path, $name ) = ( $1, $2 ) if $u =~ m%(.*)/(.*?)$%;
+        my ( $path, $name ) = ( $1, $2 ) if &cache_url.$::CONFIG->{cache}{file}{ext} =~ m%(.*)/(.*?)$%;
         $path = $::CONFIG->{cache}{file}{dir} . "/$path";
         make_path( $path ) unless -e $path;
-
         open F, '>', "$path/$name";
         print F $content;
         close F;
@@ -96,8 +94,8 @@ sub cache_load {
     }
 
     if ( $::CONFIG->{cache}{file} ) {
-        my ( $path, $name ) = ( $1, $2 ) if &cache_url =~ m%(.*)/(.*?)$%;
-        $path = $::CONFIG->{cache}{file}{dir} . "/$path/.cache";
+        my ( $path, $name ) = ( $1, $2 ) if &cache_url.$::CONFIG->{cache}{file}{ext} =~ m%(.*)/(.*?)$%;
+        $path = $::CONFIG->{cache}{file}{dir} . "/$path";
         my $file = "$path/$name";
         return 0 if !-e $file || (stat( $file ))[9] < time ;
         open F, $file;

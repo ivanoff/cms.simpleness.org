@@ -78,9 +78,7 @@ sub is_default_lang {
 
 sub cache {
     my $cache_time = shift;
-    $::CONFIG->{cache} = undef if $cache_time eq '0';
-    $::CONFIG->{cache}{file_md5}{expire} = $cache_time 
-        if $::CONFIG->{cache}{file_md5} && $cache_time>1;
+    $::CONFIG->{cache}{all} = ($cache_time)? 1 : 0;
 }
 
 sub param {

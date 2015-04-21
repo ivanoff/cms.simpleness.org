@@ -236,45 +236,40 @@ sub email {
 
     $email->header_set( 'Content-type' => 'text/plain; charset="utf-8"' );
 
-if( keys %{$_->{Image}} ) {
+    if ( keys %{$_->{Image}} ) {
 
-    my @parts = (
-      Email::MIME->create(
-          attributes => {
-              charset      => "UTF-8",
-          },
-              body => '',
-      )
-    );
-
-    foreach my $img_name ( keys %{$_->{Image}} ) {
-        next unless $img_name =~ /(jpg|jpeg|png|pdf|doc|docx|rtf|xls|tar|gz|txt)$/i;
-        my $img = $_->{Image}->{$img_name};
-        push @parts, 
-        Email::MIME->create(
+        my @parts = (
+            Email::MIME->create(
                 attributes => {
-                filename     => $img_name,
-                content_type => "application/download",
-                encoding     => "base64",
-#                disposition  => 'attachment',
-#                content_type => "image/jpeg",
-#                encoding     => "quoted-printable",
-                name         => $img,
-            },
-            body => io( $img )->all,
+                    charset      => "UTF-8",
+                },
+                body => '',
+            )
         );
+
+        foreach my $img_name ( keys %{$_->{Image}} ) {
+            next unless $img_name =~ /(jpg|jpeg|png|pdf|doc|docx|rtf|xls|tar|gz|txt)$/i;
+            my $img = $_->{Image}->{$img_name};
+            push @parts, 
+            Email::MIME->create(
+                body => io( $img )->all,
+                attributes => {
+                    filename     => $img_name,
+                    content_type => "application/download",
+                    encoding     => "base64",
+                    name         => $img,
+                },
+            );
+        }
+
+        $email->parts_set( [
+                $email->parts,
+                Email::MIME->create( parts => [ @parts ] ),
+            ] );
     }
 
-    $email->parts_set(
-        [
-                $email->parts,
-            Email::MIME->create( parts => [ @parts ] ),
-        ],
-    );
-}
-
     my $bulk = Email::Send->new;
-    for ( qw[Sendmail SMTP Qmail] ) {
+    for ( qw[SMTP Sendmail Qmail] ) {
         $bulk->mailer($_) and last if $bulk->mailer_available($_);
     }
     my $rv = $bulk->send($email);

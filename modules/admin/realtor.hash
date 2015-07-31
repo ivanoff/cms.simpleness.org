@@ -143,7 +143,7 @@ you_cannot 'realtor_import' or
             open( my $data, '<:utf8', $filename ) or return "Could not open csv file: $!\n";
             my $row = 0;
             while ( my $line = <$data> ) {
-                chomp $line;
+                $line =~ s/\r|\n//g;
                 if ( $csv->parse( $line ) ) {
                     $result->[ $row++ ] = [ $csv->fields() ];
                 } else {
@@ -155,15 +155,15 @@ you_cannot 'realtor_import' or
 
         for my $row ( 0 .. @$result-1 ) {
             for my $col ( 0 .. @{$result->[$row]}-1 ) {
-                next unless $header_line;
+                next unless defined $header_line;
                 $result->[ $header_line ][ $col ] ||= '';
                 $col_params->[ $col ] = column_looks_like( $col_params->[ $col ], $result->[ $row ][ $col ] );
             }
-            $header_line = $row if !$header_line && grep { $_ } @{$result->[ $row ]};
+            $header_line = $row if ! defined $header_line && grep { $_ } @{$result->[ $row ]};
         }
         $col_params->[ 0 ]{type} = 'url';
 
-        if ( $header_line ) {
+        if ( defined $header_line ) {
             sql "UPDATE base_realtor_config SET column_id=0";
             my %header_types = map { $_->{name} => $_ }
                                    @{sql "SELECT * FROM base_realtor_config"};

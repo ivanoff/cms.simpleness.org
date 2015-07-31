@@ -29,6 +29,7 @@ our $CONFIG = {
         session_expires    => 60*60*3,          # session expires ( in seconds )
 
 # CACHE
+        cache_dir => '../tmp/cache',
         cache => {
 #            memcached => {                  # memcached parameters
 #                servers => [ '127.0.0.1:11211' ],
